@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { Container } from "reactstrap";
-import FlipTime from "./components/FlipTime";
 import WebFont from "webfontloader";
-import { EventCountdown } from "./components/EventCountdown";
 import ErrorBoundary from "./components/ErrorBoundary";
 import FlipDate from "./components/FlipDate";
 
