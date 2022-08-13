@@ -20,12 +20,6 @@ export default function App() {
     <Container>
       <span className="outline-lg">Weather Station</span>
       <ErrorBoundary>
-        <FlipTime value={"70"} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <EventCountdown value="2023-01-01T00:00:00+01:00" />
-      </ErrorBoundary>
-      <ErrorBoundary>
         <FlipDate />
       </ErrorBoundary>
     </Container>
