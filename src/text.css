@@ -1,0 +1,132 @@
+.outline-lg {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 36px;
+    line-height: 1.2em;
+    color: white;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black, 
+        /* Outline 2 */
+        -2px -2px 0 DarkBlue,
+        2px -2px 0 DarkBlue,
+        -2px 2px 0 DarkBlue,
+        2px 2px 0 DarkBlue,  
+        -3px 0 0 DarkBlue,
+        3px 0 0 DarkBlue,
+        0 3px 0 DarkBlue,
+        0 -3px 0 DarkBlue; /* Terminate with a semi-colon */
+}
+
+.outline-md {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 24px;
+    line-height: 1.1em;
+    color: gold;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black; /* Terminate with a semi-colon */
+}
+.outline-sm {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 20px;
+    line-height: 1.2em;
+    color: whitesmoke;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black; /* Terminate with a semi-colon */
+}
+
+.outline-temp {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 128px;
+    line-height: 1.1em;
+    color: dodgerblue;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black, 
+        /* Outline 2 */
+        -2px -2px 0 DarkBlue,
+        2px -2px 0 DarkBlue,
+        -2px 2px 0 DarkBlue,
+        2px 2px 0 DarkBlue,  
+        -3px 0 0 DarkBlue,
+        3px 0 0 DarkBlue,
+        0 3px 0 DarkBlue,
+        0 -3px 0 DarkBlue; /* Terminate with a semi-colon */
+}
+
+.outline-temp-md {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 48px;
+    line-height: 1.2em;
+    color: dodgerblue;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black, 
+        /* Outline 2 */
+        -2px -2px 0 DarkBlue,
+        2px -2px 0 DarkBlue,
+        -2px 2px 0 DarkBlue,
+        2px 2px 0 DarkBlue,  
+        -3px 0 0 DarkBlue,
+        3px 0 0 DarkBlue,
+        0 3px 0 DarkBlue,
+        0 -3px 0 DarkBlue; /* Terminate with a semi-colon */
+}
+
+.outline-temp-sm {
+    font: Tahoma, Geneva, sans-serif;
+    font-size: 24px;
+    line-height: 1.1em;
+    color: gold;
+    text-shadow:
+    /* Outline 1 */
+        -1px -1px 0 Black,
+        1px -1px 0 Black,
+        -1px 1px 0 Black,
+        1px 1px 0 Black,  
+        -2px 0 0 Black,
+        2px 0 0 Black,
+        0 2px 0 Black,
+        0 -2px 0 Black;
+}
+
+.border-temp {
+    border-width: 5px !important;
+    color: dodgerblue !important;
+}
