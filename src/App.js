@@ -6,6 +6,7 @@ import FlipDate from "./components/FlipDate";
 
 export default function App() {
 
+  // Load fonts used in the app
   useEffect(() => {
     WebFont.load({
       google: {

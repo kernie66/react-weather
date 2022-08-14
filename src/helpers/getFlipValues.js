@@ -18,6 +18,7 @@ export default function getFlipValues() {
   const now = new Date().getTime();
   const time = timeFormat.format(now).split(':');
   const date = dateFormat.format(now).split(' ');
+  const dayOfWeek = new Date().getDay();
 
   const value = {
     sep: ":",
@@ -25,7 +26,8 @@ export default function getFlipValues() {
     minutes: time[1],
     weekday: capitalizeFirstLetter(date[0]),
     day: date[1],
-    month: capitalizeFirstLetter(date[2])
+    month: capitalizeFirstLetter(date[2]),
+    dayOfWeek: dayOfWeek,
   };
 
   return(value);

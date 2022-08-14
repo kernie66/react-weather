@@ -51,7 +51,7 @@
     border-radius:0.12em !important; 
 }
 /* rounder corners */
-#date-flip {
+#flip-date {
     /* increase border radius */
     border-radius:.3125em;
     /* decrease spacing between letters */
@@ -59,7 +59,7 @@
     text-indent: .2em;
     font-size: 2.2em;
 }
-#date-flip2 {
+#flip-date-day {
     /* increase border radius */
     border-radius:.3125em;
     /* decrease spacing between letters */
@@ -67,10 +67,24 @@
     text-indent: .2em;
     font-size: 2.2em;
 }
-/*
-#date-flip2 .tick-flip-panel {
-    color: {{ day_colour }};
+
+#flip-date-day .tick-flip-panel {
+  color: white;
+  background-color: rgb(59, 61, 59);
+  font-weight: bold;
+}
+
+#flip-date-sunday {
+  /* increase border radius */
+  border-radius:.3125em;
+  /* decrease spacing between letters */
+  letter-spacing: .2em;
+  text-indent: .2em;
+  font-size: 2.2em;
+}
+
+#flip-date-sunday .tick-flip-panel {
+    color: tomato;
     background-color: rgb(59, 61, 59);
     font-weight: bold;
 }
-*/

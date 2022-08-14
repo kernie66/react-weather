@@ -6,6 +6,7 @@ export default function FlipDate() {
   const divRef = useRef();
   const tickRef = useRef();
   const [tickValue, setTickValue] = useState(getFlipValues());
+  const [flipDayStyle, setFlipDayStyle] = useState("flip-date-day");
 
   // Make the Tick instance and store it in the refs
   useEffect(() => {
@@ -26,13 +27,10 @@ export default function FlipDate() {
   // Set up a timer
   useEffect(() => {
     const timerId = setInterval(() => {
-      console.log("Timer event");
       const value = getFlipValues();
-      console.log(value.hours, value.sep, value.minutes);
 
       if (tickRef.current.value.minutes !== value.minutes) {
         setTickValue(value);
-        console.log("New time");
       };
     }, 1000);
 
@@ -43,11 +41,12 @@ export default function FlipDate() {
   useEffect(() => {
     if (tickRef.current) {
       tickRef.current.value = tickValue;
+      setFlipDayStyle(tickValue.dayOfWeek === 0 ? "flip-date-sunday" : "flip-date-day");
     }
   }, [tickValue]);
 
   return (
-    <div style={{ fontFamily: 'Azeret Mono', fontSize: '45px' }}>
+    <div style={{ fontFamily: 'Azeret Mono', fontSize: '36px' }}>
       <div className="tick">
         <div data-repeat="true">
           <div ref={divRef}>
@@ -72,18 +71,18 @@ export default function FlipDate() {
               <div className="mt-3">
                 <span
                   data-key="weekday"
-                  id="date-flip"
+                  id="flip-date"
                   data-view="flip">
                 </span>
                 <span
                   data-key="day"
-                  id="date-flip2"
+                  id={flipDayStyle}
                   data-view="flip"
                   data-transform="pad(00)">
                 </span>
                 <span
                   data-key="month"
-                  id="date-flip"
+                  id="flip-date"
                   data-view="flip">
                 </span>
               </div>
