@@ -7,8 +7,8 @@ import ClearDay from "./img/clear_day.jpg";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 export default function App() {
-//  const fullScreenRef = useRef();
-  let fullScreenRef
+  const fullScreenRef = useRef();
+  //  let fullScreenRef
   const [isFullScreen, setIsFullScreen] = useState(false);
   const backgroundImage = ClearDay;
   const background = {
@@ -16,7 +16,7 @@ export default function App() {
     backgroundPosition: 'center',
     backgroundSize: 'center',
     backgroundRepeat: 'no-repeat',
-//    width: '100vw',
+    //    width: '100vw',
     height: '100vh'
   };
 
@@ -35,20 +35,24 @@ export default function App() {
 
   const requestOrExitFullScreen = () => {
     console.log('Fullscreen button pressed');
-    fullScreenRef.fullScreen();
+    fullScreenRef.current.fullScreen();
   };
 
-  return (
+//  <p>Browser support fullscreen feature: {`${fullScreenSupported()}`}</p>
+//  <p>Browser is fullscreen: {`${isFullScreen}`}</p>
 
+  return (
     <Container fluid style={background}>
-      <p>Browser support fullscreen feature: {`${fullScreenSupported()}`}</p>
-      <p>Browser is fullscreen: {`${isFullScreen}`}</p>
-      <FullScreen ref={ref => { fullScreenRef = ref }} onFullScreenChange={onFullScreenChange}>
-        <Button onClick={requestOrExitFullScreen}>
-        Fullscreen
-        </Button>
+      <FullScreen ref={fullScreenRef} onFullScreenChange={onFullScreenChange}>
+        {fullScreenSupported() &&
+          <Button onClick={requestOrExitFullScreen}>
+            Fullscreen
+          </Button>
+        }
       </FullScreen>
-      <Body />
+      <ErrorBoundary>
+        <Body />
+      </ErrorBoundary>
     </Container>
   );
 };
