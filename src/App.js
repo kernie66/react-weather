@@ -1,10 +1,24 @@
-import { useEffect } from "react";
-import { Container } from "reactstrap";
+import { useEffect, useRef, useState } from "react";
+import { Button, Container } from "reactstrap";
 import WebFont from "webfontloader";
+import FullScreen, { fullScreenSupported } from "react-request-fullscreen";
+import Body from "./components/Body";
+import ClearDay from "./img/clear_day.jpg";
 import ErrorBoundary from "./components/ErrorBoundary";
-import FlipDate from "./components/FlipDate";
 
 export default function App() {
+//  const fullScreenRef = useRef();
+  let fullScreenRef
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const backgroundImage = ClearDay;
+  const background = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'center',
+    backgroundRepeat: 'no-repeat',
+//    width: '100vw',
+    height: '100vh'
+  };
 
   // Load fonts used in the app
   useEffect(() => {
@@ -15,12 +29,26 @@ export default function App() {
     });
   }, []);
 
+  const onFullScreenChange = () => {
+    setIsFullScreen(!isFullScreen);
+  };
+
+  const requestOrExitFullScreen = () => {
+    console.log('Fullscreen button pressed');
+    fullScreenRef.fullScreen();
+  };
+
   return (
-    <Container>
-      <span className="outline-lg">Weather Station</span>
-      <ErrorBoundary>
-        <FlipDate />
-      </ErrorBoundary>
+
+    <Container fluid style={background}>
+      <p>Browser support fullscreen feature: {`${fullScreenSupported()}`}</p>
+      <p>Browser is fullscreen: {`${isFullScreen}`}</p>
+      <FullScreen ref={ref => { fullScreenRef = ref }} onFullScreenChange={onFullScreenChange}>
+        <Button onClick={requestOrExitFullScreen}>
+        Fullscreen
+        </Button>
+      </FullScreen>
+      <Body />
     </Container>
   );
 };
