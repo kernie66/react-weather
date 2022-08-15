@@ -1,6 +1,7 @@
 import { Col, Container, Row } from "reactstrap";
 import ErrorBoundary from "./ErrorBoundary";
-import FlipDate from "./FlipDate";
+import FlipDisplay from "./FlipDisplay";
+import FullScreenCheck from "./FullScreenCheck";
 
 export default function Body() {
   const background = {
@@ -11,6 +12,9 @@ export default function Body() {
     <Container fluid style={background}>
       <Row>
         <Col xs="auto">
+          <ErrorBoundary>
+            <FullScreenCheck />
+          </ErrorBoundary>
           <p>Col 1</p>
         </Col>
         <Col xs="auto" className="ms-auto me-auto">
@@ -28,11 +32,11 @@ export default function Body() {
           <Row>
             <Col>
               <ErrorBoundary>
-                <FlipDate />
+                <FlipDisplay />
               </ErrorBoundary>
             </Col>
             <Col>
-            <p>Väderbild</p>
+              <p>Väderbild</p>
             </Col>
           </Row>
         </Col>

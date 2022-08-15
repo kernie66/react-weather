@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Tick from "@pqina/flip";
 import getFlipValues from "../helpers/getFlipValues";
 
-export default function FlipDate() {
+export default function FlipDisplay() {
   const divRef = useRef();
   const tickRef = useRef();
   const [tickValue, setTickValue] = useState(getFlipValues());
@@ -47,10 +47,10 @@ export default function FlipDate() {
 
   return (
     <div style={{ fontFamily: 'Azeret Mono', fontSize: '36px' }}>
-      <div className="tick">
+      <div className="tick FlipDisplay">
         <div data-repeat="true">
           <div ref={divRef}>
-            <div className="tick-group">
+            <div className="tick-group FlipTime">
               <span
                 data-key="hours"
                 data-repeat="true"
@@ -68,7 +68,7 @@ export default function FlipDate() {
                   data-view="flip">
                 </span>
               </span>
-              <div className="mt-3">
+              <div className="mt-3 FlipDate">
                 <span
                   data-key="weekday"
                   id="flip-date"
