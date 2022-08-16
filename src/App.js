@@ -4,7 +4,6 @@ import WebFont from "webfontloader";
 import Body from "./components/Body";
 import ClearDay from "./img/clear_day.jpg";
 import ErrorBoundary from "./components/ErrorBoundary";
-import FullScreenCheck from "./components/FullScreenCheck";
 
 export default function App() {
   const backgroundImage = ClearDay;

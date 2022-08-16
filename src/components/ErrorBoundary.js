@@ -15,12 +15,12 @@ export default class ErrorBoundary extends Component {
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
     // eslint-disable-next-line no-console
-    console.log({ error, errorInfo });
-    this.setState({ errorInfo });
+    console.log(error, errorInfo.componentStack);
+    this.setState({ error, errorInfo });
   };
 
   render() {
-    const { hasError, errorInfo } = this.state;
+    const { hasError, error, errorInfo } = this.state;
     if (hasError) {
       return (
         <div className="card my-5">
@@ -40,6 +40,7 @@ export default class ErrorBoundary extends Component {
           <div className="card-body">
             <details className="error-details">
               <summary>Click for error details</summary>
+              {error && error.toString()}
               {errorInfo && errorInfo.componentStack.toString()}
             </details>
           </div>
