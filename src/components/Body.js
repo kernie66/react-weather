@@ -3,12 +3,8 @@ import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
 
 export default function Body() {
-  const backgroundStyle = {
-    backgroundImage: "url(/img/weather/clear_day.jpg)"
-  };
-
   return (
-    <Container fluid style={backgroundStyle} className="pt-1">
+    <Container fluid className="pt-1">
       <Row>
         <Col xs="auto">
           <p>Col 1</p>
