@@ -4,17 +4,19 @@ import FlipDisplay from "./FlipDisplay";
 import FullScreenCheck from "./FullScreenCheck";
 
 export default function Body() {
-  const background = {
+  const backgroundStyle = {
     backgroundImage: "url(/img/weather/clear_day.jpg)"
   };
 
   return (
-    <Container fluid style={background}>
+    <Container fluid style={backgroundStyle} className="pt-3">
       <Row>
         <Col xs="auto">
-          <ErrorBoundary>
-            <FullScreenCheck />
-          </ErrorBoundary>
+          <Row>
+            <ErrorBoundary>
+              <FullScreenCheck />
+            </ErrorBoundary>
+          </Row>
           <p>Col 1</p>
         </Col>
         <Col xs="auto" className="ms-auto me-auto">

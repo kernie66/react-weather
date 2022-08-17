@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import FullScreen, { fullScreenSupported } from "react-request-fullscreen";
-import { Button } from "reactstrap";
 import FullScreenButton from "./FullScreenButton";
 
 export default function FullScreenCheck() {
@@ -12,7 +11,6 @@ export default function FullScreenCheck() {
   };
 
   const requestOrExitFullScreen = () => {
-    console.log('Fullscreen button pressed');
     fullScreenRef.current.fullScreen();
   };
 
