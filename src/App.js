@@ -4,6 +4,7 @@ import WebFont from "webfontloader";
 import Body from "./components/Body";
 import ClearDay from "./img/clear_day.jpg";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Header from "./components/Header";
 
 export default function App() {
   const backgroundImage = ClearDay;
@@ -27,6 +28,7 @@ export default function App() {
 
   return (
     <Container fluid style={background}>
+      <Header />
       <ErrorBoundary>
         <Body />
       </ErrorBoundary>

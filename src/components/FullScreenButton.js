@@ -8,10 +8,10 @@ export default function FullScreenButton({ onClick }) {
     borderColor: "transparent",
     backgroundColor: "transparent",
     color: "dodgerblue",
-    fontSize: 36,
+    fontSize: 32,
     padding: 0,
     margin: 0,
-    marginTop: -24,
+    marginTop: -4,
   };
 
   return(

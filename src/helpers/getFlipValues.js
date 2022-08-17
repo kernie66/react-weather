@@ -25,7 +25,6 @@ export default function getFlipValues() {
   const date = dateFormat.format(now).split(' ');
   const day = dayFormat.format(now);
   const dayOfWeek = new Date().getDay();
-  console.log(date[0], date[1], date[2])
   const value = {
     sep: ":",
     hours: time[0],
