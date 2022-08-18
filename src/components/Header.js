@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import FullScreenCheck from './FullScreenCheck';
 
 export default function Header() {
@@ -20,7 +20,7 @@ export default function Header() {
         <FullScreenCheck isFullScreen={isFullScreen} onFullScreenChange={onFullScreenChange} />
       </Col>
       <Col xs="10" className="text-center outline-lg">
-        Weather Station
+        Väderstation
       </Col>
     </Row>
   );

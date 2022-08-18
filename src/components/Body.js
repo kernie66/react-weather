@@ -1,21 +1,27 @@
 import { Col, Container, Row } from "reactstrap";
 import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
+import LeftSide from "./LeftSide";
+import Temperature from "./Temperature";
 
 export default function Body() {
   return (
     <Container fluid className="pt-1" style={{ height: "80vh" }}>
       <Row>
         <Col xs="auto">
-          <p>Col 1</p>
+          <ErrorBoundary>
+            <LeftSide />
+          </ErrorBoundary>
         </Col>
         <Col xs="auto" className="ms-auto me-auto">
           <Row>
             <Col>
-              <p>Temperatur</p>
+              <ErrorBoundary>
+                <Temperature />
+              </ErrorBoundary>
             </Col>
             <Col>
-              <p>Min/Max</p>
+              <p>Min/Max mmmm</p>
             </Col>
           </Row>
           <Row>
