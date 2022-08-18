@@ -4,7 +4,7 @@ import FlipDisplay from "./FlipDisplay";
 
 export default function Body() {
   return (
-    <Container fluid className="pt-1">
+    <Container fluid className="pt-1" style={{ height: "80vh" }}>
       <Row>
         <Col xs="auto">
           <p>Col 1</p>

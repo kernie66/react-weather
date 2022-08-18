@@ -22,6 +22,7 @@ export default function App() {
       <ErrorBoundary>
         <Body />
       </ErrorBoundary>
+      <span className="text-center">Botten av sidan</span>
     </Background>
   );
 };

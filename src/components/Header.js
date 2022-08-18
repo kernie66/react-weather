@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import FullScreenCheck from './FullScreenCheck';
 
 export default function Header() {
@@ -11,7 +11,7 @@ export default function Header() {
   };
 
   useEffect(() => {
-    setHeaderStyle(isFullScreen ? "pt-4 pb-0" : "pt-2 pb-0");
+    setHeaderStyle(isFullScreen ? "pt-4 pb-2" : "pt-2 pb-2");
   }, [isFullScreen]);
 
   return (
