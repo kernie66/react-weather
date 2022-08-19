@@ -127,6 +127,6 @@
 }
 
 .border-temp {
-    border-width: 5px !important;
-    color: dodgerblue !important;
+    border-width: 4px !important;
+    border-color: dodgerblue !important;
 }

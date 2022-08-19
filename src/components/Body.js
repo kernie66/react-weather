@@ -2,6 +2,7 @@ import { Col, Container, Row } from "reactstrap";
 import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
 import LeftSide from "./LeftSide";
+import MinMax from "./MinMax";
 import Temperature from "./Temperature";
 
 export default function Body() {
@@ -21,7 +22,7 @@ export default function Body() {
                 </ErrorBoundary>
               </Col>
               <Col>
-                <p>Min/Max mmmm</p>
+                <MinMax />
               </Col>
             </Row>
           <Container className="justify-content-center border">
