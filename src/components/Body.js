@@ -14,26 +14,28 @@ export default function Body() {
           </ErrorBoundary>
         </Col>
         <Col xs="auto" className="ms-auto me-auto">
-          <Row>
-            <Col>
-              <ErrorBoundary>
-                <Temperature />
-              </ErrorBoundary>
-            </Col>
-            <Col>
-              <p>Min/Max mmmm</p>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ErrorBoundary>
-                <FlipDisplay />
-              </ErrorBoundary>
-            </Col>
-            <Col>
-              <p>Väderbild</p>
-            </Col>
-          </Row>
+            <Row>
+              <Col>
+                <ErrorBoundary>
+                  <Temperature />
+                </ErrorBoundary>
+              </Col>
+              <Col>
+                <p>Min/Max mmmm</p>
+              </Col>
+            </Row>
+          <Container className="justify-content-center border">
+            <Row>
+              <Col>
+                <ErrorBoundary>
+                  <FlipDisplay />
+                </ErrorBoundary>
+              </Col>
+              <Col>
+                <p>Väderbild</p>
+              </Col>
+            </Row>
+          </Container>
         </Col>
         <Col xs="auto">
           <p>Col 3</p>
