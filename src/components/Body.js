@@ -8,23 +8,23 @@ import Temperature from "./Temperature";
 
 export default function Body() {
   return (
-    <Container fluid className="d-flex flex-column p-0 m-0 border" style={{ height: "80vh" }}>
-      <Row className="justify-content-between w-100 m-0 border" style={{ height: "65%" }}>
+    <Container fluid className="d-flex flex-column p-0 m-0" style={{ height: "80vh" }}>
+      <Row className="justify-content-between w-100 m-0" style={{ height: "65%" }}>
         <Col xs="auto">
           <ErrorBoundary>
             <LeftSide />
           </ErrorBoundary>
         </Col>
         <Col xs="auto" className="flex-grow-1">
-          <Container className="d-flex flex-column justify-content-around h-100 p-0 bg-primary">
-            <Row className="d-flex m-0">
-              <Container className="d-flex justify-content-between m-0 bg-info">
-                <Col className="bg-danger">
+          <Container className="d-flex flex-column justify-content-around h-100 p-0">
+            <Row className="m-0">
+              <Container className="d-flex justify-content-evenly m-0">
+                <Col xs="auto">
                   <ErrorBoundary>
                     <Temperature />
                   </ErrorBoundary>
                 </Col>
-                <Col xs="auto" className="border">
+                <Col xs="auto">
                   <MinMax />
                 </Col>
               </Container>

@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-request-fullscreen": "^1.1.2",
     "react-router-dom": "^6.3.0",
+    "react-screen-orientation": "^0.0.4",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.1.3",
     "serve": "^14.0.1",
