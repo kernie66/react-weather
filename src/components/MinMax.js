@@ -1,4 +1,4 @@
-import { Container, List } from "reactstrap";
+import { List } from "reactstrap";
 
 export default function MinMax() {
   return (
