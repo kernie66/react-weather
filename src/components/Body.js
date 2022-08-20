@@ -54,9 +54,13 @@ export default function Body() {
         </Col>
       </Row>
       <Row>
-        <ErrorBoundary>
-          <p>Väderprognos</p>
-        </ErrorBoundary>
+        <Container className="d-flex justify-content-evenly m-0">
+          <ErrorBoundary>
+            <p>Väderprognos 1</p>
+            <p>Väderprognos 2</p>
+            <p>Väderprognos 3</p>
+          </ErrorBoundary>
+        </Container>
       </Row>
     </Container>
   );
