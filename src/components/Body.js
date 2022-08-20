@@ -34,12 +34,12 @@ export default function Body() {
             </Row>
             <Row>
               <Container className="d-flex justify-content-evenly m-0">
-                <Col xs="auto" className="border">
+                <Col xs="auto">
                   <ErrorBoundary>
                     <FlipDisplay />
                   </ErrorBoundary>
                 </Col>
-                <Col xs="auto" className="border">
+                <Col xs="auto">
                   <ErrorBoundary>
                     <CurrentWeather />
                   </ErrorBoundary>
