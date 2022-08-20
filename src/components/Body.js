@@ -25,28 +25,38 @@ export default function Body() {
                   </ErrorBoundary>
                 </Col>
                 <Col xs="auto">
-                  <MinMax />
+                  <ErrorBoundary>
+                    <MinMax />
+                  </ErrorBoundary>
                 </Col>
               </Container>
             </Row>
             <Row>
-              <Col>
-                <ErrorBoundary>
-                  <FlipDisplay />
-                </ErrorBoundary>
-              </Col>
-              <Col>
-                <p>Väderbild</p>
-              </Col>
+              <Container className="d-flex justify-content-evenly m-0">
+                <Col>
+                  <ErrorBoundary>
+                    <FlipDisplay />
+                  </ErrorBoundary>
+                </Col>
+                <Col>
+                  <ErrorBoundary>
+                    <p>Väderbild</p>
+                  </ErrorBoundary>
+                </Col>
+              </Container>
             </Row>
           </Container>
         </Col>
         <Col xs="auto">
-          <RightSide />
+          <ErrorBoundary>
+            <RightSide />
+          </ErrorBoundary>
         </Col>
       </Row>
       <Row>
-        <p>Väderprognos</p>
+        <ErrorBoundary>
+          <p>Väderprognos</p>
+        </ErrorBoundary>
       </Row>
     </Container>
   );

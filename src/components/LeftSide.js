@@ -2,7 +2,7 @@ import { Container, List } from "reactstrap";
 
 export default function LeftSide() {
   return (
-    <Container className="d-flex flex-column justify-content-between h-100 pt-3 px-0">
+    <Container className="d-flex flex-column justify-content-around h-100 px-0">
       <List type="unstyled" className="outline-md">
         <li className="border-bottom pb-2">
           <img src="img/weather/sunrise-clipart-lg.png"
