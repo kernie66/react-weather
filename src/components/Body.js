@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "reactstrap";
+import CurrentWeather from "./CurrentWeather";
 import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
 import LeftSide from "./LeftSide";
@@ -33,14 +34,14 @@ export default function Body() {
             </Row>
             <Row>
               <Container className="d-flex justify-content-evenly m-0">
-                <Col>
+                <Col xs="auto" className="border">
                   <ErrorBoundary>
                     <FlipDisplay />
                   </ErrorBoundary>
                 </Col>
-                <Col>
+                <Col xs="auto" className="border">
                   <ErrorBoundary>
-                    <p>Väderbild</p>
+                    <CurrentWeather />
                   </ErrorBoundary>
                 </Col>
               </Container>
