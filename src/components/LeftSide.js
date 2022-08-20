@@ -4,7 +4,7 @@ export default function LeftSide() {
   return (
     <List type="unstyled" className="outline-md">
       <li className="border-bottom outline-sm">Solen</li>
-      <li className="pb-3 pt-2">
+      <li className="pb-2 pt-2">
         <img src="img/weather/sunrise-clipart-lg.png"
           width="56px" height="32px" alt="Sunrise" />
         <span className="align-bottom ps-2">05:30</span>

@@ -3,6 +3,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
 import LeftSide from "./LeftSide";
 import MinMax from "./MinMax";
+import RightSide from "./RightSide";
 import Temperature from "./Temperature";
 
 export default function Body() {
@@ -39,7 +40,7 @@ export default function Body() {
           </Container>
         </Col>
         <Col xs="auto">
-          <p>Col 3</p>
+          <RightSide />
         </Col>
       </Row>
       <Row>
