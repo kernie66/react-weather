@@ -2,7 +2,7 @@ import { Col, Container, Row } from "reactstrap";
 import CurrentWeather from "./CurrentWeather";
 import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
-import Forecast from "./Forecast";
+import Forecasts from "./Forecasts";
 import LeftSide from "./LeftSide";
 import MinMax from "./MinMax";
 import RightSide from "./RightSide";
@@ -11,7 +11,7 @@ import Temperature from "./Temperature";
 export default function Body() {
   return (
     <Container fluid className="d-flex flex-column p-0 m-0" style={{ height: "80vh" }}>
-      <Row className="justify-content-between w-100 m-0" style={{ height: "65%" }}>
+      <Row className="justify-content-between w-100 m-0 mb-3" style={{ height: "55%" }}>
         <Col xs="auto">
           <ErrorBoundary>
             <LeftSide />
@@ -56,12 +56,9 @@ export default function Body() {
         </Col>
       </Row>
       <Row>
-        <Container className="d-flex justify-content-evenly m-0">
+        <Container className="d-flex flex-wrap justify-content-between" style={{ width: "90%" }}>
           <ErrorBoundary>
-            <Forecast />
-            <p>Väderprognos 1</p>
-            <p>Väderprognos 2</p>
-            <p>Väderprognos 3</p>
+            <Forecasts />
           </ErrorBoundary>
         </Container>
       </Row>

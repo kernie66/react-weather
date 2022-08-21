@@ -1,4 +1,4 @@
-import { Col, Container, List } from 'reactstrap';
+import { List } from 'reactstrap';
 
 export default function Forecast() {
   const forecastStyle = {
@@ -6,6 +6,7 @@ export default function Forecast() {
     borderRadius: ".5em",
     minWidth: "12vw", 
     minHeight: "13vh",
+    margin: ".5em",
   };
 
   return (
