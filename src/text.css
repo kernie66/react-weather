@@ -61,33 +61,33 @@
     font: Tahoma, Geneva, sans-serif;
     font-size: 128px;
     line-height: 1.1em;
-    color: dodgerblue;
+    /* color: dodgerblue; */
     text-shadow:
     /* Outline 1 */
-        -1px -1px 0 Black,
-        1px -1px 0 Black,
-        -1px 1px 0 Black,
-        1px 1px 0 Black,  
-        -2px 0 0 Black,
-        2px 0 0 Black,
-        0 2px 0 Black,
-        0 -2px 0 Black, 
-        /* Outline 2 */
-        -2px -2px 0 DarkBlue,
-        2px -2px 0 DarkBlue,
-        -2px 2px 0 DarkBlue,
-        2px 2px 0 DarkBlue,  
-        -3px 0 0 DarkBlue,
-        3px 0 0 DarkBlue,
-        0 3px 0 DarkBlue,
-        0 -3px 0 DarkBlue; /* Terminate with a semi-colon */
+      -1px -1px 0 Black,
+      1px -1px 0 Black,
+      -1px 1px 0 Black,
+      1px 1px 0 Black,  
+      -2px 0 0 Black,
+      2px 0 0 Black,
+      0 2px 0 Black,
+      0 -2px 0 Black, 
+    /* Outline 2 */
+      -2px -2px 0 DarkBlue,
+      2px -2px 0 DarkBlue,
+      -2px 2px 0 DarkBlue,
+      2px 2px 0 DarkBlue,  
+      -3px 0 0 DarkBlue,
+      3px 0 0 DarkBlue,
+      0 3px 0 DarkBlue,
+      0 -3px 0 DarkBlue; /* Terminate with a semi-colon */
 }
 
 .outline-temp-md {
     font: Tahoma, Geneva, sans-serif;
     font-size: 48px;
     line-height: 1.2em;
-    color: dodgerblue;
+    /* color: dodgerblue; */
     text-shadow:
     /* Outline 1 */
         -1px -1px 0 Black,
@@ -127,6 +127,6 @@
 }
 
 .border-temp {
-    border-width: 4px !important;
-    border-color: dodgerblue !important;
+    border-width: 2px !important;
+    border-color: whitesmoke !important;
 }

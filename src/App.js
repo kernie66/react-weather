@@ -19,26 +19,25 @@ export default function App() {
 
   return (
     <DeviceOrientation lockOrientation={'landscape'}>
-        {/* Will only be in DOM in landscape */}
-        <Orientation orientation='landscape' alwaysRender={false}>
+      {/* Will only be in DOM in landscape */}
+      <Orientation orientation='landscape' alwaysRender={false}>
         <ErrorBoundary>
-        <Background>
-          <Header />
-          <ErrorBoundary>
-            <Body />
-          </ErrorBoundary>
-          <span className="text-center">Botten av sidan</span>
+          <Background>
+            <Header />
+            <ErrorBoundary>
+              <Body />
+            </ErrorBoundary>
           </Background>
-          </ErrorBoundary>
-        </Orientation>
-        {/* Will stay in DOM, but is only visible in portrait */}
-        <Orientation orientation='portrait'>
+        </ErrorBoundary>
+      </Orientation>
+      {/* Will stay in DOM, but is only visible in portrait */}
+      <Orientation orientation='portrait'>
         <Background>
           <div>
             <p className="text-info text-center fs-4">Please rotate your device</p>
           </div>
-          </Background>
-        </Orientation>
+        </Background>
+      </Orientation>
     </DeviceOrientation>
 
   );

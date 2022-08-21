@@ -4,9 +4,8 @@ import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
 import Forecasts from "./Forecasts";
 import LeftSide from "./LeftSide";
-import MinMax from "./MinMax";
 import RightSide from "./RightSide";
-import Temperature from "./Temperature";
+import TemperatureDisplay from "./TemperatureDisplay";
 
 export default function Body() {
   return (
@@ -20,18 +19,7 @@ export default function Body() {
         <Col xs="auto" className="flex-grow-1">
           <Container className="d-flex flex-column justify-content-around h-100 p-0">
             <Row className="m-0">
-              <Container className="d-flex justify-content-evenly m-0">
-                <Col xs="auto">
-                  <ErrorBoundary>
-                    <Temperature />
-                  </ErrorBoundary>
-                </Col>
-                <Col xs="auto">
-                  <ErrorBoundary>
-                    <MinMax />
-                  </ErrorBoundary>
-                </Col>
-              </Container>
+              <TemperatureDisplay />
             </Row>
             <Row>
               <Container className="d-flex justify-content-evenly m-0">

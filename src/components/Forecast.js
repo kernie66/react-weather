@@ -2,7 +2,7 @@ import { List } from 'reactstrap';
 
 export default function Forecast() {
   const forecastStyle = {
-    backgroundColor: "rgba(30, 143, 255, 0.74)",
+    backgroundColor: "rgba(74, 127, 169, 0.8)",
     borderRadius: ".5em",
     minWidth: "12vw", 
     minHeight: "13vh",
@@ -18,7 +18,7 @@ export default function Forecast() {
           alt="Halvklart" />
         &nbsp;23.5&deg;
       </li>
-      <li style={{ color: "dodgerblue" }}>
+      <li style={{ color: "paleturquoise" }}>
         2.3 mm
       </li>
     </List>

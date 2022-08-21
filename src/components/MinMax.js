@@ -7,7 +7,7 @@ export default function MinMax() {
         26<span style={{ fontSize: "80%" }}
         >.7&deg;C</span>
       </li>
-      <li>
+      <li className="pt-1">
         15<span style={{ fontSize: "80%" }}
         >.4&deg;C</span>
       </li>
