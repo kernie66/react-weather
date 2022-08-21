@@ -2,6 +2,7 @@ import { Col, Container, Row } from "reactstrap";
 import CurrentWeather from "./CurrentWeather";
 import ErrorBoundary from "./ErrorBoundary";
 import FlipDisplay from "./FlipDisplay";
+import Forecast from "./Forecast";
 import LeftSide from "./LeftSide";
 import MinMax from "./MinMax";
 import RightSide from "./RightSide";
@@ -57,6 +58,7 @@ export default function Body() {
       <Row>
         <Container className="d-flex justify-content-evenly m-0">
           <ErrorBoundary>
+            <Forecast />
             <p>Väderprognos 1</p>
             <p>Väderprognos 2</p>
             <p>Väderprognos 3</p>
