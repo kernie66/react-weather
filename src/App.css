@@ -1,0 +1,19 @@
+.map-container {
+  height: 85vh;
+  width: 100%
+}
+
+.search {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  border-color: cornflowerblue;
+}
+
+.rbt-close {
+  color: blanchedalmond;
+  background-color: cornflowerblue;
+}

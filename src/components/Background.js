@@ -19,7 +19,6 @@ export default function Background({ children }) {
       const timerId = setInterval(() => {
         const newBackground = (backgroundImage === "night_galaxy" ? "clear_day" : "night_galaxy"); 
         setBackgroundImage(newBackground);
-        console.log(newBackground, backgroundImage);
       }, 10000);
   
       return () => clearInterval(timerId);

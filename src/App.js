@@ -4,7 +4,7 @@ import Background from "./components/Background";
 import Body from "./components/Body";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/Header";
-import DeviceOrientation, { Orientation } from "react-screen-orientation";
+import "./App.css";
 
 export default function App() {
 
@@ -18,27 +18,13 @@ export default function App() {
   }, []);
 
   return (
-    <DeviceOrientation lockOrientation={'landscape'}>
-      {/* Will only be in DOM in landscape */}
-      <Orientation orientation='landscape' alwaysRender={false}>
+    <ErrorBoundary>
+      <Background>
+        <Header />
         <ErrorBoundary>
-          <Background>
-            <Header />
-            <ErrorBoundary>
-              <Body />
-            </ErrorBoundary>
-          </Background>
+          <Body />
         </ErrorBoundary>
-      </Orientation>
-      {/* Will stay in DOM, but is only visible in portrait */}
-      <Orientation orientation='portrait'>
-        <Background>
-          <div>
-            <p className="text-info text-center fs-4">Please rotate your device</p>
-          </div>
-        </Background>
-      </Orientation>
-    </DeviceOrientation>
-
+      </Background>
+    </ErrorBoundary>
   );
 };
