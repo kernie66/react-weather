@@ -7,7 +7,7 @@ import SearchAddress from './SearchAddress';
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
-export default memo(function Map() {
+export default function Map() {
   // Loads the map using API KEY
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: API_KEY,
@@ -47,4 +47,4 @@ export default memo(function Map() {
       }
     </>
   );
-});
+};
