@@ -1,14 +1,9 @@
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import Map from "./Map";
-import SearchAddress from "./SearchAddress";
 
 export default function SelectAddress({ modal, closeModal }) {
 
   const onOpened = () => {
-
-  };
-
-  const onSubmit = async (event) => {
 
   };
 

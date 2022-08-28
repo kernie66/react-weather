@@ -2,12 +2,16 @@ import { Marker, useGoogleMap } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Typeahead } from "react-bootstrap-typeahead";
+import useLocalStorageState from "use-local-storage-state";
 
-export default function SearchAddress() {
+export default function SearchAddress({ address, setAddress, position, setPosition }) {
   const map = useGoogleMap();
   const [selected, setSelected] = useState([]);
-  const [position, setPosition] = useState();
+//  const [position, setPosition] = useState();
   const [location, setLocation] = useState(new window.google.maps.LatLng(59.476, 17.905))
+//  const [location, setLocation] = useLocalStorageState("location", {
+//    defaultValue: new window.google.maps.LatLng(59.476, 17.905)
+//  });
 
   const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
     debounce: 500,
@@ -28,18 +32,26 @@ export default function SearchAddress() {
       console.log("Selected:", selected[0].description);
     }, [selected]);
   */
+
+    useEffect(() => {
+      map.panTo(position);
+      setLocation(new window.google.maps.LatLng(position));
+      console.log("Position:", position.lat, position.lng);
+    }, [map, position]);
+
   async function handleSelect(selection) {
     const address = selection[0].description;
+    setAddress(address);
     setValue(address, false);
     //    setSelected(selection);
     console.log("Select:", address);
     //    clearSuggestions();
     const results = await getGeocode({ address: address });
     const coords = await getLatLng(results[0]);
-    console.log("Coords:", coords.lat, coords.lng);
-    map.panTo(coords);
     setPosition(coords);
-    setLocation(new window.google.maps.LatLng(position));
+    console.log("Coords:", coords.lat, coords.lng);
+//    map.panTo(coords);
+//    setLocation(new window.google.maps.LatLng(coords));
   };
 
   function onChange(address) {
@@ -64,8 +76,8 @@ export default function SearchAddress() {
           placeholder="Ange adress, ort eller plats"
         />
       </div>
-      <div className="border">
-        {position && <Marker position={position} icon="http://maps.google.com/mapfiles/ms/icons/blue.png" />}
+      <div>
+        <Marker position={position} icon="http://maps.google.com/mapfiles/ms/icons/blue.png" />
       </div>
     </>
   );
