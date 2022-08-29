@@ -1,13 +1,10 @@
 import { useGoogleMap } from "@react-google-maps/api";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Typeahead } from "react-bootstrap-typeahead";
 
 export default function SearchAddress({ address, setAddress, position, setPosition }) {
   const map = useGoogleMap();
-  const locationMarker = useRef(); 
-
-  const [selected, setSelected] = useState([]);
   const [location, setLocation] = useState(new window.google.maps.LatLng(59.476, 17.905))
 
   const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
@@ -18,29 +15,10 @@ export default function SearchAddress({ address, setAddress, position, setPositi
     }
   });
 
-  useEffect(() => {
-   locationMarker.current = new window.google.maps.Marker({
-  //  position: position,
-  //  map: map,
-    icon: "http://maps.google.com/mapfiles/ms/icons/blue.png",
-  });
-
-  }, [])
-
     useEffect(() => {
       map.panTo(position);
       setLocation(new window.google.maps.LatLng(position));
-      console.log("Position:", position.lat, position.lng);
-//      locationMarker.setMap(null);
-//      locationMarker = null;
-//      locationMarker.current.setPosition(position);
-//      locationMarker.current.setMap(map);
-//      new window.google.maps.Marker({
-//        position: position,
-//        map: map,
-//        icon: "http://maps.google.com/mapfiles/ms/icons/blue.png",
-//      });
-    }, [map, position, locationMarker]);
+    }, [map, position]);
 
   async function handleSelect(selection) {
     const address = selection[0].description;
@@ -50,12 +28,6 @@ export default function SearchAddress({ address, setAddress, position, setPositi
     const results = await getGeocode({ address: address });
     const coords = await getLatLng(results[0]);
     setPosition(coords);
-    console.log("Coords:", coords.lat, coords.lng);
-  };
-
-  function onChange(address) {
-    console.log("onChange", (address[0] ? address[0].description : "Nothing") + " selected");
-    setSelected(address);
   };
 
   return (
