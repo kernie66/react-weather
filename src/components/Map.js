@@ -6,6 +6,7 @@ import SearchAddress from './SearchAddress';
 
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+const center = { lat: 59.476, lng: 17.905 }
 
 export default function Map() {
   // Loads the map using API KEY
@@ -33,8 +34,12 @@ export default function Map() {
             <>
               <GoogleMap
                 zoom={12}
-                center={position}
+                center={center}
                 mapContainerClassName='map-container'
+                onClick={ev => {
+                  console.log("latitide = ", ev.latLng.lat());
+                  console.log("longitude = ", ev.latLng.lng());
+                }}
               >
                 <SearchAddress
                   address={address} setAddress={setAddress}

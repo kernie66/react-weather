@@ -1,10 +1,12 @@
 import { useGoogleMap } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Typeahead } from "react-bootstrap-typeahead";
 
 export default function SearchAddress({ address, setAddress, position, setPosition }) {
   const map = useGoogleMap();
+  const locationMarker = useRef(); 
+
   const [selected, setSelected] = useState([]);
   const [location, setLocation] = useState(new window.google.maps.LatLng(59.476, 17.905))
 
@@ -16,16 +18,29 @@ export default function SearchAddress({ address, setAddress, position, setPositi
     }
   });
 
+  useEffect(() => {
+   locationMarker.current = new window.google.maps.Marker({
+  //  position: position,
+  //  map: map,
+    icon: "http://maps.google.com/mapfiles/ms/icons/blue.png",
+  });
+
+  }, [])
+
     useEffect(() => {
       map.panTo(position);
       setLocation(new window.google.maps.LatLng(position));
       console.log("Position:", position.lat, position.lng);
-      new window.google.maps.Marker({
-        position: position,
-        map: map,
-        icon: "http://maps.google.com/mapfiles/ms/icons/blue.png",
-      });
-    }, [map, position]);
+//      locationMarker.setMap(null);
+//      locationMarker = null;
+      locationMarker.current.setPosition(position);
+      locationMarker.current.setMap(map);
+//      new window.google.maps.Marker({
+//        position: position,
+//        map: map,
+//        icon: "http://maps.google.com/mapfiles/ms/icons/blue.png",
+//      });
+    }, [map, position, locationMarker]);
 
   async function handleSelect(selection) {
     const address = selection[0].description;
