@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { memo, useState } from 'react';
 import { Spinner } from 'reactstrap';
 import useLocalStorageState from 'use-local-storage-state';
@@ -45,6 +45,7 @@ export default function Map() {
                   address={address} setAddress={setAddress}
                   position={position} setPosition={setPosition}
                 />
+                <MarkerF position={position} />
               </GoogleMap>
             </>
           }

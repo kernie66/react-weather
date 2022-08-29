@@ -33,8 +33,8 @@ export default function SearchAddress({ address, setAddress, position, setPositi
       console.log("Position:", position.lat, position.lng);
 //      locationMarker.setMap(null);
 //      locationMarker = null;
-      locationMarker.current.setPosition(position);
-      locationMarker.current.setMap(map);
+//      locationMarker.current.setPosition(position);
+//      locationMarker.current.setMap(map);
 //      new window.google.maps.Marker({
 //        position: position,
 //        map: map,
