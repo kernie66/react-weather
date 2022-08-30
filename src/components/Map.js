@@ -7,6 +7,35 @@ import SearchAddress from './SearchAddress';
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 const center = { lat: 59.476, lng: 17.905 }
+const mapStyles = [
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#d6d6d6"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#707070"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#858585"
+      }
+    ]
+  }
+];
 
 export default memo( function Map() {
   // Loads the map using API KEY
@@ -14,7 +43,9 @@ export default memo( function Map() {
     googleMapsApiKey: API_KEY,
     libraries,
   });
-  const [position, setPosition] = useState({ lat: 59.476, lng: 17.905 });
+  const [position, setPosition] = useLocalStorageState("position", {
+    defaultValue: { lat: 59.476, lng: 17.905 }
+  });
   const [address, setAddress] = useLocalStorageState("address", {
     defaultValue: "Rotebro, Sollentuna, Sverige",
   });
@@ -39,6 +70,7 @@ export default memo( function Map() {
             :
             <>
               <GoogleMap
+                options={{ styles: mapStyles }}
                 zoom={12}
                 center={center}
                 mapContainerClassName='map-container'

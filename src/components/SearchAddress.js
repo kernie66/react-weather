@@ -28,6 +28,9 @@ export default function SearchAddress({ address, setAddress, position, setPositi
     const results = await getGeocode({ address: address });
     const coords = await getLatLng(results[0]);
     setPosition(coords);
+    console.log("Long", results[0].address_components[1].long_name);
+    console.log("Short", results[0].address_components[1].short_name);
+    console.log("Types", results[0].types[0]);
   };
 
   return (
@@ -44,6 +47,9 @@ export default function SearchAddress({ address, setAddress, position, setPositi
             setValue(text);
           }}
           onChange={handleSelect}
+          selectHint={(shouldSelect, event) => (
+            event.key === "Enter" || shouldSelect
+          )}
           placeholder="Ange adress, ort eller plats"
         />
       </div>
