@@ -10,7 +10,7 @@ export default function SelectAddress({ modal, closeModal }) {
   return (
     <Modal fullscreen isOpen={modal} onOpened={onOpened} toggle={closeModal} fade={false}>
       <ModalHeader toggle={closeModal}>
-        Ange adress för väder
+        <h5>Ange adress för väder</h5>
       </ModalHeader>
       <ModalBody className="pt-0">
         <Map />        

@@ -31,6 +31,8 @@ export default function SearchAddress({ address, setAddress, position, setPositi
     console.log("Long", results[0].address_components[1].long_name);
     console.log("Short", results[0].address_components[1].short_name);
     console.log("Types", results[0].types[0]);
+    const reverseReults = await getGeocode({ location: coords });
+    console.log("Address:", reverseReults[0].formatted_address);
   };
 
   return (

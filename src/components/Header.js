@@ -36,7 +36,7 @@ export default function Header() {
           <FullScreenCheck isFullScreen={isFullScreen} onFullScreenChange={onFullScreenChange} />
         </Col>
         <Col xs="10" className="text-center outline-lg">
-          Väderstation :&nbsp;{address.toString()} 
+          Väderstation :&nbsp;{address && address.toString()} 
         </Col>
         <Col xs="1" className='text-primary outline-lg' onClick={selectAddress}>
           <FontAwesomeIcon icon={solid('map-location-dot')} />

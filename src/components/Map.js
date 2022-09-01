@@ -1,6 +1,6 @@
-import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, InfoBoxF, InfoWindowF, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { memo, useState } from 'react';
-import { Spinner } from 'reactstrap';
+import { Popover, PopoverBody, PopoverHeader, Spinner } from 'reactstrap';
 import useLocalStorageState from 'use-local-storage-state';
 import SearchAddress from './SearchAddress';
 
@@ -49,6 +49,7 @@ export default memo( function Map() {
   const [address, setAddress] = useLocalStorageState("address", {
     defaultValue: "Rotebro, Sollentuna, Sverige",
   });
+  const [popover, setPopover] = useState(false);
 
   const clickOnMap = ((ev) => {
     console.log("latitide = ", ev.latLng.lat());
@@ -56,6 +57,23 @@ export default memo( function Map() {
     setPosition({ lat: ev.latLng.lat(), lng: ev.latLng.lng() })
   });
 
+  const clickOnMarker = ((ev) => {
+    console.log("Marker clicked");
+    setPopover(true);
+  });
+
+  const closeInfo = (() => {
+    setPopover(false);
+    console.log("Info closed");
+  })
+
+  const divStyle = {
+    background: `white`,
+    border: `1px solid #ccc`,
+    padding: 15,
+    color: 'dodgerblue',
+  }
+  
   return (
     <>
       {loadError ?
@@ -84,8 +102,20 @@ export default memo( function Map() {
                   <MarkerF
                     position={position}
                     icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
+                    onClick={clickOnMarker}
+                    className="marked-position"
                   />
                 }
+                {popover &&
+                <InfoWindowF
+                    position={position}
+                    onCloseClick={closeInfo}
+                  >
+                    <div style={divStyle}>
+                      <h4>{address}</h4>
+                      </div>
+                      </InfoWindowF>
+                }   
               </GoogleMap>
             </>
           }
