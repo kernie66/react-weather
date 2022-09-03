@@ -1,29 +1,46 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export const AddressContext = createContext();
 
-export default function AddressProvider([ children ]) {
-  const [position, setPosition] = useLocalStorageState("position", {
+export default function AddressProvider({ children }) {
+  const [positionLS, setPositionLS] = useLocalStorageState("position", {
     defaultValue: { lat: 59.476, lng: 17.905 }
   });
-  const [address, setAddress] = useLocalStorageState("address", {
+  const [addressLS, setAddressLS] = useLocalStorageState("address", {
     defaultValue: "Rotebro, Sollentuna, Sverige",
   });
 
   useEffect(() => {
-    if (!position) {
-      setPosition({ lat: 59.476, lng: 17.905 })
+    if (!positionLS) {
+      setPositionLS({ lat: 59.476, lng: 17.905 })
       console.debug("Position set to default");
     };
-    if (!address) {
-      setAddress("Rotebro, Sollentuna, Sverige");
+    if (!addressLS) {
+      setAddressLS("Rotebro, Sollentuna, Sverige");
       console.debug("Address set to default");
     };
+    // eslint-disable-next-line  
   }, []);
 
-return (
-    <AddressContext.Provider value={{address, setAddress, position, setPosition}}>
+  const getAddress = addressLS;
+
+  function setAddress(address) {
+    if (address) {
+      setAddressLS(address);
+    };
+  };
+
+  const getPosition = positionLS;
+
+  function setPosition(position) {
+    if (position) {
+      setPositionLS(position);
+    };
+  };
+
+  return (
+    <AddressContext.Provider value={{ getAddress, setAddress, getPosition, setPosition }}>
       {children}
     </AddressContext.Provider>
   );

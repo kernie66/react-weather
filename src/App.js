@@ -5,6 +5,7 @@ import Body from "./components/Body";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/Header";
 import "./App.css";
+import AddressProvider from "./contexts/AddressProvider";
 
 export default function App() {
 
@@ -20,10 +21,12 @@ export default function App() {
   return (
     <ErrorBoundary>
       <Background>
-        <Header />
-        <ErrorBoundary>
-          <Body />
-        </ErrorBoundary>
+        <AddressProvider>
+          <Header />
+          <ErrorBoundary>
+            <Body />
+          </ErrorBoundary>
+        </AddressProvider>
       </Background>
     </ErrorBoundary>
   );

@@ -2,10 +2,13 @@ import { useGoogleMap } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Typeahead } from "react-bootstrap-typeahead";
+import { useAddress } from "../contexts/AddressProvider";
+import decodeAddress from "../helpers/decodeAddress";
 
-export default function SearchAddress({ address, setAddress, position, setPosition }) {
+export default function SearchAddress() {
   const map = useGoogleMap();
   const [location, setLocation] = useState(new window.google.maps.LatLng(59.476, 17.905))
+  const { getAddress, setAddress, getPosition, setPosition } = useAddress();
 
   const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
     debounce: 500,
@@ -16,23 +19,19 @@ export default function SearchAddress({ address, setAddress, position, setPositi
   });
 
     useEffect(() => {
-      map.panTo(position);
-      setLocation(new window.google.maps.LatLng(position));
-    }, [map, position]);
+      map.panTo(getPosition);
+      setLocation(new window.google.maps.LatLng(getPosition));
+    }, [map, getPosition]);
 
   async function handleSelect(selection) {
     const address = selection[0].description;
-    setAddress(address);
+    // setAddress(address);
     setValue(address, false);
     console.log("Select:", address);
     const results = await getGeocode({ address: address });
-    const coords = await getLatLng(results[0]);
+    const coords = getLatLng(results[0]);
     setPosition(coords);
-    console.log("Long", results[0].address_components[1].long_name);
-    console.log("Short", results[0].address_components[1].short_name);
-    console.log("Types", results[0].types[0]);
-    const reverseReults = await getGeocode({ location: coords });
-    console.log("Address:", reverseReults[0].formatted_address);
+    setAddress(decodeAddress(results[0]));
   };
 
   return (

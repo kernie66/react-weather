@@ -2,7 +2,11 @@ import { GoogleMap, InfoBoxF, InfoWindowF, MarkerF, useLoadScript } from '@react
 import { memo, useState } from 'react';
 import { Popover, PopoverBody, PopoverHeader, Spinner } from 'reactstrap';
 import useLocalStorageState from 'use-local-storage-state';
+import { getGeocode } from 'use-places-autocomplete';
+import { useAddress } from '../contexts/AddressProvider';
+import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
+import SelectOnMap from './SelectOnMap';
 
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -43,44 +47,25 @@ export default memo( function Map() {
     googleMapsApiKey: API_KEY,
     libraries,
   });
-  const [position, setPosition] = useLocalStorageState("position", {
-    defaultValue: { lat: 59.476, lng: 17.905 }
-  });
-  const [address, setAddress] = useLocalStorageState("address", {
-    defaultValue: "Rotebro, Sollentuna, Sverige",
-  });
-  const [popover, setPopover] = useState(false);
+  const { getAddress, setAddress, getPosition, setPosition } = useAddress();
 
-  const clickOnMap = ((ev) => {
-    console.log("latitide = ", ev.latLng.lat());
-    console.log("longitude = ", ev.latLng.lng());
-    setPosition({ lat: ev.latLng.lat(), lng: ev.latLng.lng() })
-  });
+  async function clickOnMap(selection) {
+    const position = { lat: selection.latLng.lat(), lng: selection.latLng.lng() }
+    const results = await getGeocode({ location: position });
+    console.log("Address:", results[0].formatted_address);
+    console.log("latitide = ", position.lat);
+    console.log("longitude = ", position.lng);
+    setPosition(position);
+    setAddress(decodeAddress(results[0]));
+  };
 
-  const clickOnMarker = ((ev) => {
-    console.log("Marker clicked");
-    setPopover(true);
-  });
-
-  const closeInfo = (() => {
-    setPopover(false);
-    console.log("Info closed");
-  })
-
-  const divStyle = {
-    background: `white`,
-    border: `1px solid #ccc`,
-    padding: 15,
-    color: 'dodgerblue',
-  }
-  
   return (
     <>
       {loadError ?
         <h3 className='text-center'>Kan inte ladda Google Maps...</h3>
         :
         <>
-          {!isLoaded || position === undefined ?
+          {!isLoaded ?
             <h3 className='text-center'>
               Väntar på Google Maps...
               <Spinner animation="border" />
@@ -94,28 +79,8 @@ export default memo( function Map() {
                 mapContainerClassName='map-container'
                 onClick={clickOnMap}
               >
-                <SearchAddress
-                  address={address} setAddress={setAddress}
-                  position={position} setPosition={setPosition}
-                />
-                {position &&
-                  <MarkerF
-                    position={position}
-                    icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
-                    onClick={clickOnMarker}
-                    className="marked-position"
-                  />
-                }
-                {popover &&
-                <InfoWindowF
-                    position={position}
-                    onCloseClick={closeInfo}
-                  >
-                    <div style={divStyle}>
-                      <h4>{address}</h4>
-                      </div>
-                      </InfoWindowF>
-                }   
+                <SearchAddress />
+                <SelectOnMap />
               </GoogleMap>
             </>
           }

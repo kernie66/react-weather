@@ -1,7 +1,7 @@
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import Map from "./Map";
 
-export default function SelectAddress({ modal, closeModal }) {
+export default function SelectLocation({ modal, closeModal }) {
 
   const onOpened = () => {
 
