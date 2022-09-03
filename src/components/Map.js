@@ -1,7 +1,6 @@
-import { GoogleMap, InfoBoxF, InfoWindowF, MarkerF, useLoadScript } from '@react-google-maps/api';
-import { memo, useState } from 'react';
-import { Popover, PopoverBody, PopoverHeader, Spinner } from 'reactstrap';
-import useLocalStorageState from 'use-local-storage-state';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { memo } from 'react';
+import { Spinner } from 'reactstrap';
 import { getGeocode } from 'use-places-autocomplete';
 import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
@@ -47,14 +46,14 @@ export default memo( function Map() {
     googleMapsApiKey: API_KEY,
     libraries,
   });
-  const { getAddress, setAddress, getPosition, setPosition } = useAddress();
+  const { setAddress, setPosition } = useAddress();
 
   async function clickOnMap(selection) {
     const position = { lat: selection.latLng.lat(), lng: selection.latLng.lng() }
     const results = await getGeocode({ location: position });
-    console.log("Address:", results[0].formatted_address);
-    console.log("latitide = ", position.lat);
-    console.log("longitude = ", position.lng);
+    console.debug("Address:", results[0].formatted_address);
+    console.debug("Latitide = ", position.lat);
+    console.debug("Longitude = ", position.lng);
     setPosition(position);
     setAddress(decodeAddress(results[0]));
   };

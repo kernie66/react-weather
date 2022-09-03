@@ -8,8 +8,9 @@ import decodeAddress from "../helpers/decodeAddress";
 export default function SearchAddress() {
   const map = useGoogleMap();
   const [location, setLocation] = useState(new window.google.maps.LatLng(59.476, 17.905))
-  const { getAddress, setAddress, getPosition, setPosition } = useAddress();
+  const { setAddress, getPosition, setPosition } = useAddress();
 
+  // eslint-disable-next-line
   const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
     debounce: 500,
     requestOptions: {

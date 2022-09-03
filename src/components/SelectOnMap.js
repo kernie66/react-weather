@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAddress } from "../contexts/AddressProvider";
 
 export default function SelectOnMap() {
-  const { getAddress, getPosition, setPosition } = useAddress();
+  const { getAddress, getPosition } = useAddress();
   const [popover, setPopover] = useState(false);
 
   const clickOnMarker = ((ev) => {
@@ -16,10 +16,14 @@ export default function SelectOnMap() {
     console.log("Info closed");
   })
 
+  const infoOptions = {
+    pixelOffset: new window.google.maps.Size(0, -20),
+  };
+
   const divStyle = {
     background: `white`,
     border: `1px solid #ccc`,
-    padding: 15,
+    padding: 5,
     color: 'dodgerblue',
   }
   
@@ -36,6 +40,7 @@ export default function SelectOnMap() {
         <InfoWindowF
           position={getPosition}
           onCloseClick={closeInfo}
+          options={infoOptions}
         >
           <div style={divStyle}>
             <h5>{getAddress}</h5>

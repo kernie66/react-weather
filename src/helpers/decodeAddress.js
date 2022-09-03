@@ -1,5 +1,4 @@
 export default function decodeAddress(geocodeResult) {
-//  const keys = Object.keys(geocodeResult.address_components);
   const addressComponents = {
     street: '',
     sublocality: '',
@@ -9,15 +8,10 @@ export default function decodeAddress(geocodeResult) {
     natural_feature: '',
     park: '',
   };
-//  console.log("Keys:", keys);
-//  geocodeResult.address_components.forEach((key, index) => {
-//    console.log(Object.keys(key), index);
-//  });
-//  const entries = Object.entries(geocodeResult.address_components);
-//  console.log(entries);
+
   let includeStreet = true;
+  // eslint-disable-next-line
   for (const [key, value] of Object.entries(geocodeResult.address_components)) {
-//    console.log(`${key}: ${value.long_name}`);
     value.types.forEach(val => console.log(val));
     if (value.types.includes('route')) {
       addressComponents.street = value.long_name + ', ';
