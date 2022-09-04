@@ -6,39 +6,18 @@ import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
 import SelectOnMap from './SelectOnMap';
+import mapStyles from '../helpers/mapStyles';  
 
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 const center = { lat: 59.476, lng: 17.905 }
-const mapStyles = [
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#d6d6d6"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#707070"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#858585"
-      }
-    ]
-  }
-];
+
+const mapOptions = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+  mapTypeControl: true,
+}
 
 export default memo( function Map() {
   // Loads the map using API KEY
@@ -72,7 +51,7 @@ export default memo( function Map() {
             :
             <>
               <GoogleMap
-                options={{ styles: mapStyles }}
+                options={mapOptions}
                 zoom={12}
                 center={center}
                 mapContainerClassName='map-container'
