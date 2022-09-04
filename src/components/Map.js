@@ -7,6 +7,7 @@ import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
 import SelectOnMap from './SelectOnMap';
 import mapStyles from '../helpers/mapStyles';  
+import CurrentPosition from './CurrentPosition';
 
 const libraries = ["places"];
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -57,6 +58,7 @@ export default memo( function Map() {
                 mapContainerClassName='map-container'
                 onClick={clickOnMap}
               >
+                <CurrentPosition />
                 <SearchAddress />
                 <SelectOnMap />
               </GoogleMap>

@@ -13,6 +13,14 @@
   border-color: cornflowerblue;
 }
 
+.locate {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.1rem;
+  background: none;
+  border: none;
+}
+
 .rbt-close {
   color: blanchedalmond;
   background-color: cornflowerblue;
