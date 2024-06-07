@@ -1,16 +1,17 @@
-import { Col, Container, Row } from "reactstrap";
-import Map from "./Map";
+import { Container } from 'reactstrap';
+import Map from './Map';
 
 export default function Playground() {
   return (
-    <Container className="d-flex flex-column h-100 justify-content-between border" >
+    <Container className="d-flex flex-column h-100 justify-content-between border">
       <Map />
     </Container>
   );
-};
-    {/*    
+}
+{
+  /*
     <Autocomplete
-    apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+    apiKey={import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY}
     onPlaceSelected={(place) => console.log(place)}
   />
   )
@@ -45,12 +46,13 @@ export default function Playground() {
           placeholder="Ange ort, adress eller plats"
         />
         <ComboboxPopover>
-            {status === "OK" && 
+            {status === "OK" &&
               data.map(({ place_id, description }) => (
                 <ComboboxOption key={place_id} value={description} />
               ))
             }
         </ComboboxPopover>
-          </Combobox> 
-    </div> 
-  );*/}
+          </Combobox>
+    </div>
+  );*/
+}
