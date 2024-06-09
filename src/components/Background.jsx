@@ -9,7 +9,7 @@ export default function Background({ children }) {
   const background = {
     backgroundImage: `url(${backgroundImageUrl})`,
     backgroundPosition: 'center',
-    backgroundSize: 'center',
+    backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     // width: '100vw',
     height: '100vh',
