@@ -11,7 +11,7 @@ export default function Background({ children }) {
     backgroundPosition: 'center',
     backgroundSize: 'center',
     backgroundRepeat: 'no-repeat',
-    //    width: '100vw',
+    // width: '100vw',
     height: '100vh',
   };
 
