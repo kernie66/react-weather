@@ -4,6 +4,7 @@ import 'bootswatch/dist/superhero/bootstrap.min.css';
 // TODO: Note: Replace ^[theme]^ (examples: darkly, slate, cosmo, spacelab, and superhero. See https://bootswatch.com/ for current theme names.)
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import '@pqina/flip/dist/flip.min.css';
@@ -12,11 +13,18 @@ import './text.css';
 import './flip.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MantineProvider, createTheme } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+
+const theme = createTheme({});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MantineProvider theme={theme}>
+      <Notifications />
+      <App />
+    </MantineProvider>
   </React.StrictMode>
 );
 

@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Azeret Mono'],
+        families: ['Chivo Mono'],
       },
     });
   }, []);

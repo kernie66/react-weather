@@ -1,25 +1,25 @@
-import React, { useRef, useEffect, useState } from "react";
-import Tick from "@pqina/flip";
-import getFlipValues from "../helpers/getFlipValues";
+import { useRef, useEffect, useState } from 'react';
+import Tick from '@pqina/flip';
+import getFlipValues from '../helpers/getFlipValues';
 
 export default function FlipDisplay() {
   const divRef = useRef();
   const tickRef = useRef();
   const [tickValue, setTickValue] = useState(getFlipValues());
-  const [flipDayStyle, setFlipDayStyle] = useState("flip-date-day");
+  const [flipDayStyle, setFlipDayStyle] = useState('flip-date-day');
 
   // Make the Tick instance and store it in the refs
   useEffect(() => {
-    const didInit = tick => {
+    const didInit = (tick) => {
       tickRef.current = tick;
       tickRef.current.value = getFlipValues();
-      console.debug("Tick initialised");
+      console.debug('Tick initialised');
     };
 
     const currDiv = divRef.current;
     const tickInstance = tickRef.current;
     Tick.DOM.create(currDiv, {
-      didInit
+      didInit,
     });
     return () => Tick.DOM.destroy(tickInstance);
   }, []);
@@ -31,7 +31,7 @@ export default function FlipDisplay() {
 
       if (tickRef.current.value.minutes !== value.minutes) {
         setTickValue(value);
-      };
+      }
     }, 1000);
 
     return () => clearInterval(timerId);
@@ -41,12 +41,16 @@ export default function FlipDisplay() {
   useEffect(() => {
     if (tickRef.current) {
       tickRef.current.value = tickValue;
-      setFlipDayStyle(tickValue.dayOfWeek === 0 ? "flip-date-sunday" : "flip-date-day");
+      setFlipDayStyle(
+        tickValue.dayOfWeek === 0
+          ? 'flip-date-sunday'
+          : 'flip-date-day'
+      );
     }
   }, [tickValue]);
 
   return (
-    <div style={{ fontFamily: 'Azeret Mono', fontSize: '36px' }}>
+    <div style={{ fontFamily: 'Chivo Mono', fontSize: '36px' }}>
       <div className="tick FlipDisplay">
         <div data-repeat="true">
           <div ref={divRef}>
@@ -54,37 +58,35 @@ export default function FlipDisplay() {
               <span
                 data-key="hours"
                 data-repeat="true"
-                data-transform="pad(00) -> split -> delay">
-                <span
-                  data-view="flip">
-                </span>
+                data-transform="pad(00) -> split -> delay"
+              >
+                <span data-view="flip"></span>
               </span>
               <span className="tick-text-inline">:</span>
               <span
                 data-key="minutes"
                 data-repeat="true"
-                data-transform="pad(00) -> split -> delay">
-                <span
-                  data-view="flip">
-                </span>
+                data-transform="pad(00) -> split -> delay"
+              >
+                <span data-view="flip"></span>
               </span>
               <div className="mt-3 FlipDate">
                 <span
                   data-key="weekday"
                   id="flip-date"
-                  data-view="flip">
-                </span>
+                  data-view="flip"
+                ></span>
                 <span
                   data-key="day"
                   id={flipDayStyle}
                   data-view="flip"
-                  data-transform="pad(00)">
-                </span>
+                  data-transform="pad(00)"
+                ></span>
                 <span
                   data-key="month"
                   id="flip-date"
-                  data-view="flip">
-                </span>
+                  data-view="flip"
+                ></span>
               </div>
             </div>
           </div>
@@ -92,4 +94,4 @@ export default function FlipDisplay() {
       </div>
     </div>
   );
-};
+}

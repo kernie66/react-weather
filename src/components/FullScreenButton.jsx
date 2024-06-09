@@ -1,7 +1,10 @@
-import { FaExpand } from 'react-icons/fa';
-import { Button } from 'reactstrap';
+import { FaCompress, FaExpand } from 'react-icons/fa';
+import { Button } from '@mantine/core';
+import { useFullscreen } from '@mantine/hooks';
 
 export default function FullScreenButton({ onClick }) {
+  const { toggle, fullscreen } = useFullscreen();
+
   const buttonStyle = {
     boxShadow: 'none',
     borderColor: 'transparent',
@@ -10,16 +13,16 @@ export default function FullScreenButton({ onClick }) {
     fontSize: 32,
     padding: 0,
     margin: 0,
-    marginTop: -4,
+    marginTop: 4,
   };
 
   return (
     <Button
       className="FullScreenButton"
       style={buttonStyle}
-      onClick={onClick}
+      onClick={toggle}
     >
-      <FaExpand />
+      {fullscreen ? <FaCompress /> : <FaExpand />}
     </Button>
   );
 }
