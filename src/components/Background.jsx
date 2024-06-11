@@ -6,8 +6,7 @@ import { useImageSize } from 'react-image-size';
 export default function Background({ children }) {
   const [backgroundImage, setBackgroundImage] = useState('clear_day');
   const [backgroundSize, setBackgroundSize] = useState('cover');
-  const backgroundImageUrl =
-    '/img/weather/' + backgroundImage + '.jpg';
+  const backgroundImageUrl = `/img/weather/${backgroundImage}.jpg`;
   const { width, height } = useViewportSize();
   const [dimensions] = useImageSize(backgroundImageUrl);
 

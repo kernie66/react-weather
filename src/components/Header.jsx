@@ -26,7 +26,7 @@ export default function Header() {
           Väderstation :&nbsp;{getAddress.toString()}
         </Text>
         <Button variant="transparent" onClick={selectAddress}>
-          <TbMap2 size={36} color="darkred" />
+          <TbMap2 size={36} color="crimson" />
         </Button>
       </Group>
     </>

@@ -9,7 +9,7 @@ export default function FullScreenButton({ onClick }) {
     boxShadow: 'none',
     borderColor: 'transparent',
     backgroundColor: 'transparent',
-    color: 'dodgerblue',
+    color: 'slateblue',
     fontSize: 32,
     padding: 0,
     margin: 0,
