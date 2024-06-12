@@ -1,13 +1,12 @@
 import { Divider, Group, Image, Stack, Text } from '@mantine/core';
-import { List } from 'reactstrap';
 
 export default function LeftSide() {
   return (
-    <Stack justify="space-around" gap="md">
+    <Stack h="50vh" justify="space-around" gap="md">
       <Stack gap={8}>
-        <Group gap={8}>
+        <Group gap={8} pb={4}>
           <Image
-            src="/img/weather/sunrise-clipart-lg.png"
+            src="/img/icons/sunrise-clipart-lg.png"
             w={56}
             h={32}
             alt="Sunrise"
@@ -17,9 +16,9 @@ export default function LeftSide() {
           </Text>
         </Group>
         <Divider />
-        <Group gap={8} my={0}>
+        <Group gap={8} my={0} pt={0}>
           <Image
-            src="img/weather/sunset-clipart-lg.png"
+            src="img/icons/sunset-clipart-lg.png"
             w={56}
             h={32}
             alt="Sunset"
@@ -29,15 +28,17 @@ export default function LeftSide() {
           </Text>
         </Group>
       </Stack>
-      <List type="unstyled" className="outline-md">
-        <li className="outline-sm border-bottom">Luftfuktighet</li>
-        <li className="ps-1 pt-1">66%</li>
-      </List>
-      <List type="unstyled" className="outline-md">
-        <li className="outline-sm border-bottom">Vind</li>
-        <li className="ps-1 pt-1">12.0 m/s</li>
-        <li className="ps-1 pt-1">NNV</li>
-      </List>
+      <Stack gap={8}>
+        <Text className="outline-sm">Luftfuktighet</Text>
+        <Divider />
+        <Text className="outline-md">66%</Text>
+      </Stack>
+      <Stack gap={8}>
+        <Text className="outline-sm">Vind</Text>
+        <Divider />
+        <Text className="outline-md">12.0 m/s</Text>
+        <Text className="outline-md">NNV</Text>
+      </Stack>
     </Stack>
   );
 }
