@@ -28,12 +28,12 @@ export default function LeftSide() {
           </Text>
         </Group>
       </Stack>
-      <Stack gap={8}>
+      <Stack gap={4}>
         <Text className="outline-sm">Luftfuktighet</Text>
         <Divider />
         <Text className="outline-md">66%</Text>
       </Stack>
-      <Stack gap={8}>
+      <Stack gap={4}>
         <Text className="outline-sm">Vind</Text>
         <Divider />
         <Text className="outline-md">12.0 m/s</Text>

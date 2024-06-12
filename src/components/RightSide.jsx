@@ -1,20 +1,35 @@
-import { Container, List } from 'reactstrap';
+import { Divider, Group, Stack, Text } from '@mantine/core';
 
 export default function RightSide() {
   return (
-    <Container className="d-flex flex-column justify-content-around h-100 p-0">
-      <List type="unstyled" className="outline-md text-end">
-        <li className="outline-sm border-bottom">Molntäcke</li>
-        <li className="pe-1 pt-1">80%</li>
-      </List>
-      <List type="unstyled" className="outline-md text-end">
-        <li className="outline-sm border-bottom">Känns som</li>
-        <li className="pe-1 pt-1">27&deg;C</li>
-      </List>
-      <List type="unstyled" className="outline-md text-end">
-        <li className="outline-sm border-bottom pt-4">Vindbyar</li>
-        <li className="pe-1 pt-1">4 m/s</li>
-      </List>
-    </Container>
+    <Stack h="50vh" justify="space-around" gap="md">
+      <Stack gap={4}>
+        <Group justify="flex-end">
+          <Text className="outline-sm">Molntäcke</Text>
+        </Group>
+        <Divider />
+        <Group justify="flex-end">
+          <Text className="outline-md">80%</Text>
+        </Group>
+      </Stack>
+      <Stack gap={4}>
+        <Group justify="flex-end">
+          <Text className="outline-sm">Känns som</Text>
+        </Group>
+        <Divider />
+        <Group justify="flex-end">
+          <Text className="outline-md">27&deg;C</Text>
+        </Group>
+      </Stack>
+      <Stack gap={4}>
+        <Group justify="flex-end">
+          <Text className="outline-sm">Vindbyar</Text>
+        </Group>
+        <Divider />
+        <Group justify="flex-end">
+          <Text className="outline-md">4 m/s</Text>
+        </Group>
+      </Stack>
+    </Stack>
   );
-};
+}
