@@ -5,7 +5,7 @@ import Forecasts from './Forecasts';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 import TemperatureDisplay from './TemperatureDisplay';
-import { Container, Grid, Group, Stack } from '@mantine/core';
+import { Container, Group, SimpleGrid, Stack } from '@mantine/core';
 
 export default function Body() {
   return (
@@ -17,7 +17,7 @@ export default function Body() {
         <ErrorBoundary>
           <Stack>
             <TemperatureDisplay />
-            <Group justify="space-between">
+            <Group justify="space-between" gap="5vw">
               <ErrorBoundary>
                 <FlipDisplay />
               </ErrorBoundary>
@@ -32,11 +32,11 @@ export default function Body() {
         </ErrorBoundary>
       </Group>
       <Group justify="center">
-        <Grid justify="space-around" w="90%">
+        <SimpleGrid cols={6} w="90%">
           <ErrorBoundary>
             <Forecasts />
           </ErrorBoundary>
-        </Grid>
+        </SimpleGrid>
       </Group>
     </Container>
   );
