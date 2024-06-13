@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
 import FlipDisplay from './FlipDisplay';
@@ -8,31 +9,32 @@ import TemperatureDisplay from './TemperatureDisplay';
 import { Container, Group, SimpleGrid, Stack } from '@mantine/core';
 
 export default function Body() {
+  const isHiddenLeft = useMediaQuery('(max-width: 60em)');
+  const isHiddenRight = useMediaQuery('(max-width: 65em)');
+
   return (
     <Container fluid>
-      <Group justify="space-between" h="55%">
+      <Group justify="space-between" h="55%" mb="xl">
         <ErrorBoundary>
-          <LeftSide />
+          {isHiddenLeft ? null : <LeftSide />}
         </ErrorBoundary>
-        <ErrorBoundary>
-          <Stack>
+        <Stack>
+          <ErrorBoundary>
             <TemperatureDisplay />
-            <Group justify="space-between" gap="5vw">
-              <ErrorBoundary>
-                <FlipDisplay />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <CurrentWeather />
-              </ErrorBoundary>
-            </Group>
-          </Stack>
-        </ErrorBoundary>
+          </ErrorBoundary>
+          <Group justify="space-between" gap="5vw">
+            <ErrorBoundary>
+              <FlipDisplay />
+              <CurrentWeather />
+            </ErrorBoundary>
+          </Group>
+        </Stack>
         <ErrorBoundary>
-          <RightSide />
+          {isHiddenRight ? null : <RightSide />}
         </ErrorBoundary>
       </Group>
       <Group justify="center">
-        <SimpleGrid cols={6} w="90%">
+        <SimpleGrid cols={{ base: 3, sm: 5, md: 6 }} w="100vw">
           <ErrorBoundary>
             <Forecasts />
           </ErrorBoundary>
