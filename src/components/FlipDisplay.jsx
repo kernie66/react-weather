@@ -50,44 +50,42 @@ export default function FlipDisplay() {
   }, [tickValue]);
 
   return (
-    <div style={{ fontFamily: 'Chivo Mono', fontSize: '36px' }}>
-      <div className="tick FlipDisplay">
-        <div data-repeat="true">
-          <div ref={divRef}>
-            <div className="tick-group FlipTime">
+    <div className="tick FlipDisplay">
+      <div data-repeat="true">
+        <div ref={divRef}>
+          <div className="tick-group FlipTime">
+            <span
+              data-key="hours"
+              data-repeat="true"
+              data-transform="pad(00) -> split -> delay"
+            >
+              <span data-view="flip"></span>
+            </span>
+            <span className="tick-text-inline">:</span>
+            <span
+              data-key="minutes"
+              data-repeat="true"
+              data-transform="pad(00) -> split -> delay"
+            >
+              <span data-view="flip"></span>
+            </span>
+            <div className="mt-3 FlipDate">
               <span
-                data-key="hours"
-                data-repeat="true"
-                data-transform="pad(00) -> split -> delay"
-              >
-                <span data-view="flip"></span>
-              </span>
-              <span className="tick-text-inline">:</span>
+                data-key="weekday"
+                id="flip-date"
+                data-view="flip"
+              ></span>
               <span
-                data-key="minutes"
-                data-repeat="true"
-                data-transform="pad(00) -> split -> delay"
-              >
-                <span data-view="flip"></span>
-              </span>
-              <div className="mt-3 FlipDate">
-                <span
-                  data-key="weekday"
-                  id="flip-date"
-                  data-view="flip"
-                ></span>
-                <span
-                  data-key="day"
-                  id={flipDayStyle}
-                  data-view="flip"
-                  data-transform="pad(00)"
-                ></span>
-                <span
-                  data-key="month"
-                  id="flip-date"
-                  data-view="flip"
-                ></span>
-              </div>
+                data-key="day"
+                id={flipDayStyle}
+                data-view="flip"
+                data-transform="pad(00)"
+              ></span>
+              <span
+                data-key="month"
+                id="flip-date"
+                data-view="flip"
+              ></span>
             </div>
           </div>
         </div>
