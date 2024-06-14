@@ -9,14 +9,14 @@ import TemperatureDisplay from './TemperatureDisplay';
 import { Container, Group, SimpleGrid, Stack } from '@mantine/core';
 
 export default function Body() {
-  const isHiddenLeft = useMediaQuery('(max-width: 60em)');
-  const isHiddenRight = useMediaQuery('(max-width: 65em)');
+  const isHiddenLeft = useMediaQuery('(max-width: 60rem)');
+  const isHiddenRight = useMediaQuery('(max-width: 68em)');
 
   return (
     <Container fluid>
       <Group justify="space-between" h="55%" mb="xl">
         <ErrorBoundary>
-          {isHiddenLeft ? null : <LeftSide />}
+          {isHiddenLeft ? <div /> : <LeftSide />}
         </ErrorBoundary>
         <Stack>
           <ErrorBoundary>
@@ -30,11 +30,11 @@ export default function Body() {
           </Group>
         </Stack>
         <ErrorBoundary>
-          {isHiddenRight ? null : <RightSide />}
+          {isHiddenRight ? <div /> : <RightSide />}
         </ErrorBoundary>
       </Group>
       <Group justify="center">
-        <SimpleGrid cols={{ base: 3, sm: 5, md: 6 }} w="100vw">
+        <SimpleGrid cols={{ base: 3, sm: 4, md: 5, lg: 6 }} w="100%">
           <ErrorBoundary>
             <Forecasts />
           </ErrorBoundary>
