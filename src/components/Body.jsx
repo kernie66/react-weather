@@ -34,7 +34,12 @@ export default function Body() {
         </ErrorBoundary>
       </Group>
       <Group justify="center">
-        <SimpleGrid cols={{ base: 3, sm: 4, md: 5, lg: 6 }} w="100%">
+        <SimpleGrid
+          cols={{ base: 3, sm: 4, md: 5, lg: 6 }}
+          spacing="xl"
+          verticalSpacing="xl"
+          w="100%"
+        >
           <ErrorBoundary>
             <Forecasts />
           </ErrorBoundary>
