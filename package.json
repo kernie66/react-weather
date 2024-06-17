@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.0",
     "bootswatch": "^5.2.0",
+    "core-js": "^3.37.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap-typeahead": "^6.0.0-rc.3",
@@ -37,25 +38,30 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "chrome >= 92",
+      "last 2 firefox version",
+      "last 2 safari version",
+      "ios >= 12"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "chrome >= 92",
+      "last 2 firefox version",
+      "last 2 safari version",
+      "ios >= 12"
     ]
   },
   "devDependencies": {
     "@nabla/vite-plugin-eslint": "^2.0.4",
     "@types/react": "^18.3.3",
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "@vitejs/plugin-react": "^4.3.1",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
+    "terser": "^5.31.1",
     "vite": "^5.2.13"
   }
 }
