@@ -1,4 +1,8 @@
-import { useMediaQuery } from '@mantine/hooks';
+import {
+  useLogger,
+  useMediaQuery,
+  useViewportSize,
+} from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
 import FlipDisplay from './FlipDisplay';
@@ -9,20 +13,22 @@ import TemperatureDisplay from './TemperatureDisplay';
 import { Container, Group, SimpleGrid, Stack } from '@mantine/core';
 
 export default function Body() {
+  const { height, width } = useViewportSize();
   const isHiddenLeft = useMediaQuery('(max-width: 60rem)');
   const isHiddenRight = useMediaQuery('(max-width: 68em)');
 
+  useLogger('Viewport size:', [{ width, height }]);
   return (
     <Container fluid>
       <Group justify="space-between" h="55%" mb="xl">
         <ErrorBoundary>
           {isHiddenLeft ? <div /> : <LeftSide />}
         </ErrorBoundary>
-        <Stack>
+        <Stack maw="75%">
           <ErrorBoundary>
             <TemperatureDisplay />
           </ErrorBoundary>
-          <Group justify="space-between" gap="5vw">
+          <Group justify="space-around" gap="md">
             <ErrorBoundary>
               <FlipDisplay />
               <CurrentWeather />

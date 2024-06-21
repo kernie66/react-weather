@@ -123,6 +123,9 @@ importers:
       vite:
         specifier: ^5.2.13
         version: 5.2.13(@types/node@20.14.2)(sugarss@4.0.1(postcss@8.4.38))(terser@5.31.1)
+      vite-plugin-simple-vconsole:
+        specifier: ^0.1.13
+        version: 0.1.13
 
 packages:
 
@@ -3080,6 +3083,9 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  vite-plugin-simple-vconsole@0.1.13:
+    resolution: {integrity: sha512-Mrm3CSyBDqrZw4FB0to7rcWTC+0qzGjKPCB/wDq3uyvVHcqos7Bw+X/MSiPKP4f+o6Re3Z9hvDdTmRN2xNOVJw==}
 
   vite@5.2.13:
     resolution: {integrity: sha512-SSq1noJfY9pR3I1TUENL3rQYDQCFqgD+lM6fTRAM8Nv6Lsg5hDLaXkjETVeBt+7vZBCMoibD+6IWnT2mJ+Zb/A==}
@@ -6595,6 +6601,8 @@ snapshots:
       '@types/react': 18.3.3
 
   util-deprecate@1.0.2: {}
+
+  vite-plugin-simple-vconsole@0.1.13: {}
 
   vite@5.2.13(@types/node@20.14.2)(sugarss@4.0.1(postcss@8.4.38))(terser@5.31.1):
     dependencies:

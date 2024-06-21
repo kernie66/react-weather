@@ -2,7 +2,7 @@ import { Group, Image, Stack, Text } from '@mantine/core';
 
 export default function CurrentWeather() {
   return (
-    <Group gap="md">
+    <Group gap="md" maw="60%">
       <Image
         src="/weather_icons/PNG/256/day_partial_cloud.png"
         width="100px"
