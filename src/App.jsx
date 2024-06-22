@@ -7,8 +7,6 @@ import Header from './components/Header';
 import './App.css';
 import AddressProvider from './contexts/AddressProvider';
 
-export const iPadSize = { width: 1112, height: 759, fsHeight: 814 };
-
 export default function App() {
   // Load fonts used in the app
   useEffect(() => {

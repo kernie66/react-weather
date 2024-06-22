@@ -1,4 +1,8 @@
-import { useMediaQuery } from '@mantine/hooks';
+import {
+  useMediaQuery,
+  useOs,
+  useViewportSize,
+} from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
 import FlipDisplay from './FlipDisplay';
@@ -13,12 +17,22 @@ import {
   Stack,
   em,
 } from '@mantine/core';
-import { iPadSize } from '../App.jsx';
 
 export default function Body() {
+  const thisOs = useOs();
+  let limitWidth = 1112; // My iPad Pro
+  const { width: viewportWidth } = useViewportSize();
+
+  if (thisOs === 'ios') {
+    if (viewportWidth >= 1024) {
+      limitWidth = viewportWidth;
+    } else {
+      limitWidth = 1112;
+    }
+  }
   const isHiddenLeft = useMediaQuery('(max-width: 60rem)');
   const isHiddenRight = useMediaQuery(
-    '(max-width: ' + em(iPadSize.width - 1) + ')'
+    '(max-width: ' + em(limitWidth - 1) + ')'
   );
 
   return (
