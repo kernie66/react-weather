@@ -6,8 +6,9 @@ import { Group } from '@mantine/core';
 export default function TemperatureDisplay() {
   return (
     <Group
-      justify="space-between"
-      mx="lg"
+      justify="flex-end"
+      gap="10%"
+      me="15%"
       style={{ color: 'sandybrown' }}
     >
       <ErrorBoundary>
