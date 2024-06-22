@@ -1,12 +1,12 @@
-import { List } from "reactstrap";
+import { Text } from '@mantine/core';
 
 export default function Temperature() {
   return (
-    <List type="unstyled" className="outline-temp font-weight-bold">
-      <li>
-        <span>-24</span
-        ><span style={{ fontSize: "75%" }}>.8&deg;C</span>
-      </li>
-    </List>
+    <Text fw={500} className="outline-temp">
+      -24
+      <span fw={500} style={{ fontSize: '75%' }}>
+        .8&deg;C
+      </span>
+    </Text>
   );
-};
+}
