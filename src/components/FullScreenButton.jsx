@@ -9,8 +9,8 @@ export default function FullScreenButton({ onClick }) {
     boxShadow: 'none',
     borderColor: 'transparent',
     backgroundColor: 'transparent',
-    color: 'slateblue',
-    fontSize: 32,
+    color: 'grey',
+    fontSize: 36,
     padding: 0,
     margin: 0,
     marginTop: 4,
@@ -18,6 +18,7 @@ export default function FullScreenButton({ onClick }) {
 
   return (
     <Button
+      ps={8}
       className="FullScreenButton"
       style={buttonStyle}
       onClick={toggle}
