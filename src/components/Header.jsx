@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SelectLocation from './SelectLocation';
 import { useAddress } from '../contexts/AddressProvider';
 import FullScreenButton from './FullScreenButton.jsx';
-import { Button, Group, Text } from '@mantine/core';
+import { Button, Center, Group, Text } from '@mantine/core';
 
 export default function Header() {
   const [modal, setModal] = useState(false);
@@ -22,9 +22,11 @@ export default function Header() {
       <SelectLocation modal={modal} closeModal={closeModal} />
       <Group justify="space-between">
         <FullScreenButton />
-        <Text xs="10" className="text-center outline-lg">
-          Väderstation :&nbsp;{getAddress.toString()}
-        </Text>
+        <Center>
+          <Text xs="10" className="outline-lg">
+            Väderstation :&nbsp;{getAddress.toString()}
+          </Text>
+        </Center>
         <Button variant="transparent" onClick={selectAddress}>
           <TbMap2 size={36} color="crimson" />
         </Button>

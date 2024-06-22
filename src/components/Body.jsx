@@ -1,8 +1,4 @@
-import {
-  useLogger,
-  useMediaQuery,
-  useViewportSize,
-} from '@mantine/hooks';
+import { useMediaQuery } from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
 import FlipDisplay from './FlipDisplay';
@@ -10,14 +6,21 @@ import Forecasts from './Forecasts';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 import TemperatureDisplay from './TemperatureDisplay';
-import { Container, Group, SimpleGrid, Stack } from '@mantine/core';
+import {
+  Container,
+  Group,
+  SimpleGrid,
+  Stack,
+  em,
+} from '@mantine/core';
+import { iPadSize } from '../App.jsx';
 
 export default function Body() {
-  const { height, width } = useViewportSize();
   const isHiddenLeft = useMediaQuery('(max-width: 60rem)');
-  const isHiddenRight = useMediaQuery('(max-width: 68em)');
+  const isHiddenRight = useMediaQuery(
+    '(max-width: ' + em(iPadSize.width - 1) + ')'
+  );
 
-  useLogger('Viewport size:', [{ width, height }]);
   return (
     <Container fluid>
       <Group justify="space-between" h="55%" mb="xl">
