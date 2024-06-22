@@ -36,8 +36,8 @@ export default function Body() {
   );
 
   return (
-    <Container fluid>
-      <Group justify="space-between" h="55%" mb="xl">
+    <Container fluid px={8}>
+      <Group justify="space-between" h="55%" mb="lg">
         <ErrorBoundary>
           {isHiddenLeft ? <div /> : <LeftSide />}
         </ErrorBoundary>
@@ -56,11 +56,11 @@ export default function Body() {
           {isHiddenRight ? <div /> : <RightSide />}
         </ErrorBoundary>
       </Group>
-      <Group justify="center">
+      <Group justify="center" h="45%">
         <SimpleGrid
-          cols={{ base: 3, sm: 4, md: 5, lg: 6 }}
-          spacing="xl"
-          verticalSpacing="xl"
+          cols={{ base: 3, sm: 4, md: 6 }}
+          spacing="md"
+          verticalSpacing="lg"
           w="100%"
         >
           <ErrorBoundary>
