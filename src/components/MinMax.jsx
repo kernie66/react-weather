@@ -1,16 +1,20 @@
-import { List } from "reactstrap";
+import { Divider, Stack } from '@mantine/core';
+import TemperatureValue from './TemperatureValue.jsx';
 
 export default function MinMax() {
   return (
-    <List type="unstyled" className="outline-temp-md text-right font-weight-bold pt-3">
-      <li className="border-bottom border-temp">
-        26<span style={{ fontSize: "80%" }}
-        >.7&deg;C</span>
-      </li>
-      <li className="pt-1">
-        15<span style={{ fontSize: "80%" }}
-        >.4&deg;C</span>
-      </li>
-    </List>
+    <Stack justify="center" gap={0}>
+      <TemperatureValue
+        tempValue={6.8}
+        fontWeight={400}
+        tempClass="outline-temp-md"
+      />
+      <Divider size="md" />
+      <TemperatureValue
+        tempValue={5.3}
+        fontWeight={400}
+        tempClass="outline-temp-md"
+      />
+    </Stack>
   );
-};
+}

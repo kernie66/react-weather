@@ -12,7 +12,7 @@ export default function TemperatureValue({
   ).toString();
 
   return (
-    <Text fw={fontWeight} className={tempClass}>
+    <Text fw={fontWeight} className={tempClass} ta="right">
       {integerTemp}
       <span fw={fontWeight} style={{ fontSize: '80%' }}>
         .{decimalTemp}&deg;C

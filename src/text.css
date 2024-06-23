@@ -60,7 +60,7 @@
 .outline-temp {
     font: Tahoma, Geneva, sans-serif;
     font-size: 128px;
-    line-height: 1.1em;
+    // line-height: 1.1em;
     /* color: dodgerblue; */
     text-shadow:
     /* Outline 1 */
@@ -86,7 +86,7 @@
 .outline-temp-md {
     font: Tahoma, Geneva, sans-serif;
     font-size: 48px;
-    line-height: 1.2em;
+    // line-height: 1.2em;
     /* color: dodgerblue; */
     text-shadow:
     /* Outline 1 */
