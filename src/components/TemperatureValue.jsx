@@ -2,7 +2,7 @@ import { Text } from '@mantine/core';
 
 export default function TemperatureValue({
   tempValue,
-  fontWeight = 300,
+  fontWeight = 500,
   tempClass,
 }) {
   const positiveTemp = Math.abs(tempValue);
