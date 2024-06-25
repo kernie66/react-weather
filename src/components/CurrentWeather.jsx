@@ -5,8 +5,8 @@ export default function CurrentWeather() {
     <Group gap="md" maw="55%">
       <Image
         src="/weather_icons/PNG/256/day_partial_cloud.png"
-        width="100px"
-        height="100px"
+        width="80px"
+        height="80px"
         alt="Väder"
       />
       <Stack align="center">

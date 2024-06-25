@@ -3,6 +3,7 @@
     font-size: 36px;
     line-height: 1.2em;
     color: white;
+    white-space: pre-wrap;
     text-shadow:
     /* Outline 1 */
         -1px -1px 0 Black,

@@ -15,11 +15,20 @@ const getWeatherData = async () => {
   return data;
 };
 
-export const useWeatherData = () => {
+export const useWeatherData = (select) => {
   return useQuery({
     queryKey: ['weatherData'],
     queryFn: getWeatherData,
+    select,
     staleTime: 1000 * 60 * 10, // 10 minutes
     gcTime: Infinity,
   });
+};
+
+export const useCurrentWeather = () => {
+  return useWeatherData((data) => data.current);
+};
+
+export const useTodaysWeather = () => {
+  return useWeatherData((data) => data.daily[0]);
 };
