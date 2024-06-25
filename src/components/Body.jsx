@@ -20,16 +20,17 @@ import {
 
 export default function Body() {
   const thisOs = useOs();
-  let limitWidth = 1112; // My iPad Pro
+  let limitWidth = 1024; // My iPad 6
   const { width: viewportWidth } = useViewportSize();
 
-  if (thisOs === 'ios') {
-    if (viewportWidth >= 1024) {
-      limitWidth = viewportWidth;
-    } else {
-      limitWidth = 1112;
-    }
+  console.log('thisOs', thisOs);
+  console.log('ViewportWidth', viewportWidth);
+  if (viewportWidth >= 1024) {
+    limitWidth = viewportWidth;
+  } else {
+    limitWidth = 1112;
   }
+
   const isHiddenLeft = useMediaQuery('(max-width: 60rem)');
   const isHiddenRight = useMediaQuery(
     '(max-width: ' + em(limitWidth - 1) + ')'
@@ -41,11 +42,11 @@ export default function Body() {
         <ErrorBoundary>
           {isHiddenLeft ? <div /> : <LeftSide />}
         </ErrorBoundary>
-        <Stack maw="75%">
+        <Stack maw="70%">
           <ErrorBoundary>
             <TemperatureDisplay />
           </ErrorBoundary>
-          <Group justify="space-around" gap="md">
+          <Group justify="space-between" gap="md">
             <ErrorBoundary>
               <FlipDisplay />
               <CurrentWeather />

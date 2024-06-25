@@ -1,9 +1,10 @@
 import { Text } from '@mantine/core';
+import classes from '../css/Text.module.css';
 
 export default function TemperatureValue({
   tempValue,
   fontWeight = 500,
-  tempClass,
+  fontSize = 128,
 }) {
   const positiveTemp = Math.abs(tempValue);
   const integerTemp = Math.trunc(tempValue);
@@ -11,8 +12,18 @@ export default function TemperatureValue({
     Math.round((positiveTemp - Math.trunc(positiveTemp)) * 10)
   ).toString();
 
+  let outlineClass = classes.outlineSm;
+
+  if (fontSize > 50) {
+    outlineClass = classes.outlineXl;
+  }
   return (
-    <Text fw={fontWeight} className={tempClass} ta="right">
+    <Text
+      fw={fontWeight}
+      fz={fontSize}
+      className={outlineClass}
+      ta="right"
+    >
       {integerTemp}
       <span fw={fontWeight} style={{ fontSize: '80%' }}>
         .{decimalTemp}&deg;C

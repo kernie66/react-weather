@@ -26,7 +26,7 @@ export default function Forecast() {
               height="46px"
               alt="Halvklart"
             />
-            <Text className="outline-temp-sm">-23.0&deg;C</Text>
+            <Text className="outline-temp-sm">-23&deg;C</Text>
           </Group>
         </Center>
         <Text className="outline-sm" c="paleturquoise">
