@@ -11,8 +11,12 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import dayjs from 'dayjs';
+import 'dayjs/locale/sv';
 
 const queryClient = new QueryClient();
+
+dayjs.locale('sv');
 
 export default function App() {
   // Load fonts used in the app

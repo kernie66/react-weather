@@ -1,6 +1,16 @@
 import { Divider, Group, Image, Stack, Text } from '@mantine/core';
+import { useCurrentWeather } from '../utils/weatherQueries.js';
+import dayjs from 'dayjs';
 
 export function Suntimes() {
+  const { data: currentWeather } = useCurrentWeather();
+  const sunriseTime = dayjs
+    .unix(currentWeather.sunrise)
+    .format('HH:DD');
+  const sunsetTime = dayjs
+    .unix(currentWeather.sunset)
+    .format('HH:DD');
+
   return (
     <Stack gap={8}>
       <Group gap={8} pb={4}>
@@ -11,7 +21,7 @@ export function Suntimes() {
           alt="Sunrise"
         />
         <Text pt={6} className="outline-md">
-          05:30
+          {sunriseTime}
         </Text>
       </Group>
       <Divider />
@@ -23,7 +33,7 @@ export function Suntimes() {
           alt="Sunset"
         />
         <Text pt={6} className="outline-md">
-          21:34
+          {sunsetTime}{' '}
         </Text>
       </Group>
     </Stack>
