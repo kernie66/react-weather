@@ -1,0 +1,19 @@
+meta {
+  name: Get overview
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://api.openweathermap.org/data/3.0/onecall/overview?lat={{lat}}&lon={{lon}}&appid={{apiKey}}&lang=sv&units=metric
+  body: none
+  auth: none
+}
+
+params:query {
+  lat: {{lat}}
+  lon: {{lon}}
+  appid: {{apiKey}}
+  lang: sv
+  units: metric
+}
