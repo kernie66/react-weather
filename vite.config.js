@@ -8,8 +8,9 @@ import vConsolePlugin from 'vite-plugin-simple-vconsole';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
+    base: '/',
     build: {
-      outDir: 'build',
+      outDir: 'dist',
     },
     plugins: [
       react(),
@@ -21,6 +22,7 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '192.168.1.44',
       port: env.PORT,
+      strictPort: true,
       fs: {
         cachedChecks: false,
       },
