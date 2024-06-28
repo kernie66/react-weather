@@ -1,10 +1,11 @@
 import { Group, Image, Stack, Text } from '@mantine/core';
+import { getLargeWeatherIconUrl } from '../helpers/getImageUrl.js';
 
 export default function CurrentWeather() {
   return (
     <Group gap="md" maw="55%">
       <Image
-        src="/weather_icons/PNG/256/day_partial_cloud.png"
+        src={getLargeWeatherIconUrl('day_partial_cloud')}
         width="80px"
         height="80px"
         alt="Väder"

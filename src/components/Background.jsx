@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { Container } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useImageSize } from 'react-image-size';
+import { getWeatherImageUrl } from '../helpers/getImageUrl.js';
 
 export default function Background({ children }) {
   const [backgroundImage, setBackgroundImage] = useState('clear_day');
   const [backgroundSize, setBackgroundSize] = useState('cover');
-  const backgroundImageUrl = `/img/weather/${backgroundImage}.jpg`;
+  const backgroundImageUrl = getWeatherImageUrl(
+    `${backgroundImage}.jpg`
+  );
   const { width, height } = useViewportSize();
   const [dimensions] = useImageSize(backgroundImageUrl);
 

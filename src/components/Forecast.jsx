@@ -6,6 +6,7 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
+import { getSmallWeatherIconUrl } from '../helpers/getImageUrl.js';
 
 export default function Forecast() {
   return (
@@ -21,7 +22,9 @@ export default function Forecast() {
         <Center>
           <Group gap="sm" justify="center">
             <Image
-              src="/weather_icons/PNG/128/night_full_moon_partial_cloud.png"
+              src={getSmallWeatherIconUrl(
+                'night_full_moon_partial_cloud'
+              )}
               width="46px"
               height="46px"
               alt="Halvklart"

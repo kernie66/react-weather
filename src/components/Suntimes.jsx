@@ -1,21 +1,22 @@
 import { Divider, Group, Image, Stack, Text } from '@mantine/core';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
 import dayjs from 'dayjs';
+import { getClipArtUrl } from '../helpers/getImageUrl.js';
 
 export function Suntimes() {
   const { data: currentWeather } = useCurrentWeather();
   const sunriseTime = dayjs
-    .unix(currentWeather.sunrise)
+    .unix(currentWeather?.sunrise)
     .format('HH:DD');
   const sunsetTime = dayjs
-    .unix(currentWeather.sunset)
+    .unix(currentWeather?.sunset)
     .format('HH:DD');
 
   return (
     <Stack gap={8}>
       <Group gap={8} pb={4}>
         <Image
-          src="/img/icons/sunrise-clipart-lg.png"
+          src={getClipArtUrl('sunrise-clipart-lg.png')}
           w={56}
           h={32}
           alt="Sunrise"
@@ -27,13 +28,13 @@ export function Suntimes() {
       <Divider />
       <Group gap={8} my={0} pt={0}>
         <Image
-          src="img/icons/sunset-clipart-lg.png"
+          src={getClipArtUrl('sunset-clipart-lg.png')}
           w={56}
           h={32}
           alt="Sunset"
         />
         <Text pt={6} className="outline-md">
-          {sunsetTime}{' '}
+          {sunsetTime}
         </Text>
       </Group>
     </Stack>
