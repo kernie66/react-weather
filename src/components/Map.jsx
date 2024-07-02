@@ -41,34 +41,32 @@ export default memo(function Map() {
     setAddress(decodeAddress(results[0]));
   }
 
+  if (loadError) {
+    return (
+      <h3 className="text-center">Kan inte ladda Google Maps...</h3>
+    );
+  }
+
+  if (!isLoaded) {
+    return (
+      <h3 className="text-center">
+        Väntar på Google Maps...
+        <Spinner animation="border" />
+      </h3>
+    );
+  }
+
   return (
-    <>
-      {loadError ? (
-        <h3 className="text-center">Kan inte ladda Google Maps...</h3>
-      ) : (
-        <>
-          {!isLoaded ? (
-            <h3 className="text-center">
-              Väntar på Google Maps...
-              <Spinner animation="border" />
-            </h3>
-          ) : (
-            <>
-              <GoogleMap
-                options={mapOptions}
-                zoom={12}
-                center={center}
-                mapContainerClassName="map-container"
-                onClick={clickOnMap}
-              >
-                <CurrentPosition />
-                <SearchAddress />
-                <SelectOnMap />
-              </GoogleMap>
-            </>
-          )}
-        </>
-      )}
-    </>
+    <GoogleMap
+      options={mapOptions}
+      zoom={12}
+      center={center}
+      mapContainerClassName="map-container"
+      onClick={clickOnMap}
+    >
+      <CurrentPosition />
+      <SearchAddress />
+      <SelectOnMap />
+    </GoogleMap>
   );
 });

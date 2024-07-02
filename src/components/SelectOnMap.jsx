@@ -1,32 +1,26 @@
-import { InfoWindowF, MarkerF } from "@react-google-maps/api";
-import { useState } from "react";
-import { useAddress } from "../contexts/AddressProvider";
+import { InfoWindowF, MarkerF } from '@react-google-maps/api';
+import { useState } from 'react';
+import { useAddress } from '../contexts/AddressProvider';
+import { Text } from '@mantine/core';
 
 export default function SelectOnMap() {
   const { getAddress, getPosition } = useAddress();
   const [popover, setPopover] = useState(false);
 
-  const clickOnMarker = ((ev) => {
-    console.log("Marker clicked");
+  const clickOnMarker = (ev) => {
+    console.log('Marker clicked');
     setPopover(true);
-  });
+  };
 
-  const closeInfo = (() => {
+  const closeInfo = () => {
     setPopover(false);
-    console.log("Info closed");
-  })
+    console.log('Info closed');
+  };
 
   const infoOptions = {
     pixelOffset: new window.google.maps.Size(0, -20),
   };
 
-  const divStyle = {
-    background: `white`,
-    border: `1px solid #ccc`,
-    padding: 5,
-    color: 'dodgerblue',
-  }
-  
   return (
     <>
       <MarkerF
@@ -36,17 +30,17 @@ export default function SelectOnMap() {
         className="marked-position"
       />
 
-      {popover &&
+      {popover && (
         <InfoWindowF
           position={getPosition}
           onCloseClick={closeInfo}
           options={infoOptions}
         >
-          <div style={divStyle}>
-            <h5>{getAddress}</h5>
-          </div>
+          <Text c="dodgerblue" fw={500} fz="h4">
+            {getAddress}
+          </Text>
         </InfoWindowF>
-      }
+      )}
     </>
   );
-};
+}
