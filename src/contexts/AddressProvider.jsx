@@ -1,46 +1,39 @@
-import { createContext, useContext, useEffect } from 'react';
-import useLocalStorageState from 'use-local-storage-state';
+import { useLocalStorage } from '@mantine/hooks';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 
 export const AddressContext = createContext();
 
 export default function AddressProvider({ children }) {
-  const [positionLS, setPositionLS] = useLocalStorageState(
-    'position',
-    {
-      defaultValue: { lat: 59.476, lng: 17.905 },
-    }
-  );
-  const [addressLS, setAddressLS] = useLocalStorageState('address', {
+  const [position, setPosition] = useLocalStorage({
+    key: 'position',
+    defaultValue: { lat: 59.476, lng: 17.905 },
+  });
+  const [address, setAddress] = useLocalStorage({
+    key: 'address',
     defaultValue: 'Rotebro, Sollentuna, Sverige',
   });
 
   useEffect(() => {
-    if (!positionLS) {
-      setPositionLS({ lat: 59.476, lng: 17.905 });
+    if (!position) {
+      setPosition({ lat: 59.476, lng: 17.905 });
       console.debug('Position set to default');
     }
-    if (!addressLS) {
-      setAddressLS('Rotebro, Sollentuna, Sverige');
+  }, [position, setPosition]);
+
+  useEffect(() => {
+    if (!address) {
+      setAddress('Rotebro, Sollentuna, Sverige');
       console.debug('Address set to default');
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [address, setAddress]);
 
-  const getAddress = addressLS;
+  const getAddress = useMemo(() => {
+    return address;
+  }, [address]);
 
-  function setAddress(address) {
-    if (address) {
-      setAddressLS(address);
-    }
-  }
-
-  const getPosition = positionLS;
-
-  function setPosition(position) {
-    if (position) {
-      setPositionLS(position);
-    }
-  }
+  const getPosition = useMemo(() => {
+    return position;
+  }, [position]);
 
   return (
     <AddressContext.Provider
