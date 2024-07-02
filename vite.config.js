@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     server: {
-      host: '192.168.1.44',
+      //      host: '192.168.1.44',
       port: env.PORT,
       strictPort: true,
       fs: {

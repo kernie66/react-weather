@@ -10,7 +10,7 @@ import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 
 const libraries = ['places'];
-const API_KEY = import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
 const center = { lat: 59.476, lng: 17.905 };
 
 const mapOptions = {
