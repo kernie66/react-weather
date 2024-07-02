@@ -1,21 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { useAddress } from '../contexts/AddressProvider.jsx';
+import { useEffect } from 'react';
 
-const lat = import.meta.env.VITE_DEFAULT_LATITUDE;
-const lon = import.meta.env.VITE_DEFAULT_LONGITUDE;
 const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;
 const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
-const apiURL = `${baseURL}/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${apiKey}&units=metric`;
-
-const getWeatherData = async () => {
-  const { data } = await axios.get(apiURL);
-  console.log('apiURL', apiURL);
-  console.log('data', data);
-  return data;
-};
 
 export const useWeatherData = (select) => {
+  const { getPosition } = useAddress();
+  const queryClient = useQueryClient();
+
+  const apiURL = `${baseURL}/onecall?lat=${getPosition.lat}&lon=${getPosition.lng}&exclude=${part}&appid=${apiKey}&units=metric`;
+
+  const getWeatherData = async () => {
+    const { data } = await axios.get(apiURL);
+    console.log('apiURL', apiURL);
+    console.log('data', data);
+    return data;
+  };
+
+  useEffect(() => {
+    console.log('Position updated', getPosition);
+    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
+  }, [getPosition, queryClient]);
+
   return useQuery({
     queryKey: ['weatherData'],
     queryFn: getWeatherData,

@@ -1,12 +1,16 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { createContext, useContext, useEffect, useMemo } from 'react';
 
+const defaultLat = import.meta.env.VITE_DEFAULT_LATITUDE;
+const defaultLon = import.meta.env.VITE_DEFAULT_LONGITUDE;
+const defaultPosition = { lat: defaultLat, lng: defaultLon };
+
 export const AddressContext = createContext();
 
 export default function AddressProvider({ children }) {
   const [position, setPosition] = useLocalStorage({
     key: 'position',
-    defaultValue: { lat: 59.476, lng: 17.905 },
+    defaultValue: defaultPosition,
   });
   const [address, setAddress] = useLocalStorage({
     key: 'address',
@@ -15,7 +19,7 @@ export default function AddressProvider({ children }) {
 
   useEffect(() => {
     if (!position) {
-      setPosition({ lat: 59.476, lng: 17.905 });
+      setPosition(defaultPosition);
       console.debug('Position set to default');
     }
   }, [position, setPosition]);
