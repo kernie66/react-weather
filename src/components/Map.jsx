@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { memo } from 'react';
 import { Spinner } from 'reactstrap';
 import { getGeocode } from 'use-places-autocomplete';
@@ -22,7 +22,7 @@ const mapOptions = {
 
 export default memo(function Map() {
   // Loads the map using API KEY
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
     libraries,
   });
