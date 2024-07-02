@@ -1,0 +1,11 @@
+meta {
+  name: Reverse geocode
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://api.openweathermap.org/geo/1.0/reverse?lat={{lat}}&lon={{lon}}&appid={{apiKey}}
+  body: none
+  auth: none
+}

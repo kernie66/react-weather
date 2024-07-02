@@ -1,0 +1,16 @@
+meta {
+  name: Geocode zip
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://api.openweathermap.org/geo/1.0/zip?zip=E14,GB&appid={{apiKey}}
+  body: none
+  auth: none
+}
+
+params:query {
+  zip: E14,GB
+  appid: {{apiKey}}
+}

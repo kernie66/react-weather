@@ -1,0 +1,16 @@
+meta {
+  name: Geocode
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://api.openweathermap.org/geo/1.0/direct?q=Ullared&appid={{apiKey}}
+  body: none
+  auth: none
+}
+
+params:query {
+  q: Ullared
+  appid: {{apiKey}}
+}
