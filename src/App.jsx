@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import WebFont from 'webfontloader';
 import Background from './components/Background';
 import Body from './components/Body';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -19,15 +17,6 @@ const queryClient = new QueryClient();
 dayjs.locale('sv');
 
 export default function App() {
-  // Load fonts used in the app
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: ['Chivo Mono'],
-      },
-    });
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />

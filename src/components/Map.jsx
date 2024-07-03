@@ -35,7 +35,7 @@ export default memo(function Map() {
     };
     const results = await getGeocode({ location: position });
     console.debug('Address:', results[0].formatted_address);
-    console.debug('Latitide = ', position.lat);
+    console.debug('Latitude = ', position.lat);
     console.debug('Longitude = ', position.lng);
     setPosition(position);
     setAddress(decodeAddress(results[0]));
