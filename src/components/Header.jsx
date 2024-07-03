@@ -1,25 +1,17 @@
 import { TbMap2 } from 'react-icons/tb';
-import { useState } from 'react';
 import SelectLocation from './SelectLocation';
 import { useAddress } from '../contexts/AddressProvider';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 export default function Header() {
-  const [modal, setModal] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false);
   const { getAddress } = useAddress();
-
-  const selectAddress = () => {
-    setModal(true);
-  };
-
-  const closeModal = () => {
-    setModal(false);
-  };
 
   return (
     <>
-      <SelectLocation modal={modal} closeModal={closeModal} />
+      <SelectLocation modal={opened} closeModal={close} />
       <Group justify="space-between">
         <FullScreenButton />
         <Box w="75vw">
@@ -29,7 +21,7 @@ export default function Header() {
             </Text>
           </Center>
         </Box>
-        <Button variant="transparent" onClick={selectAddress}>
+        <Button variant="transparent" onClick={open}>
           <TbMap2 size={36} color="crimson" />
         </Button>
       </Group>
