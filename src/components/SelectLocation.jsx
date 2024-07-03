@@ -1,26 +1,53 @@
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import { useAddress } from "../contexts/AddressProvider";
-import Map from "./Map";
+import { GiPositionMarker } from 'react-icons/gi';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Button, Group, Modal, Text } from '@mantine/core';
+import { useAddress } from '../contexts/AddressProvider';
+import Map from './Map';
 
 export default function SelectLocation({ modal, closeModal }) {
   const { getAddress } = useAddress();
-  const onOpened = () => {
 
+  const selectPosition = () => {
+    closeModal();
   };
-
   return (
-    <Modal fullscreen isOpen={modal} onOpened={onOpened} toggle={closeModal} fade={false}>
-      <ModalHeader className="p-2 m-0" toggle={closeModal}>
-          <h5>
-            Ange adress för väder :&nbsp;&nbsp;
-            <span className="text-info">
-              {getAddress}
-            </span>
-          </h5>
-      </ModalHeader>
-      <ModalBody className="pt-0">
-        <Map />
-      </ModalBody>
-    </Modal>
+    <Modal.Root
+      fullScreen
+      opened={modal}
+      onClose={closeModal}
+      transitionProps={{ transition: 'fade', duration: 200 }}
+    >
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>
+            <Group justify="space-between">
+              <Text fw={500} fz="h3">
+                Ange adress för väder :&nbsp;&nbsp;
+                <Text span c="dodgerblue" fw={500} fz="h3">
+                  {getAddress}
+                </Text>
+              </Text>
+              <Button
+                variant="outline"
+                ms={20}
+                fz={18}
+                px={8}
+                py={2}
+                rightSection={<GiPositionMarker size={18} />}
+                onClick={selectPosition}
+              >
+                Välj
+              </Button>
+            </Group>
+          </Modal.Title>
+          <Modal.CloseButton
+            icon={<AiOutlineCloseCircle size={32} />}
+          />
+        </Modal.Header>
+        <Modal.Body>
+          <Map />
+        </Modal.Body>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
