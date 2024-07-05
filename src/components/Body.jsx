@@ -12,6 +12,7 @@ import RightSide from './RightSide';
 import TemperatureDisplay from './TemperatureDisplay';
 import {
   Container,
+  Grid,
   Group,
   SimpleGrid,
   Stack,
@@ -38,25 +39,33 @@ export default function Body() {
 
   return (
     <Container fluid px={8}>
-      <Group justify="space-between" h="55%" mb="lg">
+      <Grid h="45vh" mb={20}>
         <ErrorBoundary>
-          {isHiddenLeft ? <div /> : <LeftSide />}
+          <Grid.Col span="content">
+            {isHiddenLeft ? <div /> : <LeftSide />}
+          </Grid.Col>
         </ErrorBoundary>
-        <Stack maw="70%">
-          <ErrorBoundary>
-            <TemperatureDisplay />
-          </ErrorBoundary>
-          <Group justify="space-between" gap="md">
+        <Grid.Col span="auto">
+          <Stack align="stretch" justify="flex-end">
             <ErrorBoundary>
-              <FlipDisplay />
-              <CurrentWeather />
+              <TemperatureDisplay />
             </ErrorBoundary>
-          </Group>
-        </Stack>
+            <Grid justify="space-between" gap="md">
+              <ErrorBoundary>
+                <Grid.Col span="content">
+                  <FlipDisplay />
+                </Grid.Col>
+                <CurrentWeather />
+              </ErrorBoundary>
+            </Grid>
+          </Stack>
+        </Grid.Col>
         <ErrorBoundary>
-          {isHiddenRight ? <div /> : <RightSide />}
+          <Grid.Col span="content">
+            {isHiddenRight ? <div /> : <RightSide />}
+          </Grid.Col>
         </ErrorBoundary>
-      </Group>
+      </Grid>
       <Group justify="center" h="45%">
         <SimpleGrid
           cols={{ base: 3, sm: 4, md: 6 }}

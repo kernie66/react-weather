@@ -2,7 +2,7 @@ import { Divider, Group, Stack, Text } from '@mantine/core';
 
 export default function RightSide() {
   return (
-    <Stack h="50vh" justify="space-around" gap="md">
+    <Stack h="100%" justify="space-around" gap="md">
       <Stack gap={4}>
         <Group justify="flex-end">
           <Text className="outline-sm">Molntäcke</Text>

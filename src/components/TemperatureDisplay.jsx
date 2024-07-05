@@ -1,22 +1,21 @@
 import Temperature from './Temperature';
 import MinMax from './MinMax';
 import ErrorBoundary from './ErrorBoundary';
-import { Group } from '@mantine/core';
+import { Grid } from '@mantine/core';
 
 export default function TemperatureDisplay() {
   return (
-    <Group
-      justify="flex-end"
-      gap="10%"
-      me="15%"
-      style={{ color: 'sandybrown' }}
-    >
+    <Grid justify="center" mt={20} style={{ color: 'sandybrown' }}>
       <ErrorBoundary>
-        <Temperature />
+        <Grid.Col span={6} mt={-20} me={20}>
+          <Temperature />
+        </Grid.Col>
       </ErrorBoundary>
       <ErrorBoundary>
-        <MinMax />
+        <Grid.Col span="content">
+          <MinMax />
+        </Grid.Col>
       </ErrorBoundary>
-    </Group>
+    </Grid>
   );
 }

@@ -6,7 +6,7 @@ export default function LeftSide() {
   const { data: currentWeather } = useCurrentWeather();
 
   return (
-    <Stack h="50vh" justify="space-around" gap="md">
+    <Stack h="100%" justify="space-around" gap="md">
       <Suntimes />
       <Stack gap={4}>
         <Text className="outline-sm">Luftfuktighet</Text>

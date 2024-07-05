@@ -25,9 +25,9 @@ export default function TemperatureValue({
       ta="right"
     >
       {integerTemp}
-      <span fw={fontWeight} style={{ fontSize: '80%' }}>
+      <Text span fw={fontWeight} style={{ fontSize: '80%' }}>
         .{decimalTemp}&deg;C
-      </span>
+      </Text>
     </Text>
   );
 }
