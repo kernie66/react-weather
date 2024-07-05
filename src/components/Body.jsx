@@ -50,14 +50,12 @@ export default function Body() {
             <ErrorBoundary>
               <TemperatureDisplay />
             </ErrorBoundary>
-            <Grid justify="space-between" gap="md">
+            <Group justify="flex-start" gap="xl" ms="sm">
               <ErrorBoundary>
-                <Grid.Col span="content">
-                  <FlipDisplay />
-                </Grid.Col>
+                <FlipDisplay />
                 <CurrentWeather />
               </ErrorBoundary>
-            </Grid>
+            </Group>
           </Stack>
         </Grid.Col>
         <ErrorBoundary>

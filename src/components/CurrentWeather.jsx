@@ -3,7 +3,7 @@ import { getLargeWeatherIconUrl } from '../helpers/getImageUrl.js';
 
 export default function CurrentWeather() {
   return (
-    <Group gap="md" maw="55%">
+    <Group gap="md">
       <Image
         src={getLargeWeatherIconUrl('day_partial_cloud')}
         width="80px"
@@ -11,7 +11,9 @@ export default function CurrentWeather() {
         alt="Väder"
       />
       <Stack align="center">
-        <Text className="outline-lg">Växlande molnighet</Text>
+        <Text w="100%" className="outline-lg" lineClamp={2}>
+          Växlande molnighet
+        </Text>
         <Text className="outline-md">Uppehåll</Text>
       </Stack>
     </Group>
