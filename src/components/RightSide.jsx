@@ -7,12 +7,16 @@ export default function RightSide() {
   const [windGust, setWindGust] = useState(0);
 
   useEffect(() => {
-    let newWindGust = weatherData.current.wind_speed;
-    if (weatherData.current.wind_gust) {
-      newWindGust = weatherData.current.wind_gust;
-    } else if (weatherData.hourly[0].wind_gust) {
-      newWindGust = weatherData.hourly[0].wind_gust;
+    let newWindGust = weatherData?.current.wind_speed;
+
+    if (weatherData) {
+      if (weatherData.current.wind_gust) {
+        newWindGust = weatherData.current.wind_gust;
+      } else if (weatherData.hourly[0].wind_gust) {
+        newWindGust = weatherData.hourly[0].wind_gust;
+      }
     }
+
     setWindGust(newWindGust);
   }, [weatherData]);
 
