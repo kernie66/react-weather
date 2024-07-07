@@ -7,10 +7,10 @@ export function Suntimes() {
   const { data: currentWeather } = useCurrentWeather();
   const sunriseTime = dayjs
     .unix(currentWeather?.sunrise)
-    .format('HH:DD');
+    .format('HH:mm');
   const sunsetTime = dayjs
     .unix(currentWeather?.sunset)
-    .format('HH:DD');
+    .format('HH:mm');
 
   return (
     <Stack gap={8}>
