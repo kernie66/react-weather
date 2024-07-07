@@ -5,9 +5,14 @@ import { Grid } from '@mantine/core';
 
 export default function TemperatureDisplay() {
   return (
-    <Grid justify="center" mt={20} style={{ color: 'sandybrown' }}>
+    <Grid
+      justify="center"
+      align="center"
+      mt={20}
+      style={{ color: 'sandybrown' }}
+    >
       <ErrorBoundary>
-        <Grid.Col span={7} mt={-20} me="xl">
+        <Grid.Col span={7} me="xl">
           <Temperature />
         </Grid.Col>
       </ErrorBoundary>

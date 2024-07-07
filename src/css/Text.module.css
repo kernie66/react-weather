@@ -1,7 +1,7 @@
 .outlineXl {
     font: Tahoma, Geneva, sans-serif;
     /* font-size: 128px; */
-    /* line-height: 1.1em; */
+    line-height: 1.1em;
     /* color: dodgerblue; */
     text-shadow:
     /* Outline 1 */
@@ -27,8 +27,8 @@
 .outlineSm {
     font: Tahoma, Geneva, sans-serif;
     /* font-size: 28px;
-    line-height: 1.1em;
     color: gold; */
+    line-height: 1.1em;
     text-shadow:
     /* Outline 1 */
         -1px -1px 0 Black,
