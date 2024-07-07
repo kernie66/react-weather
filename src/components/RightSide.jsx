@@ -1,27 +1,20 @@
 import { Divider, Group, Stack, Text } from '@mantine/core';
-import {
-  useCurrentWeather,
-  useHourlyWeather,
-} from '../utils/weatherQueries.js';
+import { useWeatherData } from '../utils/weatherQueries.js';
 import { useEffect, useState } from 'react';
 
 export default function RightSide() {
-  const { data: currentWeather } = useCurrentWeather();
-  const { data: hourlyWeather } = useHourlyWeather();
+  const { data: weatherData } = useWeatherData();
   const [windGust, setWindGust] = useState(0);
 
   useEffect(() => {
-    let newWindGust = currentWeather?.wind_speed;
-    try {
-      if (currentWeather?.wind_gust) {
-        newWindGust = currentWeather.wind_gust;
-      } else if (hourlyWeather[0]?.wind_gust) {
-        newWindGust = hourlyWeather[0].wind_gust;
-      }
-    } finally {
-      setWindGust(newWindGust);
+    let newWindGust = weatherData.current.wind_speed;
+    if (weatherData.current.wind_gust) {
+      newWindGust = weatherData.current.wind_gust;
+    } else if (weatherData.hourly[0].wind_gust) {
+      newWindGust = weatherData.hourly[0].wind_gust;
     }
-  }, [currentWeather, hourlyWeather]);
+    setWindGust(newWindGust);
+  }, [weatherData]);
 
   return (
     <Stack h="100%" justify="space-around" gap="md">
@@ -32,7 +25,7 @@ export default function RightSide() {
         <Divider />
         <Group justify="flex-end">
           <Text className="outline-md">
-            {currentWeather?.clouds}%
+            {weatherData?.current.clouds}%
           </Text>
         </Group>
       </Stack>
@@ -43,7 +36,7 @@ export default function RightSide() {
         <Divider />
         <Group justify="flex-end">
           <Text className="outline-md">
-            {currentWeather?.feels_like.toFixed(1)}&deg;C
+            {weatherData?.current.feels_like.toFixed(1)}&deg;C
           </Text>
         </Group>
       </Stack>
