@@ -11,10 +11,12 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import dayjs from 'dayjs';
 import 'dayjs/locale/sv';
+import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 
 const queryClient = new QueryClient();
 
 dayjs.locale('sv');
+dayjs.extend(localizedFormat);
 
 export default function App() {
   return (

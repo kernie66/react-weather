@@ -18,6 +18,7 @@ import {
   Stack,
   em,
 } from '@mantine/core';
+import UpdatedAt from './UpdatedAt.jsx';
 
 export default function Body() {
   const thisOs = useOs();
@@ -76,6 +77,7 @@ export default function Body() {
           </ErrorBoundary>
         </SimpleGrid>
       </Group>
+      <UpdatedAt />
     </Container>
   );
 }
