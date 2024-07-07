@@ -7,7 +7,7 @@ export default function TemperatureDisplay() {
   return (
     <Grid justify="center" mt={20} style={{ color: 'sandybrown' }}>
       <ErrorBoundary>
-        <Grid.Col span={6} mt={-20} me={20}>
+        <Grid.Col span={7} mt={-20} me="xl">
           <Temperature />
         </Grid.Col>
       </ErrorBoundary>

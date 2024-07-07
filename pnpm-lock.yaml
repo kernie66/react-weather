@@ -47,6 +47,9 @@ importers:
       bootswatch:
         specifier: ^5.3.3
         version: 5.3.3
+      cardinal-direction:
+        specifier: ^1.1.1
+        version: 1.1.1
       core-js:
         specifier: ^3.37.1
         version: 3.37.1
@@ -1708,6 +1711,9 @@ packages:
 
   caniuse-lite@1.0.30001639:
     resolution: {integrity: sha512-eFHflNTBIlFwP2AIKaYuBQN/apnUoKNhBdza8ZnW/h2di4LCZ4xFqYlxUxo+LQ76KFI1PGcC1QDxMbxTZpSCAg==}
+
+  cardinal-direction@1.1.1:
+    resolution: {integrity: sha512-TkVp8I4wIDmgG1i3zuggwUw0CusChN4qiEi4RWKhr7a4uwE+WjNo6OACCmCGMQ7vOOPkeJXVAvRB2oKm6nEc1Q==}
 
   chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -5067,6 +5073,8 @@ snapshots:
   camelcase-css@2.0.1: {}
 
   caniuse-lite@1.0.30001639: {}
+
+  cardinal-direction@1.1.1: {}
 
   chalk@2.4.2:
     dependencies:

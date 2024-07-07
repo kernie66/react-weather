@@ -11,7 +11,7 @@ export default function CurrentWeather() {
         alt="Väder"
       />
       <Stack align="center">
-        <Text w="100%" className="outline-lg" lineClamp={2}>
+        <Text className="outline-lg" lineClamp={2}>
           Växlande molnighet
         </Text>
         <Text className="outline-md">Uppehåll</Text>
