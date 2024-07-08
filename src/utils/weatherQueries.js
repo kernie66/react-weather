@@ -7,7 +7,7 @@ import queryPersister from '../helpers/queryPersister.js';
 const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;
 const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
-const apiURL = `${baseURL}/onecall?exclude=${part}&appid=${apiKey}&units=metric`;
+const apiURL = `${baseURL}/onecall?exclude=${part}&appid=${apiKey}&units=metric&lang=sv`;
 const maxAge = 1000 * 60 * 60 * 24; // 1 day
 
 export const useWeatherData = (select) => {

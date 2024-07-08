@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
-import { Suntimes } from './Suntimes';
+import { SunTimes } from './SunTimes.jsx';
 import { Divider, Stack, Text } from '@mantine/core';
 import * as Compass from 'cardinal-direction';
 
@@ -18,7 +18,7 @@ export default function LeftSide() {
 
   return (
     <Stack h="100%" justify="space-around" gap="md">
-      <Suntimes />
+      <SunTimes />
       <Stack gap={4}>
         <Text className="outline-sm">Luftfuktighet</Text>
         <Divider />

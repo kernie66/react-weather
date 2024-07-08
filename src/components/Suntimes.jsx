@@ -1,16 +1,22 @@
 import { Divider, Group, Image, Stack, Text } from '@mantine/core';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
 import dayjs from 'dayjs';
 import { getClipArtUrl } from '../helpers/getImageUrl.js';
+import { useAddress } from '../contexts/AddressProvider.jsx';
+import SunCalc from 'suncalc';
 
-export function Suntimes() {
-  const { data: currentWeather } = useCurrentWeather();
-  const sunriseTime = dayjs
-    .unix(currentWeather?.sunrise)
-    .format('HH:mm');
-  const sunsetTime = dayjs
-    .unix(currentWeather?.sunset)
-    .format('HH:mm');
+export function SunTimes() {
+  const { getPosition } = useAddress();
+
+  const sunTimes = SunCalc.getTimes(
+    dayjs().toDate(),
+    getPosition.lat,
+    getPosition.lng
+  );
+
+  const sunriseTime = dayjs(sunTimes.sunrise).format('HH:mm');
+  const sunsetTime = dayjs(sunTimes.sunset).format('HH:mm');
+
+  console.log('sunTimes', sunTimes);
 
   return (
     <Stack gap={8}>
