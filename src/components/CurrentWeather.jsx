@@ -1,33 +1,43 @@
 import { Group, Image, Stack, Text } from '@mantine/core';
-import { getLargeWeatherIconUrl } from '../helpers/getImageUrl.js';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
+import { useWeatherData } from '../utils/weatherQueries.js';
 import { capitalize } from 'radash';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function CurrentWeather() {
-  const { data: currentWeather } = useCurrentWeather();
+  const { data: weatherData } = useWeatherData();
   const [rain, setRain] = useState('Uppehåll');
 
   const description = capitalize(
-    currentWeather?.weather[0].description
+    weatherData.current.weather[0].description
+  );
+
+  const weatherIcon = useMemo(
+    () =>
+      getWeatherIconUrl(
+        weatherData.current.weather[0].id,
+        weatherData.current.weather[0].icon,
+        weatherData.daily[0].moon_phase
+      ),
+    [weatherData]
   );
 
   useEffect(() => {
     let newRain = 'Uppehåll';
 
-    if (currentWeather?.rain) {
-      newRain = currentWeather.rain['1h'] + ' mm/h';
-    } else if (currentWeather?.snow) {
-      newRain = currentWeather.snow['1h'] + ' mm/h';
+    if (weatherData.current.rain) {
+      newRain = weatherData.current.rain['1h'] + ' mm/h';
+    } else if (weatherData.current.snow) {
+      newRain = weatherData.current.snow['1h'] + ' mm/h';
     }
 
     setRain(newRain);
-  }, [currentWeather]);
+  }, [weatherData]);
 
   return (
     <Group gap="md">
       <Image
-        src={getLargeWeatherIconUrl(currentWeather.weather[0].icon)}
+        src={weatherIcon}
         width="80px"
         height="80px"
         alt="Väder"

@@ -1,3 +1,5 @@
+import { getWeatherIcon } from './getWeatherIcon.js';
+
 export function getWeatherImageUrl(name) {
   const weatherImageUrl = new URL(
     `../assets/images/weather/${name}`,
@@ -16,22 +18,14 @@ export function getClipArtUrl(name) {
   return clipArtUrl;
 }
 
-export function getSmallWeatherIconUrl(name) {
-  const weatherIconUrl = new URL(
-    `../assets/weather_icons/PNG/128/${name}.png`,
-    import.meta.url
-  ).href;
+export function getWeatherIconUrl(id, icon, moon_phase) {
+  let weatherIconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 
-  return weatherIconUrl;
-}
+  const weatherIconName = getWeatherIcon(id, icon, moon_phase);
 
-export function getLargeWeatherIconUrl(owmIcon) {
-  let weatherIconURL = `http://openweathermap.org/img/wn/${owmIcon}@2x.png`;
-
-  if (!owmIcon) {
-    let name = 'day_partial_cloud';
+  if (weatherIconName) {
     weatherIconURL = new URL(
-      `../assets/weather_icons/PNG/256/${name}.png`,
+      `../assets/weather_icons/PNG/128/${weatherIconName}.png`,
       import.meta.url
     ).href;
   }
