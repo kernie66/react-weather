@@ -11,16 +11,20 @@ import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 import TemperatureDisplay from './TemperatureDisplay';
 import {
+  Center,
   Container,
   Grid,
   Group,
+  Loader,
   SimpleGrid,
   Stack,
   em,
 } from '@mantine/core';
 import UpdatedAt from './UpdatedAt.jsx';
+import { useWeatherData } from '../utils/weatherQueries.js';
 
 export default function Body() {
+  const { isLoading } = useWeatherData();
   const thisOs = useOs();
   let limitWidth = 1024; // My iPad 6
   const { width: viewportWidth } = useViewportSize();
@@ -38,6 +42,13 @@ export default function Body() {
     '(max-width: ' + em(limitWidth - 1) + ')'
   );
 
+  if (isLoading) {
+    return (
+      <Center h="75vh">
+        <Loader color="blue" size="xl" type="bars" />
+      </Center>
+    );
+  }
   return (
     <Container fluid px={8}>
       <Grid h="45vh" mb={20}>
