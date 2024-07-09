@@ -25,11 +25,15 @@ export function getSmallWeatherIconUrl(name) {
   return weatherIconUrl;
 }
 
-export function getLargeWeatherIconUrl(name) {
-  const weatherIconUrl = new URL(
-    `../assets/weather_icons/PNG/256/${name}.png`,
-    import.meta.url
-  ).href;
+export function getLargeWeatherIconUrl(owmIcon) {
+  let weatherIconURL = `http://openweathermap.org/img/wn/${owmIcon}@2x.png`;
 
-  return weatherIconUrl;
+  if (!owmIcon) {
+    let name = 'day_partial_cloud';
+    weatherIconURL = new URL(
+      `../assets/weather_icons/PNG/256/${name}.png`,
+      import.meta.url
+    ).href;
+  }
+  return weatherIconURL;
 }

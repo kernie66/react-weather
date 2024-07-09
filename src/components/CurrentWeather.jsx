@@ -27,7 +27,7 @@ export default function CurrentWeather() {
   return (
     <Group gap="md">
       <Image
-        src={getLargeWeatherIconUrl('day_partial_cloud')}
+        src={getLargeWeatherIconUrl(currentWeather.weather[0].icon)}
         width="80px"
         height="80px"
         alt="Väder"
