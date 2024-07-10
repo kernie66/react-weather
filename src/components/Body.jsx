@@ -77,16 +77,16 @@ export default function Body() {
         </ErrorBoundary>
       </Grid>
       <Group justify="center" h="45%">
-        <SimpleGrid
-          cols={{ base: 3, sm: 4, md: 6 }}
-          spacing="md"
-          verticalSpacing="lg"
-          w="100%"
-        >
-          <ErrorBoundary>
+        <ErrorBoundary>
+          <SimpleGrid
+            cols={{ base: 3, sm: 4, md: 6 }}
+            spacing="md"
+            verticalSpacing="lg"
+            w="100%"
+          >
             <Forecasts />
-          </ErrorBoundary>
-        </SimpleGrid>
+          </SimpleGrid>
+        </ErrorBoundary>
       </Group>
       <UpdatedAt />
     </Container>

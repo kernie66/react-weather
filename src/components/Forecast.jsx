@@ -6,9 +6,36 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
-import { getSmallWeatherIconUrl } from '../helpers/getImageUrl.js';
+import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
+import { useMemo } from 'react';
+import dayjs from 'dayjs';
 
-export default function Forecast() {
+export default function Forecast(props) {
+  //hourlyWeather, moonPhase) {
+
+  const hourlyWeather = props.hourlyWeather;
+  const moonPhase = props.moonPhase;
+  console.log('hourlyWeather', hourlyWeather);
+
+  const weatherIcon = useMemo(
+    () =>
+      getWeatherIconUrl(
+        hourlyWeather.weather[0].id,
+        hourlyWeather.weather[0].icon,
+        moonPhase
+      ),
+    [hourlyWeather, moonPhase]
+  );
+  const forecastTime = dayjs.unix(hourlyWeather.dt).format('HH:mm');
+  const forecastTime2 = dayjs().calendar(forecastTime);
+  console.log('forecastTime2', forecastTime2);
+  const forecastTemp = Math.round(hourlyWeather.temp);
+  let forecastRain = 'Uppehåll';
+  if (hourlyWeather.rain) {
+    forecastRain =
+      hourlyWeather.rain['1h'].toFixed(1).toString() + ' mm/h';
+  }
+
   return (
     <Paper
       bg="rgba(74, 127, 169, 0.8)"
@@ -18,22 +45,22 @@ export default function Forecast() {
       mih="12vh"
     >
       <Stack align="center" justify="space-around" gap={4} my={4}>
-        <Text className="outline-sm">Idag 12:34</Text>
+        <Text className="outline-sm">{forecastTime}</Text>
         <Center>
           <Group gap="sm" justify="center">
             <Image
-              src={getSmallWeatherIconUrl(
-                'night_full_moon_partial_cloud'
-              )}
+              src={weatherIcon}
               width="46px"
               height="46px"
               alt="Halvklart"
             />
-            <Text className="outline-temp-sm">-23&deg;C</Text>
+            <Text className="outline-temp-sm">
+              {forecastTemp}&deg;C
+            </Text>
           </Group>
         </Center>
         <Text className="outline-sm" c="paleturquoise">
-          2.3 mm
+          {forecastRain}
         </Text>
       </Stack>
     </Paper>

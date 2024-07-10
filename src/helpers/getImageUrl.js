@@ -18,10 +18,10 @@ export function getClipArtUrl(name) {
   return clipArtUrl;
 }
 
-export function getWeatherIconUrl(id, icon, moon_phase) {
+export function getWeatherIconUrl(id, icon, moonPhase) {
   let weatherIconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 
-  const weatherIconName = getWeatherIcon(id, icon, moon_phase);
+  const weatherIconName = getWeatherIcon(id, icon, moonPhase);
 
   if (weatherIconName) {
     weatherIconURL = new URL(
