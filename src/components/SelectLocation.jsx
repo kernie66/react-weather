@@ -3,13 +3,17 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Button, Group, Modal, Text } from '@mantine/core';
 import { useAddress } from '../contexts/AddressProvider';
 import Map from './Map';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function SelectLocation({ modal, closeModal }) {
   const { getAddress } = useAddress();
+  const queryClient = useQueryClient();
 
   const selectPosition = () => {
+    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     closeModal();
   };
+
   return (
     <Modal.Root
       fullScreen
