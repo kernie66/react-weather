@@ -9,6 +9,7 @@ import {
 import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { capitalize } from 'radash';
 
 export default function Forecast(props) {
   //hourlyWeather, moonPhase) {
@@ -26,9 +27,14 @@ export default function Forecast(props) {
       ),
     [hourlyWeather, moonPhase]
   );
-  const forecastTime = dayjs.unix(hourlyWeather.dt).format('HH:mm');
-  const forecastTime2 = dayjs().calendar(forecastTime);
-  console.log('forecastTime2', forecastTime2);
+
+  const forecastTime = dayjs.unix(hourlyWeather.dt);
+  let isToday = 'Idag';
+  if (!dayjs().isSame(dayjs.unix(hourlyWeather.dt), 'day')) {
+    isToday = capitalize(dayjs(forecastTime).format('ddd'));
+  }
+  const forecastText = isToday + dayjs(forecastTime).format(' HH:mm');
+
   const forecastTemp = Math.round(hourlyWeather.temp);
   let forecastRain = 'Uppehåll';
   if (hourlyWeather.rain) {
@@ -45,7 +51,7 @@ export default function Forecast(props) {
       mih="12vh"
     >
       <Stack align="center" justify="space-around" gap={4} my={4}>
-        <Text className="outline-sm">{forecastTime}</Text>
+        <Text className="outline-sm">{forecastText}</Text>
         <Center>
           <Group gap="sm" justify="center">
             <Image
