@@ -11,13 +11,7 @@ import { useMemo } from 'react';
 import dayjs from 'dayjs';
 import { capitalize } from 'radash';
 
-export default function Forecast(props) {
-  //hourlyWeather, moonPhase) {
-
-  const hourlyWeather = props.hourlyWeather;
-  const moonPhase = props.moonPhase;
-  console.log('hourlyWeather', hourlyWeather);
-
+export default function Forecast({ hourlyWeather, moonPhase }) {
   const weatherIcon = useMemo(
     () =>
       getWeatherIconUrl(
