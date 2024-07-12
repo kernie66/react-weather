@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { compareWeather } from './compareWeather.js';
 
 // Find first forecast
 const getFirstForecast = (hourlyWeather) => {
@@ -40,10 +41,7 @@ export const getForecasts = (hourlyWeather) => {
         hourlyWeather[i].weather[0].icon
       );
       if (skipped < maxConsecutiveHours) {
-        if (
-          hourlyWeather[i].weather[0].icon !==
-          hourlyWeather[index].weather[0].icon
-        ) {
+        if (!compareWeather(hourlyWeather[i], hourlyWeather[index])) {
           forecasts.push(i.toString());
           index = i;
           count++;

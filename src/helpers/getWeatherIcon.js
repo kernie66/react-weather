@@ -1,4 +1,4 @@
-export const getWeatherIcon = (id, icon, moon_phase) => {
+export const getWeatherIcon = (id, icon, moonPhase) => {
   let weatherIconName;
   let condition;
   let timeOfDay = 'day_';
@@ -6,7 +6,7 @@ export const getWeatherIcon = (id, icon, moon_phase) => {
 
   if (icon[2] === 'n') {
     timeOfDay = 'night_';
-    if (moon_phase > 0.4 && moon_phase < 0.6) {
+    if (moonPhase > 0.4 && moonPhase < 0.6) {
       moon = 'full_moon_';
     } else {
       moon = 'half_moon_';
