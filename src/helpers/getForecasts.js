@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
 import { compareWeather } from './compareWeather.js';
 
+const firstHours = 3; // Number of forecasts to always show
+const maxConsecutiveHours = 3; // Number of skipped identical forecasts
+
 // Find first forecast
 const getFirstForecast = (hourlyWeather) => {
   let first;
@@ -18,13 +21,12 @@ const getFirstForecast = (hourlyWeather) => {
 };
 
 export const getForecasts = (hourlyWeather) => {
-  const firstHours = 3;
-  const maxConsecutiveHours = 3;
   const forecasts = [];
   let index;
   let count = 0;
   let skipped = 0;
 
+  // Create an array of forecast indices to show
   const firstForecast = getFirstForecast(hourlyWeather);
   if (firstForecast) {
     for (let i = firstForecast; i < firstForecast + firstHours; i++) {
@@ -33,13 +35,6 @@ export const getForecasts = (hourlyWeather) => {
     index = firstForecast + firstHours;
     count = firstHours;
     for (let i = index + 1; i < 48; i++) {
-      console.log('count', count);
-      console.log('index', index);
-      console.log('skipped', skipped);
-      console.log(
-        'hourlyWeather[i].weather[0].icon',
-        hourlyWeather[i].weather[0].icon
-      );
       if (skipped < maxConsecutiveHours) {
         if (!compareWeather(hourlyWeather[i], hourlyWeather[index])) {
           forecasts.push(i.toString());
