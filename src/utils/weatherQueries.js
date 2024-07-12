@@ -39,7 +39,11 @@ export const useCurrentWeather = () => {
   return useWeatherData(selectCurrentData);
 };
 
-const selectHourlyData = (data) => data.hourly;
+const selectHourlyData = (data) => {
+  const hourly = data.hourly;
+  hourly.moonPhase = data.daily[0].moon_phase;
+  return data.hourly;
+};
 
 export const useHourlyWeather = () => {
   return useWeatherData(selectHourlyData);

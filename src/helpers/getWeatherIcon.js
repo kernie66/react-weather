@@ -19,13 +19,16 @@ export const getWeatherIcon = (id, icon, moon_phase) => {
       break;
     case id === 801:
     case id === 802:
+    case id === 803:
       condition = 'partial_cloud';
       break;
+    /*
     case id === 803:
       condition = 'cloudy';
       timeOfDay = '';
       moon = '';
       break;
+    */
     case id === 804:
       condition = 'overcast';
       timeOfDay = '';

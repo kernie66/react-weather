@@ -1,19 +1,32 @@
-import { useWeatherData } from '../utils/weatherQueries.js';
+import { useHourlyWeather } from '../utils/weatherQueries.js';
 import Forecast from './Forecast';
+import { getForecasts } from '../helpers/getForecasts.js';
+import { Text } from '@mantine/core';
+import { isEmpty } from 'radash';
+import { useEffect, useState } from 'react';
 
 export default function Forecasts() {
-  const { data: weatherData } = useWeatherData();
-  const forecasts = [];
+  const { data: hourlyWeather } = useHourlyWeather();
+  const [forecasts, setForecasts] = useState([]);
 
-  for (let i = 1; i <= 12; i++) {
-    forecasts.push(i.toString());
+  useEffect(() => {
+    const newForecasts = getForecasts(hourlyWeather);
+    setForecasts(newForecasts);
+  }, [hourlyWeather]);
+
+  if (isEmpty(forecasts)) {
+    return (
+      <Text fz={64} ta="center">
+        Ingen väderprognos tillgänglig, är internet anslutet?
+      </Text>
+    );
   }
 
-  return forecasts.map((forecast) => (
+  return forecasts.map((index) => (
     <Forecast
-      key={forecast}
-      hourlyWeather={weatherData.hourly[forecast]}
-      moonPhase={0.5}
+      key={index}
+      hourlyWeather={hourlyWeather[index]}
+      moonPhase={hourlyWeather.moonPhase}
     />
   ));
 }
