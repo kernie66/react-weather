@@ -33,7 +33,11 @@ export const useWeatherData = (select) => {
   });
 };
 
-const selectCurrentData = (data) => data.current;
+const selectCurrentData = (data) => {
+  const current = data.current;
+  current.moonPhase = data.daily[0].moon_phase;
+  return current;
+};
 
 export const useCurrentWeather = () => {
   return useWeatherData(selectCurrentData);
@@ -42,7 +46,7 @@ export const useCurrentWeather = () => {
 const selectHourlyData = (data) => {
   const hourly = data.hourly;
   hourly.moonPhase = data.daily[0].moon_phase;
-  return data.hourly;
+  return hourly;
 };
 
 export const useHourlyWeather = () => {
