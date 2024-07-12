@@ -1,9 +1,11 @@
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { Button, Group, Modal, Text } from '@mantine/core';
+import { Button, Group, Modal, Text, rem } from '@mantine/core';
 import { useAddress } from '../contexts/AddressProvider';
 import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
+import { TbCheck } from 'react-icons/tb';
+import { showNotification } from '@mantine/notifications';
 
 export default function SelectLocation({ modal, closeModal }) {
   const { getAddress } = useAddress();
@@ -11,6 +13,14 @@ export default function SelectLocation({ modal, closeModal }) {
 
   const selectPosition = () => {
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
+    showNotification({
+      title: 'Väderposition uppdaterad',
+      message: getAddress,
+      color: 'green',
+      icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
+      autoClose: 5000,
+    });
+
     closeModal();
   };
 
