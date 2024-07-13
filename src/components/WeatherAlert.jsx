@@ -96,7 +96,7 @@ export default function WeatherAlert() {
         <Stack gap="xs">
           <Divider />
           <Text size="md" fw={500} c="dodgerblue">
-            Kategori: {weatherAlerts[0].event}
+            Kategori: {weatherAlerts ? weatherAlerts[0].event : ''}
           </Text>
           <Text size="md" c="dodgerblue">
             Från: {alertTimes.startTime}
@@ -110,7 +110,7 @@ export default function WeatherAlert() {
           </Text>
           <Divider />
           <Text size="sm" fw={300}>
-            Källa: {weatherAlerts[0].sender_name}
+            Källa: {weatherAlerts ? weatherAlerts[0].sender_name : ''}
           </Text>
         </Stack>
       </Modal>
