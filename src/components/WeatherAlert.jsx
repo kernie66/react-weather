@@ -27,16 +27,22 @@ export default function WeatherAlert() {
     startTime: dayjs().format('LLLL'),
     endTime: dayjs().format('LLLL'),
   });
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     let startTime = dayjs().format('LLLL');
     let endTime = dayjs().format('LLLL');
+    let newDescription;
 
     if (weatherAlerts) {
+      const regex = /; /g;
+      newDescription = weatherAlerts[0].description.replace(
+        regex,
+        '\n'
+      );
       startTime = dayjs.unix(weatherAlerts[0].start).format('LLLL');
       endTime = dayjs.unix(weatherAlerts[0].end).format('LLLL');
       showIcon();
-      console.log('notificationId', notificationId);
       showNotification({
         id: notificationId,
         title: 'Vädervarning: ' + weatherAlerts[0].event,
@@ -48,12 +54,17 @@ export default function WeatherAlert() {
             <Text size="sm" c="dodgerblue">
               Till: {endTime}
             </Text>
-            <Text size="sm" lineClamp={3}>
-              {weatherAlerts[0].description}
+            <Text
+              size="sm"
+              lineClamp={3}
+              style={{ whiteSpace: 'pre-wrap' }}
+            >
+              {newDescription}
             </Text>
           </Stack>
         ),
         color: 'orange',
+        withBorder: true,
         icon: (
           <TbAlertTriangle
             style={{ width: rem(18), height: rem(18) }}
@@ -67,6 +78,7 @@ export default function WeatherAlert() {
       closeAlert();
     }
     setAlertTimes({ startTime, endTime });
+    setDescription(newDescription);
   }, [weatherAlerts, showIcon, hideIcon, notificationId, closeAlert]);
 
   const openAlertModal = () => {
@@ -93,7 +105,9 @@ export default function WeatherAlert() {
             Till: {alertTimes.endTime}
           </Text>
           <Divider />
-          <Text size="md">{weatherAlerts[0].description}</Text>
+          <Text size="md" style={{ whiteSpace: 'pre-wrap' }}>
+            {description}
+          </Text>
           <Divider />
           <Text size="sm" fw={300}>
             Källa: {weatherAlerts[0].sender_name}
