@@ -23,7 +23,10 @@ dayjs.extend(calendar);
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools
+        initialIsOpen={false}
+        buttonPosition="bottom-left"
+      />
       <ErrorBoundary>
         <Background>
           <AddressProvider>

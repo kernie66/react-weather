@@ -58,3 +58,9 @@ const selectDailyData = (data) => data.daily[0];
 export const useTodaysWeather = () => {
   return useWeatherData(selectDailyData);
 };
+
+const selectAlertData = (data) => data.alerts;
+
+export const useWeatherAlerts = () => {
+  return useWeatherData(selectAlertData);
+};
