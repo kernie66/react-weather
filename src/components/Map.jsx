@@ -1,6 +1,5 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { memo } from 'react';
-import { Spinner } from 'reactstrap';
 import { getGeocode } from 'use-places-autocomplete';
 import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
@@ -8,6 +7,7 @@ import SearchAddress from './SearchAddress';
 import SelectOnMap from './SelectOnMap';
 import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
+import { Center, Loader, Text } from '@mantine/core';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
@@ -49,10 +49,10 @@ export default memo(function Map() {
 
   if (!isLoaded) {
     return (
-      <h3 className="text-center">
-        Väntar på Google Maps...
-        <Spinner animation="border" />
-      </h3>
+      <Center h="75vh">
+        <Text fz="xl">Väntar på Google Maps...</Text>
+        <Loader color="blue" size="xl" type="bars" />
+      </Center>
     );
   }
 
