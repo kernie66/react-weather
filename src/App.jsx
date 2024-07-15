@@ -28,14 +28,14 @@ export default function App() {
         buttonPosition="bottom-left"
       />
       <ErrorBoundary>
-        <Background>
-          <AddressProvider>
+        <AddressProvider>
+          <Background>
             <Header />
             <ErrorBoundary>
               <Body />
             </ErrorBoundary>
-          </AddressProvider>
-        </Background>
+          </Background>
+        </AddressProvider>
       </ErrorBoundary>
     </QueryClientProvider>
   );

@@ -3,6 +3,9 @@ import { Container } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useImageSize } from 'react-image-size';
 import { getWeatherImageUrl } from '../helpers/getImageUrl.js';
+import { useAddress } from '../contexts/AddressProvider.jsx';
+import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { getBackgroundImage } from '../helpers/getBackgroundImage.js';
 
 export default function Background({ children }) {
   const [backgroundImage, setBackgroundImage] = useState('clear_day');
@@ -12,6 +15,8 @@ export default function Background({ children }) {
   );
   const { width, height } = useViewportSize();
   const [dimensions] = useImageSize(backgroundImageUrl);
+  const { getPosition } = useAddress();
+  const { data: currentWeather } = useCurrentWeather();
 
   const background = {
     backgroundImage: `url(${backgroundImageUrl})`,
@@ -40,18 +45,13 @@ export default function Background({ children }) {
     setBackgroundSize(newBgSize);
   }, [dimensions, width, height, setBackgroundSize]);
 
-  // Set up a timer
   useEffect(() => {
-    const timerId = setInterval(() => {
-      const newBackground =
-        backgroundImage === 'night_galaxy'
-          ? 'clear_day'
-          : 'night_galaxy';
-      setBackgroundImage(newBackground);
-    }, 10000);
-
-    return () => clearInterval(timerId);
-  }, [backgroundImage]);
+    const newBackground = getBackgroundImage(
+      currentWeather,
+      getPosition
+    );
+    setBackgroundImage(newBackground.image);
+  }, [currentWeather, getPosition]);
 
   return (
     <Container fluid style={background}>
