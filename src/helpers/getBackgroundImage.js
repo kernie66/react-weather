@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import SunCalc from 'suncalc';
 
-export const getBackgroundImage = (weather, position) => {
+export const getBackgroundImage = (weather) => {
   const now = dayjs();
   const sunTimes = SunCalc.getTimes(
     dayjs().toDate(),
-    position.lat,
-    position.lng
+    weather.lat,
+    weather.lon
   );
 
   // Set default image to clear night sky
@@ -16,10 +16,10 @@ export const getBackgroundImage = (weather, position) => {
   if (now > sunTimes.dawn && now < sunTimes.dusk) {
     backgroundColor = 'rgba(74, 127, 169, 0.8)';
     tempColor = 'sandybrown';
-    if (now < sunTimes['sunrise']) {
+    if (now < sunTimes.sunrise) {
       image = 'sunrise';
     }
-    if (now < sunTimes['dusk']) {
+    if (now < sunTimes.dusk) {
       if (weather && weather.weather[0].id === 800) {
         image = 'clear_day';
       } else {

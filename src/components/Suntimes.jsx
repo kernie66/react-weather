@@ -1,16 +1,16 @@
 import { Divider, Group, Image, Stack, Text } from '@mantine/core';
 import dayjs from 'dayjs';
 import { getClipArtUrl } from '../helpers/getImageUrl.js';
-import { useAddress } from '../contexts/AddressProvider.jsx';
 import SunCalc from 'suncalc';
+import { useWeatherPosition } from '../utils/weatherQueries.js';
 
 export function SunTimes() {
-  const { getPosition } = useAddress();
+  const { data: position } = useWeatherPosition();
 
   const sunTimes = SunCalc.getTimes(
     dayjs().toDate(),
-    getPosition.lat,
-    getPosition.lng
+    position.lat,
+    position.lon
   );
 
   const sunriseTime = dayjs(sunTimes.sunrise).format('HH:mm');

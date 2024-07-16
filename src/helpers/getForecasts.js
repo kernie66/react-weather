@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { compareWeather } from './compareWeather.js';
+import { checkWeatherChange } from './checkWeatherChange.js';
 
 const firstHours = 3; // Number of forecasts to always show
 const maxConsecutiveHours = 3; // Number of skipped identical forecasts
@@ -36,7 +36,9 @@ export const getForecasts = (hourlyWeather) => {
     count = firstHours;
     for (let i = index + 1; i < 48; i++) {
       if (skipped < maxConsecutiveHours) {
-        if (!compareWeather(hourlyWeather[i], hourlyWeather[index])) {
+        if (
+          checkWeatherChange(hourlyWeather[i], hourlyWeather[index])
+        ) {
           forecasts.push(i.toString());
           index = i;
           count++;

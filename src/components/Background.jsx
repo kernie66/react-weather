@@ -3,7 +3,6 @@ import { Container } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useImageSize } from 'react-image-size';
 import { getWeatherImageUrl } from '../helpers/getImageUrl.js';
-import { useAddress } from '../contexts/AddressProvider.jsx';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
 import { getBackgroundImage } from '../helpers/getBackgroundImage.js';
 
@@ -15,7 +14,6 @@ export default function Background({ children }) {
   );
   const { width, height } = useViewportSize();
   const [dimensions] = useImageSize(backgroundImageUrl);
-  const { getPosition } = useAddress();
   const { data: currentWeather } = useCurrentWeather();
 
   const background = {
@@ -46,12 +44,11 @@ export default function Background({ children }) {
   }, [dimensions, width, height, setBackgroundSize]);
 
   useEffect(() => {
-    const newBackground = getBackgroundImage(
-      currentWeather,
-      getPosition
-    );
-    setBackgroundImage(newBackground.image);
-  }, [currentWeather, getPosition]);
+    if (currentWeather) {
+      const newBackground = getBackgroundImage(currentWeather);
+      setBackgroundImage(newBackground.image);
+    }
+  }, [currentWeather]);
 
   return (
     <Container fluid style={background}>

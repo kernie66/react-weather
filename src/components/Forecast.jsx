@@ -17,6 +17,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
     text: '',
     temp: '',
     rain: '',
+    rainColor: 'paleturquoise',
   });
 
   const weatherIcon = useMemo(
@@ -41,16 +42,27 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
 
     const forecastTemp = Math.round(hourlyWeather.temp);
 
-    let forecastRain = 'Uppehåll';
+    let forecastRain = 'Uppehåll ';
+    let rainColor = 'palegreen';
     if (hourlyWeather.rain) {
       forecastRain =
-        hourlyWeather.rain['1h'].toFixed(1).toString() + ' mm/h';
+        hourlyWeather.rain['1h'].toFixed(1).toString() + ' mm/h ';
+      rainColor = 'paleturquoise';
+    }
+    if (hourlyWeather.snow) {
+      forecastRain =
+        hourlyWeather.snow['1h'].toFixed(1).toString() + ' mm/h ';
+      rainColor = 'whitesmoke';
+    }
+    if (hourlyWeather.pop) {
+      forecastRain += hourlyWeather.pop * 100 + '%';
     }
 
     setForecast({
       text: forecastText,
       temp: forecastTemp,
       rain: forecastRain,
+      rainColor: rainColor,
     });
   }, [hourlyWeather, setForecast]);
 
@@ -77,7 +89,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
             </Text>
           </Group>
         </Center>
-        <Text className="outline-sm" c="paleturquoise">
+        <Text className="outline-sm" c={forecast.rainColor}>
           {forecast.rain}
         </Text>
       </Stack>

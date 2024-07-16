@@ -11,7 +11,7 @@ export default function LeftSide() {
   useEffect(() => {
     let newWindDir = Compass.cardinalFromDegree(
       currentWeather?.wind_deg,
-      Compass.CardinalSubset.InterCardinal
+      Compass.CardinalSubset.Intercardinal
     );
     setWindDir(newWindDir);
   }, [currentWeather]);
