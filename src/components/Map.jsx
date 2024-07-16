@@ -43,7 +43,11 @@ export default memo(function Map() {
 
   if (loadError) {
     return (
-      <h3 className="text-center">Kan inte ladda Google Maps...</h3>
+      <Center h="75vh">
+        <Text color="red" fz="xl">
+          Kan inte ladda Google Maps...
+        </Text>
+      </Center>
     );
   }
 
