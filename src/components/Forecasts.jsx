@@ -11,7 +11,6 @@ export default function Forecasts() {
 
   useEffect(() => {
     const newForecasts = getForecasts(hourlyWeather);
-    console.log('newForecasts', newForecasts);
     setForecasts(newForecasts);
   }, [hourlyWeather]);
 

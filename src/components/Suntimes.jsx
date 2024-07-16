@@ -16,8 +16,6 @@ export function SunTimes() {
   const sunriseTime = dayjs(sunTimes.sunrise).format('HH:mm');
   const sunsetTime = dayjs(sunTimes.sunset).format('HH:mm');
 
-  console.log('sunTimes', sunTimes);
-
   return (
     <Stack gap={8}>
       <Group gap={8} pb={4}>

@@ -12,7 +12,6 @@ export const checkWeatherChange = (weather1, weather2) => {
     weather2.weather[0].icon,
     weather2.moonPhase
   );
-  console.log('Weather icons:', weather1Icon, weather2Icon);
 
   // Check if at least 2 mm rain is expected
   if (weather2.rain && weather2.rain['1h'] >= 2) {
