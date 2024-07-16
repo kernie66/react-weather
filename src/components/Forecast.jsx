@@ -17,6 +17,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
     text: '',
     temp: '',
     rain: '',
+    pop: '',
     rainColor: 'paleturquoise',
   });
 
@@ -43,6 +44,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
     const forecastTemp = Math.round(hourlyWeather.temp);
 
     let forecastRain = 'Uppehåll ';
+    let forecastPoP = '';
     let rainColor = 'palegreen';
     if (hourlyWeather.rain) {
       forecastRain =
@@ -55,13 +57,15 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
       rainColor = 'whitesmoke';
     }
     if (hourlyWeather.pop) {
-      forecastRain += hourlyWeather.pop * 100 + '%';
+      forecastPoP =
+        (hourlyWeather.pop * 100).toFixed(0).toString() + '%';
     }
 
     setForecast({
       text: forecastText,
       temp: forecastTemp,
       rain: forecastRain,
+      pop: forecastPoP,
       rainColor: rainColor,
     });
   }, [hourlyWeather, setForecast]);
@@ -91,6 +95,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
         </Center>
         <Text className="outline-sm" c={forecast.rainColor}>
           {forecast.rain}
+          <Text span>&nbsp;{forecast.pop}</Text>
         </Text>
       </Stack>
     </Paper>
