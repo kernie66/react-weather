@@ -5,32 +5,34 @@ import { capitalize } from 'radash';
 import { useEffect, useMemo, useState } from 'react';
 
 export default function CurrentWeather() {
-  const { data: current } = useCurrentWeather();
+  const { data: currentWeather } = useCurrentWeather();
   const [rain, setRain] = useState('Uppehåll');
 
-  const description = capitalize(current.weather[0].description);
+  const description = capitalize(
+    currentWeather.weather[0].description
+  );
 
   const weatherIcon = useMemo(
     () =>
       getWeatherIconUrl(
-        current.weather[0].id,
-        current.weather[0].icon,
-        current.moonPhase
+        currentWeather.weather[0].id,
+        currentWeather.weather[0].icon,
+        currentWeather.moonPhase
       ),
-    [current]
+    [currentWeather]
   );
 
   useEffect(() => {
     let newRain = 'Uppehåll';
 
-    if (current.rain) {
-      newRain = current.rain['1h'] + ' mm/h';
-    } else if (current.snow) {
-      newRain = current.snow['1h'] + ' mm/h';
+    if (currentWeather.rain) {
+      newRain = currentWeather.rain['1h'] + ' mm/h';
+    } else if (currentWeather.snow) {
+      newRain = currentWeather.snow['1h'] + ' mm/h';
     }
 
     setRain(newRain);
-  }, [current]);
+  }, [currentWeather]);
 
   return (
     <Group gap="md">
