@@ -1,18 +1,20 @@
+import { FiDelete } from 'react-icons/fi';
 import { useGoogleMap } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
-import { Typeahead } from 'react-bootstrap-typeahead';
 import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
+import { Autocomplete, CloseButton } from '@mantine/core';
 
 export default function SearchAddress() {
   const map = useGoogleMap();
   const [location, setLocation] = useState(
     new window.google.maps.LatLng(59.476, 17.905)
   );
+  const [options, setOptions] = useState([]);
   const { setAddress, getPosition, setPosition } = useAddress();
 
   const {
@@ -38,11 +40,13 @@ export default function SearchAddress() {
     setLocation(new window.google.maps.LatLng(getPosition));
   }, [map, getPosition]);
 
-  async function handleSelect(selection) {
-    if (selection[0]) {
-      const address = selection[0].description;
+  async function selectionHandler(selection) {
+    console.log('selection', selection);
+    if (selection) {
+      const address = selection;
       // setAddress(address);
       setValue(address, false);
+      clearSuggestions();
       console.log('Select:', address);
       const results = await getGeocode({ address: address });
       const coords = getLatLng(results[0]);
@@ -51,26 +55,44 @@ export default function SearchAddress() {
     }
   }
 
+  const onChangeHandler = (value) => {
+    console.log('value', value);
+    if (value.length >= 2) {
+      setValue(value);
+    } else {
+      setValue(value, false);
+      clearSuggestions();
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      const newOptions = data.map((option) => option.description);
+      setOptions(newOptions);
+    }
+  }, [data]);
+
   return (
-    <>
-      <div className="search">
-        <Typeahead
-          id="searchAddress"
-          labelKey="description"
-          options={data}
-          minLength={2}
-          clearButton
-          autoFocus
-          onInputChange={(text, e) => {
-            setValue(text);
-          }}
-          onChange={handleSelect}
-          selectHint={(shouldSelect, event) =>
-            event.key === 'Enter' || shouldSelect
-          }
-          placeholder="Ange adress, ort eller plats"
-        />
-      </div>
-    </>
+    <div className="search">
+      <Autocomplete
+        size="md"
+        placeholder="Ange adress, ort eller plats"
+        value={value}
+        data={options}
+        selectFirstOptionOnChange
+        onChange={onChangeHandler}
+        onOptionSubmit={selectionHandler}
+        disabled={!ready}
+        rightSection={
+          value !== '' && (
+            <CloseButton
+              icon={<FiDelete size={20} />}
+              onClick={() => setValue('')}
+              aria-label="Clear value"
+            />
+          )
+        }
+      />
+    </div>
   );
 }
