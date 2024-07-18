@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete';
 import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
-import { Autocomplete, CloseButton, FocusTrap } from '@mantine/core';
+import { Autocomplete, CloseButton } from '@mantine/core';
 
 export default function SearchAddress() {
   const map = useGoogleMap();
@@ -77,28 +77,25 @@ export default function SearchAddress() {
 
   return (
     <div className="search">
-      <FocusTrap>
-        <Autocomplete
-          size="md"
-          placeholder="Ange adress, ort eller plats"
-          value={value}
-          data={options}
-          data-autofocus
-          selectFirstOptionOnChange
-          onChange={onChangeHandler}
-          onOptionSubmit={selectionHandler}
-          disabled={!ready}
-          rightSection={
-            value !== '' && (
-              <CloseButton
-                icon={<FiDelete size={20} />}
-                onClick={() => setValue('')}
-                aria-label="Clear value"
-              />
-            )
-          }
-        />
-      </FocusTrap>
+      <Autocomplete
+        size="md"
+        placeholder="Ange adress, ort eller plats"
+        value={value}
+        data={options}
+        selectFirstOptionOnChange
+        onChange={onChangeHandler}
+        onOptionSubmit={selectionHandler}
+        disabled={!ready}
+        rightSection={
+          value !== '' && (
+            <CloseButton
+              icon={<FiDelete size={20} />}
+              onClick={() => setValue('')}
+              aria-label="Clear value"
+            />
+          )
+        }
+      />
     </div>
   );
 }
