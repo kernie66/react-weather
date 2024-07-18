@@ -38,6 +38,7 @@ export default function SearchAddress() {
 
   useEffect(() => {
     // map.panTo(getPosition);
+    console.log('getPosition:', getPosition);
     const newLocation = new window.google.maps.LatLng(getPosition);
     map.panTo(newLocation);
     setLocation(newLocation);

@@ -1,9 +1,13 @@
 import { useLocalStorage } from '@mantine/hooks';
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 
 const defaultLat = import.meta.env.VITE_DEFAULT_LATITUDE;
 const defaultLon = import.meta.env.VITE_DEFAULT_LONGITUDE;
-const defaultPosition = { lat: defaultLat, lng: defaultLon };
+const defaultPosition = {
+  lat: parseFloat(defaultLat),
+  lng: parseFloat(defaultLon),
+};
+const defaultAddress = 'Rotebro, Sollentuna, Sverige';
 
 export const AddressContext = createContext();
 
@@ -14,35 +18,42 @@ export default function AddressProvider({ children }) {
   });
   const [address, setAddress] = useLocalStorage({
     key: 'address',
-    defaultValue: 'Rotebro, Sollentuna, Sverige',
+    defaultValue: defaultAddress,
   });
 
-  useEffect(() => {
-    if (!position) {
-      setPosition(defaultPosition);
-      console.debug('Position set to default');
-    }
-  }, [position, setPosition]);
+  console.log('Position:', position);
 
-  useEffect(() => {
-    if (!address) {
-      setAddress('Rotebro, Sollentuna, Sverige');
+  const getAddress = useMemo(() => {
+    if (address) {
+      return address;
+    } else {
+      setAddress(defaultAddress);
       console.debug('Address set to default');
+      return defaultAddress;
     }
   }, [address, setAddress]);
 
-  const getAddress = useMemo(() => {
-    return address;
-  }, [address]);
-
   const getPosition = useMemo(() => {
-    return position;
-  }, [position]);
+    if (position) {
+      return position;
+    } else {
+      setPosition(defaultPosition);
+      console.debug('Position set to default');
+      return defaultPosition;
+    }
+  }, [position, setPosition]);
+
+  const value = useMemo(() => {
+    return {
+      setAddress,
+      getAddress,
+      setPosition,
+      getPosition,
+    };
+  }, [setAddress, getAddress, setPosition, getPosition]);
 
   return (
-    <AddressContext.Provider
-      value={{ getAddress, setAddress, getPosition, setPosition }}
-    >
+    <AddressContext.Provider value={value}>
       {children}
     </AddressContext.Provider>
   );
