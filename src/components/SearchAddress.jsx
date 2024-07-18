@@ -29,15 +29,18 @@ export default function SearchAddress() {
     clearSuggestions,
   } = usePlacesAutocomplete({
     debounce: 500,
+    cache: 60 * 60 * 24 * 7, // One week
     requestOptions: {
-      location: location,
-      radius: 100 * 1000,
+      origin: location,
+      locationBias: { center: location, radius: 10 * 1000 },
     },
   });
 
   useEffect(() => {
-    map.panTo(getPosition);
-    setLocation(new window.google.maps.LatLng(getPosition));
+    // map.panTo(getPosition);
+    const newLocation = new window.google.maps.LatLng(getPosition);
+    map.panTo(newLocation);
+    setLocation(newLocation);
   }, [map, getPosition]);
 
   async function selectionHandler(selection) {
