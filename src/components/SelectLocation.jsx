@@ -7,16 +7,21 @@ import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
+import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { getAddress, setAddress, setPosition } = useAddress();
+  const { setAddress, setPosition } = useAddress();
+  const { getMapLocationAddress, getMapLocationPosition } =
+    useMapLocation();
   const queryClient = useQueryClient();
 
   const selectPosition = () => {
+    setAddress(getMapLocationAddress);
+    setPosition(getMapLocationPosition);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition uppdaterad',
-      message: getAddress,
+      message: getMapLocationAddress,
       color: 'green',
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
@@ -25,8 +30,8 @@ export default function SelectLocation({ modal, closeModal }) {
   };
 
   const defaultPosition = () => {
-    setAddress(null);
-    setPosition(null);
+    setAddress('default');
+    setPosition('default');
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition satt till hemadressen',
@@ -52,7 +57,7 @@ export default function SelectLocation({ modal, closeModal }) {
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
                 <Text span c="dodgerblue" fw={500} fz="h3">
-                  {getAddress}
+                  {getMapLocationAddress}
                 </Text>
               </Text>
               <Button

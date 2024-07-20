@@ -4,6 +4,7 @@ import { useAddress } from '../contexts/AddressProvider';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import MapLocationProvider from '../contexts/MapLocationProvider.jsx';
 
 export default function Header() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -11,13 +12,15 @@ export default function Header() {
 
   return (
     <>
-      <SelectLocation modal={opened} closeModal={close} />
+      <MapLocationProvider>
+        <SelectLocation modal={opened} closeModal={close} />
+      </MapLocationProvider>
       <Group justify="space-between">
         <FullScreenButton />
         <Box w="75vw">
           <Center>
             <Text xs="10" className="outline-lg" lineClamp={1}>
-              Väderstation :&nbsp;{getAddress.toString()}
+              Väderstation:&nbsp;{getAddress.toString()}
             </Text>
           </Center>
         </Box>

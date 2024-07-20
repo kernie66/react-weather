@@ -24,22 +24,22 @@ export default function AddressProvider({ children }) {
   console.log('Position:', position);
 
   const getAddress = useMemo(() => {
-    if (address) {
-      return address;
-    } else {
+    if (address === 'default') {
       setAddress(defaultAddress);
       console.debug('Address set to default');
       return defaultAddress;
+    } else {
+      return address;
     }
   }, [address, setAddress]);
 
   const getPosition = useMemo(() => {
-    if (position) {
-      return position;
-    } else {
+    if (position === 'default') {
       setPosition(defaultPosition);
       console.debug('Position set to default');
       return defaultPosition;
+    } else {
+      return position;
     }
   }, [position, setPosition]);
 

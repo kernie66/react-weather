@@ -5,9 +5,9 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
-import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
+import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SearchAddress() {
   const map = useGoogleMap();
@@ -15,7 +15,7 @@ export default function SearchAddress() {
     new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
-  const { setAddress, getPosition, setPosition } = useAddress();
+  const { setMapLocation, getMapLocationPosition } = useMapLocation();
 
   const {
     // eslint-disable-next-line
@@ -38,11 +38,13 @@ export default function SearchAddress() {
 
   useEffect(() => {
     // map.panTo(getPosition);
-    console.log('getPosition:', getPosition);
-    const newLocation = new window.google.maps.LatLng(getPosition);
+    console.log('getMapPosition:', getMapLocationPosition);
+    const newLocation = new window.google.maps.LatLng(
+      getMapLocationPosition
+    );
     map.panTo(newLocation);
     setLocation(newLocation);
-  }, [map, getPosition]);
+  }, [map, getMapLocationPosition]);
 
   async function selectionHandler(selection) {
     console.log('selection', selection);
@@ -54,8 +56,10 @@ export default function SearchAddress() {
       console.log('Select:', address);
       const results = await getGeocode({ address: address });
       const coords = getLatLng(results[0]);
-      setPosition(coords);
-      setAddress(decodeAddress(results[0]));
+      setMapLocation({
+        position: coords,
+        address: decodeAddress(results[0]),
+      });
     }
   }
 

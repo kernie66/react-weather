@@ -1,10 +1,11 @@
 import { InfoWindowF, MarkerF } from '@react-google-maps/api';
 import { useState } from 'react';
-import { useAddress } from '../contexts/AddressProvider';
 import { Text } from '@mantine/core';
+import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SelectOnMap() {
-  const { getAddress, getPosition } = useAddress();
+  const { getMapLocationAddress, getMapLocationPosition } =
+    useMapLocation();
   const [popover, setPopover] = useState(false);
 
   const clickOnMarker = (ev) => {
@@ -24,7 +25,7 @@ export default function SelectOnMap() {
   return (
     <>
       <MarkerF
-        position={getPosition}
+        position={getMapLocationPosition}
         icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
         onClick={clickOnMarker}
         className="marked-position"
@@ -32,12 +33,12 @@ export default function SelectOnMap() {
 
       {popover && (
         <InfoWindowF
-          position={getPosition}
+          position={getMapLocationPosition}
           onCloseClick={closeInfo}
           options={infoOptions}
         >
           <Text c="dodgerblue" fw={500} fz="h4">
-            {getAddress}
+            {getMapLocationAddress}
           </Text>
         </InfoWindowF>
       )}

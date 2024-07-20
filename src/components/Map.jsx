@@ -1,13 +1,13 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { memo } from 'react';
 import { getGeocode } from 'use-places-autocomplete';
-import { useAddress } from '../contexts/AddressProvider';
 import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
 import SelectOnMap from './SelectOnMap';
 import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
+import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
@@ -26,7 +26,7 @@ export default memo(function Map() {
     googleMapsApiKey: API_KEY,
     libraries,
   });
-  const { setAddress, setPosition } = useAddress();
+  const { setMapLocation } = useMapLocation();
 
   async function clickOnMap(selection) {
     const position = {
@@ -37,8 +37,10 @@ export default memo(function Map() {
     console.debug('Address:', results[0].formatted_address);
     console.debug('Latitude = ', position.lat);
     console.debug('Longitude = ', position.lng);
-    setPosition(position);
-    setAddress(decodeAddress(results[0]));
+    setMapLocation({
+      position: position,
+      address: decodeAddress(results[0]),
+    });
   }
 
   if (loadError) {
