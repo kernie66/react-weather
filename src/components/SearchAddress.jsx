@@ -80,6 +80,10 @@ export default function SearchAddress() {
     }
   }, [data]);
 
+  const optionsFilter = ({ options }) => {
+    console.log('Options:', options);
+    return options;
+  };
   return (
     <div className="search">
       <Autocomplete
@@ -87,6 +91,7 @@ export default function SearchAddress() {
         placeholder="Ange adress, ort eller plats"
         value={value}
         data={options}
+        filter={optionsFilter}
         selectFirstOptionOnChange
         onChange={onChangeHandler}
         onOptionSubmit={selectionHandler}
