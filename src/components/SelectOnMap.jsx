@@ -4,8 +4,7 @@ import { Text } from '@mantine/core';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SelectOnMap() {
-  const { getMapLocationAddress, getMapLocationPosition } =
-    useMapLocation();
+  const { getMapLocation } = useMapLocation();
   const [popover, setPopover] = useState(false);
 
   const clickOnMarker = (ev) => {
@@ -25,7 +24,7 @@ export default function SelectOnMap() {
   return (
     <>
       <MarkerF
-        position={getMapLocationPosition}
+        position={getMapLocation.position}
         icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
         onClick={clickOnMarker}
         className="marked-position"
@@ -33,12 +32,12 @@ export default function SelectOnMap() {
 
       {popover && (
         <InfoWindowF
-          position={getMapLocationPosition}
+          position={getMapLocation.position}
           onCloseClick={closeInfo}
           options={infoOptions}
         >
           <Text c="dodgerblue" fw={500} fz="h4">
-            {getMapLocationAddress}
+            {getMapLocation.address}
           </Text>
         </InfoWindowF>
       )}

@@ -14,18 +14,16 @@ import { showNotification } from '@mantine/notifications';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setAddress, setPosition } = useAddress();
-  const { getMapLocationAddress, getMapLocationPosition } =
-    useMapLocation();
+  const { setLocation } = useAddress();
+  const { getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
 
   const selectPosition = () => {
-    setAddress(getMapLocationAddress);
-    setPosition(getMapLocationPosition);
+    setLocation(getMapLocation);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition uppdaterad',
-      message: getMapLocationAddress,
+      message: getMapLocation.address,
       color: 'green',
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
@@ -34,8 +32,10 @@ export default function SelectLocation({ modal, closeModal }) {
   };
 
   const setDefaultPosition = () => {
-    setAddress(defaultAddress);
-    setPosition(defaultPosition);
+    setLocation({
+      address: defaultAddress,
+      position: defaultPosition,
+    });
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition satt till hemadressen',
@@ -61,7 +61,7 @@ export default function SelectLocation({ modal, closeModal }) {
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
                 <Text span c="dodgerblue" fw={500} fz="h3">
-                  {getMapLocationAddress}
+                  {getMapLocation.address}
                 </Text>
               </Text>
               <Button

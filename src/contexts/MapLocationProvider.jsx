@@ -5,36 +5,28 @@ import { useAddress } from './AddressProvider.jsx';
 export const LocationContext = createContext();
 
 export default function MapLocationProvider({ children }) {
-  const { getAddress, getPosition } = useAddress();
+  const { getLocation } = useAddress();
   const [mapLocation, setMapLocation] = useSetState({
     // address: getAddress,
     // position: getPosition,
   });
 
   useEffect(() => {
-    setMapLocation({
-      address: getAddress,
-      position: getPosition,
-    });
-  }, [getPosition, getAddress, setMapLocation]);
+    setMapLocation(getLocation);
+  }, [getLocation, setMapLocation]);
 
   console.log('Location:', mapLocation);
 
-  const getMapLocationAddress = useMemo(() => {
-    return mapLocation.address;
-  }, [mapLocation]);
-
-  const getMapLocationPosition = useMemo(() => {
-    return mapLocation.position;
+  const getMapLocation = useMemo(() => {
+    return mapLocation;
   }, [mapLocation]);
 
   const value = useMemo(() => {
     return {
       setMapLocation,
-      getMapLocationAddress,
-      getMapLocationPosition,
+      getMapLocation,
     };
-  }, [setMapLocation, getMapLocationAddress, getMapLocationPosition]);
+  }, [setMapLocation, getMapLocation]);
 
   return (
     <LocationContext.Provider value={value}>

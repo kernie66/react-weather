@@ -12,6 +12,13 @@ export const defaultAddress = 'Rotebro, Sollentuna, Sverige';
 export const AddressContext = createContext();
 
 export default function AddressProvider({ children }) {
+  const [location, setLocation] = useLocalStorage({
+    key: 'location',
+    defaultValue: {
+      address: defaultAddress,
+      position: defaultPosition,
+    },
+  });
   const [position, setPosition] = useLocalStorage({
     key: 'position',
     defaultValue: defaultPosition,
@@ -21,15 +28,19 @@ export default function AddressProvider({ children }) {
     defaultValue: defaultAddress,
   });
 
-  console.log('Position:', position);
+  console.log('Main location:', location);
 
   const getAddress = useMemo(() => {
-    return address;
-  }, [address]);
+    return location.address;
+  }, [location.address]);
 
   const getPosition = useMemo(() => {
-    return position;
-  }, [position]);
+    return location.position;
+  }, [location.position]);
+
+  const getLocation = useMemo(() => {
+    return location;
+  }, [location]);
 
   const value = useMemo(() => {
     return {
@@ -37,8 +48,17 @@ export default function AddressProvider({ children }) {
       getAddress,
       setPosition,
       getPosition,
+      setLocation,
+      getLocation,
     };
-  }, [setAddress, getAddress, setPosition, getPosition]);
+  }, [
+    setAddress,
+    getAddress,
+    setPosition,
+    getPosition,
+    setLocation,
+    getLocation,
+  ]);
 
   return (
     <AddressContext.Provider value={value}>

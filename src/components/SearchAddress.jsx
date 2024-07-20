@@ -15,7 +15,7 @@ export default function SearchAddress() {
     new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
-  const { setMapLocation, getMapLocationPosition } = useMapLocation();
+  const { setMapLocation, getMapLocation } = useMapLocation();
 
   const {
     // eslint-disable-next-line
@@ -38,13 +38,13 @@ export default function SearchAddress() {
 
   useEffect(() => {
     // map.panTo(getPosition);
-    console.log('getMapPosition:', getMapLocationPosition);
+    console.log('getMapPosition:', getMapLocation.position);
     const newLocation = new window.google.maps.LatLng(
-      getMapLocationPosition
+      getMapLocation.position
     );
     map.panTo(newLocation);
     setLocation(newLocation);
-  }, [map, getMapLocationPosition]);
+  }, [map, getMapLocation]);
 
   async function selectionHandler(selection) {
     console.log('selection', selection);
