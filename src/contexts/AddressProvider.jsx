@@ -3,11 +3,11 @@ import { createContext, useContext, useMemo } from 'react';
 
 const defaultLat = import.meta.env.VITE_DEFAULT_LATITUDE;
 const defaultLon = import.meta.env.VITE_DEFAULT_LONGITUDE;
-const defaultPosition = {
+export const defaultPosition = {
   lat: parseFloat(defaultLat),
   lng: parseFloat(defaultLon),
 };
-const defaultAddress = 'Rotebro, Sollentuna, Sverige';
+export const defaultAddress = 'Rotebro, Sollentuna, Sverige';
 
 export const AddressContext = createContext();
 
@@ -24,24 +24,12 @@ export default function AddressProvider({ children }) {
   console.log('Position:', position);
 
   const getAddress = useMemo(() => {
-    if (address === 'default') {
-      setAddress(defaultAddress);
-      console.debug('Address set to default');
-      return defaultAddress;
-    } else {
-      return address;
-    }
-  }, [address, setAddress]);
+    return address;
+  }, [address]);
 
   const getPosition = useMemo(() => {
-    if (position === 'default') {
-      setPosition(defaultPosition);
-      console.debug('Position set to default');
-      return defaultPosition;
-    } else {
-      return position;
-    }
-  }, [position, setPosition]);
+    return position;
+  }, [position]);
 
   const value = useMemo(() => {
     return {

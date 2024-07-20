@@ -2,7 +2,11 @@ import { TbHomeCheck } from 'react-icons/tb';
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Button, Group, Modal, Text, rem } from '@mantine/core';
-import { useAddress } from '../contexts/AddressProvider';
+import {
+  defaultAddress,
+  defaultPosition,
+  useAddress,
+} from '../contexts/AddressProvider';
 import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
@@ -29,13 +33,13 @@ export default function SelectLocation({ modal, closeModal }) {
     closeModal();
   };
 
-  const defaultPosition = () => {
-    setAddress('default');
-    setPosition('default');
+  const setDefaultPosition = () => {
+    setAddress(defaultAddress);
+    setPosition(defaultPosition);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition satt till hemadressen',
-      message: 'Välkommen hem',
+      message: defaultAddress, // 'Välkommen hem',
       color: 'green',
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
@@ -78,7 +82,7 @@ export default function SelectLocation({ modal, closeModal }) {
                 px={8}
                 py={2}
                 rightSection={<TbHomeCheck size={18} />}
-                onClick={defaultPosition}
+                onClick={setDefaultPosition}
               >
                 Hem
               </Button>
