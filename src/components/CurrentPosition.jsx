@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAddress } from '../contexts/AddressProvider';
+import { useLocation } from '../contexts/LocationProvider';
 
 export default function CurrentPosition() {
-  const { setPosition } = useAddress();
+  const { setPosition } = useLocation();
   const [locationServiceEnabled, setLocationServiceEnabled] =
     useState(false);
 

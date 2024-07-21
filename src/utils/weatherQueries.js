@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useAddress } from '../contexts/AddressProvider.jsx';
+import { useLocation } from '../contexts/LocationProvider.jsx';
 import { useCallback, useMemo } from 'react';
 import queryPersister from '../helpers/queryPersister.js';
 import dayjs from 'dayjs';
@@ -12,7 +12,7 @@ const apiURL = `${baseURL}/onecall?exclude=${part}&appid=${apiKey}&units=metric&
 const maxAge = 1000 * 60 * 60 * 24; // 1 day
 
 export const useWeatherData = (select) => {
-  const { getPosition } = useAddress();
+  const { getPosition } = useLocation();
 
   const apiFullURL = useMemo(
     () => apiURL + `&lat=${getPosition.lat}&lon=${getPosition.lng}`,

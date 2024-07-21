@@ -3,7 +3,7 @@ import Body from './components/Body';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import './App.css';
-import AddressProvider from './contexts/AddressProvider';
+import LocationProvider from './contexts/LocationProvider';
 import {
   QueryClient,
   QueryClientProvider,
@@ -28,14 +28,14 @@ export default function App() {
         buttonPosition="bottom-left"
       />
       <ErrorBoundary>
-        <AddressProvider>
+        <LocationProvider>
           <Background>
             <Header />
             <ErrorBoundary>
               <Body />
             </ErrorBoundary>
           </Background>
-        </AddressProvider>
+        </LocationProvider>
       </ErrorBoundary>
     </QueryClientProvider>
   );

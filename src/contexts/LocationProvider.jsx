@@ -15,9 +15,9 @@ export const defaultPosition = {
 };
 export const defaultAddress = 'Rotebro, Sollentuna, Sverige';
 
-export const AddressContext = createContext();
+export const LocationContext = createContext();
 
-export default function AddressProvider({ children }) {
+export default function LocationProvider({ children }) {
   const [myLocation, setMyLocation] = useLocalStorage({
     key: 'location',
     defaultValue: {
@@ -68,12 +68,12 @@ export default function AddressProvider({ children }) {
   }, [getAddress, getPosition, setLocation, getLocation]);
 
   return (
-    <AddressContext.Provider value={value}>
+    <LocationContext.Provider value={value}>
       {children}
-    </AddressContext.Provider>
+    </LocationContext.Provider>
   );
 }
 
-export function useAddress() {
-  return useContext(AddressContext);
+export function useLocation() {
+  return useContext(LocationContext);
 }

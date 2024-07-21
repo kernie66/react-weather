@@ -1,6 +1,6 @@
 import { TbMap2 } from 'react-icons/tb';
 import SelectLocation from './SelectLocation';
-import { useAddress } from '../contexts/AddressProvider';
+import { useLocation } from '../contexts/LocationProvider';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -8,7 +8,7 @@ import MapLocationProvider from '../contexts/MapLocationProvider.jsx';
 
 export default function Header() {
   const [opened, { open, close }] = useDisclosure(false);
-  const { getAddress } = useAddress();
+  const { getAddress } = useLocation();
 
   return (
     <>

@@ -1,12 +1,20 @@
 import { TbHomeCheck } from 'react-icons/tb';
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { Button, Group, Modal, Text, rem } from '@mantine/core';
+import {
+  Autocomplete,
+  Button,
+  Group,
+  Modal,
+  Popover,
+  Text,
+  rem,
+} from '@mantine/core';
 import {
   defaultAddress,
   defaultPosition,
-  useAddress,
-} from '../contexts/AddressProvider';
+  useLocation,
+} from '../contexts/LocationProvider';
 import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
@@ -14,7 +22,7 @@ import { showNotification } from '@mantine/notifications';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setLocation } = useAddress();
+  const { setLocation } = useLocation();
   const { getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
 
@@ -60,9 +68,28 @@ export default function SelectLocation({ modal, closeModal }) {
             <Group>
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
-                <Text span c="dodgerblue" fw={500} fz="h3">
-                  {getMapLocation.address}
-                </Text>
+                <Popover
+                  width={300}
+                  position="bottom"
+                  withArrow
+                  shadow="md"
+                >
+                  <Popover.Target>
+                    <Button variant="light" px="sm">
+                      <Text span c="dodgerblue" fw={500} fz="h3">
+                        {getMapLocation.address}
+                      </Text>
+                    </Button>
+                  </Popover.Target>
+                  <Popover.Dropdown>
+                    <Autocomplete
+                      label="Your favorite library"
+                      placeholder="Pick value or enter anything"
+                      data={['React', 'Angular', 'Vue', 'Svelte']}
+                      comboboxProps={{ withinPortal: false }}
+                    />
+                  </Popover.Dropdown>
+                </Popover>
               </Text>
               <Button
                 variant="outline"

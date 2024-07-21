@@ -1,11 +1,11 @@
 import { useSetState } from '@mantine/hooks';
 import { createContext, useContext, useEffect, useMemo } from 'react';
-import { useAddress } from './AddressProvider.jsx';
+import { useLocation } from './LocationProvider.jsx';
 
 export const LocationContext = createContext();
 
 export default function MapLocationProvider({ children }) {
-  const { getLocation } = useAddress();
+  const { getLocation } = useLocation();
   const [mapLocation, setMapLocation] = useSetState({
     // address: getAddress,
     // position: getPosition,
