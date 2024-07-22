@@ -27,6 +27,7 @@ export default function LocationProvider({ children }) {
   });
   const [history, setHistory] = useLocalStorage({
     key: 'locationHistory',
+    defaultValue: [],
   });
 
   console.log('Main location:', myLocation);
@@ -42,6 +43,10 @@ export default function LocationProvider({ children }) {
   const getLocation = useMemo(() => {
     return myLocation;
   }, [myLocation]);
+
+  const getHistory = useMemo(() => {
+    return history;
+  }, [history]);
 
   const setLocation = useCallback(
     (newLocation) => {
@@ -64,8 +69,9 @@ export default function LocationProvider({ children }) {
       getPosition,
       setLocation,
       getLocation,
+      getHistory,
     };
-  }, [getAddress, getPosition, setLocation, getLocation]);
+  }, [getAddress, getPosition, setLocation, getLocation, getHistory]);
 
   return (
     <LocationContext.Provider value={value}>

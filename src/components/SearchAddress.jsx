@@ -84,6 +84,7 @@ export default function SearchAddress() {
     console.log('Options:', options);
     return options;
   };
+
   return (
     <div className="search">
       <Autocomplete

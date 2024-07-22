@@ -4,6 +4,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import {
   Autocomplete,
   Button,
+  CloseButton,
   Group,
   Modal,
   Popover,
@@ -20,11 +21,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
+import { useState } from 'react';
+import { FiDelete } from 'react-icons/fi';
+import { select } from 'radash';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setLocation } = useLocation();
-  const { getMapLocation } = useMapLocation();
+  const { setLocation, getHistory } = useLocation();
+  const { setMapLocation, getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
+  const [historyValue, setHistoryValue] = useState('');
 
   const selectPosition = () => {
     setLocation(getMapLocation);
@@ -55,6 +60,20 @@ export default function SelectLocation({ modal, closeModal }) {
     closeModal();
   };
 
+  const onChangeHandler = (value) => {
+    setHistoryValue(value);
+  };
+
+  const selectHistory = (selection) => {
+    console.log('Selected history:', selection);
+    const historyLocation = select(
+      getHistory,
+      (h) => h,
+      (h) => h.address === selection
+    );
+    setMapLocation(historyLocation[0]);
+  };
+
   return (
     <Modal.Root
       fullScreen
@@ -83,10 +102,24 @@ export default function SelectLocation({ modal, closeModal }) {
                   </Popover.Target>
                   <Popover.Dropdown>
                     <Autocomplete
-                      label="Your favorite library"
-                      placeholder="Pick value or enter anything"
-                      data={['React', 'Angular', 'Vue', 'Svelte']}
+                      placeholder="Välj plats från historiken"
+                      value={historyValue}
+                      data={getHistory.map(
+                        (history) => history.address
+                      )}
                       comboboxProps={{ withinPortal: false }}
+                      dropdownOpened
+                      onChange={onChangeHandler}
+                      onOptionSubmit={selectHistory}
+                      rightSection={
+                        historyValue !== '' && (
+                          <CloseButton
+                            icon={<FiDelete size={20} />}
+                            onClick={() => setHistoryValue('')}
+                            aria-label="Clear value"
+                          />
+                        )
+                      }
                     />
                   </Popover.Dropdown>
                 </Popover>
