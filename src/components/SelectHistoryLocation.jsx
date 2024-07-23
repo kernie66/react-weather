@@ -44,6 +44,7 @@ export default function SelectHistoryLocation({ popover, toggle }) {
     <Popover
       width={300}
       opened={popover}
+      trapFocus
       position="bottom"
       withArrow
       shadow="md"
@@ -55,14 +56,15 @@ export default function SelectHistoryLocation({ popover, toggle }) {
           </Text>
         </Button>
       </Popover.Target>
-      <Popover.Dropdown>
+      <Popover.Dropdown ref={ref}>
         <Autocomplete
-          ref={ref}
           placeholder="Välj plats från historiken"
           value={historyValue}
           data={getHistory.map((history) => history.address)}
           comboboxProps={{ withinPortal: false }}
           dropdownOpened
+          data-autofocus
+          selectFirstOptionOnChange
           onChange={onChangeHandler}
           onOptionSubmit={selectHistory}
           rightSection={
