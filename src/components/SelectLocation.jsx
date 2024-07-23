@@ -26,7 +26,7 @@ import { FiDelete } from 'react-icons/fi';
 import { select } from 'radash';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setLocation, getHistory } = useLocation();
+  const { setLocation, getLocation, getHistory } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
   const [historyValue, setHistoryValue] = useState('');
@@ -41,6 +41,12 @@ export default function SelectLocation({ modal, closeModal }) {
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
     });
+    closeModal();
+  };
+
+  const restorePosition = () => {
+    setMapLocation(getLocation);
+    setHistoryValue('');
     closeModal();
   };
 
@@ -72,13 +78,15 @@ export default function SelectLocation({ modal, closeModal }) {
       (h) => h.address === selection
     );
     setMapLocation(historyLocation[0]);
+    setHistoryValue('');
+    console.log('History location:', historyLocation[0]);
   };
 
   return (
     <Modal.Root
       fullScreen
       opened={modal}
-      onClose={closeModal}
+      onClose={restorePosition}
       transitionProps={{ transition: 'fade', duration: 200 }}
     >
       <Modal.Content>
