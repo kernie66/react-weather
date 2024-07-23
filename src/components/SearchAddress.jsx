@@ -8,14 +8,25 @@ import usePlacesAutocomplete, {
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
+import { useClickOutside } from '@mantine/hooks';
 
-export default function SearchAddress() {
+export default function SearchAddress({
+  addressOpened,
+  openAddress,
+  closeAddress,
+}) {
   const map = useGoogleMap();
   const [location, setLocation] = useState(
     new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
   const { setMapLocation, getMapLocation } = useMapLocation();
+
+  const handleClickOutside = () => {
+    console.log('Clicked outside');
+    // closeAddress();
+  };
+  const ref = useClickOutside(handleClickOutside);
 
   const {
     // eslint-disable-next-line
@@ -60,6 +71,7 @@ export default function SearchAddress() {
         position: coords,
         address: decodeAddress(results[0]),
       });
+      closeAddress();
     }
   }
 
@@ -67,8 +79,10 @@ export default function SearchAddress() {
     console.log('value', value);
     if (value.length >= 2) {
       setValue(value);
+      openAddress();
     } else {
       setValue(value, false);
+      closeAddress();
       clearSuggestions();
     }
   };
@@ -96,12 +110,13 @@ export default function SearchAddress() {
         selectFirstOptionOnChange
         onChange={onChangeHandler}
         onOptionSubmit={selectionHandler}
+        dropdownOpened={addressOpened}
         disabled={!ready}
         rightSection={
           value !== '' && (
             <CloseButton
               icon={<FiDelete size={20} />}
-              onClick={() => setValue('')}
+              onClick={() => setValue('', false)}
               aria-label="Clear value"
             />
           )

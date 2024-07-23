@@ -14,13 +14,30 @@ import { showNotification } from '@mantine/notifications';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
 
 export default function SelectLocation({ modal, closeModal }) {
   const { setLocation, getLocation } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
+  const [
+    addressInputOpened,
+    { open: openAddressInput, close: closeAddressInput },
+  ] = useDisclosure(false);
   const [popoverOpened, { toggle: togglePopover }] =
     useDisclosure(false);
+  const [disableMouseEvents, setDisableMouseEvents] = useState(false);
+
+  useEffect(() => {
+    let disable = false;
+    if (popoverOpened) {
+      disable = true;
+    }
+    if (addressInputOpened) {
+      disable = true;
+    }
+    setDisableMouseEvents(disable);
+  }, [popoverOpened, addressInputOpened]);
 
   const selectPosition = () => {
     setLocation(getMapLocation);
@@ -103,7 +120,12 @@ export default function SelectLocation({ modal, closeModal }) {
           />
         </Modal.Header>
         <Modal.Body>
-          <Map />
+          <Map
+            addressOpened={addressInputOpened}
+            openAddress={openAddressInput}
+            closeAddress={closeAddressInput}
+            disableMouseEvents={disableMouseEvents}
+          />
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>

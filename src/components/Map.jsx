@@ -20,7 +20,12 @@ const mapOptions = {
   mapTypeControl: true,
 };
 
-export default memo(function Map() {
+export default memo(function Map({
+  addressOpened,
+  openAddress,
+  closeAddress,
+  disableMouseEvents = false,
+}) {
   // Loads the map using API KEY
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
@@ -29,18 +34,20 @@ export default memo(function Map() {
   const { setMapLocation } = useMapLocation();
 
   async function clickOnMap(selection) {
-    const position = {
-      lat: selection.latLng.lat(),
-      lng: selection.latLng.lng(),
-    };
-    const results = await getGeocode({ location: position });
-    console.debug('Address:', results[0].formatted_address);
-    console.debug('Latitude = ', position.lat);
-    console.debug('Longitude = ', position.lng);
-    setMapLocation({
-      position: position,
-      address: decodeAddress(results[0]),
-    });
+    if (!disableMouseEvents) {
+      const position = {
+        lat: selection.latLng.lat(),
+        lng: selection.latLng.lng(),
+      };
+      const results = await getGeocode({ location: position });
+      console.debug('Address:', results[0].formatted_address);
+      console.debug('Latitude = ', position.lat);
+      console.debug('Longitude = ', position.lng);
+      setMapLocation({
+        position: position,
+        address: decodeAddress(results[0]),
+      });
+    }
   }
 
   if (loadError) {
@@ -71,7 +78,11 @@ export default memo(function Map() {
       onClick={clickOnMap}
     >
       <CurrentPosition />
-      <SearchAddress />
+      <SearchAddress
+        addressOpened={addressOpened}
+        openAddress={openAddress}
+        closeAddress={closeAddress}
+      />
       <SelectOnMap />
     </GoogleMap>
   );
