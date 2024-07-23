@@ -1,16 +1,7 @@
 import { TbHomeCheck } from 'react-icons/tb';
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import {
-  Autocomplete,
-  Button,
-  CloseButton,
-  Group,
-  Modal,
-  Popover,
-  Text,
-  rem,
-} from '@mantine/core';
+import { Button, Group, Modal, Text, rem } from '@mantine/core';
 import {
   defaultAddress,
   defaultPosition,
@@ -21,15 +12,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
-import { useState } from 'react';
-import { FiDelete } from 'react-icons/fi';
-import { select } from 'radash';
+import SelectHistoryLocation from './SelectHistoryLocation.jsx';
+import { useDisclosure } from '@mantine/hooks';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setLocation, getLocation, getHistory } = useLocation();
+  const { setLocation, getLocation } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
-  const [historyValue, setHistoryValue] = useState('');
+  const [popoverOpened, { toggle: togglePopover }] =
+    useDisclosure(false);
 
   const selectPosition = () => {
     setLocation(getMapLocation);
@@ -46,7 +37,6 @@ export default function SelectLocation({ modal, closeModal }) {
 
   const restorePosition = () => {
     setMapLocation(getLocation);
-    setHistoryValue('');
     closeModal();
   };
 
@@ -66,22 +56,6 @@ export default function SelectLocation({ modal, closeModal }) {
     closeModal();
   };
 
-  const onChangeHandler = (value) => {
-    setHistoryValue(value);
-  };
-
-  const selectHistory = (selection) => {
-    console.log('Selected history:', selection);
-    const historyLocation = select(
-      getHistory,
-      (h) => h,
-      (h) => h.address === selection
-    );
-    setMapLocation(historyLocation[0]);
-    setHistoryValue('');
-    console.log('History location:', historyLocation[0]);
-  };
-
   return (
     <Modal.Root
       fullScreen
@@ -95,42 +69,10 @@ export default function SelectLocation({ modal, closeModal }) {
             <Group>
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
-                <Popover
-                  width={300}
-                  position="bottom"
-                  withArrow
-                  shadow="md"
-                >
-                  <Popover.Target>
-                    <Button variant="light" px="sm">
-                      <Text span c="dodgerblue" fw={500} fz="h3">
-                        {getMapLocation.address}
-                      </Text>
-                    </Button>
-                  </Popover.Target>
-                  <Popover.Dropdown>
-                    <Autocomplete
-                      placeholder="Välj plats från historiken"
-                      value={historyValue}
-                      data={getHistory.map(
-                        (history) => history.address
-                      )}
-                      comboboxProps={{ withinPortal: false }}
-                      dropdownOpened
-                      onChange={onChangeHandler}
-                      onOptionSubmit={selectHistory}
-                      rightSection={
-                        historyValue !== '' && (
-                          <CloseButton
-                            icon={<FiDelete size={20} />}
-                            onClick={() => setHistoryValue('')}
-                            aria-label="Clear value"
-                          />
-                        )
-                      }
-                    />
-                  </Popover.Dropdown>
-                </Popover>
+                <SelectHistoryLocation
+                  popover={popoverOpened}
+                  toggle={togglePopover}
+                />
               </Text>
               <Button
                 variant="outline"
