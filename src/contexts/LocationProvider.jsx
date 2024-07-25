@@ -55,7 +55,9 @@ export default function LocationProvider({ children }) {
       const newHistory = replaceOrAppend(
         history,
         newLocation,
-        (f) => f.address === newLocation.address
+        (f) =>
+          f.address.toLowerCase() ===
+          newLocation.address.toLowerCase()
       );
       setHistory(newHistory);
       console.log('History:', newHistory);

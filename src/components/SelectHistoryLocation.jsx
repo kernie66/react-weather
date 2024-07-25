@@ -61,12 +61,12 @@ export default function SelectHistoryLocation({ popover, toggle }) {
           placeholder="Välj plats från historiken"
           value={historyValue}
           data={getHistory.map((history) => history.address)}
-          comboboxProps={{ withinPortal: false }}
           dropdownOpened
           data-autofocus
           selectFirstOptionOnChange
           onChange={onChangeHandler}
           onOptionSubmit={selectHistory}
+          comboboxProps={{ withinPortal: false, shadow: 'md' }}
           rightSection={
             historyValue !== '' && (
               <CloseButton

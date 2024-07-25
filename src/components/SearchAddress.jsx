@@ -8,7 +8,7 @@ import usePlacesAutocomplete, {
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
-import { useClickOutside } from '@mantine/hooks';
+import { title } from 'radash';
 
 export default function SearchAddress({
   addressOpened,
@@ -21,12 +21,6 @@ export default function SearchAddress({
   );
   const [options, setOptions] = useState([]);
   const { setMapLocation, getMapLocation } = useMapLocation();
-
-  const handleClickOutside = () => {
-    console.log('Clicked outside');
-    // closeAddress();
-  };
-  const ref = useClickOutside(handleClickOutside);
 
   const {
     // eslint-disable-next-line
@@ -60,7 +54,7 @@ export default function SearchAddress({
   async function selectionHandler(selection) {
     console.log('selection', selection);
     if (selection) {
-      const address = selection;
+      const address = title(selection);
       // setAddress(address);
       setValue(address, false);
       clearSuggestions();
@@ -69,7 +63,7 @@ export default function SearchAddress({
       const coords = getLatLng(results[0]);
       setMapLocation({
         position: coords,
-        address: decodeAddress(results[0]),
+        address: title(decodeAddress(results[0])),
       });
       closeAddress();
     }
@@ -112,6 +106,7 @@ export default function SearchAddress({
         onOptionSubmit={selectionHandler}
         dropdownOpened={addressOpened}
         disabled={!ready}
+        comboboxProps={{ shadow: 'md' }}
         rightSection={
           value !== '' && (
             <CloseButton

@@ -8,6 +8,7 @@ import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
+import { title } from 'radash';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
@@ -45,7 +46,7 @@ export default memo(function Map({
       console.debug('Longitude = ', position.lng);
       setMapLocation({
         position: position,
-        address: decodeAddress(results[0]),
+        address: title(decodeAddress(results[0])),
       });
     }
   }
