@@ -11,8 +11,14 @@ import { useState } from 'react';
 import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useClickOutside } from '@mantine/hooks';
+import classes from '../css/Text.module.css';
 
-export default function SelectHistoryLocation({ popover, toggle }) {
+export default function SelectHistoryLocation({
+  popover,
+  toggle,
+  buttonSize = 'sm',
+  textClass = classes.historyButton,
+}) {
   const { getHistory } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
   const [historyValue, setHistoryValue] = useState('');
@@ -50,8 +56,14 @@ export default function SelectHistoryLocation({ popover, toggle }) {
       shadow="md"
     >
       <Popover.Target>
-        <Button variant="light" px="sm" onClick={toggle}>
-          <Text span c="dodgerblue" fw={500} fz="h3">
+        <Button
+          size={buttonSize}
+          variant="light"
+          px="sm"
+          style={{ verticalAlign: 'baseline' }}
+          onClick={toggle}
+        >
+          <Text span className={textClass}>
             {getMapLocation.address}
           </Text>
         </Button>

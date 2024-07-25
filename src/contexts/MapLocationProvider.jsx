@@ -15,7 +15,7 @@ export default function MapLocationProvider({ children }) {
     setMapLocation(getLocation);
   }, [getLocation, setMapLocation]);
 
-  console.log('Location:', mapLocation);
+  console.log('Map location:', mapLocation);
 
   const getMapLocation = useMemo(() => {
     return mapLocation;

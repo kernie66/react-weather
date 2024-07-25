@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/sv';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import calendar from 'dayjs/plugin/calendar.js';
+import MapLocationProvider from './contexts/MapLocationProvider.jsx';
 
 const queryClient = new QueryClient();
 
@@ -30,10 +31,12 @@ export default function App() {
       <ErrorBoundary>
         <LocationProvider>
           <Background>
-            <Header />
-            <ErrorBoundary>
-              <Body />
-            </ErrorBoundary>
+            <MapLocationProvider>
+              <Header />
+              <ErrorBoundary>
+                <Body />
+              </ErrorBoundary>
+            </MapLocationProvider>
           </Background>
         </LocationProvider>
       </ErrorBoundary>
