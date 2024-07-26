@@ -7,7 +7,7 @@ import {
 } from '@mantine/core';
 import { useLocation } from '../contexts/LocationProvider.jsx';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useClickOutside } from '@mantine/hooks';
@@ -18,10 +18,12 @@ export default function SelectHistoryLocation({
   toggle,
   buttonSize = 'sm',
   textClass = classes.historyButton,
+  showHistoryLocation = true,
 }) {
-  const { getHistory } = useLocation();
+  const { getLocation, getHistory } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
   const [historyValue, setHistoryValue] = useState('');
+  const [shownLocation, setShownLocation] = useState(false);
 
   const handleClickOutside = () => {
     console.log('Clicked outside');
@@ -46,6 +48,14 @@ export default function SelectHistoryLocation({
     console.log('History location:', historyLocation[0]);
   };
 
+  useEffect(() => {
+    let newShownLocation = getMapLocation.address;
+    if (!showHistoryLocation) {
+      newShownLocation = getLocation.address;
+    }
+    setShownLocation(newShownLocation);
+  }, [showHistoryLocation, getLocation, getMapLocation]);
+
   return (
     <Popover
       width={300}
@@ -64,7 +74,7 @@ export default function SelectHistoryLocation({
           onClick={toggle}
         >
           <Text span className={textClass}>
-            {getMapLocation.address}
+            {shownLocation}
           </Text>
         </Button>
       </Popover.Target>

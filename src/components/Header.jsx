@@ -46,6 +46,7 @@ export default function Header() {
                 toggle={toggleHistory}
                 buttonSize="lg"
                 textClass={classes.outlineLg}
+                showHistoryLocation={false}
               />
             </Text>
           </Center>
