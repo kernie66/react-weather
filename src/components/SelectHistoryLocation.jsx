@@ -24,13 +24,15 @@ export default function SelectHistoryLocation({
   const { setMapLocation, getMapLocation } = useMapLocation();
   const [historyValue, setHistoryValue] = useState('');
   const [shownLocation, setShownLocation] = useState(false);
+  const [target, setTarget] = useState(null);
+  const [dropdown, setDropdown] = useState(null);
 
   const handleClickOutside = () => {
     console.log('Clicked outside');
     setHistoryValue('');
     toggle();
   };
-  const ref = useClickOutside(handleClickOutside);
+  useClickOutside(handleClickOutside, null, [target, dropdown]);
 
   const onChangeHandler = (value) => {
     setHistoryValue(value);
@@ -56,6 +58,17 @@ export default function SelectHistoryLocation({
     setShownLocation(newShownLocation);
   }, [showHistoryLocation, getLocation, getMapLocation]);
 
+  /*
+  useEffect(() => {
+    console.log('History value:', historyValue);
+  }, [historyValue]);
+  */
+
+  const clearHistoryInput = () => {
+    setHistoryValue('');
+    setMapLocation(getLocation);
+  };
+
   return (
     <Popover
       width={300}
@@ -65,7 +78,7 @@ export default function SelectHistoryLocation({
       withArrow
       shadow="md"
     >
-      <Popover.Target>
+      <Popover.Target ref={setTarget}>
         <Button
           size={buttonSize}
           variant="light"
@@ -78,11 +91,13 @@ export default function SelectHistoryLocation({
           </Text>
         </Button>
       </Popover.Target>
-      <Popover.Dropdown ref={ref}>
+      <Popover.Dropdown ref={setDropdown}>
         <Autocomplete
           placeholder="Välj plats från historiken"
           value={historyValue}
-          data={getHistory.map((history) => history.address)}
+          data={getHistory
+            .toReversed()
+            .map((history) => history.address)}
           dropdownOpened
           data-autofocus
           selectFirstOptionOnChange
@@ -93,7 +108,7 @@ export default function SelectHistoryLocation({
             historyValue !== '' && (
               <CloseButton
                 icon={<FiDelete size={20} />}
-                onClick={() => setHistoryValue('')}
+                onClick={clearHistoryInput}
                 aria-label="Clear value"
               />
             )

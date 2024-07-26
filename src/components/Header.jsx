@@ -11,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { showNotification } from '@mantine/notifications';
 
 export default function Header() {
-  const { setLocation } = useLocation();
+  const { setLocation, getLocation } = useLocation();
   const { getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
   const [opened, { open, close }] = useDisclosure(false);
@@ -21,15 +21,17 @@ export default function Header() {
   );
 
   const setPosition = () => {
-    setLocation(getMapLocation);
-    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
-    showNotification({
-      title: 'Väderposition uppdaterad',
-      message: getMapLocation.address,
-      color: 'green',
-      icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
-      autoClose: 5000,
-    });
+    if (getMapLocation.address !== getLocation.address) {
+      setLocation(getMapLocation);
+      queryClient.invalidateQueries({ queryKey: ['weatherData'] });
+      showNotification({
+        title: 'Väderposition uppdaterad',
+        message: getMapLocation.address,
+        color: 'green',
+        icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
+        autoClose: 5000,
+      });
+    }
   };
 
   return (
