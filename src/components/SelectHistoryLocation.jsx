@@ -29,9 +29,7 @@ export default function SelectHistoryLocation({
   const forceUpdate = useForceUpdate();
 
   const handleClickOutside = () => {
-    console.log('Clicked outside');
-    setHistoryValue('');
-    forceUpdate();
+    console.debug('Clicked outside');
     toggle();
   };
   useClickOutside(handleClickOutside, null, [target, dropdown]);
@@ -41,14 +39,12 @@ export default function SelectHistoryLocation({
   };
 
   const selectHistory = (selection) => {
-    console.log('Selected history:', selection);
     const historyLocation = select(
       getHistory,
       (h) => h,
       (h) => h.address === selection
     );
     setMapLocation(historyLocation[0]);
-    console.log('History location:', historyLocation[0]);
     if (closeOnSelect) {
       forceUpdate();
       toggle();
@@ -69,13 +65,14 @@ export default function SelectHistoryLocation({
   const clearHistoryInput = () => {
     setHistoryValue('');
     setMapLocation(getLocation);
-    console.log('History input cleared');
+    console.debug('History input cleared');
   };
 
   return (
     <Popover
       width={300}
       opened={popover}
+      onOpen={() => setHistoryValue('')}
       trapFocus
       position="bottom"
       withArrow

@@ -39,7 +39,8 @@ export default function Header() {
         });
       }
     };
-    console.log('In set position effect', historyActive);
+
+    // Only update position if changed by history popup on this page
     if (historyActive) {
       setPosition();
     }
@@ -51,8 +52,8 @@ export default function Header() {
     historyActive,
   ]);
 
+  // Allow history to change when page active, disable when map shown
   useEffect(() => {
-    console.log('History opened:', historyOpened);
     if (historyOpened) {
       setHistoryActive(true);
     } else if (mapOpened) {
