@@ -24,20 +24,20 @@ export default function SelectLocation({ modal, closeModal }) {
     addressInputOpened,
     { open: openAddressInput, close: closeAddressInput },
   ] = useDisclosure(false);
-  const [popoverOpened, { toggle: togglePopover }] =
+  const [historyOpened, { toggle: toggleHistory }] =
     useDisclosure(false);
   const [disableMouseEvents, setDisableMouseEvents] = useState(false);
 
   useEffect(() => {
     let disable = false;
-    if (popoverOpened) {
+    if (historyOpened) {
       disable = true;
     }
     if (addressInputOpened) {
       disable = true;
     }
     setDisableMouseEvents(disable);
-  }, [popoverOpened, addressInputOpened]);
+  }, [historyOpened, addressInputOpened]);
 
   const selectPosition = () => {
     setLocation(getMapLocation);
@@ -87,8 +87,8 @@ export default function SelectLocation({ modal, closeModal }) {
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
                 <SelectHistoryLocation
-                  popover={popoverOpened}
-                  toggle={togglePopover}
+                  popover={historyOpened}
+                  toggle={toggleHistory}
                 />
               </Text>
               <Button

@@ -10,7 +10,7 @@ import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import { useEffect, useState } from 'react';
 import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
-import { useClickOutside } from '@mantine/hooks';
+import { useClickOutside, useForceUpdate } from '@mantine/hooks';
 import classes from '../css/Text.module.css';
 
 export default function SelectHistoryLocation({
@@ -18,7 +18,7 @@ export default function SelectHistoryLocation({
   toggle,
   buttonSize = 'sm',
   textClass = classes.historyButton,
-  showHistoryLocation = true,
+  closeOnSelect = false,
 }) {
   const { getLocation, getHistory } = useLocation();
   const { setMapLocation, getMapLocation } = useMapLocation();
@@ -26,10 +26,12 @@ export default function SelectHistoryLocation({
   const [shownLocation, setShownLocation] = useState(false);
   const [target, setTarget] = useState(null);
   const [dropdown, setDropdown] = useState(null);
+  const forceUpdate = useForceUpdate();
 
   const handleClickOutside = () => {
     console.log('Clicked outside');
     setHistoryValue('');
+    forceUpdate();
     toggle();
   };
   useClickOutside(handleClickOutside, null, [target, dropdown]);
@@ -46,17 +48,17 @@ export default function SelectHistoryLocation({
       (h) => h.address === selection
     );
     setMapLocation(historyLocation[0]);
-    setHistoryValue('');
     console.log('History location:', historyLocation[0]);
+    if (closeOnSelect) {
+      forceUpdate();
+      toggle();
+    }
   };
 
   useEffect(() => {
     let newShownLocation = getMapLocation.address;
-    if (!showHistoryLocation) {
-      newShownLocation = getLocation.address;
-    }
     setShownLocation(newShownLocation);
-  }, [showHistoryLocation, getLocation, getMapLocation]);
+  }, [getMapLocation]);
 
   /*
   useEffect(() => {
@@ -67,6 +69,7 @@ export default function SelectHistoryLocation({
   const clearHistoryInput = () => {
     setHistoryValue('');
     setMapLocation(getLocation);
+    console.log('History input cleared');
   };
 
   return (

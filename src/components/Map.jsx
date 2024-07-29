@@ -31,6 +31,7 @@ export default memo(function Map({
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
     libraries,
+    language: 'sv',
   });
   const { setMapLocation } = useMapLocation();
 

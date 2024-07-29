@@ -14,12 +14,34 @@ import 'dayjs/locale/sv';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import calendar from 'dayjs/plugin/calendar.js';
 import MapLocationProvider from './contexts/MapLocationProvider.jsx';
+import { isEmpty } from 'radash';
 
 const queryClient = new QueryClient();
 
 dayjs.locale('sv');
 dayjs.extend(localizedFormat);
 dayjs.extend(calendar);
+
+console.debug('Runs in App.jsx');
+
+const storedLocation = localStorage.getItem('location');
+console.log('Stored location:', storedLocation);
+if (
+  storedLocation &&
+  (isEmpty(storedLocation) || storedLocation === '{}')
+) {
+  console.log('Location key is empty, removed from localStorage');
+  localStorage.removeItem('location');
+}
+
+const storedHistory = localStorage.getItem('locationHistory');
+console.log('Stored history locations:', storedHistory);
+if (isEmpty(storedHistory) || storedHistory === '[{}]') {
+  console.log(
+    'History location key is empty, removed from localStorage'
+  );
+  localStorage.removeItem('locationHistory');
+}
 
 export default function App() {
   return (

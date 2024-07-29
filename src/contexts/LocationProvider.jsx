@@ -1,9 +1,10 @@
 import { useLocalStorage } from '@mantine/hooks';
-import { replaceOrAppend } from 'radash';
+import { replaceOrAppend, isEmpty } from 'radash';
 import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
 } from 'react';
 
@@ -50,13 +51,14 @@ export default function LocationProvider({ children }) {
 
   const setLocation = useCallback(
     (newLocation) => {
+      console.log('History:', history);
       console.log('Location updated:', newLocation);
       setMyLocation(newLocation);
       const newHistory = replaceOrAppend(
         history,
         newLocation,
         (f) =>
-          f.address.toLowerCase() ===
+          f.address?.toLowerCase() ===
           newLocation.address.toLowerCase()
       );
       setHistory(newHistory);
@@ -64,6 +66,14 @@ export default function LocationProvider({ children }) {
     },
     [setMyLocation, history, setHistory]
   );
+
+  useEffect(() => {
+    if (isEmpty(myLocation))
+      setLocation({
+        address: defaultAddress,
+        position: defaultPosition,
+      });
+  }, [myLocation, setLocation]);
 
   const value = useMemo(() => {
     return {
