@@ -51,7 +51,7 @@ export default function Body() {
   }
   return (
     <Container fluid px={8}>
-      <Grid h="45vh" mb={20}>
+      <Grid mih={320} mb={20}>
         <ErrorBoundary>
           <Grid.Col span="content">
             {isHiddenLeft ? <div /> : <LeftSide />}
@@ -76,7 +76,7 @@ export default function Body() {
           </Grid.Col>
         </ErrorBoundary>
       </Grid>
-      <Group justify="center" h="45%">
+      <Group justify="center" mih={240}>
         <ErrorBoundary>
           <SimpleGrid
             cols={{ base: 3, sm: 4, md: 6 }}

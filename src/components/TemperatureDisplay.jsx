@@ -9,7 +9,7 @@ export default function TemperatureDisplay() {
     <Grid
       justify="center"
       align="center"
-      mt={20}
+      mt={8}
       style={{ color: 'sandybrown' }}
     >
       <ErrorBoundary>
@@ -21,7 +21,7 @@ export default function TemperatureDisplay() {
         </Grid.Col>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Grid.Col span="content">
+        <Grid.Col span="content" maw={175}>
           <MinMax />
         </Grid.Col>
       </ErrorBoundary>
