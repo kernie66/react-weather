@@ -42,7 +42,7 @@ export default function CurrentWeather() {
         height="80px"
         alt="Väder"
       />
-      <Stack align="center">
+      <Stack align="center" miw={310} mah={80}>
         <Text className="outline-lg" lineClamp={2}>
           {description}
         </Text>

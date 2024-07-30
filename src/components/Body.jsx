@@ -62,7 +62,7 @@ export default function Body() {
             <ErrorBoundary>
               <TemperatureDisplay />
             </ErrorBoundary>
-            <Group justify="flex-start" gap="xl" ms="sm">
+            <Group justify="center" grow gap="xl" ms="sm">
               <ErrorBoundary>
                 <FlipDisplay />
                 <CurrentWeather />

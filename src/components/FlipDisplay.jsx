@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import Tick from '@pqina/flip';
 import getFlipValues from '../helpers/getFlipValues';
+import { Box } from '@mantine/core';
 
 export default function FlipDisplay() {
   const divRef = useRef();
@@ -50,7 +51,7 @@ export default function FlipDisplay() {
   }, [tickValue]);
 
   return (
-    <div className="tick FlipDisplay">
+    <Box className="tick FlipDisplay" miw={260}>
       <div data-repeat="true">
         <div ref={divRef}>
           <div className="tick-group FlipTime">
@@ -90,6 +91,6 @@ export default function FlipDisplay() {
           </div>
         </div>
       </div>
-    </div>
+    </Box>
   );
 }
