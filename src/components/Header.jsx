@@ -2,7 +2,7 @@ import { TbCheck, TbMap2 } from 'react-icons/tb';
 import SelectLocation from './SelectLocation';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, rem, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useViewportSize } from '@mantine/hooks';
 import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import classes from '../css/Text.module.css';
@@ -11,7 +11,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { showNotification } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
 
+const titleWidth = 220;
+const paddingWidth = 16 * 2;
+const controlsWidth = 38 * 2;
+
 export default function Header() {
+  const { width: viewportWidth } = useViewportSize();
   const { setLocation, getLocation } = useLocation();
   const { getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
@@ -20,6 +25,9 @@ export default function Header() {
   const [historyOpened, { toggle: toggleHistory }] =
     useDisclosure(false);
   const [historyActive, setHistoryActive] = useState(false);
+
+  const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
+  const buttonWidth = boxWidth - titleWidth - 16;
 
   useEffect(() => {
     const setPosition = () => {
@@ -64,24 +72,42 @@ export default function Header() {
   return (
     <>
       <SelectLocation modal={mapOpened} closeModal={closeMap} />
-      <Group justify="space-between">
+      <Group justify="space-between" gap={0}>
         <FullScreenButton />
-        <Box w="75vw">
+        <Box w={boxWidth} px={4}>
           <Center>
-            <Text xs="10" className={classes.outlineLg} lineClamp={1}>
-              Väderstation:&nbsp;
+            <Text xs="10" className={classes.outlineLg}>
+              <Text
+                span
+                px={8}
+                maw={titleWidth}
+                className={classes.outlineLg}
+              >
+                Väderstation:
+              </Text>
               <SelectHistoryLocation
                 popover={historyOpened}
                 toggle={toggleHistory}
-                buttonSize="lg"
+                buttonProps={{
+                  size: 'lg',
+                  width: buttonWidth,
+                  variant: 'subtle',
+                  px: 4,
+                }}
                 textClass={classes.outlineLg}
                 closeOnSelect
               />
             </Text>
           </Center>
         </Box>
-        <Button variant="transparent" onClick={openMap}>
-          <TbMap2 size={36} color="crimson" />
+        <Button
+          variant="subtle"
+          fz={36}
+          px={0}
+          c="crimson"
+          onClick={openMap}
+        >
+          <TbMap2 />
         </Button>
       </Group>
     </>

@@ -16,7 +16,7 @@ import classes from '../css/Text.module.css';
 export default function SelectHistoryLocation({
   popover,
   toggle,
-  buttonSize = 'sm',
+  buttonProps = { size: 'sm', variant: 'light', px: 'sm' },
   textClass = classes.historyButton,
   closeOnSelect = false,
 }) {
@@ -80,13 +80,22 @@ export default function SelectHistoryLocation({
     >
       <Popover.Target ref={setTarget}>
         <Button
-          size={buttonSize}
-          variant="light"
-          px="sm"
+          size={buttonProps.size}
+          variant={buttonProps.variant}
+          px={buttonProps.px}
+          maw={buttonProps.width}
           style={{ verticalAlign: 'baseline' }}
           onClick={toggle}
+          justify="space-between"
+          rightSection={<span />}
         >
-          <Text span className={textClass}>
+          <Text
+            span
+            maw={buttonProps.width - buttonProps.px * 2}
+            ta="left"
+            className={textClass}
+            lineClamp={1}
+          >
             {shownLocation}
           </Text>
         </Button>
