@@ -16,7 +16,7 @@ export default function TemperatureDisplay() {
         <Grid.Col span={1}>
           <WeatherAlert />
         </Grid.Col>
-        <Grid.Col span={7} me="xl">
+        <Grid.Col span="content" miw={420} mx="lg">
           <Temperature />
         </Grid.Col>
       </ErrorBoundary>
