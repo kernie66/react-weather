@@ -13,7 +13,7 @@ export default function TemperatureDisplay() {
       style={{ color: 'sandybrown' }}
     >
       <ErrorBoundary>
-        <Grid.Col span={1}>
+        <Grid.Col span="content" miw={64}>
           <WeatherAlert />
         </Grid.Col>
         <Grid.Col span="content" miw={420} mx="lg">

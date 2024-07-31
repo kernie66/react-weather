@@ -51,10 +51,10 @@ export default function FlipDisplay() {
   }, [tickValue]);
 
   return (
-    <Box className="tick FlipDisplay" miw={260}>
+    <Box className="tick FlipDisplay" miw={260} mih={125}>
       <div data-repeat="true">
         <div ref={divRef}>
-          <div className="tick-group FlipTime">
+          <Box className="tick-group FlipTime">
             <span
               data-key="hours"
               data-repeat="true"
@@ -70,7 +70,7 @@ export default function FlipDisplay() {
             >
               <span data-view="flip"></span>
             </span>
-            <div className="mt-3 FlipDate">
+            <Box className="FlipDate" mt={8}>
               <span
                 data-key="weekday"
                 id="flip-date"
@@ -87,8 +87,8 @@ export default function FlipDisplay() {
                 id="flip-date"
                 data-view="flip"
               ></span>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </div>
       </div>
     </Box>
