@@ -85,6 +85,7 @@ export default function WeatherAlert() {
     hideNotification(notificationId);
     openAlert();
   };
+
   return (
     <>
       <Modal
@@ -114,21 +115,22 @@ export default function WeatherAlert() {
           </Text>
         </Stack>
       </Modal>
-      <Button
-        variant="transparent"
-        size="xl"
-        px={0}
-        onClick={openAlertModal}
-        hidden={!iconShown}
-      >
-        <TbAlertTriangle
-          style={{
-            width: rem(64),
-            height: rem(64),
-          }}
-          color="orange"
-        />
-      </Button>
+      {iconShown ? (
+        <Button
+          variant="transparent"
+          size="xl"
+          px={0}
+          onClick={openAlertModal}
+        >
+          <TbAlertTriangle
+            style={{
+              width: rem(64),
+              height: rem(64),
+            }}
+            color="orange"
+          />
+        </Button>
+      ) : null}
     </>
   );
 }
