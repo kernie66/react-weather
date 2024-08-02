@@ -22,6 +22,7 @@ import {
 } from '@mantine/core';
 import UpdatedAt from './UpdatedAt.jsx';
 import { useWeatherData } from '../utils/weatherQueries.js';
+import SummaryBanner from './SummaryBanner.jsx';
 
 export default function Body() {
   const { isLoading } = useWeatherData();
@@ -62,7 +63,11 @@ export default function Body() {
             <ErrorBoundary>
               <TemperatureDisplay />
             </ErrorBoundary>
-            <Group justify="center" grow gap="xl" ms="sm">
+            <Group
+              justify="center"
+              grow
+              gap={{ base: 'md', lg: 'xl' }}
+            >
               <ErrorBoundary>
                 <FlipDisplay />
                 <CurrentWeather />
@@ -76,6 +81,7 @@ export default function Body() {
           </Grid.Col>
         </ErrorBoundary>
       </Grid>
+      <SummaryBanner />
       <Group justify="center" mih={240}>
         <ErrorBoundary>
           <SimpleGrid

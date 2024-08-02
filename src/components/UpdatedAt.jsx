@@ -10,10 +10,10 @@ export default function UpdatedAt() {
 
   return (
     <Group justify="center" gap="xs" mt="sm">
-      <Text c="yellow.3" className={classes.outlineSm}>
+      <Text c="yellow.3" className={classes.outlineSingle}>
         Uppdaterad:
       </Text>
-      <Text span c="gray.0" className={classes.outlineSm}>
+      <Text span c="gray.0" className={classes.outlineSingle}>
         {updatedAt}
       </Text>
     </Group>

@@ -6,12 +6,7 @@ import WeatherAlert from './WeatherAlert.jsx';
 
 export default function TemperatureDisplay() {
   return (
-    <Grid
-      justify="center"
-      align="center"
-      mt={8}
-      style={{ color: 'sandybrown' }}
-    >
+    <Grid justify="center" align="center" mt={8} c="orange.4">
       <ErrorBoundary>
         <Grid.Col span="content" miw={64}>
           <WeatherAlert />

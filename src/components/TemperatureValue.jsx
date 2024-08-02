@@ -25,10 +25,10 @@ export default function TemperatureValue({
     setDecimalTemp(newDecimalTemp);
   }, [tempValue]);
 
-  let outlineClass = classes.outlineSm;
+  let outlineClass = classes.outlineSingle;
 
   if (fontSize > 50) {
-    outlineClass = classes.outlineXl;
+    outlineClass = classes.outlineDouble;
   }
   return (
     <Text

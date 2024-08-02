@@ -76,12 +76,12 @@ export default function Header() {
         <FullScreenButton />
         <Box w={boxWidth} px={4}>
           <Center>
-            <Text xs="10" className={classes.outlineLg}>
+            <Text xs="10" className={classes.outlineHeader}>
               <Text
                 span
                 px={8}
                 maw={titleWidth}
-                className={classes.outlineLg}
+                className={classes.outlineHeader}
               >
                 Väderstation:
               </Text>
@@ -94,7 +94,7 @@ export default function Header() {
                   variant: 'subtle',
                   px: 4,
                 }}
-                textClass={classes.outlineLg}
+                textClass={classes.outlineHeader}
                 closeOnSelect
               />
             </Text>
