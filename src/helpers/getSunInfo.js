@@ -21,7 +21,6 @@ export const getSunTimes = (date, position) => {
     position.lat,
     position.lon
   );
-  console.log('Sun times:', currentSunTimes, nextSunTimes);
 
   if (currentTime.isBefore(dayjs(currentSunTimes.sunrise))) {
     sunTimes.sunrise = dayjs(currentSunTimes.sunrise);
