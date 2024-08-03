@@ -30,6 +30,7 @@ export const useWeatherData = (select) => {
     queryFn: getWeatherData,
     select,
     staleTime: 1000 * 60 * 10, // 10 minutes
+    refetchInterval: 1000 * 60 * 10, // 10 minutes
     gcTime: maxAge,
     persister: queryPersister(maxAge),
   });
