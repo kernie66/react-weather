@@ -4,7 +4,7 @@ import { getClipArtUrl } from '../helpers/getImageUrl.js';
 import SunCalc from 'suncalc';
 import { useWeatherPosition } from '../utils/weatherQueries.js';
 
-export function SunTimes() {
+export default function SunTimes() {
   const { data: position } = useWeatherPosition();
 
   const sunTimes = SunCalc.getTimes(

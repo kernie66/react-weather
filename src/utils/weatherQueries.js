@@ -4,6 +4,7 @@ import { useLocation } from '../contexts/LocationProvider.jsx';
 import { useCallback, useMemo } from 'react';
 import queryPersister from '../helpers/queryPersister.js';
 import dayjs from 'dayjs';
+import { inRange, isInt } from 'radash';
 
 const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;
@@ -58,10 +59,16 @@ export const useHourlyWeather = () => {
   return useWeatherData(selectHourlyData);
 };
 
-const selectDailyData = (data) => data.daily[0];
+export const useDailyWeather = (dayIndex) => {
+  let index = 0;
+  if (isInt(dayIndex) && inRange(dayIndex, 0, 8)) {
+    index = dayIndex;
+  }
+  return useWeatherData((data) => data.daily[index]);
+};
 
 export const useTodaysWeather = () => {
-  return useWeatherData(selectDailyData);
+  return useDailyWeather(0);
 };
 
 const selectAlertData = (data) => data.alerts;

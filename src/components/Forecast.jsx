@@ -75,6 +75,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
             <Text
               className={classes.outlineSingle}
               fz={28}
+              fw={500}
               c="orange.4"
             >
               {forecast.temp}&deg;C

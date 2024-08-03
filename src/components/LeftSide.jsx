@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
-import { SunTimes } from './SunTimes.jsx';
+import SunTimes from './SunTimes.jsx';
 import { Divider, Stack, Text } from '@mantine/core';
 import * as Compass from 'cardinal-direction';
 
