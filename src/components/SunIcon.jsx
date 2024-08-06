@@ -17,7 +17,7 @@ export default function SunIcon({
         ta="right"
         fw={500}
         fz={24}
-        c="orange.4"
+        c="orange.3"
         className={classes.outlineSingle}
       >
         {sunTime}

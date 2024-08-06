@@ -1,12 +1,7 @@
 import SunCalc from 'suncalc';
 import dayjs from 'dayjs';
 
-export const getSunTimes = (date, position) => {
-  let sunriseTime = '00:00';
-  let sunsetTime = '23:59';
-  let sunTimes = {};
-  let afterSunrise = false;
-
+const calculateSunTimes = (date, position) => {
   const currentTime = dayjs(date);
   const nextDay = currentTime.add(1, 'day');
 
@@ -21,6 +16,22 @@ export const getSunTimes = (date, position) => {
     position.lat,
     position.lon
   );
+
+  return {
+    currentTime,
+    currentSunTimes,
+    nextSunTimes,
+  };
+};
+
+export const getSunTimes = (date, position) => {
+  let sunriseTime = '00:00';
+  let sunsetTime = '23:59';
+  let sunTimes = {};
+  let afterSunrise = false;
+
+  const { currentTime, currentSunTimes, nextSunTimes } =
+    calculateSunTimes(date, position);
 
   if (currentTime.isBefore(dayjs(currentSunTimes.sunrise))) {
     sunTimes.sunrise = dayjs(currentSunTimes.sunrise);
@@ -48,4 +59,19 @@ export const getSunTimes = (date, position) => {
     sunsetTime,
     afterSunrise,
   };
+};
+
+export const getAllSunTimes = (date, position) => {
+  let sunTimes = {};
+  const { currentTime, currentSunTimes, nextSunTimes } =
+    calculateSunTimes(date, position);
+
+  if (currentTime.isBefore(dayjs(currentSunTimes.sunset))) {
+    sunTimes = currentSunTimes;
+  } else {
+    sunTimes = nextSunTimes;
+  }
+  // console.log('Sun times:', sunTimes);
+
+  return sunTimes;
 };
