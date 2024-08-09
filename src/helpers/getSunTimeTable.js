@@ -11,16 +11,21 @@ const formatSunTime = (sunTime) => {
   }
 };
 
-const formatDiff = (minutesDiff) => {
-  if (isNumber(minutesDiff)) {
-    if (minutesDiff === 0) {
+const formatDiff = (secondsDiff) => {
+  console.log('Diff:', secondsDiff);
+  if (isNumber(secondsDiff)) {
+    const absSecondsDiff = Math.abs(secondsDiff);
+    if (absSecondsDiff < 10) {
+      return 'samma tid';
+    }
+    if (absSecondsDiff < 45) {
       return 'mindre än en minut';
     }
     let supplementString = ' senare';
-    if (minutesDiff > 0) {
+    if (secondsDiff > 0) {
       supplementString = ' tidigare';
     }
-    const minutes = Math.abs(minutesDiff);
+    const minutes = Math.round(absSecondsDiff / 60);
     if (minutes === 1) {
       return 'en minut' + supplementString;
     }
@@ -43,23 +48,27 @@ export const getSunTimeTable = (date, position) => {
 
   const createSunTimeRow = (label, parameter) => {
     let row = [label];
+
+    // Add current sun time (in Date format) to row
     row.push(formatSunTime(allSunTimes[parameter]));
+
+    // Add difference to previous day to row
     const currentSunTime = dayjs(allSunTimes[parameter]);
     const oneDayOldSunTime = dayjs(allDayOldSunTimes[parameter]).add(
       1,
       'day'
     );
+    const dayDiff = oneDayOldSunTime.diff(currentSunTime, 'seconds');
+    row.push(formatDiff(dayDiff));
+
+    // Add difference to previous week to row
     const oneWeekOldSunTime = dayjs(
       allWeekOldSunTimes[parameter]
     ).add(1, 'week');
-    const dayDiff = oneDayOldSunTime.diff(currentSunTime, 'minutes');
-    console.log(dayDiff);
-    row.push(formatDiff(dayDiff));
     const weekDiff = oneWeekOldSunTime.diff(
       currentSunTime,
-      'minutes'
+      'seconds'
     );
-    console.log(weekDiff);
     row.push(formatDiff(weekDiff));
 
     return row;
