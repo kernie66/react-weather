@@ -1,22 +1,11 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { replaceOrAppend, isEmpty } from 'radash';
+import { useCallback, useEffect, useMemo } from 'react';
+import { LocationContext } from './Contexts.js';
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-} from 'react';
-
-const defaultLat = import.meta.env.VITE_DEFAULT_LATITUDE;
-const defaultLon = import.meta.env.VITE_DEFAULT_LONGITUDE;
-export const defaultPosition = {
-  lat: parseFloat(defaultLat),
-  lng: parseFloat(defaultLon),
-};
-export const defaultAddress = 'Rotebro, Sollentuna, Sverige';
-
-const LocationContext = createContext();
+  defaultAddress,
+  defaultPosition,
+} from '../hooks/useLocation.js';
 
 export default function LocationProvider({ children }) {
   const [myLocation, setMyLocation] = useLocalStorage({
@@ -90,8 +79,4 @@ export default function LocationProvider({ children }) {
       {children}
     </LocationContext.Provider>
   );
-}
-
-export function useLocation() {
-  return useContext(LocationContext);
 }

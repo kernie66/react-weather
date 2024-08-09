@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useLocation } from '../contexts/LocationProvider.jsx';
 import { useCallback, useMemo } from 'react';
 import queryPersister from '../helpers/queryPersister.js';
 import dayjs from 'dayjs';
 import { inRange, isInt } from 'radash';
+import useLocation from '../hooks/useLocation.js';
 
 const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;

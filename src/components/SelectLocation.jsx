@@ -2,19 +2,18 @@ import { TbHomeCheck } from 'react-icons/tb';
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Button, Group, Modal, Text, rem } from '@mantine/core';
-import {
-  defaultAddress,
-  defaultPosition,
-  useLocation,
-} from '../contexts/LocationProvider';
 import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
+import useLocation, {
+  defaultAddress,
+  defaultPosition,
+} from '../hooks/useLocation.js';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 export default function SelectLocation({ modal, closeModal }) {
   const { setLocation, getLocation } = useLocation();

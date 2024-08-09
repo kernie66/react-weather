@@ -5,13 +5,13 @@ import {
   Popover,
   Text,
 } from '@mantine/core';
-import { useLocation } from '../contexts/LocationProvider.jsx';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import { useEffect, useState } from 'react';
 import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useClickOutside, useForceUpdate } from '@mantine/hooks';
 import classes from '../css/Text.module.css';
+import useLocation from '../hooks/useLocation.js';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 export default function SelectHistoryLocation({
   popover,

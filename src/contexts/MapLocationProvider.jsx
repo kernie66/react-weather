@@ -1,8 +1,7 @@
 import { useSetState } from '@mantine/hooks';
-import { createContext, useContext, useEffect, useMemo } from 'react';
-import { useLocation } from './LocationProvider.jsx';
-
-const MapLocationContext = createContext();
+import { useEffect, useMemo } from 'react';
+import { MapLocationContext } from './Contexts.js';
+import useLocation from '../hooks/useLocation.js';
 
 export default function MapLocationProvider({ children }) {
   const { getLocation } = useLocation();
@@ -33,8 +32,4 @@ export default function MapLocationProvider({ children }) {
       {children}
     </MapLocationContext.Provider>
   );
-}
-
-export function useMapLocation() {
-  return useContext(MapLocationContext);
 }

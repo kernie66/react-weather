@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from '../contexts/LocationProvider';
+import useLocation from '../hooks/useLocation.js';
 
 export default function CurrentPosition() {
   const { setPosition } = useLocation();

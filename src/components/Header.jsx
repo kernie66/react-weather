@@ -3,13 +3,13 @@ import SelectLocation from './SelectLocation';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, rem, Text } from '@mantine/core';
 import { useDisclosure, useViewportSize } from '@mantine/hooks';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import classes from '../css/Text.module.css';
-import { useLocation } from '../contexts/LocationProvider.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { showNotification } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
+import useLocation from '../hooks/useLocation.js';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;

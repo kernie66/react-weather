@@ -7,8 +7,8 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete';
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import { title } from 'radash';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 export default function SearchAddress({
   addressOpened,

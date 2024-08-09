@@ -7,8 +7,8 @@ import SelectOnMap from './SelectOnMap';
 import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
 import { title } from 'radash';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;

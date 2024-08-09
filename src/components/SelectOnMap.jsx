@@ -1,5 +1,5 @@
 import { MarkerF } from '@react-google-maps/api';
-import { useMapLocation } from '../contexts/MapLocationProvider.jsx';
+import useMapLocation from '../hooks/useMapLocation.js';
 
 export default function SelectOnMap() {
   const { getMapLocation } = useMapLocation();
