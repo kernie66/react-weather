@@ -12,7 +12,6 @@ const formatSunTime = (sunTime) => {
 };
 
 const formatDiff = (secondsDiff) => {
-  console.log('Diff:', secondsDiff);
   if (isNumber(secondsDiff)) {
     const absSecondsDiff = Math.abs(secondsDiff);
     if (absSecondsDiff < 10) {
