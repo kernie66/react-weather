@@ -16,7 +16,7 @@ export const defaultPosition = {
 };
 export const defaultAddress = 'Rotebro, Sollentuna, Sverige';
 
-export const LocationContext = createContext();
+const LocationContext = createContext();
 
 export default function LocationProvider({ children }) {
   const [myLocation, setMyLocation] = useLocalStorage({

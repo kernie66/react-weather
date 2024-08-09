@@ -2,7 +2,7 @@ import { useSetState } from '@mantine/hooks';
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useLocation } from './LocationProvider.jsx';
 
-export const LocationContext = createContext();
+const MapLocationContext = createContext();
 
 export default function MapLocationProvider({ children }) {
   const { getLocation } = useLocation();
@@ -29,12 +29,12 @@ export default function MapLocationProvider({ children }) {
   }, [setMapLocation, getMapLocation]);
 
   return (
-    <LocationContext.Provider value={value}>
+    <MapLocationContext.Provider value={value}>
       {children}
-    </LocationContext.Provider>
+    </MapLocationContext.Provider>
   );
 }
 
 export function useMapLocation() {
-  return useContext(LocationContext);
+  return useContext(MapLocationContext);
 }
