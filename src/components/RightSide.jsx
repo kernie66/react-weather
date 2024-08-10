@@ -1,8 +1,11 @@
 import { Divider, Group, Stack, Text } from '@mantine/core';
 import { useWeatherData } from '../utils/weatherQueries.js';
 import { useEffect, useState } from 'react';
+import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import classes from '../css/Text.module.css';
 
 export default function RightSide() {
+  const { weatherTheme } = useWeatherTheme();
   const { data: weatherData } = useWeatherData();
   const [windGust, setWindGust] = useState(0);
 
@@ -24,33 +27,63 @@ export default function RightSide() {
     <Stack h="100%" justify="space-around" gap="md">
       <Stack gap={4}>
         <Group justify="flex-end">
-          <Text className="outline-sm">Molntäcke</Text>
+          <Text
+            fz={18}
+            c="indigo.1"
+            className={classes.outlineSingle}
+          >
+            Molntäcke
+          </Text>
         </Group>
         <Divider />
         <Group justify="flex-end">
-          <Text className="outline-md">
+          <Text
+            fz={24}
+            c={weatherTheme.infoColor}
+            className={classes.outlineSingle}
+          >
             {weatherData?.current.clouds}%
           </Text>
         </Group>
       </Stack>
       <Stack gap={4}>
         <Group justify="flex-end">
-          <Text className="outline-sm">Känns som</Text>
+          <Text
+            fz={18}
+            c="indigo.1"
+            className={classes.outlineSingle}
+          >
+            Känns som
+          </Text>
         </Group>
         <Divider />
         <Group justify="flex-end">
-          <Text className="outline-md">
+          <Text
+            fz={24}
+            c={weatherTheme.infoColor}
+            className={classes.outlineSingle}
+          >
             {weatherData?.current.feels_like.toFixed(1)}&deg;C
           </Text>
         </Group>
       </Stack>
       <Stack gap={4}>
         <Group justify="flex-end">
-          <Text className="outline-sm">Vindbyar</Text>
+          <Text
+            fz={18}
+            c="indigo.1"
+            className={classes.outlineSingle}
+          >
+            Vindbyar
+          </Text>
         </Group>
         <Divider />
         <Group justify="flex-end">
-          <Text className="outline-md">
+          <Text
+            fz={24}
+            c={weatherTheme.infoColor}
+            className={classes.outlineSingle}
+          >
             {windGust.toFixed(1)} m/s
           </Text>
         </Group>

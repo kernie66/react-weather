@@ -3,18 +3,25 @@ import { Container } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useImageSize } from 'react-image-size';
 import { getWeatherImageUrl } from '../helpers/getImageUrl.js';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
-import { getBackgroundImage } from '../helpers/getBackgroundImage.js';
+import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import { defaultBackgroundImage } from '../helpers/getWeatherTheme.js';
 
 export default function Background({ children }) {
-  const [backgroundImage, setBackgroundImage] = useState('clear_day');
+  const { weatherTheme } = useWeatherTheme();
   const [backgroundSize, setBackgroundSize] = useState('cover');
-  const backgroundImageUrl = getWeatherImageUrl(
-    `${backgroundImage}.jpg`
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState(
+    getWeatherImageUrl(`${defaultBackgroundImage}.jpg`)
   );
   const { width, height } = useViewportSize();
   const [dimensions] = useImageSize(backgroundImageUrl);
-  const { data: currentWeather } = useCurrentWeather();
+
+  useEffect(() => {
+    if (weatherTheme.backgroundImage) {
+      setBackgroundImageUrl(
+        getWeatherImageUrl(`${weatherTheme.backgroundImage}.jpg`)
+      );
+    }
+  }, [weatherTheme.backgroundImage]);
 
   const background = {
     backgroundImage: `url(${backgroundImageUrl})`,
@@ -42,13 +49,6 @@ export default function Background({ children }) {
     }
     setBackgroundSize(newBgSize);
   }, [dimensions, width, height, setBackgroundSize]);
-
-  useEffect(() => {
-    if (currentWeather) {
-      const newBackground = getBackgroundImage(currentWeather);
-      setBackgroundImage(newBackground.image);
-    }
-  }, [currentWeather]);
 
   return (
     <Container fluid style={background}>

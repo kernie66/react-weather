@@ -15,6 +15,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import calendar from 'dayjs/plugin/calendar.js';
 import MapLocationProvider from './contexts/MapLocationProvider.jsx';
 import { isEmpty } from 'radash';
+import WeatherThemeProvider from './contexts/WeatherThemeProvider.jsx';
 
 const queryClient = new QueryClient();
 
@@ -52,14 +53,16 @@ export default function App() {
       />
       <ErrorBoundary>
         <LocationProvider>
-          <Background>
-            <MapLocationProvider>
-              <Header />
-              <ErrorBoundary>
-                <Body />
-              </ErrorBoundary>
-            </MapLocationProvider>
-          </Background>
+          <WeatherThemeProvider>
+            <Background>
+              <MapLocationProvider>
+                <Header />
+                <ErrorBoundary>
+                  <Body />
+                </ErrorBoundary>
+              </MapLocationProvider>
+            </Background>
+          </WeatherThemeProvider>
         </LocationProvider>
       </ErrorBoundary>
     </QueryClientProvider>

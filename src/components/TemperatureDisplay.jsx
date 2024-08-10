@@ -3,10 +3,18 @@ import MinMax from './MinMax';
 import ErrorBoundary from './ErrorBoundary';
 import { Grid } from '@mantine/core';
 import WeatherAlert from './WeatherAlert.jsx';
+import useWeatherTheme from '../hooks/useWeatherTheme.js';
 
 export default function TemperatureDisplay() {
+  const { weatherTheme } = useWeatherTheme();
+
   return (
-    <Grid justify="center" align="center" mt={8} c="orange.4">
+    <Grid
+      justify="center"
+      align="center"
+      mt={8}
+      c={weatherTheme.tempColor}
+    >
       <ErrorBoundary>
         <Grid.Col span="content" miw={64}>
           <WeatherAlert />
