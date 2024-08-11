@@ -43,15 +43,18 @@ export default function LocationProvider({ children }) {
       console.log('History:', history);
       console.log('Location updated:', newLocation);
       setMyLocation(newLocation);
-      const newHistory = replaceOrAppend(
-        history,
-        newLocation,
-        (f) =>
-          f.address?.toLowerCase() ===
-          newLocation.address.toLowerCase()
-      );
-      setHistory(newHistory);
-      console.log('History:', newHistory);
+      // Add to history unless default location
+      if (newLocation.address !== defaultAddress) {
+        const newHistory = replaceOrAppend(
+          history,
+          newLocation,
+          (f) =>
+            f.address?.toLowerCase() ===
+            newLocation.address.toLowerCase()
+        );
+        setHistory(newHistory);
+        console.log('History:', newHistory);
+      }
     },
     [setMyLocation, history, setHistory]
   );
