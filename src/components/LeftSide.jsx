@@ -20,7 +20,7 @@ export default function LeftSide() {
   }, [currentWeather]);
 
   return (
-    <Stack h="100%" justify="space-around" gap="md">
+    <Stack h="100%" justify="space-between" gap="md">
       <SunTimes />
       <Stack gap={4}>
         <Text fz={18} c="indigo.1" className={classes.outlineSingle}>

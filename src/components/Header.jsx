@@ -72,7 +72,7 @@ export default function Header() {
   return (
     <>
       <SelectLocation modal={mapOpened} closeModal={closeMap} />
-      <Group justify="space-between" gap={0}>
+      <Group justify="space-between" gap={0} mb={8}>
         <FullScreenButton />
         <Box w={boxWidth} px={4}>
           <Center>

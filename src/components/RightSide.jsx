@@ -24,7 +24,7 @@ export default function RightSide() {
   }, [weatherData]);
 
   return (
-    <Stack h="100%" justify="space-around" gap="md">
+    <Stack h="100%" justify="space-between" gap="md">
       <Stack gap={4}>
         <Group justify="flex-end">
           <Text

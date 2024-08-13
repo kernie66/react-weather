@@ -52,7 +52,7 @@ export default function Body() {
   }
   return (
     <Container fluid px={8}>
-      <Grid mih={320} mb={20}>
+      <Grid mih={340} mb={20} align="stretch">
         <ErrorBoundary>
           <Grid.Col span="content">
             {isHiddenLeft ? <div /> : <LeftSide />}
@@ -67,6 +67,7 @@ export default function Body() {
               justify="center"
               grow
               gap={{ base: 'md', lg: 'xl' }}
+              py={8}
             >
               <ErrorBoundary>
                 <FlipDisplay />
