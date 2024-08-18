@@ -1,11 +1,11 @@
 import { Group, Text } from '@mantine/core';
-import MarqueeText from 'react-marquee-text';
 import {
   useDailyWeather,
   useTodaysWeather,
 } from '../utils/weatherQueries.js';
 import classes from '../css/Text.module.css';
 import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import Marquee from 'react-fast-marquee';
 
 export default function SummaryBanner() {
   const { weatherTheme } = useWeatherTheme();
@@ -13,7 +13,7 @@ export default function SummaryBanner() {
   const { data: tomorrow } = useDailyWeather(1);
 
   return (
-    <MarqueeText direction="right" textSpacing="1rem">
+    <Marquee autofill gradient gradientColor="skyblue">
       <Group className={classes.outlineSingle} gap={8} w="125vw">
         <Text c={weatherTheme.infoColor} fz={18}>
           Idag:
@@ -28,6 +28,6 @@ export default function SummaryBanner() {
           {tomorrow.summary}
         </Text>
       </Group>
-    </MarqueeText>
+    </Marquee>
   );
 }
