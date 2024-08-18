@@ -20,8 +20,9 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     server: {
-      //      host: '192.168.1.44',
+      host: true, // '192.168.1.44',
       port: env.PORT,
+      // origin: `http://0.0.0.0:${env.PORT}`,
       strictPort: true,
       fs: {
         cachedChecks: false,
