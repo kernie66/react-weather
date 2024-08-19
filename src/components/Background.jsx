@@ -3,11 +3,12 @@ import { Container } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useImageSize } from 'react-image-size';
 import { getWeatherImageUrl } from '../helpers/getImageUrl.js';
-import useWeatherTheme from '../hooks/useWeatherTheme.js';
 import { defaultBackgroundImage } from '../helpers/getWeatherTheme.js';
+import { useAtomValue } from 'jotai';
+import { backgroundImageState } from '../atoms/weatherThemeStates.js';
 
 export default function Background({ children }) {
-  const { weatherTheme } = useWeatherTheme();
+  const backgroundImage = useAtomValue(backgroundImageState);
   const [backgroundSize, setBackgroundSize] = useState('cover');
   const [backgroundImageUrl, setBackgroundImageUrl] = useState(
     getWeatherImageUrl(`${defaultBackgroundImage}.jpg`)
@@ -16,12 +17,12 @@ export default function Background({ children }) {
   const [dimensions] = useImageSize(backgroundImageUrl);
 
   useEffect(() => {
-    if (weatherTheme.backgroundImage) {
+    if (backgroundImage) {
       setBackgroundImageUrl(
-        getWeatherImageUrl(`${weatherTheme.backgroundImage}.jpg`)
+        getWeatherImageUrl(`${backgroundImage}.jpg`)
       );
     }
-  }, [weatherTheme.backgroundImage]);
+  }, [backgroundImage]);
 
   const background = {
     backgroundImage: `url(${backgroundImageUrl})`,

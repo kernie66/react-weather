@@ -12,10 +12,15 @@ import dayjs from 'dayjs';
 import { capitalize } from 'radash';
 import { getRainInfo } from '../helpers/getRainInfo.js';
 import classes from '../css/Text.module.css';
-import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import { useAtomValue } from 'jotai';
+import {
+  backgroundColorState,
+  infoColorState,
+} from '../atoms/weatherThemeStates';
 
 export default function Forecast({ hourlyWeather, moonPhase }) {
-  const { weatherTheme } = useWeatherTheme();
+  const infoColor = useAtomValue(infoColorState);
+  const backgroundColor = useAtomValue(backgroundColorState);
   const [forecast, setForecast] = useState({
     text: '',
     temp: '',
@@ -56,7 +61,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
 
   return (
     <Paper
-      bg={weatherTheme.backgroundColor}
+      bg={backgroundColor}
       radius="md"
       shadow="lg"
       miw="12vw"
@@ -78,7 +83,7 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
               className={classes.outlineSingle}
               fz={28}
               fw={500}
-              c={weatherTheme.infoColor}
+              c={infoColor}
             >
               {forecast.temp}&deg;C
             </Text>

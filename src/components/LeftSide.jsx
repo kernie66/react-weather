@@ -4,10 +4,11 @@ import SunTimes from './SunTimes.jsx';
 import { Divider, Stack, Text } from '@mantine/core';
 import * as Compass from 'cardinal-direction';
 import classes from '../css/Text.module.css';
-import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import { useAtomValue } from 'jotai';
+import { infoColorState } from '../atoms/weatherThemeStates.js';
 
 export default function LeftSide() {
-  const { weatherTheme } = useWeatherTheme();
+  const infoColor = useAtomValue(infoColorState);
   const { data: currentWeather } = useCurrentWeather();
   const [windDir, setWindDir] = useState('N');
 
@@ -27,11 +28,7 @@ export default function LeftSide() {
           Luftfuktighet
         </Text>
         <Divider />
-        <Text
-          fz={24}
-          c={weatherTheme.infoColor}
-          className={classes.outlineSingle}
-        >
+        <Text fz={24} c={infoColor} className={classes.outlineSingle}>
           {currentWeather?.humidity}%
         </Text>
       </Stack>
@@ -40,18 +37,10 @@ export default function LeftSide() {
           Vind
         </Text>
         <Divider />
-        <Text
-          fz={24}
-          c={weatherTheme.infoColor}
-          className={classes.outlineSingle}
-        >
+        <Text fz={24} c={infoColor} className={classes.outlineSingle}>
           {currentWeather?.wind_speed.toFixed(1)} m/s
         </Text>
-        <Text
-          fz={24}
-          c={weatherTheme.infoColor}
-          className={classes.outlineSingle}
-        >
+        <Text fz={24} c={infoColor} className={classes.outlineSingle}>
           {windDir}
         </Text>
       </Stack>

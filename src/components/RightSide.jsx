@@ -1,11 +1,12 @@
 import { Divider, Group, Stack, Text } from '@mantine/core';
 import { useWeatherData } from '../utils/weatherQueries.js';
 import { useEffect, useState } from 'react';
-import useWeatherTheme from '../hooks/useWeatherTheme.js';
 import classes from '../css/Text.module.css';
+import { useAtomValue } from 'jotai';
+import { infoColorState } from '../atoms/weatherThemeStates.js';
 
 export default function RightSide() {
-  const { weatherTheme } = useWeatherTheme();
+  const infoColor = useAtomValue(infoColorState);
   const { data: weatherData } = useWeatherData();
   const [windGust, setWindGust] = useState(0);
 
@@ -39,7 +40,7 @@ export default function RightSide() {
         <Group justify="flex-end">
           <Text
             fz={24}
-            c={weatherTheme.infoColor}
+            c={infoColor}
             className={classes.outlineSingle}
           >
             {weatherData?.current.clouds}%
@@ -60,7 +61,7 @@ export default function RightSide() {
         <Group justify="flex-end">
           <Text
             fz={24}
-            c={weatherTheme.infoColor}
+            c={infoColor}
             className={classes.outlineSingle}
           >
             {weatherData?.current.feels_like.toFixed(1)}&deg;C
@@ -81,7 +82,7 @@ export default function RightSide() {
         <Group justify="flex-end">
           <Text
             fz={24}
-            c={weatherTheme.infoColor}
+            c={infoColor}
             className={classes.outlineSingle}
           >
             {windGust.toFixed(1)} m/s

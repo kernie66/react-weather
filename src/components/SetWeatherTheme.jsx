@@ -1,0 +1,23 @@
+import { useEffect } from 'react';
+import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { getWeatherTheme } from '../helpers/getWeatherTheme.js';
+import { useSetAtom } from 'jotai';
+import { weatherThemeState } from '../atoms/weatherThemeStates.js';
+import { useLogger } from '@mantine/hooks';
+
+export default function SetWeatherTheme() {
+  const { data: currentWeather } = useCurrentWeather();
+  const setWeatherTheme = useSetAtom(weatherThemeState);
+
+  useLogger('SetWeatherTheme', [{ currentWeather }]);
+
+  useEffect(() => {
+    if (currentWeather) {
+      const newWeatherTheme = getWeatherTheme(currentWeather);
+      console.log('Weather theme:', newWeatherTheme);
+      setWeatherTheme(newWeatherTheme);
+    }
+  }, [currentWeather, setWeatherTheme]);
+
+  return null;
+}

@@ -1,13 +1,14 @@
 import { Group, Image, Text } from '@mantine/core';
 import { getClipArtUrl } from '../helpers/getImageUrl.js';
 import classes from '../css/Text.module.css';
-import useWeatherTheme from '../hooks/useWeatherTheme.js';
+import { useAtomValue } from 'jotai';
+import { infoColorState } from '../atoms/weatherThemeStates.js';
 
 export default function SunIcon({
   isSunset = false,
   sunTime = '00:00',
 }) {
-  const { weatherTheme } = useWeatherTheme();
+  const infoColor = useAtomValue(infoColorState);
 
   const event = isSunset ? 'sunset' : 'sunrise';
   const imageUrl = getClipArtUrl(`${event}-clipart-lg.png`);
@@ -20,7 +21,7 @@ export default function SunIcon({
         ta="right"
         fw={500}
         fz={24}
-        c={weatherTheme.infoColor}
+        c={infoColor}
         className={classes.outlineSingle}
       >
         {sunTime}
