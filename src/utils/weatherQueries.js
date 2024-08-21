@@ -4,7 +4,8 @@ import { useCallback, useMemo } from 'react';
 import queryPersister from '../helpers/queryPersister.js';
 import dayjs from 'dayjs';
 import { inRange, isInt } from 'radash';
-import useLocation from '../hooks/useLocation.js';
+import { useAtomValue } from 'jotai';
+import { currentPositionState } from '../atoms/locationStates.js';
 
 const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;
@@ -13,11 +14,13 @@ const apiURL = `${baseURL}/onecall?exclude=${part}&appid=${apiKey}&units=metric&
 const maxAge = 1000 * 60 * 60 * 24; // 1 day
 
 export const useWeatherData = (select) => {
-  const { getPosition } = useLocation();
+  const currentPosition = useAtomValue(currentPositionState);
 
   const apiFullURL = useMemo(
-    () => apiURL + `&lat=${getPosition.lat}&lon=${getPosition.lng}`,
-    [getPosition]
+    () =>
+      apiURL +
+      `&lat=${currentPosition.lat}&lon=${currentPosition.lng}`,
+    [currentPosition]
   );
 
   const getWeatherData = useCallback(async () => {

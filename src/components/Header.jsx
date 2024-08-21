@@ -8,17 +8,23 @@ import classes from '../css/Text.module.css';
 import { useQueryClient } from '@tanstack/react-query';
 import { showNotification } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
-import useLocation from '../hooks/useLocation.js';
-import useMapLocation from '../hooks/useMapLocation.js';
+import { useAtom, useAtomValue } from 'jotai';
+import {
+  currentLocationState,
+  mapLocationState,
+} from '../atoms/locationStates.js';
+import { isEmpty } from 'radash';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;
 const controlsWidth = 38 * 2;
 
 export default function Header() {
+  const [currentLocation, setCurrentLocation] = useAtom(
+    currentLocationState
+  );
+  const mapLocation = useAtomValue(mapLocationState);
   const { width: viewportWidth } = useViewportSize();
-  const { setLocation, getLocation } = useLocation();
-  const { getMapLocation } = useMapLocation();
   const queryClient = useQueryClient();
   const [mapOpened, { open: openMap, close: closeMap }] =
     useDisclosure(false);
@@ -29,16 +35,18 @@ export default function Header() {
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
 
+  console.log('currentLocation', currentLocation);
+
   useEffect(() => {
     const setPosition = () => {
-      console.log('Address 1:', getMapLocation.address);
-      console.log('Address 2:', getLocation.address);
-      if (getMapLocation.address !== getLocation.address) {
-        setLocation(getMapLocation);
+      console.log('Address old:', currentLocation.address);
+      console.log('Address new:', mapLocation.address);
+      if (mapLocation.address !== currentLocation.address) {
+        setCurrentLocation(mapLocation);
         queryClient.invalidateQueries({ queryKey: ['weatherData'] });
         showNotification({
           title: 'Väderposition uppdaterad',
-          message: getMapLocation.address,
+          message: mapLocation.address,
           color: 'green',
           icon: (
             <TbCheck style={{ width: rem(18), height: rem(18) }} />
@@ -49,13 +57,13 @@ export default function Header() {
     };
 
     // Only update position if changed by history popup on this page
-    if (historyActive) {
+    if (historyActive && !isEmpty(mapLocation)) {
       setPosition();
     }
   }, [
-    getLocation.address,
-    getMapLocation,
-    setLocation,
+    currentLocation.address,
+    mapLocation,
+    setCurrentLocation,
     queryClient,
     historyActive,
   ]);

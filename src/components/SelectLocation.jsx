@@ -9,15 +9,19 @@ import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
-import useLocation, {
+import { useAtom } from 'jotai';
+import {
+  currentLocationState,
   defaultAddress,
   defaultPosition,
-} from '../hooks/useLocation.js';
-import useMapLocation from '../hooks/useMapLocation.js';
+  mapLocationState,
+} from '../atoms/locationStates.js';
 
 export default function SelectLocation({ modal, closeModal }) {
-  const { setLocation, getLocation } = useLocation();
-  const { setMapLocation, getMapLocation } = useMapLocation();
+  const [currentLocation, setCurrentLocation] = useAtom(
+    currentLocationState
+  );
+  const [mapLocation, setMapLocation] = useAtom(mapLocationState);
   const queryClient = useQueryClient();
   const [
     addressInputOpened,
@@ -39,11 +43,11 @@ export default function SelectLocation({ modal, closeModal }) {
   }, [historyOpened, addressInputOpened]);
 
   const selectPosition = () => {
-    setLocation(getMapLocation);
+    setCurrentLocation(mapLocation);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition uppdaterad',
-      message: getMapLocation.address,
+      message: mapLocation.address,
       color: 'green',
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
@@ -52,12 +56,12 @@ export default function SelectLocation({ modal, closeModal }) {
   };
 
   const restorePosition = () => {
-    setMapLocation(getLocation);
+    setMapLocation(currentLocation);
     closeModal();
   };
 
   const setDefaultPosition = () => {
-    setLocation({
+    setCurrentLocation({
       address: defaultAddress,
       position: defaultPosition,
     });

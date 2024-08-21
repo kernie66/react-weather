@@ -3,7 +3,6 @@ import Body from './components/Body';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import './App.css';
-import LocationProvider from './contexts/LocationProvider';
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,7 +12,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/sv';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import calendar from 'dayjs/plugin/calendar.js';
-import MapLocationProvider from './contexts/MapLocationProvider.jsx';
 import { isEmpty } from 'radash';
 import SetWeatherTheme from './components/SetWeatherTheme.jsx';
 
@@ -52,17 +50,13 @@ export default function App() {
         buttonPosition="bottom-left"
       />
       <ErrorBoundary>
-        <LocationProvider>
-          <SetWeatherTheme />
-          <Background>
-            <MapLocationProvider>
-              <Header />
-              <ErrorBoundary>
-                <Body />
-              </ErrorBoundary>
-            </MapLocationProvider>
-          </Background>
-        </LocationProvider>
+        <SetWeatherTheme />
+        <Background>
+          <Header />
+          <ErrorBoundary>
+            <Body />
+          </ErrorBoundary>
+        </Background>
       </ErrorBoundary>
     </QueryClientProvider>
   );

@@ -1,8 +1,9 @@
 import { MarkerF } from '@react-google-maps/api';
-import useMapLocation from '../hooks/useMapLocation.js';
+import { useAtomValue } from 'jotai';
+import { mapLocationState } from '../atoms/locationStates.js';
 
 export default function SelectOnMap() {
-  const { getMapLocation } = useMapLocation();
+  const mapLocation = useAtomValue(mapLocationState);
 
   const clickOnMarker = (ev) => {
     console.log('Marker clicked');
@@ -11,7 +12,7 @@ export default function SelectOnMap() {
   return (
     <>
       <MarkerF
-        position={getMapLocation.position}
+        position={mapLocation.position}
         icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
         onClick={clickOnMarker}
         className="marked-position"

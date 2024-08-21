@@ -8,7 +8,8 @@ import usePlacesAutocomplete, {
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
 import { title } from 'radash';
-import useMapLocation from '../hooks/useMapLocation.js';
+import { useAtom } from 'jotai';
+import { mapLocationState } from '../atoms/locationStates.js';
 
 export default function SearchAddress({
   addressOpened,
@@ -20,7 +21,7 @@ export default function SearchAddress({
     new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
-  const { setMapLocation, getMapLocation } = useMapLocation();
+  const [mapLocation, setMapLocation] = useAtom(mapLocationState);
 
   const {
     // eslint-disable-next-line
@@ -43,13 +44,13 @@ export default function SearchAddress({
 
   useEffect(() => {
     // map.panTo(getPosition);
-    console.log('getMapPosition:', getMapLocation.position);
+    console.log('MapPosition:', mapLocation.position);
     const newLocation = new window.google.maps.LatLng(
-      getMapLocation.position
+      mapLocation.position
     );
     map.panTo(newLocation);
     setLocation(newLocation);
-  }, [map, getMapLocation]);
+  }, [map, mapLocation]);
 
   async function selectionHandler(selection) {
     console.log('selection', selection);

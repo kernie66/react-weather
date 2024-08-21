@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import useLocation from '../hooks/useLocation.js';
+import { useSetAtom } from 'jotai';
+import { currentLocationState } from '../atoms/locationStates.js';
 
 export default function CurrentPosition() {
-  const { setPosition } = useLocation();
+  const setCurrentPosition = useSetAtom(currentLocationState);
   const [locationServiceEnabled, setLocationServiceEnabled] =
     useState(false);
 
@@ -46,7 +47,7 @@ export default function CurrentPosition() {
   function clickHome() {
     const position = getCurrentPosition();
     if (position) {
-      setPosition(position);
+      setCurrentPosition(position);
     }
   }
 

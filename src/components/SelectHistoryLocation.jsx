@@ -10,8 +10,12 @@ import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useClickOutside, useForceUpdate } from '@mantine/hooks';
 import classes from '../css/Text.module.css';
-import useLocation from '../hooks/useLocation.js';
-import useMapLocation from '../hooks/useMapLocation.js';
+import { useAtomValue, useAtom } from 'jotai';
+import {
+  currentLocationState,
+  historyLocationState,
+  mapLocationState,
+} from '../atoms/locationStates.js';
 
 export default function SelectHistoryLocation({
   popover,
@@ -20,8 +24,9 @@ export default function SelectHistoryLocation({
   textClass = classes.historyButton,
   closeOnSelect = false,
 }) {
-  const { getLocation, getHistory } = useLocation();
-  const { setMapLocation, getMapLocation } = useMapLocation();
+  const currentLocation = useAtomValue(currentLocationState);
+  const historyLocations = useAtomValue(historyLocationState);
+  const [mapLocation, setMapLocation] = useAtom(mapLocationState);
   const [historyValue, setHistoryValue] = useState('');
   const [shownLocation, setShownLocation] = useState(false);
   const [target, setTarget] = useState(null);
@@ -40,7 +45,7 @@ export default function SelectHistoryLocation({
 
   const selectHistory = (selection) => {
     const historyLocation = select(
-      getHistory,
+      historyLocations,
       (h) => h,
       (h) => h.address === selection
     );
@@ -52,9 +57,9 @@ export default function SelectHistoryLocation({
   };
 
   useEffect(() => {
-    let newShownLocation = getMapLocation.address;
+    let newShownLocation = mapLocation.address;
     setShownLocation(newShownLocation);
-  }, [getMapLocation]);
+  }, [mapLocation]);
 
   /*
   useEffect(() => {
@@ -64,7 +69,7 @@ export default function SelectHistoryLocation({
 
   const clearHistoryInput = () => {
     setHistoryValue('');
-    setMapLocation(getLocation);
+    setMapLocation(currentLocation);
     console.debug('History input cleared');
   };
 
@@ -104,7 +109,7 @@ export default function SelectHistoryLocation({
         <Autocomplete
           placeholder="Välj plats från historiken"
           value={historyValue}
-          data={getHistory
+          data={historyLocations
             .toReversed()
             .map((history) => history.address)}
           dropdownOpened

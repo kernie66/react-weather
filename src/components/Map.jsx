@@ -8,7 +8,8 @@ import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
 import { title } from 'radash';
-import useMapLocation from '../hooks/useMapLocation.js';
+import { useSetAtom } from 'jotai';
+import { mapLocationState } from '../atoms/locationStates.js';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
@@ -33,7 +34,7 @@ export default memo(function Map({
     libraries,
     language: 'sv',
   });
-  const { setMapLocation } = useMapLocation();
+  const setMapLocation = useSetAtom(mapLocationState);
 
   async function clickOnMap(selection) {
     if (!disableMouseEvents) {
