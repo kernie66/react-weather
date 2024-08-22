@@ -7,7 +7,6 @@ import {
   Text,
 } from '@mantine/core';
 import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
-import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { capitalize } from 'radash';
 import { getRainInfo } from '../helpers/getRainInfo.js';
@@ -18,46 +17,35 @@ import {
   infoColorState,
 } from '../atoms/weatherThemeStates';
 
+const getForecast = (weather) => {
+  const forecastTime = dayjs.unix(weather.dt);
+  let isToday = 'Idag';
+  if (!dayjs().isSame(dayjs.unix(weather.dt), 'day')) {
+    isToday = capitalize(dayjs(forecastTime).format('ddd'));
+  }
+
+  const forecastText = isToday + dayjs(forecastTime).format(' HH:mm');
+
+  const forecastTemp = Math.round(weather.temp);
+
+  return {
+    text: forecastText,
+    temp: forecastTemp,
+  };
+};
+
 export default function Forecast({ hourlyWeather, moonPhase }) {
   const infoColor = useAtomValue(infoColorState);
   const backgroundColor = useAtomValue(backgroundColorState);
-  const [forecast, setForecast] = useState({
-    text: '',
-    temp: '',
-  });
-  const [rainInfo, setRainInfo] = useState(
-    getRainInfo(hourlyWeather)
+
+  const weatherIcon = getWeatherIconUrl(
+    hourlyWeather.weather[0].id,
+    hourlyWeather.weather[0].icon,
+    moonPhase
   );
 
-  const weatherIcon = useMemo(
-    () =>
-      getWeatherIconUrl(
-        hourlyWeather.weather[0].id,
-        hourlyWeather.weather[0].icon,
-        moonPhase
-      ),
-    [hourlyWeather, moonPhase]
-  );
-
-  useEffect(() => {
-    const forecastTime = dayjs.unix(hourlyWeather.dt);
-    let isToday = 'Idag';
-    if (!dayjs().isSame(dayjs.unix(hourlyWeather.dt), 'day')) {
-      isToday = capitalize(dayjs(forecastTime).format('ddd'));
-    }
-
-    const forecastText =
-      isToday + dayjs(forecastTime).format(' HH:mm');
-
-    const forecastTemp = Math.round(hourlyWeather.temp);
-    const forecastRainInfo = getRainInfo(hourlyWeather);
-
-    setForecast({
-      text: forecastText,
-      temp: forecastTemp,
-    });
-    setRainInfo(forecastRainInfo);
-  }, [hourlyWeather]);
+  const forecast = getForecast(hourlyWeather);
+  const forecastRainInfo = getRainInfo(hourlyWeather);
 
   return (
     <Paper
@@ -92,11 +80,11 @@ export default function Forecast({ hourlyWeather, moonPhase }) {
         <Text
           className={classes.outlineSingle}
           fz={18}
-          c={rainInfo.color}
+          c={forecastRainInfo.color}
         >
-          {rainInfo.text}
-          {rainInfo.pop !== '' ? (
-            <Text span>&nbsp;{rainInfo.pop}</Text>
+          {forecastRainInfo.text}
+          {forecastRainInfo.pop !== '' ? (
+            <Text span>&nbsp;{forecastRainInfo.pop}</Text>
           ) : null}
         </Text>
       </Stack>

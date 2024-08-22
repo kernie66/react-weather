@@ -3,18 +3,13 @@ import Forecast from './Forecast';
 import { getForecasts } from '../helpers/getForecasts.js';
 import { Text } from '@mantine/core';
 import { isEmpty } from 'radash';
-import { useEffect, useState } from 'react';
 
 export default function Forecasts() {
   const { data: hourlyWeather } = useHourlyWeather();
-  const [forecasts, setForecasts] = useState([]);
 
-  useEffect(() => {
-    const newForecasts = getForecasts(hourlyWeather);
-    setForecasts(newForecasts);
-  }, [hourlyWeather]);
+  const forecastIndicies = getForecasts(hourlyWeather);
 
-  if (isEmpty(forecasts)) {
+  if (isEmpty(forecastIndicies)) {
     return (
       <Text fz={64} ta="center">
         Ingen väderprognos tillgänglig, är internet anslutet?
@@ -22,7 +17,7 @@ export default function Forecasts() {
     );
   }
 
-  return forecasts.map((index) => (
+  return forecastIndicies.map((index) => (
     <Forecast
       key={index}
       hourlyWeather={hourlyWeather[index]}
