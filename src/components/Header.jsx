@@ -87,7 +87,7 @@ export default function Header() {
             <Text xs="10" className={classes.outlineHeader}>
               <Text
                 span
-                px={8}
+                px={4}
                 maw={titleWidth}
                 className={classes.outlineHeader}
               >

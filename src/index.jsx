@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@pqina/flip/dist/flip.min.css';
-import 'react-marquee-text/dist/styles.css';
 import './index.css';
 import './text.css';
 import './flip.css';

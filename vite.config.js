@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react-swc';
 // import eslint from 'vite-plugin-eslint';
 import eslintPlugin from '@nabla/vite-plugin-eslint';
 import vConsolePlugin from 'vite-plugin-simple-vconsole';
+import jotaiDebugLabel from 'jotai/babel/plugin-debug-label';
+import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -13,7 +15,11 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
     },
     plugins: [
-      react(),
+      react({
+        babel: {
+          plugins: [jotaiDebugLabel, jotaiReactRefresh],
+        },
+      }),
       eslintPlugin(),
       vConsolePlugin({
         enable: true,

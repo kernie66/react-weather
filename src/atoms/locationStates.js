@@ -1,4 +1,4 @@
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithDefault, atomWithStorage } from 'jotai/utils';
 import { atomStorage } from './atomStorage.js';
 import { atom } from 'jotai';
 
@@ -38,4 +38,6 @@ export const historyLocationState = atomWithStorage(
   { getOnInit: true }
 );
 
-export const mapLocationState = atom({});
+export const mapLocationState = atomWithDefault((get) =>
+  get(currentLocationState)
+);
