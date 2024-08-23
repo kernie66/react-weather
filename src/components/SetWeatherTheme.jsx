@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
 import { getWeatherTheme } from '../helpers/getWeatherTheme.js';
 import { useSetAtom } from 'jotai';
@@ -11,7 +11,7 @@ export default function SetWeatherTheme() {
 
   useLogger('SetWeatherTheme', [{ currentWeather }]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (currentWeather) {
       const newWeatherTheme = getWeatherTheme(currentWeather);
       console.log('Weather theme:', newWeatherTheme);

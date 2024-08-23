@@ -13,7 +13,6 @@ import {
   currentLocationState,
   mapLocationState,
 } from '../atoms/locationStates.js';
-import { isEmpty } from 'radash';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;
@@ -30,52 +29,44 @@ export default function Header() {
     useDisclosure(false);
   const [historyOpened, { toggle: toggleHistory }] =
     useDisclosure(false);
-  const [historyActive, setHistoryActive] = useState(false);
+  const [allowHistoryChange, setAllowHistoryChange] = useState(false);
 
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
 
-  console.log('currentLocation', currentLocation);
+  // Allow history to change when page active, disable when map shown
+  useEffect(() => {
+    if (historyOpened && !mapOpened) {
+      setAllowHistoryChange(true);
+    } else {
+      setAllowHistoryChange(false);
+    }
+  }, [historyOpened, mapOpened]);
+
+  console.log('Address old:', currentLocation.address);
+  console.log('Address new:', mapLocation.address);
+  const updateLocation =
+    allowHistoryChange &&
+    mapLocation.address !== currentLocation.address;
 
   useEffect(() => {
     const setPosition = () => {
-      console.log('Address old:', currentLocation.address);
-      console.log('Address new:', mapLocation.address);
-      if (mapLocation.address !== currentLocation.address) {
-        setCurrentLocation(mapLocation);
-        queryClient.invalidateQueries({ queryKey: ['weatherData'] });
-        showNotification({
-          title: 'Väderposition uppdaterad',
-          message: mapLocation.address,
-          color: 'green',
-          icon: (
-            <TbCheck style={{ width: rem(18), height: rem(18) }} />
-          ),
-          autoClose: 5000,
-        });
-      }
+      setCurrentLocation(mapLocation);
+      queryClient.invalidateQueries({ queryKey: ['weatherData'] });
+      showNotification({
+        title: 'Väderposition uppdaterad',
+        message: mapLocation.address,
+        color: 'green',
+        icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
+        autoClose: 5000,
+      });
     };
 
     // Only update position if changed by history popup on this page
-    if (historyActive && !isEmpty(mapLocation)) {
+    if (updateLocation) {
       setPosition();
     }
-  }, [
-    currentLocation.address,
-    mapLocation,
-    setCurrentLocation,
-    queryClient,
-    historyActive,
-  ]);
-
-  // Allow history to change when page active, disable when map shown
-  useEffect(() => {
-    if (historyOpened) {
-      setHistoryActive(true);
-    } else if (mapOpened) {
-      setHistoryActive(false);
-    }
-  }, [historyOpened, mapOpened]);
+  }, [updateLocation, mapLocation, setCurrentLocation, queryClient]);
 
   return (
     <>
