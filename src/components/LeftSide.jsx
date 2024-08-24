@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useCurrentWeather } from '../utils/weatherQueries.js';
 import SunTimes from './SunTimes.jsx';
 import { Divider, Stack, Text } from '@mantine/core';
@@ -10,15 +9,13 @@ import { infoColorState } from '../atoms/weatherThemeStates.js';
 export default function LeftSide() {
   const infoColor = useAtomValue(infoColorState);
   const { data: currentWeather } = useCurrentWeather();
-  const [windDir, setWindDir] = useState('N');
 
-  useEffect(() => {
-    let newWindDir = Compass.cardinalFromDegree(
-      currentWeather?.wind_deg,
-      Compass.CardinalSubset.Intercardinal
-    );
-    setWindDir(newWindDir);
-  }, [currentWeather]);
+  const windDir = Compass.cardinalFromDegree(
+    currentWeather?.wind_deg,
+    Compass.CardinalSubset.Intercardinal
+  );
+
+  const seWindDir = windDir.replaceAll('W', 'V').replaceAll('E', 'Ö');
 
   return (
     <Stack h="100%" justify="space-between" gap="md">
@@ -41,7 +38,7 @@ export default function LeftSide() {
           {currentWeather?.wind_speed.toFixed(1)} m/s
         </Text>
         <Text fz={24} c={infoColor} className={classes.outlineSingle}>
-          {windDir}
+          {seWindDir}
         </Text>
       </Stack>
     </Stack>

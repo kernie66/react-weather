@@ -34,15 +34,6 @@ export default function Header() {
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
 
-  // Allow history to change when page active, disable when map shown
-  useEffect(() => {
-    if (historyOpened && !mapOpened) {
-      setAllowHistoryChange(true);
-    } else {
-      setAllowHistoryChange(false);
-    }
-  }, [historyOpened, mapOpened]);
-
   console.log('Address old:', currentLocation.address);
   console.log('Address new:', mapLocation.address);
   const updateLocation =
@@ -67,6 +58,15 @@ export default function Header() {
       setPosition();
     }
   }, [updateLocation, mapLocation, setCurrentLocation, queryClient]);
+
+  // Allow history to change when page active, disable when map shown
+  useEffect(() => {
+    if (historyOpened && !mapOpened) {
+      setAllowHistoryChange(true);
+    } else {
+      setAllowHistoryChange(false);
+    }
+  }, [historyOpened, mapOpened]);
 
   return (
     <>

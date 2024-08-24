@@ -1,6 +1,5 @@
 import { Divider, Group, Stack, Text } from '@mantine/core';
 import { useWeatherData } from '../utils/weatherQueries.js';
-import { useEffect, useState } from 'react';
 import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
 import { infoColorState } from '../atoms/weatherThemeStates.js';
@@ -8,21 +7,17 @@ import { infoColorState } from '../atoms/weatherThemeStates.js';
 export default function RightSide() {
   const infoColor = useAtomValue(infoColorState);
   const { data: weatherData } = useWeatherData();
-  const [windGust, setWindGust] = useState(0);
 
-  useEffect(() => {
-    let newWindGust = weatherData?.current.wind_speed;
+  let windGust = 0;
 
-    if (weatherData) {
-      if (weatherData.current.wind_gust) {
-        newWindGust = weatherData.current.wind_gust;
-      } else if (weatherData.hourly[0].wind_gust) {
-        newWindGust = weatherData.hourly[0].wind_gust;
-      }
+  if (weatherData) {
+    windGust = weatherData.current.wind_speed;
+    if (weatherData.current.wind_gust) {
+      windGust = weatherData.current.wind_gust;
+    } else if (weatherData.hourly[0].wind_gust) {
+      windGust = weatherData.hourly[0].wind_gust;
     }
-
-    setWindGust(newWindGust);
-  }, [weatherData]);
+  }
 
   return (
     <Stack h="100%" justify="space-between" gap="md">
