@@ -2,20 +2,23 @@ import { TbHomeCheck } from 'react-icons/tb';
 import { GiPositionMarker } from 'react-icons/gi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Button, Group, Modal, Text, rem } from '@mantine/core';
-import Map from './Map';
+// import Map from './Map';
 import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
-import { useAtom } from 'jotai';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import {
   currentLocationState,
   defaultAddress,
   defaultPosition,
   mapLocationState,
 } from '../atoms/locationStates.js';
+import { historyPopoverToggleState } from '../atoms/toggleStates.js';
+
+const Map = lazy(() => import('./Map'));
 
 export default function SelectLocation({ modal, closeModal }) {
   const [currentLocation, setCurrentLocation] = useAtom(
@@ -27,8 +30,7 @@ export default function SelectLocation({ modal, closeModal }) {
     addressInputOpened,
     { open: openAddressInput, close: closeAddressInput },
   ] = useDisclosure(false);
-  const [historyOpened, { toggle: toggleHistory }] =
-    useDisclosure(false);
+  const historyOpened = useAtomValue(historyPopoverToggleState);
   const [disableMouseEvents, setDisableMouseEvents] = useState(false);
 
   useEffect(() => {
@@ -89,10 +91,7 @@ export default function SelectLocation({ modal, closeModal }) {
             <Group>
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
-                <SelectHistoryLocation
-                  popover={historyOpened}
-                  toggle={toggleHistory}
-                />
+                <SelectHistoryLocation />
               </Text>
               <Button
                 variant="outline"
@@ -123,12 +122,14 @@ export default function SelectLocation({ modal, closeModal }) {
           />
         </Modal.Header>
         <Modal.Body>
-          <Map
-            addressOpened={addressInputOpened}
-            openAddress={openAddressInput}
-            closeAddress={closeAddressInput}
-            disableMouseEvents={disableMouseEvents}
-          />
+          <Suspense fallback={<div>Laddar kartan...</div>}>
+            <Map
+              addressOpened={addressInputOpened}
+              openAddress={openAddressInput}
+              closeAddress={closeAddressInput}
+              disableMouseEvents={disableMouseEvents}
+            />
+          </Suspense>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>
