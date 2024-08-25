@@ -5,7 +5,7 @@ import {
 } from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
-import FlipDisplay from './FlipDisplay';
+// import FlipDisplay from './FlipDisplay';
 import Forecasts from './Forecasts';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
@@ -23,6 +23,9 @@ import {
 import UpdatedAt from './UpdatedAt.jsx';
 import { useWeatherData } from '../utils/weatherQueries.js';
 import SummaryBanner from './SummaryBanner.jsx';
+import { lazy, Suspense } from 'react';
+
+const FlipDisplay = lazy(() => import('./FlipDisplay'));
 
 export default function Body() {
   const { isLoading } = useWeatherData();
@@ -52,50 +55,52 @@ export default function Body() {
   }
   return (
     <Container fluid px={8}>
-      <Grid mih={340} mb={20} align="stretch">
-        <ErrorBoundary>
-          <Grid.Col span="content">
-            {isHiddenLeft ? <div /> : <LeftSide />}
-          </Grid.Col>
-        </ErrorBoundary>
-        <Grid.Col span="auto">
-          <Stack align="stretch" justify="flex-end">
-            <ErrorBoundary>
-              <TemperatureDisplay />
-            </ErrorBoundary>
-            <Group
-              justify="center"
-              grow
-              gap={{ base: 'md', lg: 'xl' }}
-              py={8}
-            >
+      <Suspense fallback={<div>Vänta lite...</div>}>
+        <Grid mih={340} mb={20} align="stretch">
+          <ErrorBoundary>
+            <Grid.Col span="content">
+              {isHiddenLeft ? <div /> : <LeftSide />}
+            </Grid.Col>
+          </ErrorBoundary>
+          <Grid.Col span="auto">
+            <Stack align="stretch" justify="flex-end">
               <ErrorBoundary>
-                <FlipDisplay />
-                <CurrentWeather />
+                <TemperatureDisplay />
               </ErrorBoundary>
-            </Group>
-          </Stack>
-        </Grid.Col>
-        <ErrorBoundary>
-          <Grid.Col span="content">
-            {isHiddenRight ? <div /> : <RightSide />}
+              <Group
+                justify="center"
+                grow
+                gap={{ base: 'md', lg: 'xl' }}
+                py={8}
+              >
+                <ErrorBoundary>
+                  <FlipDisplay />
+                  <CurrentWeather />
+                </ErrorBoundary>
+              </Group>
+            </Stack>
           </Grid.Col>
-        </ErrorBoundary>
-      </Grid>
-      <SummaryBanner />
-      <Group justify="center" mih={240}>
-        <ErrorBoundary>
-          <SimpleGrid
-            cols={{ base: 3, sm: 4, md: 6 }}
-            spacing="md"
-            verticalSpacing="lg"
-            w="100%"
-          >
-            <Forecasts />
-          </SimpleGrid>
-        </ErrorBoundary>
-      </Group>
-      <UpdatedAt />
+          <ErrorBoundary>
+            <Grid.Col span="content">
+              {isHiddenRight ? <div /> : <RightSide />}
+            </Grid.Col>
+          </ErrorBoundary>
+        </Grid>
+        <SummaryBanner />
+        <Group justify="center" mih={240}>
+          <ErrorBoundary>
+            <SimpleGrid
+              cols={{ base: 3, sm: 4, md: 6 }}
+              spacing="md"
+              verticalSpacing="lg"
+              w="100%"
+            >
+              <Forecasts />
+            </SimpleGrid>
+          </ErrorBoundary>
+        </Group>
+        <UpdatedAt />
+      </Suspense>
     </Container>
   );
 }

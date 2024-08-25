@@ -13,6 +13,14 @@ export default defineConfig(({ mode }) => {
     base: '/',
     build: {
       outDir: 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ['react', 'react-dom'],
+            axios: ['axios'],
+          },
+        },
+      },
     },
     plugins: [
       react({

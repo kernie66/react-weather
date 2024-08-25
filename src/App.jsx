@@ -1,5 +1,5 @@
 import Background from './components/Background';
-import Body from './components/Body';
+// import Body from './components/Body';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import './App.css';
@@ -14,6 +14,9 @@ import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import calendar from 'dayjs/plugin/calendar.js';
 import { isEmpty } from 'radash';
 import SetWeatherTheme from './components/SetWeatherTheme.jsx';
+import { lazy, Suspense } from 'react';
+
+const Body = lazy(() => import('./components/Body'));
 
 const queryClient = new QueryClient();
 
@@ -54,7 +57,9 @@ export default function App() {
         <Background>
           <Header />
           <ErrorBoundary>
-            <Body />
+            <Suspense fallback={<div>Ett ögonblick...</div>}>
+              <Body />
+            </Suspense>
           </ErrorBoundary>
         </Background>
       </ErrorBoundary>
