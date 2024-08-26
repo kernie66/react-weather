@@ -7,39 +7,27 @@ import { useQueryClient } from '@tanstack/react-query';
 import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
-import { useDisclosure } from '@mantine/hooks';
 import { lazy, Suspense } from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import {
   currentLocationState,
   defaultAddress,
   defaultPosition,
   mapLocationState,
 } from '../atoms/locationStates.js';
+import { mapHistoryToggleState } from '../atoms/toggleStates.js';
 
-const Map = lazy(() => import('./Map'));
+const Map = lazy(() => import('./Map.jsx'));
 
-export default function SelectLocation({ modal, closeModal }) {
-  const [currentLocation, setCurrentLocation] = useAtom(
-    currentLocationState
-  );
+export default function SelectMapLocation({ modal, closeModal }) {
+  const currentLocation = useAtomValue(currentLocationState);
   const [mapLocation, setMapLocation] = useAtom(mapLocationState);
   const queryClient = useQueryClient();
-  const [
-    addressInputOpened,
-    { open: openAddressInput, close: closeAddressInput },
-  ] = useDisclosure(false);
-  const [historyOpened, { toggle: toggleHistory }] =
-    useDisclosure(false);
-
-  let disableMouseEvents = false;
-  if (historyOpened || addressInputOpened) {
-    disableMouseEvents = true;
-  }
-  console.log(disableMouseEvents);
+  const [mapHistoryOpened, toggleMapHistory] = useAtom(
+    mapHistoryToggleState
+  );
 
   const selectPosition = () => {
-    setCurrentLocation(mapLocation);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition uppdaterad',
@@ -57,7 +45,7 @@ export default function SelectLocation({ modal, closeModal }) {
   };
 
   const setDefaultPosition = () => {
-    setCurrentLocation({
+    setMapLocation({
       address: defaultAddress,
       position: defaultPosition,
     });
@@ -86,8 +74,8 @@ export default function SelectLocation({ modal, closeModal }) {
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
                 <SelectHistoryLocation
-                  popover={historyOpened}
-                  toggle={toggleHistory}
+                  popover={mapHistoryOpened}
+                  toggle={toggleMapHistory}
                 />
               </Text>
               <Button
@@ -120,12 +108,7 @@ export default function SelectLocation({ modal, closeModal }) {
         </Modal.Header>
         <Modal.Body>
           <Suspense fallback={<div>Laddar kartan...</div>}>
-            <Map
-              addressOpened={addressInputOpened}
-              openAddress={openAddressInput}
-              closeAddress={closeAddressInput}
-              disableMouseEvents={disableMouseEvents}
-            />
+            <Map />
           </Suspense>
         </Modal.Body>
       </Modal.Content>

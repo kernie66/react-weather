@@ -1,5 +1,5 @@
 import { TbCheck, TbMap2 } from 'react-icons/tb';
-import SelectLocation from './SelectLocation';
+import SelectMapLocation from './SelectMapLocation';
 import FullScreenButton from './FullScreenButton.jsx';
 import { Box, Button, Center, Group, rem, Text } from '@mantine/core';
 import { useDisclosure, useViewportSize } from '@mantine/hooks';
@@ -13,6 +13,7 @@ import {
   currentLocationState,
   mapLocationState,
 } from '../atoms/locationStates.js';
+import { historyToggleState } from '../atoms/toggleStates.js';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;
@@ -27,8 +28,7 @@ export default function Header() {
   const queryClient = useQueryClient();
   const [mapOpened, { open: openMap, close: closeMap }] =
     useDisclosure(false);
-  const [historyOpened, { toggle: toggleHistory }] =
-    useDisclosure(false);
+  const [historyOpened, toggleHistory] = useAtom(historyToggleState);
   const [allowHistoryChange, setAllowHistoryChange] = useState(false);
 
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
@@ -70,7 +70,7 @@ export default function Header() {
 
   return (
     <>
-      <SelectLocation modal={mapOpened} closeModal={closeMap} />
+      <SelectMapLocation modal={mapOpened} closeModal={closeMap} />
       <Group justify="space-between" gap={0} mb={8}>
         <FullScreenButton />
         <Box w={boxWidth} px={4}>

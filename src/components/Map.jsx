@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { getGeocode } from 'use-places-autocomplete';
 import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
@@ -8,8 +8,12 @@ import mapStyles from '../helpers/mapStyles';
 import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
 import { title } from 'radash';
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 import { mapLocationState } from '../atoms/locationStates.js';
+import {
+  mapAddressToggleState,
+  mapHistoryToggleState,
+} from '../atoms/toggleStates.js';
 
 const libraries = ['places'];
 const API_KEY = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
@@ -22,12 +26,7 @@ const mapOptions = {
   mapTypeControl: true,
 };
 
-export default memo(function Map({
-  addressOpened,
-  openAddress,
-  closeAddress,
-  disableMouseEvents = false,
-}) {
+export default memo(function Map() {
   // Loads the map using API KEY
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
@@ -35,6 +34,17 @@ export default memo(function Map({
     language: 'sv',
   });
   const setMapLocation = useSetAtom(mapLocationState);
+  const mapHistoryOpened = useAtomValue(mapHistoryToggleState);
+  const mapAddressOpened = useAtomValue(mapAddressToggleState);
+  const [disableMouseEvents, setDisableMouseEvents] = useState(false);
+
+  useEffect(() => {
+    if (mapHistoryOpened || mapAddressOpened) {
+      setDisableMouseEvents(true);
+    } else {
+      setDisableMouseEvents(false);
+    }
+  }, [mapAddressOpened, mapHistoryOpened]);
 
   async function clickOnMap(selection) {
     if (!disableMouseEvents) {
@@ -81,11 +91,7 @@ export default memo(function Map({
       onClick={clickOnMap}
     >
       <CurrentPosition />
-      <SearchAddress
-        addressOpened={addressOpened}
-        openAddress={openAddress}
-        closeAddress={closeAddress}
-      />
+      <SearchAddress />
       <SelectOnMap />
     </GoogleMap>
   );

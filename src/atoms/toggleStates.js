@@ -10,4 +10,8 @@ export function atomWithToggle(initialValue) {
 
 export const mapModalToggleState = atomWithToggle(false);
 
-export const historyPopoverToggleState = atomWithToggle(false);
+export const historyToggleState = atomWithToggle(false);
+
+export const mapHistoryToggleState = atomWithToggle(false);
+
+export const mapAddressToggleState = atomWithToggle(false);

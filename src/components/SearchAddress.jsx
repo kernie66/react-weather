@@ -10,18 +10,18 @@ import { Autocomplete, CloseButton } from '@mantine/core';
 import { title } from 'radash';
 import { useAtom } from 'jotai';
 import { mapLocationState } from '../atoms/locationStates.js';
+import { mapAddressToggleState } from '../atoms/toggleStates.js';
 
-export default function SearchAddress({
-  addressOpened,
-  openAddress,
-  closeAddress,
-}) {
+export default function SearchAddress() {
   const map = useGoogleMap();
   const [location, setLocation] = useState(
     new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
   const [mapLocation, setMapLocation] = useAtom(mapLocationState);
+  const [addressOpened, toggleAddress] = useAtom(
+    mapAddressToggleState
+  );
 
   const {
     // eslint-disable-next-line
@@ -66,7 +66,7 @@ export default function SearchAddress({
         position: coords,
         address: title(decodeAddress(results[0])),
       });
-      closeAddress();
+      toggleAddress(false);
     }
   }
 
@@ -74,10 +74,10 @@ export default function SearchAddress({
     console.log('value', value);
     if (value.length >= 2) {
       setValue(value);
-      openAddress();
+      toggleAddress(true);
     } else {
       setValue(value, false);
-      closeAddress();
+      toggleAddress(false);
       clearSuggestions();
     }
   };
