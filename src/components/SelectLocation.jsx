@@ -8,7 +8,7 @@ import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import {
   currentLocationState,
@@ -31,18 +31,11 @@ export default function SelectLocation({ modal, closeModal }) {
     { open: openAddressInput, close: closeAddressInput },
   ] = useDisclosure(false);
   const historyOpened = useAtomValue(historyPopoverToggleState);
-  const [disableMouseEvents, setDisableMouseEvents] = useState(false);
 
-  useEffect(() => {
-    let disable = false;
-    if (historyOpened) {
-      disable = true;
-    }
-    if (addressInputOpened) {
-      disable = true;
-    }
-    setDisableMouseEvents(disable);
-  }, [historyOpened, addressInputOpened]);
+  let disableMouseEvents = false;
+  if (historyOpened || addressInputOpened) {
+    disableMouseEvents = true;
+  }
 
   const selectPosition = () => {
     setCurrentLocation(mapLocation);
