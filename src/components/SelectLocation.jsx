@@ -9,14 +9,13 @@ import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { useDisclosure } from '@mantine/hooks';
 import { lazy, Suspense } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import {
   currentLocationState,
   defaultAddress,
   defaultPosition,
   mapLocationState,
 } from '../atoms/locationStates.js';
-import { historyPopoverToggleState } from '../atoms/toggleStates.js';
 
 const Map = lazy(() => import('./Map'));
 
@@ -30,12 +29,14 @@ export default function SelectLocation({ modal, closeModal }) {
     addressInputOpened,
     { open: openAddressInput, close: closeAddressInput },
   ] = useDisclosure(false);
-  const historyOpened = useAtomValue(historyPopoverToggleState);
+  const [historyOpened, { toggle: toggleHistory }] =
+    useDisclosure(false);
 
   let disableMouseEvents = false;
   if (historyOpened || addressInputOpened) {
     disableMouseEvents = true;
   }
+  console.log(disableMouseEvents);
 
   const selectPosition = () => {
     setCurrentLocation(mapLocation);
@@ -84,7 +85,10 @@ export default function SelectLocation({ modal, closeModal }) {
             <Group>
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
-                <SelectHistoryLocation />
+                <SelectHistoryLocation
+                  popover={historyOpened}
+                  toggle={toggleHistory}
+                />
               </Text>
               <Button
                 variant="outline"

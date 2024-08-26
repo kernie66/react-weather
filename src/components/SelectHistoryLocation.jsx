@@ -1,21 +1,10 @@
-import {
-  Autocomplete,
-  Button,
-  CloseButton,
-  Popover,
-  Text,
-} from '@mantine/core';
+import { Button, Popover, Text } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
+import { useAtomValue } from 'jotai';
 import { useState } from 'react';
-import { select } from 'radash';
-import { FiDelete } from 'react-icons/fi';
-import { useClickOutside, useForceUpdate } from '@mantine/hooks';
+import { mapLocationState } from '../atoms/locationStates.js';
 import classes from '../css/Text.module.css';
-import { useAtomValue, useAtom } from 'jotai';
-import {
-  currentLocationState,
-  historyLocationState,
-  mapLocationState,
-} from '../atoms/locationStates.js';
+import HistorySelector from './HistorySelector.jsx';
 
 export default function SelectHistoryLocation({
   popover,
@@ -24,13 +13,9 @@ export default function SelectHistoryLocation({
   textClass = classes.historyButton,
   closeOnSelect = false,
 }) {
-  const currentLocation = useAtomValue(currentLocationState);
-  const historyLocations = useAtomValue(historyLocationState);
-  const [mapLocation, setMapLocation] = useAtom(mapLocationState);
-  const [historyValue, setHistoryValue] = useState('');
+  const mapLocation = useAtomValue(mapLocationState);
   const [target, setTarget] = useState(null);
   const [dropdown, setDropdown] = useState(null);
-  const forceUpdate = useForceUpdate();
 
   const handleClickOutside = () => {
     console.debug('Clicked outside');
@@ -38,34 +23,10 @@ export default function SelectHistoryLocation({
   };
   useClickOutside(handleClickOutside, null, [target, dropdown]);
 
-  const onChangeHandler = (value) => {
-    setHistoryValue(value);
-  };
-
-  const selectHistory = (selection) => {
-    const historyLocation = select(
-      historyLocations,
-      (h) => h,
-      (h) => h.address === selection
-    );
-    setMapLocation(historyLocation[0]);
-    if (closeOnSelect) {
-      forceUpdate();
-      toggle();
-    }
-  };
-
-  const clearHistoryInput = () => {
-    setHistoryValue('');
-    setMapLocation(currentLocation);
-    console.debug('History input cleared');
-  };
-
   return (
     <Popover
       width={300}
       opened={popover}
-      onOpen={() => setHistoryValue('')}
       trapFocus
       position="bottom"
       withArrow
@@ -94,27 +55,9 @@ export default function SelectHistoryLocation({
         </Button>
       </Popover.Target>
       <Popover.Dropdown ref={setDropdown}>
-        <Autocomplete
-          placeholder="Välj plats från historiken"
-          value={historyValue}
-          data={historyLocations
-            .toReversed()
-            .map((history) => history.address)}
-          dropdownOpened
-          data-autofocus
-          selectFirstOptionOnChange
-          onChange={onChangeHandler}
-          onOptionSubmit={selectHistory}
-          comboboxProps={{ withinPortal: false, shadow: 'md' }}
-          rightSection={
-            historyValue !== '' && (
-              <CloseButton
-                icon={<FiDelete size={20} />}
-                onClick={clearHistoryInput}
-                aria-label="Clear value"
-              />
-            )
-          }
+        <HistorySelector
+          toggle={toggle}
+          closeOnSelect={closeOnSelect}
         />
       </Popover.Dropdown>
     </Popover>
