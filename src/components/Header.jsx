@@ -39,6 +39,7 @@ export default function Header() {
   const updateLocation =
     allowHistoryChange &&
     mapLocation.address !== currentLocation.address;
+  console.log('updateLocation', updateLocation);
 
   useEffect(() => {
     const setPosition = () => {

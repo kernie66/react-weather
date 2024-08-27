@@ -8,26 +8,34 @@ import { TbCheck } from 'react-icons/tb';
 import { showNotification } from '@mantine/notifications';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import { lazy, Suspense } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import {
   currentLocationState,
   defaultAddress,
   defaultPosition,
+  historyLocationState,
   mapLocationState,
 } from '../atoms/locationStates.js';
 import { mapHistoryToggleState } from '../atoms/toggleStates.js';
+import { replaceOrAppend } from 'radash';
 
 const Map = lazy(() => import('./Map.jsx'));
 
 export default function SelectMapLocation({ modal, closeModal }) {
-  const currentLocation = useAtomValue(currentLocationState);
+  const [currentLocation, setCurrentLocation] = useAtom(
+    currentLocationState
+  );
   const [mapLocation, setMapLocation] = useAtom(mapLocationState);
+  const [historyLocations, setHistoryLocations] = useAtom(
+    historyLocationState
+  );
   const queryClient = useQueryClient();
   const [mapHistoryOpened, toggleMapHistory] = useAtom(
     mapHistoryToggleState
   );
 
   const selectPosition = () => {
+    setCurrentLocation(mapLocation);
     queryClient.invalidateQueries({ queryKey: ['weatherData'] });
     showNotification({
       title: 'Väderposition uppdaterad',
@@ -36,6 +44,14 @@ export default function SelectMapLocation({ modal, closeModal }) {
       icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
       autoClose: 5000,
     });
+    if (mapLocation.address !== defaultAddress) {
+      const newHistory = replaceOrAppend(
+        historyLocations,
+        mapLocation,
+        (loc) => loc.address === mapLocation.address
+      );
+      setHistoryLocations(newHistory);
+    }
     closeModal();
   };
 
@@ -46,6 +62,10 @@ export default function SelectMapLocation({ modal, closeModal }) {
 
   const setDefaultPosition = () => {
     setMapLocation({
+      address: defaultAddress,
+      position: defaultPosition,
+    });
+    setCurrentLocation({
       address: defaultAddress,
       position: defaultPosition,
     });
