@@ -56,50 +56,52 @@ export default function Body() {
   return (
     <Container fluid px={8}>
       <Suspense fallback={<div>Vänta lite...</div>}>
-        <Grid mih={340} mb={20} align="stretch">
-          <ErrorBoundary>
-            <Grid.Col span="content">
-              {isHiddenLeft ? <div /> : <LeftSide />}
-            </Grid.Col>
-          </ErrorBoundary>
-          <Grid.Col span="auto">
-            <Stack align="stretch" justify="flex-end">
-              <ErrorBoundary>
-                <TemperatureDisplay />
-              </ErrorBoundary>
-              <Group
-                justify="center"
-                grow
-                gap={{ base: 'md', lg: 'xl' }}
-                py={8}
-              >
+        <Stack justify="space-around" mih="90vh" gap="sm">
+          <Grid mih={340} mb={20} align="stretch">
+            <ErrorBoundary>
+              <Grid.Col span="content">
+                {isHiddenLeft ? <div /> : <LeftSide />}
+              </Grid.Col>
+            </ErrorBoundary>
+            <Grid.Col span="auto">
+              <Stack align="stretch" justify="flex-end">
                 <ErrorBoundary>
-                  <FlipDisplay />
-                  <CurrentWeather />
+                  <TemperatureDisplay />
                 </ErrorBoundary>
-              </Group>
-            </Stack>
-          </Grid.Col>
-          <ErrorBoundary>
-            <Grid.Col span="content">
-              {isHiddenRight ? <div /> : <RightSide />}
+                <Group
+                  justify="center"
+                  grow
+                  gap={{ base: 'md', lg: 'xl' }}
+                  py={8}
+                >
+                  <ErrorBoundary>
+                    <FlipDisplay />
+                    <CurrentWeather />
+                  </ErrorBoundary>
+                </Group>
+              </Stack>
             </Grid.Col>
-          </ErrorBoundary>
-        </Grid>
-        <SummaryBanner />
-        <Group justify="center" mih={240}>
-          <ErrorBoundary>
-            <SimpleGrid
-              cols={{ base: 3, sm: 4, md: 6 }}
-              spacing="md"
-              verticalSpacing="lg"
-              w="100%"
-            >
-              <Forecasts />
-            </SimpleGrid>
-          </ErrorBoundary>
-        </Group>
-        <UpdatedAt />
+            <ErrorBoundary>
+              <Grid.Col span="content">
+                {isHiddenRight ? <div /> : <RightSide />}
+              </Grid.Col>
+            </ErrorBoundary>
+          </Grid>
+          <Group justify="center" mih={240}>
+            <ErrorBoundary>
+              <SummaryBanner />
+              <SimpleGrid
+                cols={{ base: 3, sm: 4, md: 6 }}
+                spacing="md"
+                verticalSpacing="lg"
+                w="100%"
+              >
+                <Forecasts />
+              </SimpleGrid>
+              <UpdatedAt />
+            </ErrorBoundary>
+          </Group>
+        </Stack>
       </Suspense>
     </Container>
   );
