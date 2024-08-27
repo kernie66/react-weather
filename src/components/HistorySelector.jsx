@@ -2,7 +2,6 @@ import { Autocomplete, CloseButton } from '@mantine/core';
 import { useState } from 'react';
 import { select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
-import { useForceUpdate } from '@mantine/hooks';
 import { useAtomValue, useSetAtom } from 'jotai';
 import {
   currentLocationState,
@@ -18,7 +17,6 @@ export default function HistorySelector({
   const historyLocations = useAtomValue(historyLocationState);
   const setMapLocation = useSetAtom(mapLocationState);
   const [historyValue, setHistoryValue] = useState('');
-  const forceUpdate = useForceUpdate();
 
   const onChangeHandler = (value) => {
     setHistoryValue(value);
@@ -32,7 +30,6 @@ export default function HistorySelector({
     );
     setMapLocation(historyLocation[0]);
     if (closeOnSelect) {
-      forceUpdate();
       toggle();
     }
   };

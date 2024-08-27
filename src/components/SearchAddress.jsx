@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete';
 import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
-import { title } from 'radash';
+import { title, unique } from 'radash';
 import { useAtom } from 'jotai';
 import { mapLocationState } from '../atoms/locationStates.js';
 import { mapAddressToggleState } from '../atoms/toggleStates.js';
@@ -85,7 +85,10 @@ export default function SearchAddress() {
   useEffect(() => {
     if (data) {
       const newOptions = data.map((option) => option.description);
-      setOptions(newOptions);
+      console.log('newOptions', newOptions);
+      const uniqueOptions = unique(newOptions);
+      console.log('uniqueOptions', uniqueOptions);
+      setOptions(uniqueOptions);
     }
   }, [data]);
 
