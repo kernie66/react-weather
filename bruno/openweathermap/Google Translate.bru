@@ -1,0 +1,31 @@
+meta {
+  name: Google Translate
+  type: http
+  seq: 7
+}
+
+post {
+  url: https://translation.googleapis.com/language/translate/v2?key={{googleApiKey}}
+  body: json
+  auth: none
+}
+
+params:query {
+  key: {{googleApiKey}}
+}
+
+body:json {
+  {
+    "q": [
+      "Testing translation", 
+      "This is a second text"
+    ],
+    "target": "sv"
+  }
+}
+
+body:xml {
+  {
+  q: 
+  }
+}
