@@ -27,7 +27,8 @@ export default function SummaryBanner() {
   );
 
   useEffect(() => {
-    if (today) {
+    if (today?.summary) {
+      console.log('today', today);
       translate(today.summary);
     }
     if (translations) {
@@ -37,7 +38,7 @@ export default function SummaryBanner() {
   }, [today, translate, translations]);
 
   useEffect(() => {
-    if (tomorrow) {
+    if (tomorrow?.summary) {
       translate(tomorrow.summary);
     }
     if (translations) {
