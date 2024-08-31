@@ -17,16 +17,17 @@ export const useTranslation = (targetLanguage = 'sv') => {
         q: textToTranslate,
         target: targetLanguage,
       });
-      return data;
+      console.log('data', data.data.translations);
+      return data.data.translations; // return array of translations
     }
     return false;
   }, [textToTranslate, targetLanguage]);
 
   const translationQuery = useQuery({
-    queryKey: ['translation', textToTranslate, targetLanguage],
+    queryKey: ['translations', textToTranslate, targetLanguage],
     queryFn: getTranslation,
     staleTime: Infinity,
-    gcTime: 1000 * 60 * 15, // 15 minutes
+    gcTime: 1000 * 60 * 60 * 24 * 7, // One week
   });
 
   const translate = (text) => {

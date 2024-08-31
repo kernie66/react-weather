@@ -18,7 +18,7 @@ export default function SummaryBanner() {
   const backgroundColor = useAtomValue(backgroundColorState);
   const { data: today } = useTodaysWeather();
   const { data: tomorrow } = useDailyWeather(1);
-  const [translate, { data: translatedText }] = useTranslation('sv');
+  const [translate, { data: translations }] = useTranslation('sv');
   const [todaySummary, setTodaySummary] = useState(
     'Vänta medan prognosen hämtas'
   );
@@ -30,27 +30,23 @@ export default function SummaryBanner() {
     if (today) {
       translate(today.summary);
     }
-    if (translatedText) {
-      console.log('translatedText', translatedText);
-      setTodaySummary(
-        translatedText.data.translations[0].translatedText
-      );
+    if (translations) {
+      console.log('translatedText', translations);
+      setTodaySummary(translations[0].translatedText);
     }
-  }, [today, translate, translatedText]);
+  }, [today, translate, translations]);
 
   useEffect(() => {
     if (tomorrow) {
       translate(tomorrow.summary);
     }
-    if (translatedText) {
-      console.log('translatedText', translatedText);
-      setTomorrowSummary(
-        translatedText.data.translations[0].translatedText
-      );
+    if (translations) {
+      console.log('translatedText', translations);
+      setTomorrowSummary(translations[0].translatedText);
     }
-  }, [tomorrow, translate, translatedText]);
+  }, [tomorrow, translate, translations]);
 
-  console.log('translatedText', translatedText);
+  console.log('translatedText', translations);
   console.log('todaySummary', todaySummary);
 
   return (
