@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { isEmpty } from 'radash';
-import { useState } from 'react';
 
 const googleApiKey = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
 const googleApiUrl =
@@ -12,7 +11,7 @@ const getTranslation = async ({
   queryKey: [, { texts, language }], // Get the objects of queryKey[1]
 }) => {
   if (isEmpty(texts)) {
-    console.log('No text supplied to translate');
+    console.log('Error: No text supplied to translate');
     throw new Error('No text supplied to translate');
   }
 
@@ -24,25 +23,21 @@ const getTranslation = async ({
 };
 
 export const useTranslation = (defaultLanguage = 'sv') => {
-  const [textToTranslate, setTextToTranslate] = useState();
-  const [targetLanguage, setTargetLanguage] =
-    useState(defaultLanguage);
+  const queryClient = useQueryClient();
 
-  const translationQuery = useQuery({
-    queryKey: [
-      'translations',
-      { texts: textToTranslate, language: targetLanguage },
-    ],
-    queryFn: getTranslation,
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 60 * 24 * 7, // One week
-  });
-
-  const translate = (text, language = defaultLanguage) => {
-    console.log('Text to translate:', text);
-    setTextToTranslate(text);
-    setTargetLanguage(language);
+  const translate = async (text, language = defaultLanguage) => {
+    console.log('Hook text to translate:', text);
+    const translatedTexts = await queryClient.fetchQuery({
+      queryKey: ['translations', { texts: text, language: language }],
+      queryFn: getTranslation,
+      staleTime: Infinity,
+      gcTime: 1000 * 60 * 60 * 24 * 7, // One week
+    });
+    // setTextToTranslate(text);
+    // setTargetLanguage(language);
+    console.log('Hook translatedTexts:', translatedTexts);
+    return translatedTexts;
   };
 
-  return [translate, translationQuery];
+  return translate;
 };

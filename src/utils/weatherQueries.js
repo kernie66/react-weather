@@ -75,6 +75,10 @@ export const useTodaysWeather = () => {
   return useDailyWeather(0);
 };
 
+export const useWeeklyWeather = () => {
+  return useWeatherData((data) => data.daily);
+};
+
 const selectAlertData = (data) => data.alerts;
 
 export const useWeatherAlerts = () => {
