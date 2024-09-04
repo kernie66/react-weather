@@ -40,7 +40,11 @@ export default function SummaryBanner() {
     async function getTranslation(index = 0) {
       const translations = await translate(summaryArray[index].text);
       let newSummaryTexts = summaryTexts;
-      newSummaryTexts[index] = translations[0].translatedText;
+      newSummaryTexts[index] =
+        translations[0].translatedText.replaceAll(
+          ' klarning',
+          ' uppklarnande'
+        );
       console.log('newSummaryTexts', newSummaryTexts);
       setSummaryTexts(newSummaryTexts);
       return true;
@@ -59,46 +63,9 @@ export default function SummaryBanner() {
     console.log('useEffect summaryTexts', summaryTexts);
   }, [summaryTexts]);
 
-  /*
-  useEffect(() => {
-    let mounted = true;
-    let newState = state;
-
-    if (translations) {
-      let newSummaryTexts = summaryTexts;
-      newSummaryTexts[state] = translations[0].translatedText;
-
-      if (state < 1) {
-        newState += 1;
-      } else {
-        newState = null;
-      }
-
-      if (mounted) {
-        setSummaryTexts(newSummaryTexts);
-        setState(newState);
-      }
-    }
-
-    return () => (mounted = false);
-  }, [state, translations, summaryTexts]);
-
-  /*
-  useEffect(() => {
-    if (today?.summary) {
-      console.log('today', today);
-      translate(today.summary);
-    }
-    if (translations) {
-      console.log('translatedText', translations);
-      setTodaySummary(translations[0].translatedText);
-    }
-  }, [today, translate, translations]);
-  */
-
   return (
     <Marquee autofill gradient gradientColor={backgroundColor}>
-      <Group className={classes.outlineSingle} gap={8} w="125vw">
+      <Group className={classes.outlineSingle} gap={8} me="xl">
         <Text c={infoColor} fz={18}>
           Idag:
         </Text>
