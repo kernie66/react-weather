@@ -1,7 +1,7 @@
 import { TbRefresh } from 'react-icons/tb';
 import { TbMenu2 } from 'react-icons/tb';
-import { FaCompress, FaExpand } from 'react-icons/fa';
-import { Button, Menu, rem } from '@mantine/core';
+import { FaCompress } from 'react-icons/fa';
+import { Button, Menu, rem, Text } from '@mantine/core';
 import { useFullscreen } from '@mantine/hooks';
 
 export default function MenuButton() {
@@ -24,29 +24,35 @@ export default function MenuButton() {
           <TbMenu2 />
         </Button>
       </Menu.Target>
-
       <Menu.Dropdown>
         <Menu.Item
           onClick={reload}
           leftSection={
-            <TbRefresh style={{ width: rem(14), height: rem(14) }} />
+            <TbRefresh
+              color="teal"
+              style={{ width: rem(20), height: rem(20) }}
+            />
           }
         >
-          Uppdatera
+          <Text fz={20}>Uppdatera</Text>
         </Menu.Item>
         <Menu.Item
           onClick={toggle}
           leftSection={
             fullscreen ? (
               <FaCompress
-                style={{ width: rem(14), height: rem(14) }}
+                color="teal"
+                style={{ width: rem(20), height: rem(20) }}
               />
             ) : (
-              <FaExpand style={{ width: rem(14), height: rem(14) }} />
+              <FaCompress
+                color="teal"
+                style={{ width: rem(20), height: rem(20) }}
+              />
             )
           }
         >
-          {fullscreen ? 'Återställ' : 'Helskärm'}
+          <Text fz={20}>{fullscreen ? 'Återställ' : 'Helskärm'}</Text>
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
