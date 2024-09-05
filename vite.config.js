@@ -42,5 +42,10 @@ export default defineConfig(({ mode }) => {
         cachedChecks: false,
       },
     },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./vitest.setup.ts'],
+    },
   };
 });

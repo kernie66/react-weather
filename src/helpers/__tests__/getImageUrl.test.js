@@ -3,7 +3,7 @@ import {
   getClipArtUrl,
   getWeatherIconUrl,
   getWeatherImageUrl,
-} from '../../src/helpers/getImageUrl.js';
+} from '../getImageUrl.js';
 
 describe('getImageUrl', () => {
   it('creates weather image url from file name', () => {
