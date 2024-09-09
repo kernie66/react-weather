@@ -5,7 +5,7 @@ import { useSetAtom } from 'jotai';
 import { weatherThemeState } from '../atoms/weatherThemeStates.js';
 import { useLogger } from '@mantine/hooks';
 
-export default function SetWeatherTheme() {
+export default function SetWeatherTheme({ children }) {
   const { data: currentWeather } = useCurrentWeather();
   const setWeatherTheme = useSetAtom(weatherThemeState);
 
@@ -19,5 +19,5 @@ export default function SetWeatherTheme() {
     }
   }, [currentWeather, setWeatherTheme]);
 
-  return null;
+  return <>{children}</>;
 }

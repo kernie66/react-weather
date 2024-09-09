@@ -53,15 +53,16 @@ export default function App() {
         buttonPosition="bottom-left"
       />
       <ErrorBoundary>
-        <SetWeatherTheme />
-        <Background>
-          <Header />
-          <ErrorBoundary>
-            <Suspense fallback={<div>Ett ögonblick...</div>}>
-              <Body />
-            </Suspense>
-          </ErrorBoundary>
-        </Background>
+        <SetWeatherTheme>
+          <Background>
+            <Header />
+            <ErrorBoundary>
+              <Suspense fallback={<div>Ett ögonblick...</div>}>
+                <Body />
+              </Suspense>
+            </ErrorBoundary>
+          </Background>
+        </SetWeatherTheme>
       </ErrorBoundary>
     </QueryClientProvider>
   );
