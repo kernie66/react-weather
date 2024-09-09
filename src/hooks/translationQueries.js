@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { isEmpty } from 'radash';
 import queryPersister from '../helpers/queryPersister.js';
+import { useCallback } from 'react';
 
 const googleApiKey = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
 const googleApiUrl =
@@ -26,20 +27,26 @@ const getTranslation = async ({
 export const useTranslation = (defaultLanguage = 'sv') => {
   const queryClient = useQueryClient();
 
-  const translate = async (text, language = defaultLanguage) => {
-    console.log('Hook text to translate:', text);
-    const translatedTexts = await queryClient.fetchQuery({
-      queryKey: ['translations', { texts: text, language: language }],
-      queryFn: getTranslation,
-      staleTime: Infinity,
-      gcTime: 1000 * 60 * 60 * 24 * 7, // One week
-      persister: queryPersister(),
-    });
-    // setTextToTranslate(text);
-    // setTargetLanguage(language);
-    console.log('Hook translatedTexts:', translatedTexts);
-    return translatedTexts;
-  };
+  const translate = useCallback(
+    async (text, language = defaultLanguage) => {
+      console.log('Hook text to translate:', text);
+      const translatedTexts = await queryClient.fetchQuery({
+        queryKey: [
+          'translations',
+          { texts: text, language: language },
+        ],
+        queryFn: getTranslation,
+        staleTime: Infinity,
+        gcTime: 1000 * 60 * 60 * 24 * 7, // One week
+        persister: queryPersister(),
+      });
+      // setTextToTranslate(text);
+      // setTargetLanguage(language);
+      console.log('Hook translatedTexts:', translatedTexts);
+      return translatedTexts;
+    },
+    [defaultLanguage, queryClient]
+  );
 
   return translate;
 };

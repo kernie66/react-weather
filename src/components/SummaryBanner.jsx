@@ -28,7 +28,6 @@ export default function SummaryBanner() {
   const backgroundColor = useAtomValue(backgroundColorState);
   const { data: weeklyWeather } = useWeeklyWeather();
   const translate = useTranslation('sv');
-  const [summaryArray, setSummaryArray] = useState([]);
   const [summaryTexts, setSummaryTexts] = useState([
     { text: '' },
     { text: '' },
@@ -37,12 +36,44 @@ export default function SummaryBanner() {
   useLogger('SummaryBanner', [{ summaryTexts }]);
 
   useEffect(() => {
-    const newSummaryArray = prepareSummary(weeklyWeather);
-    console.log('newSummaryArray', newSummaryArray);
-    setSummaryArray(newSummaryArray);
-  }, [weeklyWeather]);
+    async function getTranslation(textToTranslate) {
+      const translation = await translate(textToTranslate);
+      const modifiedTranslation =
+        translation[0].translatedText.replaceAll(
+          ' klarning',
+          ' uppklarnande'
+        );
+      console.log('modifiedTranslation', modifiedTranslation);
+      return modifiedTranslation;
+    }
 
-  useEffect(() => {
+    async function getTranslatedSummary() {
+      if (!isEmpty(summaryArray)) {
+        console.log('Translate start');
+        const firstText = await getTranslation(summaryArray[0].text);
+        const newSummaryArray = [
+          {
+            time: summaryArray[0].time,
+            text: firstText,
+          },
+        ];
+        const secondText = await getTranslation(summaryArray[1].text);
+        newSummaryArray.push({
+          time: summaryArray[0].time,
+          text: secondText,
+        });
+        setSummaryTexts(newSummaryArray);
+        console.log('Translate stop');
+      }
+    }
+
+    const summaryArray = prepareSummary(weeklyWeather);
+
+    console.log('summaryArray', summaryArray);
+    getTranslatedSummary();
+  }, [weeklyWeather, translate]);
+
+  /*  useEffect(() => {
     async function getTranslation(index = 0) {
       const translations = await translate(summaryArray[index].text);
       let newSummaryTexts = summaryTexts;
@@ -66,7 +97,7 @@ export default function SummaryBanner() {
       console.log('Translate stop');
     }
   }, [summaryArray, summaryTexts, translate]);
-
+*/
   useEffect(() => {
     console.log('useEffect summaryTexts', summaryTexts);
   }, [summaryTexts]);
