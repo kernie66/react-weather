@@ -1,5 +1,5 @@
 import { Divider, Group, Stack, Text } from '@mantine/core';
-import { useWeatherData } from '../utils/weatherQueries.js';
+import { useWeatherData } from '../hooks/weatherQueries.js';
 import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
 import { infoColorState } from '../atoms/weatherThemeStates.js';

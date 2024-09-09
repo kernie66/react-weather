@@ -1,4 +1,4 @@
-import { useHourlyWeather } from '../utils/weatherQueries.js';
+import { useHourlyWeather } from '../hooks/weatherQueries.js';
 import Forecast from './Forecast';
 import { getForecasts } from '../helpers/getForecasts.js';
 import { Text } from '@mantine/core';

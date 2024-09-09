@@ -1,6 +1,6 @@
 import { Group, Image, Stack, Text } from '@mantine/core';
 import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { useCurrentWeather } from '../hooks/weatherQueries.js';
 import { capitalize } from 'radash';
 import { getRainInfo } from '../helpers/getRainInfo.js';
 import classes from '../css/Text.module.css';

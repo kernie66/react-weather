@@ -1,7 +1,11 @@
 import { experimental_createPersister } from '@tanstack/query-persist-client-core';
 
-export default function queryPersister(maxAge) {
+export default function queryPersister(
+  maxAge,
+  prefix = 'weather-query'
+) {
   let maxAgeSetting = 1000 * 60 * 60 * 24 * 10; // 10 days default
+
   if (Number(maxAge)) {
     maxAgeSetting = Number(maxAge);
   }
@@ -9,6 +13,6 @@ export default function queryPersister(maxAge) {
   return experimental_createPersister({
     storage: window.localStorage,
     maxAge: maxAgeSetting,
-    prefix: 'weather-query',
+    prefix: prefix,
   });
 }

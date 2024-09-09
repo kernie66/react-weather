@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { isEmpty } from 'radash';
+import queryPersister from '../helpers/queryPersister.js';
 
 const googleApiKey = import.meta.env.VITE_GOOGLEMAPS_API_KEY;
 const googleApiUrl =
@@ -32,6 +33,7 @@ export const useTranslation = (defaultLanguage = 'sv') => {
       queryFn: getTranslation,
       staleTime: Infinity,
       gcTime: 1000 * 60 * 60 * 24 * 7, // One week
+      persister: queryPersister(),
     });
     // setTextToTranslate(text);
     // setTargetLanguage(language);

@@ -21,7 +21,7 @@ import {
   em,
 } from '@mantine/core';
 import UpdatedAt from './UpdatedAt.jsx';
-import { useWeatherData } from '../utils/weatherQueries.js';
+import { useWeatherData } from '../hooks/weatherQueries.js';
 import SummaryBanner from './SummaryBanner.jsx';
 import { lazy, Suspense } from 'react';
 

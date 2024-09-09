@@ -1,6 +1,6 @@
 import { Divider, Stack } from '@mantine/core';
 import TemperatureValue from './TemperatureValue.jsx';
-import { useTodaysWeather } from '../utils/weatherQueries.js';
+import { useTodaysWeather } from '../hooks/weatherQueries.js';
 
 const minMaxFontSize = 48;
 

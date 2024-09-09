@@ -7,13 +7,13 @@ import {
 
 describe('getImageUrl', () => {
   it('creates weather image url from file name', () => {
-    expect(getWeatherImageUrl('testImage')).toContain(
-      '/src/assets/images/weather/testImage'
+    expect(getWeatherImageUrl('clear_day.jpg')).toContain(
+      '/src/assets/images/weather/clear_day.jpg'
     );
   });
   it('creates clipart url from file name', () => {
-    expect(getClipArtUrl('testClipart')).toContain(
-      '/src/assets/images/clipart/testClipart'
+    expect(getClipArtUrl('sunrise-clipart-lg.png')).toContain(
+      '/src/assets/images/clipart/sunrise-clipart-lg.png'
     );
   });
   it('creates clear day weather icon url from params', () => {

@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { useCurrentWeather } from '../hooks/weatherQueries.js';
 import { getWeatherTheme } from '../helpers/getWeatherTheme.js';
 import { useSetAtom } from 'jotai';
 import { weatherThemeState } from '../atoms/weatherThemeStates.js';

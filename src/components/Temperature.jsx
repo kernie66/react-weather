@@ -1,4 +1,4 @@
-import { useCurrentWeather } from '../utils/weatherQueries';
+import { useCurrentWeather } from '../hooks/weatherQueries';
 import TemperatureValue from './TemperatureValue.jsx';
 
 export default function Temperature() {

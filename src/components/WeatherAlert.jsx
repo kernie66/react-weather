@@ -8,7 +8,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure, useId } from '@mantine/hooks';
 import { TbAlertTriangle } from 'react-icons/tb';
-import { useWeatherAlerts } from '../utils/weatherQueries.js';
+import { useWeatherAlerts } from '../hooks/weatherQueries.js';
 import { useEffect, useState } from 'react';
 import {
   hideNotification,

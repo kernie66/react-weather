@@ -7,7 +7,7 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import dayjs from 'dayjs';
-import { useWeatherPosition } from '../utils/weatherQueries.js';
+import { useWeatherPosition } from '../hooks/weatherQueries.js';
 import { getSunTimes } from '../helpers/getSunInfo.js';
 import SunIcon from './SunIcon.jsx';
 import { useDisclosure } from '@mantine/hooks';

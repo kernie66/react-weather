@@ -1,6 +1,6 @@
 import { Group, Text } from '@mantine/core';
 import classes from '../css/Text.module.css';
-import { useCurrentWeather } from '../utils/weatherQueries.js';
+import { useCurrentWeather } from '../hooks/weatherQueries.js';
 import * as dayjs from 'dayjs';
 
 export default function UpdatedAt() {
