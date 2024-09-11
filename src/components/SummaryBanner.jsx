@@ -11,17 +11,7 @@ import { useTranslation } from '../hooks/translationQueries.js';
 import { useEffect, useState } from 'react';
 import { isEmpty } from 'radash';
 import { useLogger } from '@mantine/hooks';
-
-const prepareSummary = (weatherArray, start = 0, number = 2) => {
-  let summaryArray = [];
-  for (let i = start; i < start + number; i++) {
-    summaryArray.push({
-      text: weatherArray[i].summary,
-      time: weatherArray[i].dt,
-    });
-  }
-  return summaryArray;
-};
+import { prepareSummary } from '../helpers/prepareSummary.js';
 
 export default function SummaryBanner() {
   const infoColor = useAtomValue(infoColorState);
@@ -62,23 +52,22 @@ export default function SummaryBanner() {
     }
 
     const summaryArray = prepareSummary(weeklyWeather);
-
     getTranslatedSummary();
   }, [weeklyWeather, translate]);
 
   return (
     <Marquee autofill gradient gradientColor={backgroundColor}>
       <Group className={classes.outlineSingle} gap={8} me="xl">
-        <Text c={infoColor} fz={18}>
+        <Text c={infoColor} fz={20}>
           Idag:
         </Text>
-        <Text c="gray.0" fz={18} pe="xl">
+        <Text c="gray.0" fz={20} pe="xl">
           {summaryTexts[0].text}
         </Text>
-        <Text c={infoColor} fz={18}>
+        <Text c={infoColor} fz={20}>
           Imorgon:
         </Text>
-        <Text c="gray.0" fz={18} pe="xl">
+        <Text c="gray.0" fz={20} pe="xl">
           {summaryTexts[1].text}
         </Text>
       </Group>
