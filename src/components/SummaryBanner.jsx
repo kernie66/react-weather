@@ -49,7 +49,6 @@ export default function SummaryBanner() {
 
     async function getTranslatedSummary() {
       if (!isEmpty(summaryArray)) {
-        console.log('Translate start');
         const firstText = await getTranslation(summaryArray[0].text);
         const newSummaryArray = [
           {
@@ -59,11 +58,10 @@ export default function SummaryBanner() {
         ];
         const secondText = await getTranslation(summaryArray[1].text);
         newSummaryArray.push({
-          time: summaryArray[0].time,
+          time: summaryArray[1].time,
           text: secondText,
         });
         setSummaryTexts(newSummaryArray);
-        console.log('Translate stop');
       }
     }
 
@@ -72,35 +70,6 @@ export default function SummaryBanner() {
     console.log('summaryArray', summaryArray);
     getTranslatedSummary();
   }, [weeklyWeather, translate]);
-
-  /*  useEffect(() => {
-    async function getTranslation(index = 0) {
-      const translations = await translate(summaryArray[index].text);
-      let newSummaryTexts = summaryTexts;
-      newSummaryTexts[index] = {
-        time: summaryArray[index].time,
-        text: translations[0].translatedText.replaceAll(
-          ' klarning',
-          ' uppklarnande'
-        ),
-      };
-      console.log('newSummaryTexts', newSummaryTexts);
-      setSummaryTexts(newSummaryTexts);
-      return true;
-    }
-
-    console.log('summaryArray', summaryArray);
-    if (!isEmpty(summaryArray)) {
-      console.log('Translate start');
-      getTranslation(0);
-      getTranslation(1);
-      console.log('Translate stop');
-    }
-  }, [summaryArray, summaryTexts, translate]);
-*/
-  useEffect(() => {
-    console.log('useEffect summaryTexts', summaryTexts);
-  }, [summaryTexts]);
 
   return (
     <Marquee autofill gradient gradientColor={backgroundColor}>
