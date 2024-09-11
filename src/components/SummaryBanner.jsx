@@ -43,31 +43,26 @@ export default function SummaryBanner() {
           ' klarning',
           ' uppklarnande'
         );
-      console.log('modifiedTranslation', modifiedTranslation);
       return modifiedTranslation;
     }
 
     async function getTranslatedSummary() {
       if (!isEmpty(summaryArray)) {
-        const firstText = await getTranslation(summaryArray[0].text);
-        const newSummaryArray = [
-          {
-            time: summaryArray[0].time,
-            text: firstText,
-          },
-        ];
-        const secondText = await getTranslation(summaryArray[1].text);
-        newSummaryArray.push({
-          time: summaryArray[1].time,
-          text: secondText,
-        });
-        setSummaryTexts(newSummaryArray);
+        const newSummaryTexts = await Promise.all(
+          summaryArray.map(async (summary) => {
+            const translatedText = await getTranslation(summary.text);
+            return {
+              time: summary.time,
+              text: translatedText,
+            };
+          })
+        );
+        setSummaryTexts(newSummaryTexts);
       }
     }
 
     const summaryArray = prepareSummary(weeklyWeather);
 
-    console.log('summaryArray', summaryArray);
     getTranslatedSummary();
   }, [weeklyWeather, translate]);
 
