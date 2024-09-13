@@ -58,18 +58,18 @@ export default function SummaryBanner() {
   return (
     <Marquee autofill gradient gradientColor={backgroundColor}>
       <Group className={classes.outlineSingle} gap={8} me="xl">
-        <Text c={infoColor} fz={20}>
-          {summaryTexts[0].day}
-        </Text>
-        <Text c="gray.0" fz={20} pe="xl">
-          {summaryTexts[0].text}
-        </Text>
-        <Text c={infoColor} fz={20}>
-          Imorgon:
-        </Text>
-        <Text c="gray.0" fz={20} pe="xl">
-          {summaryTexts[1].text}
-        </Text>
+        {summaryTexts.map((summaryText) => {
+          return (
+            <>
+              <Text c={infoColor} fz={20}>
+                {summaryText.day}:
+              </Text>
+              <Text c="gray.0" fz={20} pe="xl">
+                {summaryText.text}
+              </Text>
+            </>
+          );
+        })}
       </Group>
     </Marquee>
   );
