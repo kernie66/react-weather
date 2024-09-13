@@ -8,7 +8,6 @@ import {
 } from '@mantine/core';
 import { getWeatherIconUrl } from '../helpers/getImageUrl.js';
 import dayjs from 'dayjs';
-import { capitalize } from 'radash';
 import { getRainInfo } from '../helpers/getRainInfo.js';
 import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
@@ -16,15 +15,13 @@ import {
   backgroundColorState,
   infoColorState,
 } from '../atoms/weatherThemeStates';
+import { getDayText } from '../helpers/getDay.js';
 
 const getForecast = (weather) => {
   const forecastTime = dayjs.unix(weather.dt);
-  let isToday = 'Idag';
-  if (!dayjs().isSame(dayjs.unix(weather.dt), 'day')) {
-    isToday = capitalize(dayjs(forecastTime).format('ddd'));
-  }
+  const dayText = getDayText(forecastTime);
 
-  const forecastText = isToday + dayjs(forecastTime).format(' HH:mm');
+  const forecastText = dayText + dayjs(forecastTime).format(' HH:mm');
 
   const forecastTemp = Math.round(weather.temp);
 

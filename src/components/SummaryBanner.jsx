@@ -42,7 +42,7 @@ export default function SummaryBanner() {
           summaryArray.map(async (summary) => {
             const translatedText = await getTranslation(summary.text);
             return {
-              time: summary.time,
+              day: summary.day,
               text: translatedText,
             };
           })
@@ -59,7 +59,7 @@ export default function SummaryBanner() {
     <Marquee autofill gradient gradientColor={backgroundColor}>
       <Group className={classes.outlineSingle} gap={8} me="xl">
         <Text c={infoColor} fz={20}>
-          Idag:
+          {summaryTexts[0].day}
         </Text>
         <Text c="gray.0" fz={20} pe="xl">
           {summaryTexts[0].text}

@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import { getDayText } from './getDay.js';
+
 export const prepareSummary = (
   weatherArray,
   start = 0,
@@ -7,7 +10,7 @@ export const prepareSummary = (
   for (let i = start; i < start + number; i++) {
     summaryArray.push({
       text: weatherArray[i].summary,
-      time: weatherArray[i].dt,
+      day: getDayText(dayjs.unix(weatherArray[i].dt)),
     });
   }
   return summaryArray;
