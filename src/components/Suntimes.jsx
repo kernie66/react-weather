@@ -1,17 +1,10 @@
-import {
-  Divider,
-  Group,
-  Modal,
-  Stack,
-  Table,
-  UnstyledButton,
-} from '@mantine/core';
+import { Divider, Stack, UnstyledButton } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useWeatherPosition } from '../hooks/weatherQueries.js';
 import { getSunTimes } from '../helpers/getSunInfo.js';
 import SunIcon from './SunIcon.jsx';
 import { useDisclosure } from '@mantine/hooks';
-import { getSunTimeTable } from '../helpers/getSunTimeTable.js';
+import SunInfoModal from './SunInfoModal.jsx';
 
 export default function SunTimes() {
   const { data: position } = useWeatherPosition();
@@ -23,20 +16,12 @@ export default function SunTimes() {
     position
   );
 
-  const sunTableData = getSunTimeTable(dayjs(), position);
-
   return (
     <>
-      <Modal
-        opened={sunInfoOpened}
-        title="Solinformation"
-        size="content"
-        onClose={closeSunInfo}
-      >
-        <Group justify="center" gap="xl">
-          <Table stickyHeader striped py={4} data={sunTableData} />
-        </Group>
-      </Modal>
+      <SunInfoModal
+        sunInfoOpened={sunInfoOpened}
+        closeSunInfo={closeSunInfo}
+      />
       <UnstyledButton onClick={openSunInfo}>
         <Stack gap={8}>
           <SunIcon
