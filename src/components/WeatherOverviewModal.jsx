@@ -45,7 +45,7 @@ export default function WeatherOverviewModal({
       onClose={closeOverview}
       centered
     >
-      <Text fz={20} c="blue.7">
+      <Text fz={24} c="blue.7">
         {overview}
       </Text>
     </Modal>
