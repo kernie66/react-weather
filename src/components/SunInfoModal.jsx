@@ -1,4 +1,4 @@
-import { Group, Modal, Table, Title } from '@mantine/core';
+import { Group, Modal, Table } from '@mantine/core';
 import { getSunTimeTable } from '../helpers/getSunTimeTable.js';
 import dayjs from 'dayjs';
 import { useWeatherPosition } from '../hooks/weatherQueries.js';
@@ -14,7 +14,6 @@ export default function SunInfoModal({
   return (
     <Modal
       opened={sunInfoOpened}
-      title={<Title order={3}>Solinformation</Title>}
       size="content"
       onClose={closeSunInfo}
       withCloseButton={false}
