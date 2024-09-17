@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { capitalize } from 'radash';
 
-const DAYS = ['Idag', 'Imorgon'];
+export const DAYS = ['Idag', 'Imorgon'];
 
 export const getDayText = (date = dayjs(), tomorrowAsText = true) => {
   if (isToday(date)) {

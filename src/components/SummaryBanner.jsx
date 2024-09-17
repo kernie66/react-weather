@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { isEmpty } from 'radash';
 import { useLogger } from '@mantine/hooks';
 import { prepareSummary } from '../helpers/prepareSummary.js';
+import { DAYS } from '../helpers/getDay.js';
 
 export default function SummaryBanner() {
   const infoColor = useAtomValue(infoColorState);
@@ -26,13 +27,20 @@ export default function SummaryBanner() {
   useLogger('SummaryBanner', [{ summaryTexts }]);
 
   useEffect(() => {
-    async function getTranslation(textToTranslate) {
+    async function getTranslation(textToTranslate, dayConcerned) {
       const translation = await translate(textToTranslate);
-      const modifiedTranslation =
+      let modifiedTranslation =
         translation[0].translatedText.replaceAll(
           ' klarning',
           ' uppklarnande'
         );
+
+      if (dayConcerned === DAYS[1]) {
+        modifiedTranslation = modifiedTranslation.replaceAll(
+          'idag',
+          'imorgon'
+        );
+      }
       return modifiedTranslation;
     }
 
@@ -40,7 +48,10 @@ export default function SummaryBanner() {
       if (!isEmpty(summaryArray)) {
         const newSummaryTexts = await Promise.all(
           summaryArray.map(async (summary) => {
-            const translatedText = await getTranslation(summary.text);
+            const translatedText = await getTranslation(
+              summary.text,
+              summary.day
+            );
             return {
               day: summary.day,
               text: translatedText,
