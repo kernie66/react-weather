@@ -1,4 +1,4 @@
-import { Modal, Text, Title } from '@mantine/core';
+import { Modal, Text } from '@mantine/core';
 import { useWeatherOverview } from '../hooks/weatherQueries.js';
 import { useTranslation } from '../hooks/translationQueries.js';
 import { useEffect, useState } from 'react';
@@ -37,9 +37,9 @@ export default function WeatherOverviewModal({
     <Modal
       opened={overviewOpened}
       title={
-        <Title order={3} c="blue.9">
+        <Text fz={28} fw={500} c="blue.9">
           Väderöversikt för {date}
-        </Title>
+        </Text>
       }
       size="lg"
       onClose={closeOverview}
