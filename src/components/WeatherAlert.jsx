@@ -15,6 +15,12 @@ import {
   showNotification,
 } from '@mantine/notifications';
 import dayjs from 'dayjs';
+import { useTranslation } from '../hooks/translationQueries.js';
+
+const alertTimes = {
+  startTime: dayjs().format('LLLL'),
+  endTime: dayjs().format('LLLL'),
+};
 
 export default function WeatherAlert() {
   const [iconShown, { open: showIcon, close: hideIcon }] =
@@ -23,43 +29,80 @@ export default function WeatherAlert() {
     useDisclosure(false);
   const notificationId = useId('notification-alert');
   const { data: weatherAlerts } = useWeatherAlerts();
-  const [alertTimes, setAlertTimes] = useState({
-    startTime: dayjs().format('LLLL'),
-    endTime: dayjs().format('LLLL'),
-  });
-  const [description, setDescription] = useState('');
+  const [alertEvent, setAlertEvent] = useState('Okänd');
+  const [alertDescription, setAlertDescription] = useState('');
+  const translate = useTranslation('sv');
 
   useEffect(() => {
-    let startTime = dayjs().format('LLLL');
-    let endTime = dayjs().format('LLLL');
-    let newDescription;
+    let modifiedAlertDescription = '';
+    async function getTranslation(textToTranslate) {
+      const translation = await translate(textToTranslate);
+      const modifiedTranslation = translation[0].translatedText
+        .replaceAll(' klarning', ' uppklarnande')
+        .replaceAll('trasiga', 'brutna');
+      return modifiedTranslation;
+    }
+
+    async function getTranslatedAlerts() {
+      const newAlertEventText = await getTranslation(
+        weatherAlerts[0].event
+      );
+      const newAlertDescriptionText = await getTranslation(
+        modifiedAlertDescription
+      );
+      setAlertEvent(newAlertEventText);
+      setAlertDescription(newAlertDescriptionText);
+    }
 
     if (weatherAlerts) {
+      alertTimes.startTime = dayjs
+        .unix(weatherAlerts[0].start)
+        .format('LLLL');
+      alertTimes.endTime = dayjs
+        .unix(weatherAlerts[0].end)
+        .format('LLLL');
       const regex = /; /g;
-      newDescription = weatherAlerts[0].description.replace(
+      modifiedAlertDescription = weatherAlerts[0].description.replace(
         regex,
         '\n'
       );
-      startTime = dayjs.unix(weatherAlerts[0].start).format('LLLL');
-      endTime = dayjs.unix(weatherAlerts[0].end).format('LLLL');
+
+      getTranslatedAlerts();
+
       showIcon();
+    } else {
+      hideIcon();
+      hideNotification(notificationId);
+      closeAlert();
+    }
+  }, [
+    weatherAlerts,
+    showIcon,
+    hideIcon,
+    notificationId,
+    closeAlert,
+    translate,
+  ]);
+
+  useEffect(() => {
+    if (alertEvent !== 'Okänd') {
       showNotification({
         id: notificationId,
-        title: 'Vädervarning: ' + weatherAlerts[0].event,
+        title: 'Vädervarning: ' + alertEvent,
         message: (
           <Stack gap={4}>
             <Text size="sm" c="dodgerblue">
-              Från: {startTime}
+              Från: {alertTimes.startTime}
             </Text>
             <Text size="sm" c="dodgerblue">
-              Till: {endTime}
+              Till: {alertTimes.endTime}
             </Text>
             <Text
               size="sm"
               lineClamp={3}
               style={{ whiteSpace: 'pre-wrap' }}
             >
-              {newDescription}
+              {alertDescription}
             </Text>
           </Stack>
         ),
@@ -72,14 +115,8 @@ export default function WeatherAlert() {
         ),
         autoClose: false,
       });
-    } else {
-      hideIcon();
-      hideNotification(notificationId);
-      closeAlert();
     }
-    setAlertTimes({ startTime, endTime });
-    setDescription(newDescription);
-  }, [weatherAlerts, showIcon, hideIcon, notificationId, closeAlert]);
+  }, [alertDescription, alertEvent, notificationId]);
 
   const openAlertModal = () => {
     hideNotification(notificationId);
@@ -97,7 +134,7 @@ export default function WeatherAlert() {
         <Stack gap="xs">
           <Divider />
           <Text size="md" fw={500} c="dodgerblue">
-            Kategori: {weatherAlerts ? weatherAlerts[0].event : ''}
+            Kategori: {alertEvent}
           </Text>
           <Text size="md" c="dodgerblue">
             Från: {alertTimes.startTime}
@@ -107,7 +144,7 @@ export default function WeatherAlert() {
           </Text>
           <Divider />
           <Text size="md" style={{ whiteSpace: 'pre-wrap' }}>
-            {description}
+            {alertDescription}
           </Text>
           <Divider />
           <Text size="sm" fw={300}>
