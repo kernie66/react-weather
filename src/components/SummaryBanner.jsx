@@ -29,10 +29,11 @@ export default function SummaryBanner() {
   useEffect(() => {
     async function getTranslation(textToTranslate, dayConcerned) {
       const translation = await translate(textToTranslate);
+      const regexp = /(upp)?klarning/gi;
       let modifiedTranslation =
         translation[0].translatedText.replaceAll(
-          ' klarning',
-          ' uppklarnande'
+          regexp,
+          'uppklarnande'
         );
 
       if (dayConcerned === DAYS[1]) {
