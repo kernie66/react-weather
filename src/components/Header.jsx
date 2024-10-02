@@ -72,7 +72,12 @@ export default function Header() {
   return (
     <>
       <SelectMapLocation modal={mapOpened} closeModal={closeMap} />
-      <Group justify="space-between" gap={0} mb={8}>
+      <Group
+        className="weather-header"
+        justify="space-between"
+        gap={0}
+        mb={8}
+      >
         <MenuButton />
         <Box w={boxWidth} px={4}>
           <Center>

@@ -8,7 +8,11 @@ export default function Background({ children }) {
   useLogger('Background', [{ backgroundStyle }]);
 
   return (
-    <Container fluid style={backgroundStyle}>
+    <Container
+      className="weather-background"
+      fluid
+      style={backgroundStyle}
+    >
       {children}
     </Container>
   );

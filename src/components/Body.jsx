@@ -54,23 +54,30 @@ export default function Body() {
     );
   }
   return (
-    <Container fluid px={8}>
+    <Container className="weather-body" fluid px={0}>
       <Suspense fallback={<div>Vänta lite...</div>}>
-        <Stack justify="space-around" mih="90vh" gap="sm">
+        <Stack
+          className="weather-body--stack"
+          justify="space-around"
+          mih="90vh"
+          gap="sm"
+        >
           <Grid mih={340} mb={20} align="stretch">
             <ErrorBoundary>
-              <Grid.Col span="content">
+              <Grid.Col className="left-col" span="content">
                 {isHiddenLeft ? <div /> : <LeftSide />}
               </Grid.Col>
             </ErrorBoundary>
-            <Grid.Col span="auto">
+            <Grid.Col className="middle-col" span="auto">
               <Stack align="stretch" justify="flex-end">
                 <ErrorBoundary>
-                  <TemperatureDisplay />
+                  <TemperatureDisplay className="top-group" />
                 </ErrorBoundary>
                 <Group
+                  className="middle-group"
                   justify="center"
                   grow
+                  wrap="nowrap"
                   gap={{ base: 'md', lg: 'xl' }}
                   py={8}
                 >
@@ -82,12 +89,12 @@ export default function Body() {
               </Stack>
             </Grid.Col>
             <ErrorBoundary>
-              <Grid.Col span="content">
+              <Grid.Col className="right-col" span="content">
                 {isHiddenRight ? <div /> : <RightSide />}
               </Grid.Col>
             </ErrorBoundary>
           </Grid>
-          <Group justify="center" mih={240}>
+          <Group className="bottom-group" justify="center" mih={240}>
             <ErrorBoundary>
               <SummaryBanner />
               <SimpleGrid
