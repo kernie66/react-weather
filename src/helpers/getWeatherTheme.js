@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { inRange } from 'radash';
 import SunCalc from 'suncalc';
 
 // Define general day and night colors
@@ -36,6 +37,13 @@ export const getWeatherTheme = (weather) => {
       } else {
         image = 'cloudy';
       }
+    }
+  }
+  if (weather && inRange(weather.weather[0].id, 300, 600)) {
+    if (weather.clouds >= 50) {
+      image = 'rain_on_glass';
+    } else {
+      image = 'rain_over_sun';
     }
   }
   return {

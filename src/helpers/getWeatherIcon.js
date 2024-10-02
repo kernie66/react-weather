@@ -1,3 +1,5 @@
+import { inRange } from 'radash';
+
 export const getWeatherIcon = (id, icon, moonPhase) => {
   let weatherIconName;
   let condition;
@@ -58,6 +60,10 @@ export const getWeatherIcon = (id, icon, moonPhase) => {
       break;
     case id >= 300:
       condition = 'rain';
+      // Remove sun or moon if enough rain
+      if (inRange(id, 302, 399) || inRange(id, 502, 599)) {
+        timeOfDay = '';
+      }
       break;
     case id >= 210 && id < 230:
       condition = 'thunder';
