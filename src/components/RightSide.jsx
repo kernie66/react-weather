@@ -4,7 +4,7 @@ import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
 import { infoColorState } from '../atoms/weatherThemeStates.js';
 
-export default function RightSide() {
+export default function RightSide({ minHeight = '100%' }) {
   const infoColor = useAtomValue(infoColorState);
   const { data: weatherData } = useWeatherData();
 
@@ -20,7 +20,12 @@ export default function RightSide() {
   }
 
   return (
-    <Stack h="100%" justify="space-between" gap="md">
+    <Stack
+      className="right-side--stack"
+      mih={minHeight}
+      justify="space-between"
+      gap="md"
+    >
       <Stack gap={4}>
         <Group justify="flex-end">
           <Text

@@ -13,7 +13,6 @@ import TemperatureDisplay from './TemperatureDisplay';
 import {
   Center,
   Container,
-  Grid,
   Group,
   Loader,
   SimpleGrid,
@@ -26,6 +25,8 @@ import SummaryBanner from './SummaryBanner.jsx';
 import { lazy, Suspense } from 'react';
 
 const FlipDisplay = lazy(() => import('./FlipDisplay'));
+
+const mainDisplayMinHeight = 340;
 
 export default function Body() {
   const { isLoading } = useWeatherData();
@@ -62,38 +63,44 @@ export default function Body() {
           mih="90vh"
           gap="sm"
         >
-          <Grid mih={340} mb={20} align="stretch">
+          <Group
+            mih={mainDisplayMinHeight}
+            mb={20}
+            justify="space-between"
+          >
             <ErrorBoundary>
-              <Grid.Col className="left-col" span="content">
-                {isHiddenLeft ? <div /> : <LeftSide />}
-              </Grid.Col>
+              {isHiddenLeft ? (
+                <div />
+              ) : (
+                <LeftSide minHeight={mainDisplayMinHeight} />
+              )}
             </ErrorBoundary>
-            <Grid.Col className="middle-col" span="auto">
-              <Stack align="stretch" justify="flex-end">
+            <Stack align="stretch" justify="flex-end">
+              <ErrorBoundary>
+                <TemperatureDisplay className="top-group" />
+              </ErrorBoundary>
+              <Group
+                className="middle-group"
+                justify="center"
+                grow
+                wrap="nowrap"
+                gap={{ base: 'md', lg: 'xl' }}
+                py={8}
+              >
                 <ErrorBoundary>
-                  <TemperatureDisplay className="top-group" />
+                  <FlipDisplay />
+                  <CurrentWeather />
                 </ErrorBoundary>
-                <Group
-                  className="middle-group"
-                  justify="center"
-                  grow
-                  wrap="nowrap"
-                  gap={{ base: 'md', lg: 'xl' }}
-                  py={8}
-                >
-                  <ErrorBoundary>
-                    <FlipDisplay />
-                    <CurrentWeather />
-                  </ErrorBoundary>
-                </Group>
-              </Stack>
-            </Grid.Col>
+              </Group>
+            </Stack>
             <ErrorBoundary>
-              <Grid.Col className="right-col" span="content">
-                {isHiddenRight ? <div /> : <RightSide />}
-              </Grid.Col>
+              {isHiddenRight ? (
+                <div />
+              ) : (
+                <RightSide minHeight={mainDisplayMinHeight} />
+              )}
             </ErrorBoundary>
-          </Grid>
+          </Group>
           <Group className="bottom-group" justify="center" mih={240}>
             <ErrorBoundary>
               <SummaryBanner />
