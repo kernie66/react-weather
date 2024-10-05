@@ -10,7 +10,7 @@ export const getDayText = (date = dayjs(), tomorrowAsText = true) => {
   if (isTomorrow(date) && tomorrowAsText) {
     return DAYS[1];
   }
-  return capitalize(date.format('ddd'));
+  return capitalize(date.format('dddd'));
 };
 
 export const isToday = (date = dayjs()) => {
@@ -23,6 +23,14 @@ export const isToday = (date = dayjs()) => {
 export const isTomorrow = (date = dayjs()) => {
   const tomorrow = dayjs().add(1, 'day');
   if (tomorrow.isSame(date, 'day')) {
+    return true;
+  }
+  return false;
+};
+
+export const isAlmostTomorrow = (hour = '22') => {
+  const now = dayjs();
+  if (now.isAfter(hour, 'hour')) {
     return true;
   }
   return false;

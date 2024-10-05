@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { isEmpty } from 'radash';
 import { useLogger } from '@mantine/hooks';
 import { prepareSummary } from '../helpers/prepareSummary.js';
-import { DAYS } from '../helpers/getDay.js';
+import { DAYS, isAlmostTomorrow } from '../helpers/getDay.js';
 
 export default function SummaryBanner() {
   const infoColor = useAtomValue(infoColorState);
@@ -63,7 +63,8 @@ export default function SummaryBanner() {
       }
     }
 
-    const summaryArray = prepareSummary(weeklyWeather);
+    const startDay = isAlmostTomorrow() ? 1 : 0;
+    const summaryArray = prepareSummary(weeklyWeather, startDay);
     getTranslatedSummary();
   }, [weeklyWeather, translate]);
 
