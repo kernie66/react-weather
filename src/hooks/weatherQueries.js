@@ -11,7 +11,6 @@ const part = 'minutely';
 const baseURL = import.meta.env.VITE_BASE_URL;
 const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 const apiURL = `${baseURL}/onecall?exclude=${part}&appid=${apiKey}&units=metric&lang=sv`;
-const overviewApiURL = `${baseURL}/onecall/overview?appid=${apiKey}&units=metric`;
 const maxAge = 1000 * 60 * 60 * 24; // 1 day
 
 export const useWeatherData = (select) => {
@@ -35,31 +34,6 @@ export const useWeatherData = (select) => {
     select,
     staleTime: 1000 * 60 * 10, // 10 minutes
     refetchInterval: 1000 * 60 * 10, // 10 minutes
-    gcTime: maxAge,
-    persister: queryPersister(maxAge),
-  });
-};
-
-export const useWeatherOverview = (select) => {
-  const currentPosition = useAtomValue(currentPositionState);
-
-  const overviewApiFullURL = useMemo(
-    () =>
-      overviewApiURL +
-      `&lat=${currentPosition.lat}&lon=${currentPosition.lng}`,
-    [currentPosition]
-  );
-
-  const getWeatherOverview = useCallback(async () => {
-    const { data } = await axios.get(overviewApiFullURL);
-    return data;
-  }, [overviewApiFullURL]);
-
-  return useQuery({
-    queryKey: ['weatherOverview'],
-    queryFn: getWeatherOverview,
-    select,
-    staleTime: 1000 * 60 * 30, // 30 minutes
     gcTime: maxAge,
     persister: queryPersister(maxAge),
   });

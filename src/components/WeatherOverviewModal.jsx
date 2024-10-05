@@ -1,7 +1,7 @@
 import { Modal, Text } from '@mantine/core';
-import { useWeatherOverview } from '../hooks/weatherQueries.js';
 import { useTranslation } from '../hooks/translationQueries.js';
 import { useEffect, useState } from 'react';
+import { useWeatherOverview } from '../hooks/weatherOverviewQueries';
 
 export default function WeatherOverviewModal({
   overviewOpened,
