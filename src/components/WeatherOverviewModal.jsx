@@ -11,7 +11,6 @@ export default function WeatherOverviewModal({
   const translate = useTranslation('sv');
   const [date, setDate] = useState('idag');
   const [overview, setOverview] = useState('Vänta på sammanfattning');
-  console.log('weatherOverview', weatherOverview);
 
   useEffect(() => {
     async function getTranslation(textToTranslate) {
@@ -30,7 +29,10 @@ export default function WeatherOverviewModal({
       setDate(weatherOverview.date);
     }
 
-    getTranslatedOverview();
+    console.log('weatherOverview', weatherOverview);
+    if (weatherOverview) {
+      getTranslatedOverview();
+    }
   }, [weatherOverview, translate]);
 
   return (
