@@ -64,9 +64,12 @@ export default function Body() {
           gap="sm"
         >
           <Group
+            className="main-display--group"
             mih={mainDisplayMinHeight}
             mb={20}
+            preventGrowOverflow={false}
             justify="space-between"
+            wrap="nowrap"
           >
             <ErrorBoundary>
               {isHiddenLeft ? (
@@ -75,12 +78,17 @@ export default function Body() {
                 <LeftSide minHeight={mainDisplayMinHeight} />
               )}
             </ErrorBoundary>
-            <Stack align="stretch" justify="flex-end">
+            <Stack
+              className="middle-display--stack"
+              align="stretch"
+              justify="flex-end"
+              miw="65%"
+            >
               <ErrorBoundary>
-                <TemperatureDisplay className="top-group" />
+                <TemperatureDisplay />
               </ErrorBoundary>
               <Group
-                className="middle-group"
+                className="middle-bottom--group"
                 justify="center"
                 grow
                 wrap="nowrap"

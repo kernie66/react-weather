@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Divider,
   Modal,
@@ -152,22 +153,24 @@ export default function WeatherAlert() {
           </Text>
         </Stack>
       </Modal>
-      {iconShown ? (
-        <Button
-          variant="transparent"
-          size="xl"
-          px={0}
-          onClick={openAlertModal}
-        >
-          <TbAlertTriangle
-            style={{
-              width: rem(64),
-              height: rem(64),
-            }}
-            color="orange"
-          />
-        </Button>
-      ) : null}
+      <Box className="weather-alert--box" miw={64}>
+        {iconShown ? (
+          <Button
+            variant="transparent"
+            size="xl"
+            px={0}
+            onClick={openAlertModal}
+          >
+            <TbAlertTriangle
+              style={{
+                width: rem(64),
+                height: rem(64),
+              }}
+              color="orange"
+            />
+          </Button>
+        ) : null}
+      </Box>
     </>
   );
 }

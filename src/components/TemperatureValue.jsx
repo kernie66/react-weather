@@ -37,6 +37,7 @@ export default function TemperatureValue({
       fz={fontSize}
       className={outlineClass}
       ta="right"
+      ms="auto"
     >
       {temperature.integer}
       <Text span fw={fontWeight} style={{ fontSize: '80%' }}>
