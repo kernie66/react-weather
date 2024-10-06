@@ -1,7 +1,13 @@
 import { TbRefresh } from 'react-icons/tb';
 import { TbMenu2 } from 'react-icons/tb';
 import { FaCompress } from 'react-icons/fa';
-import { Button, Menu, rem, Text } from '@mantine/core';
+import {
+  Button,
+  Menu,
+  rem,
+  Text,
+  VisuallyHidden,
+} from '@mantine/core';
 import { useFullscreen } from '@mantine/hooks';
 
 export default function MenuButton() {
@@ -14,14 +20,9 @@ export default function MenuButton() {
   return (
     <Menu position="bottom-start">
       <Menu.Target>
-        <Button
-          px={0}
-          variant="subtle"
-          fz={36}
-          c="teal"
-          className="MenuButton"
-        >
+        <Button px={0} variant="subtle" fz={36} c="teal">
           <TbMenu2 />
+          <VisuallyHidden>MenuButton</VisuallyHidden>
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
