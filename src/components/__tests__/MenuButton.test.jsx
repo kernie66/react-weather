@@ -4,24 +4,23 @@ import { render, screen } from '../../../testing-utils';
 import { userEvent } from '../../../testing-utils/index.js';
 
 describe('MenuButton', () => {
-  it('renders menu button', () => {
+  it('renders menu button and opens the menu', async () => {
     render(<MenuButton />);
 
-    screen.debug();
     const menuButton = screen.getByRole('button', {
       name: /menubutton/i,
     });
     expect(menuButton).toBeInTheDocument();
-  });
 
-  it('opens menu when menu button clicked', async () => {
-    const user = userEvent.setup();
-    render(<MenuButton />);
-
-    await user.click(
+    await userEvent.click(
       screen.getByRole('button', { name: /menubutton/i })
     );
 
-    screen.debug();
+    expect(
+      await screen.findByRole('button', { text: /uppdatera/i })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { text: /helskärm/i })
+    ).toBeInTheDocument();
   });
 });
