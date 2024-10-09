@@ -8,7 +8,7 @@ export const getWeatherIcon = (id, icon, moonPhase) => {
 
   if (icon[2] === 'n') {
     timeOfDay = 'night_';
-    if (moonPhase > 0.4 && moonPhase < 0.6) {
+    if (moonPhase >= 0.4 && moonPhase <= 0.6) {
       moon = 'full_moon_';
     } else {
       moon = 'half_moon_';
@@ -57,12 +57,18 @@ export const getWeatherIcon = (id, icon, moonPhase) => {
     case id >= 600:
     case id === 511:
       condition = 'snow';
+      // Remove sun or moon if enough snow
+      if (inRange(id, 601, 699) || id === 511) {
+        timeOfDay = '';
+        moon = '';
+      }
       break;
     case id >= 300:
       condition = 'rain';
       // Remove sun or moon if enough rain
-      if (inRange(id, 302, 399) || inRange(id, 502, 599)) {
+      if (inRange(id, 301, 399) || inRange(id, 501, 599)) {
         timeOfDay = '';
+        moon = '';
       }
       break;
     case id >= 210 && id < 230:
