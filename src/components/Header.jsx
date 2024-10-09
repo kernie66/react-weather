@@ -1,6 +1,6 @@
-import { TbCheck, TbMap2 } from 'react-icons/tb';
+import { TbCheck } from 'react-icons/tb';
 import SelectMapLocation from './SelectMapLocation';
-import { Box, Button, Center, Group, rem, Text } from '@mantine/core';
+import { Box, Center, Group, rem, Text } from '@mantine/core';
 import { useDisclosure, useViewportSize } from '@mantine/hooks';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import classes from '../css/Text.module.css';
@@ -14,6 +14,7 @@ import {
 } from '../atoms/locationStates.js';
 import { historyToggleState } from '../atoms/toggleStates.js';
 import MenuButton from './MenuButton.jsx';
+import OpenMapButton from './OpenMapButton.jsx';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;
@@ -105,15 +106,7 @@ export default function Header() {
             </Text>
           </Center>
         </Box>
-        <Button
-          variant="subtle"
-          fz={36}
-          px={0}
-          c="crimson"
-          onClick={openMap}
-        >
-          <TbMap2 />
-        </Button>
+        <OpenMapButton openMap={openMap} />
       </Group>
     </>
   );

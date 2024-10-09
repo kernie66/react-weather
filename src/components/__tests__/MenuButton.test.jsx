@@ -8,19 +8,16 @@ describe('MenuButton', () => {
     render(<MenuButton />);
 
     const menuButton = screen.getByRole('button', {
-      name: /menubutton/i,
+      name: /meny/i,
     });
     expect(menuButton).toBeInTheDocument();
 
     await userEvent.click(
-      screen.getByRole('button', { name: /menubutton/i })
+      menuButton
+      // screen.getByRole('button', { name: /meny/i })
     );
 
-    expect(
-      await screen.findByRole('button', { text: /uppdatera/i })
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByRole('button', { text: /helskärm/i })
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/uppdatera/i)).toBeInTheDocument();
+    expect(await screen.findByText(/helskärm/i)).toBeInTheDocument();
   });
 });

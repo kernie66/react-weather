@@ -22,7 +22,7 @@ export default function MenuButton() {
       <Menu.Target>
         <Button px={0} variant="subtle" fz={36} c="teal">
           <TbMenu2 />
-          <VisuallyHidden>MenuButton</VisuallyHidden>
+          <VisuallyHidden>Meny</VisuallyHidden>
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
