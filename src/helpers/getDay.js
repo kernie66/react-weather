@@ -29,8 +29,8 @@ export const isTomorrow = (date = dayjs()) => {
 };
 
 export const isAlmostTomorrow = (hour = '22') => {
-  const now = dayjs();
-  if (now.isAfter(hour, 'hour')) {
+  const now = dayjs().hour();
+  if (now >= hour) {
     return true;
   }
   return false;
