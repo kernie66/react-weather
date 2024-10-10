@@ -67,6 +67,7 @@
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-jest-dom": "^5.4.0",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-7c1344f-20241009",
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-testing-library": "^6.3.0",
     "jsdom": "^25.0.1",
