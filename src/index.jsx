@@ -13,6 +13,20 @@ import { Notifications } from '@mantine/notifications';
 
 const theme = createTheme({});
 
+async function enableMocking() {
+  if (!Boolean(import.meta.env.VITE_ENABLE_MSW)) {
+    return;
+  }
+
+  const { worker } = await import('./mocks/browser.js');
+
+  // `worker.start()` returns a Promise that resolves
+  // once the Service Worker is up and ready to intercept requests.
+  return worker.start();
+}
+
+await enableMocking();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
