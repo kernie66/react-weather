@@ -35,7 +35,6 @@ export default function WeatherAlert() {
   const translate = useTranslation('sv');
 
   useEffect(() => {
-    let modifiedAlertDescription = '';
     async function getTranslation(textToTranslate) {
       const translation = await translate(textToTranslate);
       const modifiedTranslation = translation[0].translatedText
@@ -49,10 +48,13 @@ export default function WeatherAlert() {
         weatherAlerts[0].event
       );
       const newAlertDescriptionText = await getTranslation(
-        modifiedAlertDescription
+        weatherAlerts[0].description
       );
+      const regex = /; /g;
+      const modifiedAlertDescriptionText =
+        newAlertDescriptionText.replace(regex, '\n');
       setAlertEvent(newAlertEventText);
-      setAlertDescription(newAlertDescriptionText);
+      setAlertDescription(modifiedAlertDescriptionText);
     }
 
     if (weatherAlerts) {
@@ -62,11 +64,6 @@ export default function WeatherAlert() {
       alertTimes.endTime = dayjs
         .unix(weatherAlerts[0].end)
         .format('LLLL');
-      const regex = /; /g;
-      modifiedAlertDescription = weatherAlerts[0].description.replace(
-        regex,
-        '\n'
-      );
 
       getTranslatedAlerts();
 
@@ -128,23 +125,27 @@ export default function WeatherAlert() {
     <>
       <Modal
         opened={alertShown}
-        title="Vädervarning"
+        title={
+          <Text fz={24} fw={500} c="blue.9">
+            Vädervarning
+          </Text>
+        }
         onClose={closeAlert}
-        size="lg"
+        size="xl"
       >
         <Stack gap="xs">
           <Divider />
-          <Text size="md" fw={500} c="dodgerblue">
+          <Text fz={20} fw={500} c="blue.7">
             Kategori: {alertEvent}
           </Text>
-          <Text size="md" c="dodgerblue">
+          <Text fz={20} c="blue.7">
             Från: {alertTimes.startTime}
           </Text>
-          <Text size="md" c="dodgerblue">
+          <Text fz={20} c="blue.7">
             Till: {alertTimes.endTime}
           </Text>
           <Divider />
-          <Text size="md" style={{ whiteSpace: 'pre-wrap' }}>
+          <Text fz={20} style={{ whiteSpace: 'pre-wrap' }}>
             {alertDescription}
           </Text>
           <Divider />
