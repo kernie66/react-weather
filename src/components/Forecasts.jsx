@@ -11,7 +11,14 @@ export default function Forecasts() {
 
   if (isEmpty(forecastIndicies)) {
     return (
-      <Text fz={64} ta="center">
+      <Text
+        fz={36}
+        c="orange.8"
+        fw={500}
+        fs="italic"
+        ta="center"
+        w="100vw"
+      >
         Ingen väderprognos tillgänglig, är internet anslutet?
       </Text>
     );
