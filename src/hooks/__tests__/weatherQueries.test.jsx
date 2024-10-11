@@ -8,7 +8,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import weatherDataJson from '../../../bruno/weather_alert_response.json';
 
 describe('weatherQueries', () => {
-  it('should return weather data', async () => {
+  it('should return complete weather data', async () => {
     const queryClient = new QueryClient();
     const wrapper = ({ children }) => (
       <QueryClientProvider client={queryClient}>
@@ -25,5 +25,9 @@ describe('weatherQueries', () => {
     expect(result.current.data.lat).toBe(weatherDataJson.lat);
     expect(result.current.data.lon).toBe(weatherDataJson.lon);
     expect(result.current.data.current).toBeDefined();
+    expect(result.current.data.current.weather).toHaveLength(1);
+    expect(result.current.data.hourly).toHaveLength(48);
+    expect(result.current.data.daily).toHaveLength(8);
+    expect(result.current.data.alerts).toHaveLength(1);
   });
 });
