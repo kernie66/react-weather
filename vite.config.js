@@ -45,7 +45,10 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: ['./testing-utils/vitest.setup.mjs'],
+      setupFiles: [
+        './testing-utils/vitest.setup.mjs',
+        './testing-utils/setupTests.js',
+      ],
     },
   };
 });
