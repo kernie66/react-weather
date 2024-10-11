@@ -5,7 +5,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 export const handlers = [
   http.get(`${baseURL}/onecall`, () => {
-    console.log('weatherDataJson', weatherDataJson);
+    // console.log('weatherDataJson', weatherDataJson);
     return HttpResponse.json(weatherDataJson);
   }),
 ];

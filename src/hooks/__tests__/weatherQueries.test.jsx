@@ -5,6 +5,7 @@ import {
 import { describe } from 'vitest';
 import { useWeatherData } from '../weatherQueries.js';
 import { renderHook, waitFor } from '@testing-library/react';
+import weatherDataJson from '../../../bruno/weather_alert_response.json';
 
 describe('weatherQueries', () => {
   it('should return weather data', async () => {
@@ -19,9 +20,10 @@ describe('weatherQueries', () => {
       wrapper,
     });
 
-    console.log('result', result.current.lat);
-
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.lat).toEqual(undefined);
+    // console.log('result', result.current.data);
+    expect(result.current.data.lat).toBe(weatherDataJson.lat);
+    expect(result.current.data.lon).toBe(weatherDataJson.lon);
+    expect(result.current.data.current).toBeDefined();
   });
 });
