@@ -5,6 +5,7 @@ import {
   Modal,
   Stack,
   Text,
+  VisuallyHidden,
   rem,
 } from '@mantine/core';
 import { useDisclosure, useId } from '@mantine/hooks';
@@ -169,6 +170,7 @@ export default function WeatherAlert() {
               }}
               color="orange"
             />
+            <VisuallyHidden>Vädervarning</VisuallyHidden>
           </Button>
         ) : null}
       </Box>

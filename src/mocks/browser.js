@@ -1,4 +1,4 @@
 import { setupWorker } from 'msw/browser';
-import { handlers } from './handlers.js';
+import { weatherHandlers } from './weatherHandlers.js';
 
-export const worker = setupWorker(...handlers);
+export const worker = setupWorker(...weatherHandlers);

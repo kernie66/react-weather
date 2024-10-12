@@ -37,6 +37,7 @@ describe('weatherQueries', () => {
     expect(result.current.data.hourly).toHaveLength(48);
     expect(result.current.data.daily).toHaveLength(8);
     expect(result.current.data.alerts).toHaveLength(1);
+    expect(result.current.data).not.toHaveProperty('minutely');
   });
 
   it('should return only current weather data', async () => {

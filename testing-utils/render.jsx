@@ -10,12 +10,28 @@ import {
 
 const theme = createTheme({});
 
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+    logger: {
+      log: console.log,
+      warn: console.warn,
+      error: () => {},
+    },
+  });
+
+export const testQueryClient = createTestQueryClient();
+
 export function render(ui) {
-  const queryClient = new QueryClient();
+  console.log('testQueryClient', testQueryClient);
   return testingLibraryRender(<>{ui}</>, {
     wrapper: ({ children }) => (
       <MantineProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={testQueryClient}>
           {children}
         </QueryClientProvider>
       </MantineProvider>

@@ -8,7 +8,7 @@ import {
   infoColorState,
 } from '../atoms/weatherThemeStates.js';
 import { useTranslation } from '../hooks/translationQueries.js';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { isEmpty } from 'radash';
 import { useLogger } from '@mantine/hooks';
 import { prepareSummary } from '../helpers/prepareSummary.js';
@@ -73,14 +73,14 @@ export default function SummaryBanner() {
       <Group className={classes.outlineSingle} gap={8} me="xl">
         {summaryTexts.map((summaryText) => {
           return (
-            <>
+            <Fragment key={summaryText.day}>
               <Text c={infoColor} fz={20}>
                 {summaryText.day}:
               </Text>
               <Text c="gray.0" fz={20} pe="xl">
                 {summaryText.text}
               </Text>
-            </>
+            </Fragment>
           );
         })}
       </Group>
