@@ -15,7 +15,7 @@ const getTemperatureValue = (temp) => {
 
   return {
     integer: newIntegerTemp,
-    decimal: newDecimalTemp,
+    decimal: `.${newDecimalTemp}°C`,
   };
 };
 
@@ -41,7 +41,7 @@ export default function TemperatureValue({
     >
       {temperature.integer}
       <Text span fw={fontWeight} style={{ fontSize: '80%' }}>
-        .{temperature.decimal}&deg;C
+        {temperature.decimal}
       </Text>
     </Text>
   );
