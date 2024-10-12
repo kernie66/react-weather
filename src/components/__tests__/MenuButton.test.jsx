@@ -5,6 +5,8 @@ import { userEvent } from '../../../testing-utils/index.js';
 
 describe('MenuButton', () => {
   it('renders menu button and opens the menu', async () => {
+    const user = userEvent.setup();
+
     render(<MenuButton />);
 
     const menuButton = screen.getByRole('button', {
@@ -12,7 +14,7 @@ describe('MenuButton', () => {
     });
     expect(menuButton).toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       menuButton
       // screen.getByRole('button', { name: /meny/i })
     );

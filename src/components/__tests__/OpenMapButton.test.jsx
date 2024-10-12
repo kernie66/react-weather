@@ -7,6 +7,8 @@ const openMap = vi.fn(() => console.log('Open map button clicked'));
 
 describe('OpenMapButton', () => {
   it('renders open map button and calls the open modal', async () => {
+    const user = userEvent.setup();
+
     render(<OpenMapButton openMap={openMap} />);
 
     const openMapButton = screen.getByRole('button', {
@@ -14,7 +16,7 @@ describe('OpenMapButton', () => {
     });
     expect(openMapButton).toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('button', { name: /öppna karta/i })
     );
 
