@@ -9,8 +9,8 @@ import {
 import { vi } from 'vitest';
 
 const today = dayjs();
-const fakeTodayDate = new Date(2024, 8, 22, 15, 10);
-const fakeTodayDateLate = new Date(2024, 8, 22, 22, 1);
+const fakeTodayDate = new Date('2024-09-22T15:10');
+const fakeTodayDateLate = new Date('2024-09-22T22:01');
 
 describe('getDay', () => {
   beforeEach(() => {

@@ -12,6 +12,5 @@ describe('MinMax', () => {
     expect(await screen.findByText('12')).toBeInTheDocument();
     expect(await screen.findByText(/\.9°C/)).toBeInTheDocument();
     expect(await screen.findByText(/\.0°C/)).toBeInTheDocument();
-    screen.debug();
   });
 });
