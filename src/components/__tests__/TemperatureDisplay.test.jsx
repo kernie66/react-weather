@@ -41,9 +41,10 @@ describe('TemperatureDisplay', () => {
     expect(
       await screen.queryByText(/kategori/i)
     ).not.toBeInTheDocument();
+    expect(await screen.findByText(/regnskur/i)).toBeInTheDocument();
     expect(
-      await screen.queryAllByText(/translated text/i)
-    ).toHaveLength(2);
+      await screen.findByText(/translated text/i)
+    ).toBeInTheDocument();
 
     // Open weather alert modal, should remove notification
     await user.click(alertButton);
@@ -53,9 +54,10 @@ describe('TemperatureDisplay', () => {
     console.log('Notification removed');
     expect(await screen.findByText(/kategori/i)).toBeInTheDocument();
     expect(await screen.findByText(/källa/i)).toBeInTheDocument();
+    expect(await screen.findByText(/regnskur/i)).toBeInTheDocument();
     expect(
-      await screen.queryAllByText(/translated text/i)
-    ).toHaveLength(2);
+      await screen.findByText(/translated text/i)
+    ).toBeInTheDocument();
   });
 
   it('should render the main temperature display area without weather alert', async () => {
