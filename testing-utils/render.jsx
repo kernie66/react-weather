@@ -7,6 +7,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { Notifications } from '@mantine/notifications';
 
 const theme = createTheme({});
 
@@ -27,10 +28,10 @@ const createTestQueryClient = () =>
 export const testQueryClient = createTestQueryClient();
 
 export function render(ui) {
-  console.log('testQueryClient', testQueryClient);
   return testingLibraryRender(<>{ui}</>, {
     wrapper: ({ children }) => (
       <MantineProvider theme={theme}>
+        <Notifications />
         <QueryClientProvider client={testQueryClient}>
           {children}
         </QueryClientProvider>
