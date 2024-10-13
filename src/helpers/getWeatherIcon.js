@@ -1,6 +1,10 @@
 import { inRange } from 'radash';
 
-export const getWeatherIcon = (id, icon, moonPhase) => {
+export const getWeatherIcon = (
+  id = 800,
+  icon = '01d',
+  moonPhase = 0
+) => {
   let weatherIconName;
   let condition;
   let timeOfDay = 'day_';
