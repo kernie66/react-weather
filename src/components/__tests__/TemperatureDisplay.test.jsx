@@ -1,5 +1,10 @@
 import { http, HttpResponse } from 'msw';
-import { render, screen } from '../../../testing-utils';
+import {
+  render,
+  screen,
+  userEvent,
+  waitForElementToBeRemoved,
+} from '../../../testing-utils';
 import { server } from '../../mocks/server.js';
 import TemperatureDisplay from '../TemperatureDisplay.jsx';
 import { expect } from 'vitest';
@@ -11,12 +16,15 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 describe('TemperatureDisplay', () => {
   it('should render the main temperature display area with weather alert', async () => {
+    const user = userEvent.setup();
+
     render(<TemperatureDisplay />);
 
     // Weather alert button
-    expect(
-      await screen.findByRole('button', { name: /vädervarning/i })
-    ).toBeInTheDocument();
+    const alertButton = await screen.findByRole('button', {
+      name: /vädervarning/i,
+    });
+    expect(alertButton).toBeInTheDocument();
 
     // Current temperature
     expect(await screen.findByText('19')).toBeInTheDocument();
@@ -27,13 +35,33 @@ describe('TemperatureDisplay', () => {
     // Min temperature
     expect(await screen.findByText('12')).toBeInTheDocument();
     expect(await screen.findByText(/\.0°C/)).toBeInTheDocument();
+    // Notification
+    expect(await screen.findByRole('alert')).toBeInTheDocument();
+    expect(
+      await screen.queryByText(/kategori/i)
+    ).not.toBeInTheDocument();
+    expect(
+      await screen.queryAllByText(/translated text/i)
+    ).toHaveLength(2);
+
+    // Open weather alert modal, should remove notification
+    await user.click(alertButton);
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText(/vädernotifiering/i)
+    );
+    console.log('Notification removed');
+    expect(await screen.findByText(/kategori/i)).toBeInTheDocument();
+    expect(await screen.findByText(/källa/i)).toBeInTheDocument();
+    expect(
+      await screen.queryAllByText(/translated text/i)
+    ).toHaveLength(2);
   });
 
   it('should render the main temperature display area without weather alert', async () => {
     const weatherDataNoAlert = omit(weatherDataJson, ['alerts']);
     server.use(
       http.get(`${baseURL}/onecall`, () => {
-        console.log('Getting data without alert');
+        console.log('Getting weather data without alert');
         return HttpResponse.json(weatherDataNoAlert);
       })
     );
@@ -50,7 +78,6 @@ describe('TemperatureDisplay', () => {
     // Min temperature
     expect(await screen.findByText('12')).toBeInTheDocument();
     expect(await screen.findByText(/\.0°C/)).toBeInTheDocument();
-
     // No weather alert button
     expect(
       screen.queryByRole('button', { name: /vädervarning/i })

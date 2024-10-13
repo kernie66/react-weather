@@ -5,6 +5,8 @@ import OpenMapButton from '../OpenMapButton.jsx';
 
 const openMap = vi.fn(() => console.log('Open map button clicked'));
 
+afterEach(() => vi.restoreAllMocks());
+
 describe('OpenMapButton', () => {
   it('renders open map button and calls the open modal', async () => {
     const user = userEvent.setup();

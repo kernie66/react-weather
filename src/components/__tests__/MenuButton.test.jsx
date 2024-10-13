@@ -14,10 +14,7 @@ describe('MenuButton', () => {
     });
     expect(menuButton).toBeInTheDocument();
 
-    await user.click(
-      menuButton
-      // screen.getByRole('button', { name: /meny/i })
-    );
+    await user.click(menuButton);
 
     expect(await screen.findByText(/uppdatera/i)).toBeInTheDocument();
     expect(await screen.findByText(/helskärm/i)).toBeInTheDocument();

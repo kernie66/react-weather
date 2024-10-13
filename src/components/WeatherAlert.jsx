@@ -103,6 +103,7 @@ export default function WeatherAlert() {
             >
               {alertDescription}
             </Text>
+            <VisuallyHidden>Vädernotifiering</VisuallyHidden>
           </Stack>
         ),
         color: 'orange',

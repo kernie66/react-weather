@@ -42,7 +42,7 @@ describe('getDay', () => {
     vi.setSystemTime(fakeTodayDate);
     const fakeToday = dayjs();
     const fakeTomorrow = fakeToday.add(1, 'day');
-    expect(getDayText(fakeTomorrow, false)).toBe('Monday');
+    expect(getDayText(fakeTomorrow, false)).toBe('Måndag');
     console.log(dayjs().format('YYYY-MM-DD HH:mm dddd'));
   });
 
