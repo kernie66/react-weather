@@ -19,10 +19,7 @@ export default function SummaryBanner() {
   const backgroundColor = useAtomValue(backgroundColorState);
   const { data: weeklyWeather } = useWeeklyWeather();
   const translate = useTranslation('sv');
-  const [summaryTexts, setSummaryTexts] = useState([
-    { text: '' },
-    { text: '' },
-  ]);
+  const [summaryTexts, setSummaryTexts] = useState([]);
 
   useLogger('SummaryBanner', [{ summaryTexts }]);
 
@@ -65,25 +62,36 @@ export default function SummaryBanner() {
 
     const startDay = isAlmostTomorrow() ? 1 : 0;
     const summaryArray = prepareSummary(weeklyWeather, startDay);
+    console.log('summaryArray', summaryArray);
     getTranslatedSummary();
   }, [weeklyWeather, translate]);
 
-  return (
-    <Marquee autofill gradient gradientColor={backgroundColor}>
-      <Group className={classes.outlineSingle} gap={8} me="xl">
-        {summaryTexts.map((summaryText) => {
-          return (
-            <Fragment key={summaryText.day}>
-              <Text c={infoColor} fz={20}>
-                {summaryText.day}:
-              </Text>
-              <Text c="gray.0" fz={20} pe="xl">
-                {summaryText.text}
-              </Text>
-            </Fragment>
-          );
-        })}
-      </Group>
-    </Marquee>
-  );
+  if (!weeklyWeather) {
+    console.log('Render wait text while waiting for weather data');
+    return (
+      <Text c="gray.0" fz={20}>
+        Väntar på väderdata
+      </Text>
+    );
+  } else {
+    console.log('Rendering summary');
+    return (
+      <Marquee autofill gradient gradientColor={backgroundColor}>
+        <Group className={classes.outlineSingle} gap={8} me="xl">
+          {summaryTexts.map((summaryText) => {
+            return (
+              <Fragment key={summaryText.day}>
+                <Text c={infoColor} fz={20}>
+                  {summaryText.day}:
+                </Text>
+                <Text c="gray.0" fz={20} pe="xl">
+                  {summaryText.text}
+                </Text>
+              </Fragment>
+            );
+          })}
+        </Group>
+      </Marquee>
+    );
+  }
 }
