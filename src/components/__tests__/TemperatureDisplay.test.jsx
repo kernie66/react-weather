@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import {
   render,
+  renderWithNotifications,
   screen,
   userEvent,
   waitForElementToBeRemoved,
@@ -18,7 +19,7 @@ describe('TemperatureDisplay', () => {
   it('should render the main temperature display area with weather alert', async () => {
     const user = userEvent.setup();
 
-    render(<TemperatureDisplay />);
+    renderWithNotifications(<TemperatureDisplay />);
 
     // Weather alert button
     const alertButton = await screen.findByRole('button', {

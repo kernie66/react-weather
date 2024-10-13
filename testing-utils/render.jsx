@@ -31,6 +31,18 @@ export function render(ui) {
   return testingLibraryRender(<>{ui}</>, {
     wrapper: ({ children }) => (
       <MantineProvider theme={theme}>
+        <QueryClientProvider client={testQueryClient}>
+          {children}
+        </QueryClientProvider>
+      </MantineProvider>
+    ),
+  });
+}
+
+export function renderWithNotifications(ui) {
+  return testingLibraryRender(<>{ui}</>, {
+    wrapper: ({ children }) => (
+      <MantineProvider theme={theme}>
         <Notifications />
         <QueryClientProvider client={testQueryClient}>
           {children}
