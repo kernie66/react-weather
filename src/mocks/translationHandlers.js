@@ -1,5 +1,9 @@
 import { http, HttpResponse } from 'msw';
 
+const getWordCount = (text) => {
+  return text ? text.trim().split(/\s+/g).length : 0;
+};
+
 const getMockedTranslations = (text) => {
   switch (text) {
     case 'Downpour':
@@ -9,7 +13,7 @@ const getMockedTranslations = (text) => {
     case 'There will be partly cloudy today':
       return 'Det kommer att vara halvmolnigt idag';
     default:
-      return 'Translated text';
+      return 'Translated text ' + getWordCount(text);
   }
 };
 export const translationHandlers = [
