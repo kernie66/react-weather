@@ -28,6 +28,5 @@ describe('CurrentWeather', () => {
     expect(
       await screen.findByText(/translated text 102/i)
     ).toBeInTheDocument();
-    screen.debug();
   });
 });

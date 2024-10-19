@@ -4,7 +4,7 @@ import SummaryBanner from '../SummaryBanner.jsx';
 import { vi, expect, afterAll } from 'vitest';
 
 // Set the date to match mocked weather data
-const fakeTodayDate = new Date('2024-07-12T12:34');
+const fakeTodayDate = new Date('2024-07-12T11:20');
 const fakeTodayDateLate = new Date('2024-07-12T22:34');
 const fakeTodayDate2 = new Date('2024-07-13T01:34');
 

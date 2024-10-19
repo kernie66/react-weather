@@ -1,0 +1,55 @@
+import { render, screen } from '../../../testing-utils';
+import { testQueryClient } from '../../../testing-utils/render.jsx';
+import Forecasts from '../Forecasts.jsx';
+import { expect, vi } from 'vitest';
+
+const fakeTodayDate = new Date('2024-07-12T11:20');
+
+describe('Forecasts', () => {
+  beforeEach(() => {
+    testQueryClient.removeQueries();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
+  it('should not render forecasts for current date', async () => {
+    render(<Forecasts />);
+
+    expect(
+      screen.getByText(/väntar på väderdata/i)
+    ).toBeInTheDocument();
+
+    // Wait for weather data, wrong date
+    expect(
+      await screen.findByText(
+        /ingen väderprognos tillgänglig, är internet anslutet?/i
+      )
+    ).toBeInTheDocument();
+  });
+  it('should render forecasts for fake date', async () => {
+    vi.setSystemTime(fakeTodayDate);
+    render(<Forecasts />);
+
+    expect(
+      screen.getByText(/väntar på väderdata/i)
+    ).toBeInTheDocument();
+
+    // Wait for weather data
+    // Check first forecast
+    expect(
+      await screen.findByText(/idag 12:00/i)
+    ).toBeInTheDocument();
+    // Check last forecast
+    expect(
+      await screen.findByText(/imorgon 14:00/i)
+    ).toBeInTheDocument();
+    // Check total number of forecasts
+    const todays = await screen.findAllByText(/idag/i);
+    const tomorrows = await screen.findAllByText(/imorgon/i);
+    expect(todays.length + tomorrows.length).toBe(12);
+    // Check number of forecasts without rain
+    expect(await screen.findAllByText(/uppehåll/i)).toHaveLength(8);
+  });
+});

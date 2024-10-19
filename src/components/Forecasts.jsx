@@ -7,6 +7,21 @@ import { isEmpty } from 'radash';
 export default function Forecasts() {
   const { data: hourlyWeather } = useHourlyWeather();
 
+  if (!hourlyWeather) {
+    return (
+      <Text
+        fz={36}
+        c="orange.8"
+        fw={500}
+        fs="italic"
+        ta="center"
+        w="100vw"
+      >
+        Väntar på väderdata
+      </Text>
+    );
+  }
+
   const forecastIndicies = getForecasts(hourlyWeather);
 
   if (isEmpty(forecastIndicies)) {
