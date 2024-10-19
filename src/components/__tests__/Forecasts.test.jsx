@@ -2,8 +2,11 @@ import { render, screen } from '../../../testing-utils';
 import { testQueryClient } from '../../../testing-utils/render.jsx';
 import Forecasts from '../Forecasts.jsx';
 import { expect, vi } from 'vitest';
+import weatherDataJson from '../../../bruno/weather_alert_response.json';
+import dayjs from 'dayjs';
 
-const fakeTodayDate = new Date('2024-07-12T11:20');
+const weatherDate = dayjs.unix(weatherDataJson.current.dt);
+const fakeTodayDate = new Date(weatherDate.toDate());
 
 describe('Forecasts', () => {
   beforeEach(() => {
@@ -28,6 +31,7 @@ describe('Forecasts', () => {
       )
     ).toBeInTheDocument();
   });
+
   it('should render forecasts for fake date', async () => {
     vi.setSystemTime(fakeTodayDate);
     render(<Forecasts />);

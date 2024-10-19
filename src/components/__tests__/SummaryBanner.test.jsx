@@ -2,11 +2,16 @@ import { render, screen } from '../../../testing-utils';
 import { testQueryClient } from '../../../testing-utils/render.jsx';
 import SummaryBanner from '../SummaryBanner.jsx';
 import { vi, expect, afterAll } from 'vitest';
+import weatherDataJson from '../../../bruno/weather_alert_response.json';
+import dayjs from 'dayjs';
 
 // Set the date to match mocked weather data
-const fakeTodayDate = new Date('2024-07-12T11:20');
-const fakeTodayDateLate = new Date('2024-07-12T22:34');
-const fakeTodayDate2 = new Date('2024-07-13T01:34');
+const weatherDate = dayjs.unix(weatherDataJson.current.dt);
+const fakeTodayDate = new Date(weatherDate.toDate());
+// Set hour to 22 to get late action
+const fakeTodayDateLate = new Date(weatherDate.hour(22).toDate());
+// Set hour to 26 to add one day
+const fakeTomorrowDate = new Date(weatherDate.hour(26));
 
 describe('SummaryBanner', () => {
   beforeEach(() => {
@@ -50,7 +55,7 @@ describe('SummaryBanner', () => {
   });
 
   it('should render the summary banner from next day as today', async () => {
-    vi.setSystemTime(fakeTodayDate2);
+    vi.setSystemTime(fakeTomorrowDate);
     render(<SummaryBanner />);
 
     expect(
