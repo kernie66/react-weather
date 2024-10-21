@@ -3,7 +3,10 @@ import MenuButton from '../MenuButton.jsx';
 import { render, screen } from '../../../testing-utils';
 import { userEvent } from '../../../testing-utils/index.js';
 import { useFullscreen } from '@mantine/hooks';
-import * as mantineHooks from '@mantine/hooks';
+
+const toggleSpy = vi.fn();
+
+vi.mock('@mantine/hooks');
 
 describe('test MenuButton', () => {
   const original = window.location;
@@ -15,15 +18,25 @@ describe('test MenuButton', () => {
     });
   });
 
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   afterAll(() => {
     Object.defineProperty(window, 'location', {
       configurable: true,
       value: original,
     });
+    vi.restoreAllMocks();
   });
 
   it('renders menu button and opens the menu', async () => {
     const user = userEvent.setup();
+
+    useFullscreen.mockReturnValue({
+      toggle: toggleSpy,
+      fullscreen: false,
+    });
 
     render(<MenuButton />);
 
@@ -31,6 +44,7 @@ describe('test MenuButton', () => {
       name: /meny/i,
     });
     expect(menuButton).toBeInTheDocument();
+    expect(useFullscreen).toHaveBeenCalledOnce();
 
     // Open the menu
     await user.click(menuButton);
@@ -46,10 +60,16 @@ describe('test MenuButton', () => {
         name: /helskärm/i,
       })
     ).toBeInTheDocument();
+    expect(toggleSpy).not.toHaveBeenCalled();
   });
 
   it('selects update from the menu', async () => {
     const user = userEvent.setup();
+
+    useFullscreen.mockReturnValue({
+      toggle: toggleSpy,
+      fullscreen: false,
+    });
 
     render(<MenuButton />);
 
@@ -58,6 +78,7 @@ describe('test MenuButton', () => {
     });
     expect(menuButton).toBeInTheDocument();
     expect(vi.isMockFunction(window.location.reload)).toBe(true);
+    expect(useFullscreen).toHaveBeenCalledOnce();
 
     // Open the menu
     await user.click(menuButton);
@@ -72,40 +93,29 @@ describe('test MenuButton', () => {
     await user.click(menuItemUpdate);
     expect(menuItemUpdate).toBeInTheDocument();
     expect(window.location.reload).toHaveBeenCalled();
+    expect(toggleSpy).not.toHaveBeenCalled();
   });
 
-  it('selects fullscreen from the menu, then restores normal screen', async () => {
+  it('in normal screen, selects fullscreen from the menu', async () => {
     const user = userEvent.setup();
-    let toggleValue = true;
 
-    const toggleSpy = vi.fn(() => {
-      toggleValue = !toggleValue;
-      console.log('toggleValue', toggleValue);
+    useFullscreen.mockReturnValue({
+      toggle: toggleSpy,
+      fullscreen: false,
     });
 
-    vi.mock('@mantine/hooks', { spy: true });
-    const useFullscreenSpy = vi
-      .spyOn(mantineHooks, 'useFullscreen')
-      .mockReturnValue({
-        toggle: toggleSpy,
-        fullscreen: () => {
-          return true;
-        },
-      });
-    console.log('useFullscreenSpy', useFullscreenSpy);
     render(<MenuButton />);
 
     const menuButton = screen.getByRole('button', {
       name: /meny/i,
     });
     expect(menuButton).toBeInTheDocument();
-    expect(useFullscreenSpy).toHaveReturned();
+    expect(useFullscreen).toHaveBeenCalledOnce();
     expect(useFullscreen).toHaveReturnedWith(
       expect.objectContaining({
         fullscreen: false,
       })
     );
-    expect(useFullscreenSpy).toHaveBeenCalled();
 
     // Open the menu
     await user.click(menuButton);
@@ -116,28 +126,47 @@ describe('test MenuButton', () => {
     });
     expect(menuItemFullScreen).toBeInTheDocument();
     expect(toggleSpy).not.toHaveBeenCalled();
-    console.log('toggleSpy', toggleSpy);
 
     // Click on fullscreen
     await user.click(menuItemFullScreen);
-    expect(useFullscreen).toHaveReturned();
-    expect(useFullscreen).toHaveReturnedWith(
-      expect.objectContaining({
-        fullscreen: false,
-      })
-    );
-    expect(useFullscreen).toHaveBeenCalled();
     expect(menuButton).toBeInTheDocument();
     expect(toggleSpy).toHaveBeenCalledTimes(1);
-    console.log('toggleSpy', toggleSpy);
+  });
 
-    // Open the menu again
+  it('in fullscreen, selects normal screen from the menu', async () => {
+    const user = userEvent.setup();
+
+    useFullscreen.mockReturnValue({
+      toggle: toggleSpy,
+      fullscreen: true,
+    });
+
+    render(<MenuButton />);
+
+    const menuButton = screen.getByRole('button', {
+      name: /meny/i,
+    });
+    expect(menuButton).toBeInTheDocument();
+    expect(useFullscreen).toHaveBeenCalledOnce();
+    expect(useFullscreen).toHaveReturnedWith(
+      expect.objectContaining({
+        fullscreen: true,
+      })
+    );
+
+    // Open the menu
     await user.click(menuButton);
 
-    // Check that the menu item has changed to restore
-    expect(
-      await screen.findByRole('menuitem', { name: /återställ/i })
-    ).toBeInTheDocument();
-    screen.debug();
+    // Get the fullscreen menu item
+    const menuItemRestore = await screen.findByRole('menuitem', {
+      name: /återställ/i,
+    });
+    expect(menuItemRestore).toBeInTheDocument();
+    expect(toggleSpy).not.toHaveBeenCalled();
+
+    // Click on fullscreen
+    await user.click(menuItemRestore);
+    expect(menuButton).toBeInTheDocument();
+    expect(toggleSpy).toHaveBeenCalledTimes(1);
   });
 });
