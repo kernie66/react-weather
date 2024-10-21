@@ -16,6 +16,7 @@ const fakeTomorrowDate = new Date(weatherDate.hour(26));
 describe('SummaryBanner', () => {
   beforeEach(() => {
     testQueryClient.removeQueries();
+    localStorage.clear();
   });
 
   afterAll(() => {

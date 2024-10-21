@@ -44,6 +44,7 @@ const selectCurrentData = (data) => {
   current.moonPhase = data.daily[0].moon_phase;
   current.lat = data.lat;
   current.lon = data.lon;
+  current.pop = data.hourly[0].pop;
   return current;
 };
 

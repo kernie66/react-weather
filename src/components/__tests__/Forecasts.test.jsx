@@ -11,6 +11,7 @@ const fakeTodayDate = new Date(weatherDate.toDate());
 describe('Forecasts', () => {
   beforeEach(() => {
     testQueryClient.removeQueries();
+    localStorage.clear();
   });
 
   afterAll(() => {
