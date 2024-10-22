@@ -31,13 +31,12 @@ describe('test CurrentWeather', () => {
       await screen.findByText(/växlande molnighet/i)
     ).toBeInTheDocument();
     expect(await screen.findByText(/uppehåll/i)).toBeInTheDocument();
-
     await user.click(weatherOverviewButton);
     expect(
       await screen.findByText(/väderöversikt för 2024-10-13/i)
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/translated text 102/i)
+      await screen.findByText(/translated text: 102 words/i)
     ).toBeInTheDocument();
   });
 
@@ -60,7 +59,6 @@ describe('test CurrentWeather', () => {
       name: /väderöversikt/i,
     });
     expect(weatherOverviewButton).toBeInTheDocument();
-    screen.debug();
     expect(await screen.findByText(/lätt regn/i)).toBeInTheDocument();
     expect(await screen.findByText(/0.3 mm\/h/i)).toBeInTheDocument();
     expect(await screen.findByText(/36%/i)).toBeInTheDocument();
@@ -73,8 +71,7 @@ describe('test CurrentWeather', () => {
       await screen.findByText(/väderöversikt för 2024-10-13/i)
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/translated text 102/i)
+      await screen.findByText(/translated text: 102 words/i)
     ).toBeInTheDocument();
-    screen.debug();
   });
 });

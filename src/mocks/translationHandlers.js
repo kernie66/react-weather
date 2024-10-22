@@ -13,7 +13,7 @@ const getMockedTranslations = (text) => {
     case 'There will be partly cloudy today':
       return 'Det kommer att vara halvmolnigt idag';
     default:
-      return 'Translated text ' + getWordCount(text);
+      return 'Translated text: ' + getWordCount(text) + ' words';
   }
 };
 export const translationHandlers = [

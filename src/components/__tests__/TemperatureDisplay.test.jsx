@@ -43,7 +43,7 @@ describe('TemperatureDisplay', () => {
     ).not.toBeInTheDocument();
     expect(await screen.findByText(/regnskur/i)).toBeInTheDocument();
     expect(
-      await screen.findByText(/translated text 127/i)
+      await screen.findByText(/translated text: 127 words/i)
     ).toBeInTheDocument();
 
     // Open weather alert modal, should remove notification
@@ -56,7 +56,7 @@ describe('TemperatureDisplay', () => {
     expect(await screen.findByText(/källa/i)).toBeInTheDocument();
     expect(await screen.findByText(/regnskur/i)).toBeInTheDocument();
     expect(
-      await screen.findByText(/translated text 127/i)
+      await screen.findByText(/translated text: 127 words/i)
     ).toBeInTheDocument();
   });
 
