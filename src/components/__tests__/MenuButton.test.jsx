@@ -130,7 +130,7 @@ describe('test MenuButton', () => {
     // Click on fullscreen
     await user.click(menuItemFullScreen);
     expect(menuButton).toBeInTheDocument();
-    expect(toggleSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSpy).toHaveBeenCalledOnce();
   });
 
   it('in fullscreen, selects normal screen from the menu', async () => {
@@ -167,6 +167,6 @@ describe('test MenuButton', () => {
     // Click on fullscreen
     await user.click(menuItemRestore);
     expect(menuButton).toBeInTheDocument();
-    expect(toggleSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSpy).toHaveBeenCalledOnce();
   });
 });
