@@ -38,7 +38,8 @@ describe('test MenuButton', () => {
       fullscreen: false,
     });
 
-    render(<MenuButton />);
+    const snapshot = render(<MenuButton />);
+    expect(snapshot).toMatchSnapshot();
 
     const menuButton = screen.getByRole('button', {
       name: /meny/i,

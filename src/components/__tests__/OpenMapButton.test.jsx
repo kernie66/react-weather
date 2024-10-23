@@ -7,11 +7,12 @@ const openMap = vi.fn(() => console.log('Open map button clicked'));
 
 afterEach(() => vi.restoreAllMocks());
 
-describe('OpenMapButton', () => {
+describe('test OpenMapButton', () => {
   it('renders open map button and calls the open modal', async () => {
     const user = userEvent.setup();
 
-    render(<OpenMapButton openMap={openMap} />);
+    const snapshot = render(<OpenMapButton openMap={openMap} />);
+    expect(snapshot).toMatchSnapshot();
 
     const openMapButton = screen.getByRole('button', {
       name: /öppna karta/i,

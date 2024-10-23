@@ -15,11 +15,12 @@ import { testQueryClient } from '../../../testing-utils/render.jsx';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-describe('TemperatureDisplay', () => {
-  it('should render the main temperature display area with weather alert', async () => {
+describe('test TemperatureDisplay', () => {
+  it('renders the main temperature display area with weather alert', async () => {
     const user = userEvent.setup();
 
-    renderWithNotifications(<TemperatureDisplay />);
+    const snapshot = renderWithNotifications(<TemperatureDisplay />);
+    expect(snapshot).toMatchSnapshot();
 
     // Weather alert button
     const alertButton = await screen.findByRole('button', {
@@ -60,7 +61,7 @@ describe('TemperatureDisplay', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render the main temperature display area without weather alert', async () => {
+  it('renders the main temperature display area without weather alert', async () => {
     const weatherDataNoAlert = omit(weatherDataJson, ['alerts']);
     server.use(
       http.get(`${baseURL}/onecall`, () => {

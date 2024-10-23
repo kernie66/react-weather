@@ -17,7 +17,8 @@ describe('test CurrentWeather', () => {
   it('renders the current clear weather icon and text', async () => {
     const user = userEvent.setup();
 
-    render(<CurrentWeather />);
+    const snapshot = render(<CurrentWeather />);
+    expect(snapshot).toMatchSnapshot();
 
     expect(
       screen.getByText(/väntar på väderdata/i)

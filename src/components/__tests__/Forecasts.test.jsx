@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 const weatherDate = dayjs.unix(weatherDataJson.current.dt);
 const fakeTodayDate = new Date(weatherDate.toDate());
 
-describe('Forecasts', () => {
+describe('test Forecasts', () => {
   beforeEach(() => {
     testQueryClient.removeQueries();
     localStorage.clear();
@@ -18,7 +18,7 @@ describe('Forecasts', () => {
     vi.useRealTimers();
   });
 
-  it('should not render forecasts for current date', async () => {
+  it('renders no forecasts for current date', async () => {
     render(<Forecasts />);
 
     expect(
@@ -33,9 +33,11 @@ describe('Forecasts', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render forecasts for fake date', async () => {
+  it('renders forecasts for fake date', async () => {
     vi.setSystemTime(fakeTodayDate);
-    render(<Forecasts />);
+
+    const snapshot = render(<Forecasts />);
+    expect(snapshot).toMatchSnapshot();
 
     expect(
       screen.getByText(/väntar på väderdata/i)

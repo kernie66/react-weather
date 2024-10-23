@@ -57,6 +57,7 @@ export default defineConfig(({ mode }) => {
           ...coverageConfigDefaults.exclude,
         ],
       },
+      snapshotSerializers: ['./testing-utils/mantineSerializer.ts'],
     },
   };
 });
