@@ -20,7 +20,6 @@ describe('test TemperatureDisplay', () => {
     const user = userEvent.setup();
 
     const snapshot = renderWithNotifications(<TemperatureDisplay />);
-    expect(snapshot).toMatchSnapshot();
 
     // Weather alert button
     const alertButton = await screen.findByRole('button', {
@@ -46,6 +45,7 @@ describe('test TemperatureDisplay', () => {
     expect(
       await screen.findByText(/translated text: 127 words/i)
     ).toBeInTheDocument();
+    expect(snapshot).toMatchSnapshot();
 
     // Open weather alert modal, should remove notification
     await user.click(alertButton);

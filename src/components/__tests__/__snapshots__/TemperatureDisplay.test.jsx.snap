@@ -17,17 +17,62 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
         <div
           class="weather-alert--box"
           style="min-width: calc(4rem * var(--mantine-scale));"
-        />
+        >
+          <button
+            class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+            data-size="xl"
+            data-variant="transparent"
+            style="--button-height: var(--button-height-xl); --button-padding-x: var(--button-padding-x-xl); --button-fz: var(--mantine-font-size-xl); --button-bg: transparent; --button-hover: transparent; --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; padding-inline: 0rem;"
+            type="button"
+          >
+            <span
+              class="m_80f1301b mantine-Button-inner"
+            >
+              <span
+                class="m_811560b9 mantine-Button-label"
+              >
+                <svg
+                  color="orange"
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  style="color: orange;"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 9v4"
+                  />
+                  <path
+                    d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"
+                  />
+                  <path
+                    d="M12 16h.01"
+                  />
+                </svg>
+                <span
+                  class="m_515a97f8 mantine-VisuallyHidden-root"
+                >
+                  Vädervarning
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
         <p
           class="mantine-focus-auto _outlineDouble_597f95 m_b6d8b162 mantine-Text-root"
           style="margin-inline-start: auto; font-weight: 500; text-align: right;"
         >
-          NaN
+          19
           <span
             class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
             style="font-size: 80%; font-weight: 500;"
           >
-            .NaN°C
+            .2°C
           </span>
         </p>
         <div
@@ -38,12 +83,12 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
             class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
             style="margin-inline-start: auto; font-weight: 500; text-align: right;"
           >
-            NaN
+            20
             <span
               class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
               style="font-size: 80%; font-weight: 500;"
             >
-              .NaN°C
+              .9°C
             </span>
           </p>
           <div
@@ -57,12 +102,12 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
             class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
             style="margin-inline-start: auto; font-weight: 500; text-align: right;"
           >
-            NaN
+            12
             <span
               class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
               style="font-size: 80%; font-weight: 500;"
             >
-              .NaN°C
+              .0°C
             </span>
           </p>
         </div>
@@ -97,7 +142,110 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
         data-position="bottom-right"
         style="--notifications-z-index: 400; --notifications-container-width: calc(27.5rem * var(--mantine-scale));"
       >
-        <div />
+        <div>
+          <div
+            class="m_5ed0edd0 mantine-Notifications-notification m_a513464 mantine-Notification-root"
+            data-with-border="true"
+            data-with-icon="true"
+            id="notification-alert"
+            role="alert"
+            style="--notification-color: var(--mantine-color-orange-filled); opacity: 1; max-height: 200px; transform: translateX(0); transition-duration: 250ms, 250ms, 250ms; transition-timing-function: cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear; transition-property: opacity, transform, max-height;"
+          >
+            <div
+              class="m_a4ceffb mantine-Notification-icon"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 9v4"
+                />
+                <path
+                  d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"
+                />
+                <path
+                  d="M12 16h.01"
+                />
+              </svg>
+            </div>
+            <div
+              class="m_a49ed24 mantine-Notification-body"
+            >
+              <div
+                class="m_3feedf16 mantine-Notification-title"
+              >
+                Vädervarning: Regnskur
+              </div>
+              <div
+                class="m_3d733a3a mantine-Notification-description"
+                data-with-title="true"
+              >
+                <div
+                  class="m_6d731127 mantine-Stack-root"
+                  style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: stretch; --stack-justify: flex-start;"
+                >
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    data-size="sm"
+                    style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); color: dodgerblue;"
+                  >
+                    Från: 
+                    lördag 13 juli 2024 kl. 02:00
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    data-size="sm"
+                    style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); color: dodgerblue;"
+                  >
+                    Till: 
+                    lördag 13 juli 2024 kl. 21:00
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    data-line-clamp="true"
+                    data-size="sm"
+                    style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); --text-line-clamp: 3; white-space: pre-wrap;"
+                  >
+                    Translated text: 127 words
+                  </p>
+                  <span
+                    class="m_515a97f8 mantine-VisuallyHidden-root"
+                  >
+                    Vädernotifiering
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="mantine-focus-auto mantine-active m_220c80f2 m_919a4d88 mantine-Notification-closeButton m_86a44da5 mantine-CloseButton-root m_87cf2631 mantine-UnstyledButton-root"
+              color="gray"
+              data-variant="subtle"
+              style="--cb-icon-size: calc(1rem * var(--mantine-scale));"
+              type="button"
+            >
+              <svg
+                fill="none"
+                viewBox="0 0 15 15"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
       <div
         class="m_b37d9ac7 mantine-Notifications-root"
@@ -139,17 +287,62 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
       <div
         class="weather-alert--box"
         style="min-width: calc(4rem * var(--mantine-scale));"
-      />
+      >
+        <button
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          data-size="xl"
+          data-variant="transparent"
+          style="--button-height: var(--button-height-xl); --button-padding-x: var(--button-padding-x-xl); --button-fz: var(--mantine-font-size-xl); --button-bg: transparent; --button-hover: transparent; --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; padding-inline: 0rem;"
+          type="button"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              <svg
+                color="orange"
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                style="color: orange;"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 9v4"
+                />
+                <path
+                  d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"
+                />
+                <path
+                  d="M12 16h.01"
+                />
+              </svg>
+              <span
+                class="m_515a97f8 mantine-VisuallyHidden-root"
+              >
+                Vädervarning
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
       <p
         class="mantine-focus-auto _outlineDouble_597f95 m_b6d8b162 mantine-Text-root"
         style="margin-inline-start: auto; font-weight: 500; text-align: right;"
       >
-        NaN
+        19
         <span
           class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
           style="font-size: 80%; font-weight: 500;"
         >
-          .NaN°C
+          .2°C
         </span>
       </p>
       <div
@@ -160,12 +353,12 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
           class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
           style="margin-inline-start: auto; font-weight: 500; text-align: right;"
         >
-          NaN
+          20
           <span
             class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
             style="font-size: 80%; font-weight: 500;"
           >
-            .NaN°C
+            .9°C
           </span>
         </p>
         <div
@@ -179,12 +372,12 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
           class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
           style="margin-inline-start: auto; font-weight: 500; text-align: right;"
         >
-          NaN
+          12
           <span
             class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
             style="font-size: 80%; font-weight: 500;"
           >
-            .NaN°C
+            .0°C
           </span>
         </p>
       </div>
