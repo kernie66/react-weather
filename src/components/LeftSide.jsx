@@ -1,5 +1,5 @@
 import { useCurrentWeather } from '../hooks/weatherQueries.js';
-import { Divider, Stack, Text } from '@mantine/core';
+import { Divider, Loader, Stack, Text } from '@mantine/core';
 import * as Compass from 'cardinal-direction';
 import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
@@ -9,6 +9,10 @@ import SunTimes from './Suntimes.jsx';
 export default function LeftSide({ minHeight = '100%' }) {
   const infoColor = useAtomValue(infoColorState);
   const { data: currentWeather } = useCurrentWeather();
+
+  if (!currentWeather) {
+    return <Loader size={32} color="indigo" />;
+  }
 
   const windDir = Compass.cardinalFromDegree(
     currentWeather?.wind_deg,

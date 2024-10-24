@@ -1,4 +1,9 @@
-import { Divider, Stack, UnstyledButton } from '@mantine/core';
+import {
+  Divider,
+  Stack,
+  UnstyledButton,
+  VisuallyHidden,
+} from '@mantine/core';
 import dayjs from 'dayjs';
 import { useWeatherPosition } from '../hooks/weatherQueries.js';
 import { getSunTimes } from '../helpers/getSunInfo.js';
@@ -34,6 +39,7 @@ export default function SunTimes() {
             sunTime={!afterSunrise ? sunsetTime : sunriseTime}
           />
         </Stack>
+        <VisuallyHidden>Soltider</VisuallyHidden>
       </UnstyledButton>
     </>
   );
