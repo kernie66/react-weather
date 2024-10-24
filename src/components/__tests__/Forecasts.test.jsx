@@ -37,7 +37,6 @@ describe('test Forecasts', () => {
     vi.setSystemTime(fakeTodayDate);
 
     const snapshot = render(<Forecasts />);
-    expect(snapshot).toMatchSnapshot();
 
     expect(
       screen.getByText(/väntar på väderdata/i)
@@ -58,6 +57,7 @@ describe('test Forecasts', () => {
     expect(todays.length + tomorrows.length).toBe(12);
     // Check number of forecasts without rain
     expect(await screen.findAllByText(/uppehåll/i)).toHaveLength(8);
+    expect(snapshot).toMatchSnapshot();
 
     // Check that weather data is persisted from query
     const persistedWeatherData = localStorage.getItem(

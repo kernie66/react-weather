@@ -10,12 +10,546 @@ exports[`test Forecasts > renders forecasts for fake date 1`] = `
       >
         @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
       </style>
-      <p
-        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-        style="font-weight: 500; text-align: center; font-style: italic; width: 100vw;"
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
       >
-        Väntar på väderdata
-      </p>
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Idag 12:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                20
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Idag 13:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                20
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Idag 14:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                20
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Idag 16:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                19
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Idag 20:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                18
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 00:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                17
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 04:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                17
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 08:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                17
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Uppehåll 
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 10:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/day_rain.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                16
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            0.2 mm/h 
+            <span
+              class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            >
+               
+              46%
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 12:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/rain.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                15
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            2.0 mm/h 
+            <span
+              class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            >
+               
+              100%
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 13:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/rain.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                14
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            5.0 mm/h 
+            <span
+              class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            >
+               
+              100%
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="m_1b7284a3 mantine-Paper-root"
+        style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+      >
+        <div
+          class="m_6d731127 mantine-Stack-root"
+          style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Imorgon 14:00
+          </p>
+          <div
+            class="m_4451eb3a mantine-Center-root"
+          >
+            <div
+              class="m_4081bf90 mantine-Group-root"
+              style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+            >
+              <img
+                alt="Halvklart"
+                class="m_9e117634 mantine-Image-root"
+                height="46px"
+                src="file:///src/assets/weather_icons/PNG/128/rain.png"
+                width="46px"
+              />
+              <p
+                class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+                style="font-weight: 500;"
+              >
+                14
+                °C
+              </p>
+            </div>
+          </div>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            5.3 mm/h 
+            <span
+              class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            >
+               
+              100%
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
@@ -24,12 +558,546 @@ exports[`test Forecasts > renders forecasts for fake date 1`] = `
     >
       @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
     </style>
-    <p
-      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-      style="font-weight: 500; text-align: center; font-style: italic; width: 100vw;"
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
     >
-      Väntar på väderdata
-    </p>
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Idag 12:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              20
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Idag 13:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              20
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Idag 14:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/day_partial_cloud.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              20
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Idag 16:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              19
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Idag 20:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              18
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 00:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              17
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 04:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              17
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 08:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/overcast.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              17
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Uppehåll 
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 10:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/day_rain.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              16
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          0.2 mm/h 
+          <span
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+             
+            46%
+          </span>
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 12:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/rain.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              15
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          2.0 mm/h 
+          <span
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+             
+            100%
+          </span>
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 13:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/rain.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              14
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          5.0 mm/h 
+          <span
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+             
+            100%
+          </span>
+        </p>
+      </div>
+    </div>
+    <div
+      class="m_1b7284a3 mantine-Paper-root"
+      style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-lg); background: rgba(74, 127, 169, 0.8); min-width: 12vw; min-height: 12vh;"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: center; --stack-justify: space-around; margin-block: calc(0.25rem * var(--mantine-scale));"
+      >
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          Imorgon 14:00
+        </p>
+        <div
+          class="m_4451eb3a mantine-Center-root"
+        >
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-sm); --group-align: center; --group-justify: center; --group-wrap: wrap;"
+          >
+            <img
+              alt="Halvklart"
+              class="m_9e117634 mantine-Image-root"
+              height="46px"
+              src="file:///src/assets/weather_icons/PNG/128/rain.png"
+              width="46px"
+            />
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+              style="font-weight: 500;"
+            >
+              14
+              °C
+            </p>
+          </div>
+        </div>
+        <p
+          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        >
+          5.3 mm/h 
+          <span
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+             
+            100%
+          </span>
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
