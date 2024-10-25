@@ -29,7 +29,6 @@ export default function WeatherOverviewModal({
       setDate(weatherOverview.date);
     }
 
-    console.log('weatherOverview', weatherOverview);
     if (weatherOverview) {
       getTranslatedOverview();
     }
