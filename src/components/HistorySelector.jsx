@@ -1,6 +1,6 @@
 import { Autocomplete, CloseButton } from '@mantine/core';
 import { useState } from 'react';
-import { select } from 'radash';
+import { isEmpty, select } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useAtomValue, useSetAtom } from 'jotai';
 import {
@@ -23,12 +23,17 @@ export default function HistorySelector({
   };
 
   const selectHistory = (selection) => {
-    const historyLocation = select(
-      historyLocations,
-      (h) => h,
-      (h) => h.address === selection
-    );
-    setMapLocation(historyLocation[0]);
+    let historyLocation = currentLocation;
+    if (selection !== 'Ingen historik') {
+      const newHistoryLocation = select(
+        historyLocations,
+        (h) => h,
+        (h) => h.address === selection
+      );
+      historyLocation = newHistoryLocation[0];
+    }
+    console.log('historyLocation', historyLocation);
+    setMapLocation(historyLocation);
     if (closeOnSelect) {
       toggle();
     }
@@ -40,13 +45,17 @@ export default function HistorySelector({
     console.debug('History input cleared');
   };
 
+  const historyData = !isEmpty(historyLocations)
+    ? historyLocations?.toReversed().map((history) => history.address)
+    : ['Ingen historik'];
+
   return (
     <Autocomplete
+      name="selectHistory"
+      aria-label="Indatafält för historik"
       placeholder="Välj plats från historiken"
       value={historyValue}
-      data={historyLocations
-        .toReversed()
-        .map((history) => history.address)}
+      data={historyData}
       dropdownOpened
       data-autofocus
       selectFirstOptionOnChange

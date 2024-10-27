@@ -47,19 +47,30 @@ export default function Header() {
       setCurrentLocation(mapLocation);
       queryClient.invalidateQueries({ queryKey: ['weatherData'] });
       showNotification({
+        id: 'weatherUpdate',
         title: 'Väderposition uppdaterad',
         message: mapLocation.address,
         color: 'green',
         icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
         autoClose: 5000,
+        closeButtonProps: { 'aria-label': 'Stäng notis' },
       });
     };
 
+    console.log('mapLocation', mapLocation);
+    console.log('currentLocation', currentLocation);
+    console.log('updateLocation', updateLocation);
     // Only update position if changed by history popup on this page
     if (updateLocation) {
       setPosition();
     }
-  }, [updateLocation, mapLocation, setCurrentLocation, queryClient]);
+  }, [
+    updateLocation,
+    currentLocation,
+    mapLocation,
+    setCurrentLocation,
+    queryClient,
+  ]);
 
   // Allow history to change when page active, disable when map shown
   useEffect(() => {

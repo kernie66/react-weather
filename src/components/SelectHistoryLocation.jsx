@@ -1,8 +1,8 @@
-import { Button, Popover, Text } from '@mantine/core';
+import { Button, Popover, Text, VisuallyHidden } from '@mantine/core';
 import { useClickOutside, useId } from '@mantine/hooks';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
-import { mapLocationState } from '../atoms/locationStates.js';
+import { currentLocationState } from '../atoms/locationStates.js';
 import classes from '../css/Text.module.css';
 import HistorySelector from './HistorySelector.jsx';
 import { nanoid } from 'nanoid';
@@ -16,7 +16,7 @@ export default function SelectHistoryLocation({
   textClass = classes.historyButton,
   closeOnSelect = false,
 }) {
-  const mapLocation = useAtomValue(mapLocationState);
+  const currentLocation = useAtomValue(currentLocationState);
   const [target, setTarget] = useState(null);
   const [dropdown, setDropdown] = useState(null);
 
@@ -56,8 +56,9 @@ export default function SelectHistoryLocation({
             className={textClass}
             lineClamp={1}
           >
-            {mapLocation.address}
+            {currentLocation.address}
           </Text>
+          <VisuallyHidden>Historik</VisuallyHidden>
         </Button>
       </Popover.Target>
       <Popover.Dropdown ref={setDropdown}>
