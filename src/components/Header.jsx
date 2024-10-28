@@ -57,9 +57,6 @@ export default function Header() {
       });
     };
 
-    console.log('mapLocation', mapLocation);
-    console.log('currentLocation', currentLocation);
-    console.log('updateLocation', updateLocation);
     // Only update position if changed by history popup on this page
     if (updateLocation) {
       setPosition();

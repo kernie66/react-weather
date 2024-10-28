@@ -10,6 +10,7 @@ import { expect } from 'vitest';
 import Header from '../Header.jsx';
 import { locationHistoryData } from './locationHistoryData.js';
 import { defaultAddress } from '../../atoms/locationStates.js';
+import { fork } from 'radash';
 
 const fakeLocationHistory = locationHistoryData;
 const fakeLocationOption =
@@ -122,6 +123,11 @@ describe('test Header and history selection', () => {
       'locationHistory',
       JSON.stringify(fakeLocationHistory)
     );
+    const searchTerm = 'bad';
+    const [selected] = fork(fakeLocationHistory.toReversed(), (f) =>
+      f.address.toLowerCase().includes(searchTerm)
+    );
+
     console.log('Starting third test.....');
     render(<Header />);
 
@@ -132,7 +138,6 @@ describe('test Header and history selection', () => {
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
     expect(screen.queryByRole('listbox')).toBeNull();
 
-    screen.debug(undefined, Infinity);
     // Click location name button
     await user.click(historyButton);
     expect(await screen.findByRole('dialog')).toBeInTheDocument();
@@ -141,27 +146,42 @@ describe('test Header and history selection', () => {
       fakeLocationHistory.length
     );
 
-    // Select third option to update location and close dialog
-    const thirdOption = await screen.findByRole('option', {
-      name: fakeLocationOption,
+    // Enter some search text in the history input
+    const historyInput1 = screen.getByRole('textbox', {
+      name: /indatafält för historik/i,
     });
-    expect(thirdOption).toBeInTheDocument();
-    await user.click(thirdOption);
-    await waitForElementToBeRemoved(() =>
-      screen.queryByRole('dialog')
-    );
-    expect(screen.getByText(fakeLocationOption)).toBeInTheDocument();
+    expect(historyInput1).toBeInTheDocument();
+    expect(historyInput1).toHaveFocus();
+    await user.keyboard('bad');
+    expect(historyInput1).toHaveValue('bad');
+    const historyOptions = screen.getAllByRole('option');
+    expect(historyOptions).toHaveLength(2);
+    expect(historyOptions[0]).toHaveTextContent(selected[0].address);
+    expect(historyOptions[1]).toHaveTextContent(selected[1].address);
+
+    // Select the default option
+    await user.keyboard('{Enter}');
+    expect(
+      await screen.findByText(selected[0].address)
+    ).toBeInTheDocument();
 
     // Click location name button again
     await user.click(historyButton);
     expect(await screen.findByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByRole('listbox')).toBeInTheDocument();
 
-    // Click outside to close dialog without updating location
-    await user.click(document.body);
-    await waitForElementToBeRemoved(() =>
-      screen.queryByRole('dialog')
-    );
-    expect(screen.getByText(fakeLocationOption)).toBeInTheDocument();
+    // Enter some search text in the history input
+    const historyInput2 = screen.getByRole('textbox', {
+      name: /indatafält för historik/i,
+    });
+    expect(historyInput2).toBeInTheDocument();
+    expect(historyInput2).toHaveFocus();
+    await user.keyboard('bad');
+    expect(historyInput2).toHaveValue('bad');
+    const historyOptions2 = screen.getAllByRole('option');
+    expect(historyOptions2).toHaveLength(2);
+    expect(historyOptions2[0]).toHaveTextContent(selected[0].address);
+    expect(historyOptions2[1]).toHaveTextContent(selected[1].address);
+
+    screen.debug(undefined, Infinity);
   });
 });
