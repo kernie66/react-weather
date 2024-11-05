@@ -1,9 +1,7 @@
-import {
-  getExpireTime,
-  useExpireTimeout,
-} from '../useExpireTimeout.js';
+import { useExpireTimeout } from '../useExpireTimeout.js';
 import { vi } from 'vitest';
 import { act, renderHook } from '../../../testing-utils/index.js';
+import { getExpireTime } from '../../helpers/getExpireTime';
 
 describe('test useExpireTimeout', () => {
   beforeEach(() => {
