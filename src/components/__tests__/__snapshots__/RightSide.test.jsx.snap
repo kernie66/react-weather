@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`test RightSide > renders right side info 1`] = `
+exports[`test RightSide > renders right side info with current wind gust 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

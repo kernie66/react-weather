@@ -18,7 +18,7 @@ describe('test RightSide', () => {
     vi.useRealTimers();
   });
 
-  it('renders right side info', async () => {
+  it('renders right side info with current wind gust', async () => {
     vi.setSystemTime(fakeTodayDate);
     const snapshot = render(<RightSide />);
 
@@ -26,6 +26,7 @@ describe('test RightSide', () => {
     screen.debug();
     expect(screen.getByText(/känns som/i)).toBeInTheDocument();
     expect(screen.getByText(/vindbyar/i)).toBeInTheDocument();
+    expect(screen.getByText(/2.8 m\/s/i)).toBeInTheDocument();
     expect(snapshot).toMatchSnapshot();
   });
 });
