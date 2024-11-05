@@ -8,7 +8,7 @@ import {
 import { testQueryClient } from '../../../testing-utils/render.jsx';
 import { expect } from 'vitest';
 import Header from '../Header.jsx';
-import { locationHistoryData } from './locationHistoryData.js';
+import { locationHistoryData } from './data/locationHistoryData.js';
 import { defaultAddress } from '../../atoms/locationStates.js';
 import { fork } from 'radash';
 
