@@ -73,25 +73,25 @@ export default function SummaryBanner() {
         Väntar på väderdata
       </Text>
     );
-  } else {
-    console.log('Rendering summary');
-    return (
-      <Marquee autofill gradient gradientColor={backgroundColor}>
-        <Group className={classes.outlineSingle} gap={8} me="xl">
-          {summaryTexts.map((summaryText) => {
-            return (
-              <Fragment key={summaryText.day}>
-                <Text c={infoColor} fz={20}>
-                  {summaryText.day}:
-                </Text>
-                <Text c="gray.0" fz={20} pe="xl">
-                  {summaryText.text}
-                </Text>
-              </Fragment>
-            );
-          })}
-        </Group>
-      </Marquee>
-    );
   }
+
+  console.log('Rendering summary');
+  return (
+    <Marquee autofill gradient gradientColor={backgroundColor}>
+      <Group className={classes.outlineSingle} gap={8} me="xl">
+        {summaryTexts.map((summaryText) => {
+          return (
+            <Fragment key={summaryText.day}>
+              <Text c={infoColor} fz={20}>
+                {summaryText.day}:
+              </Text>
+              <Text c="gray.0" fz={20} pe="xl">
+                {summaryText.text}
+              </Text>
+            </Fragment>
+          );
+        })}
+      </Group>
+    </Marquee>
+  );
 }

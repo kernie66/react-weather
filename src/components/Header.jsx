@@ -78,9 +78,14 @@ export default function Header() {
     }
   }, [historyOpened, mapOpened]);
 
+  const closeMap2 = () => {
+    closeMap();
+    console.log('Close map');
+  };
+
   return (
     <>
-      <SelectMapLocation modal={mapOpened} closeModal={closeMap} />
+      <SelectMapLocation modal={mapOpened} closeModal={closeMap2} />
       <Group
         className="weather-header"
         justify="space-between"

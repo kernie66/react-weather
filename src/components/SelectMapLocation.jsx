@@ -123,7 +123,8 @@ export default function SelectMapLocation({ modal, closeModal }) {
             </Group>
           </Modal.Title>
           <Modal.CloseButton
-            icon={<AiOutlineCloseCircle size={32} />}
+            icon={<AiOutlineCloseCircle size={40} />}
+            aria-label="Stäng karta"
           />
         </Modal.Header>
         <Modal.Body>
