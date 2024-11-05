@@ -4,9 +4,11 @@ import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
 import { infoColorState } from '../atoms/weatherThemeStates.js';
 
-export default function WindGust() {
+export default function WindGust({ rightSide }) {
   const infoColor = useAtomValue(infoColorState);
   const { data: weatherData } = useWeatherData();
+
+  const justifyText = rightSide ? 'flex-end' : 'flex-start';
 
   let windGust = 0;
 
@@ -19,13 +21,13 @@ export default function WindGust() {
 
   return (
     <Stack gap={4}>
-      <Group justify="flex-end">
+      <Group justify={justifyText}>
         <Text fz={18} c="indigo.1" className={classes.outlineSingle}>
           Vindbyar
         </Text>
       </Group>
       <Divider />
-      <Group justify="flex-end">
+      <Group justify={justifyText}>
         <Text fz={24} c={infoColor} className={classes.outlineSingle}>
           {windGust.toFixed(1)} m/s
         </Text>

@@ -25,8 +25,7 @@ describe('test RightSide', () => {
     expect(await screen.findByText(/molntäcke/i)).toBeInTheDocument();
     screen.debug();
     expect(screen.getByText(/känns som/i)).toBeInTheDocument();
-    expect(screen.getByText(/vindbyar/i)).toBeInTheDocument();
-    expect(screen.getByText(/2.8 m\/s/i)).toBeInTheDocument();
+    expect(screen.getByText(/luftfuktighet/i)).toBeInTheDocument();
     expect(snapshot).toMatchSnapshot();
   });
 });

@@ -1,8 +1,8 @@
 import { useCurrentWeather } from '../hooks/weatherQueries.js';
 import { Loader, Stack } from '@mantine/core';
 import SunTimes from './Suntimes.jsx';
-import Humidity from './Humidity.jsx';
 import WindSpeed from './WindSpeed.jsx';
+import WindGust from './WindGust.jsx';
 
 export default function LeftSide({ minHeight = '100%' }) {
   const { data: currentWeather } = useCurrentWeather();
@@ -20,8 +20,8 @@ export default function LeftSide({ minHeight = '100%' }) {
       gap="md"
     >
       <SunTimes />
-      <Humidity />
       <WindSpeed />
+      <WindGust />
     </Stack>
   );
 }

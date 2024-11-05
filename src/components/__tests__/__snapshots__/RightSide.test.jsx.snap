@@ -87,7 +87,7 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
             <p
               class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
             >
-              Vindbyar
+              Luftfuktighet
             </p>
           </div>
           <div
@@ -102,8 +102,8 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
             <p
               class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
             >
-              2.8
-               m/s
+              74
+              %
             </p>
           </div>
         </div>
@@ -193,7 +193,7 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
           <p
             class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
           >
-            Vindbyar
+            Luftfuktighet
           </p>
         </div>
         <div
@@ -208,8 +208,8 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
           <p
             class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
           >
-            2.8
-             m/s
+            74
+            %
           </p>
         </div>
       </div>

@@ -70,48 +70,73 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
           class="m_6d731127 mantine-Stack-root"
           style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: stretch; --stack-justify: flex-start;"
         >
-          <p
-            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
           >
-            Luftfuktighet
-          </p>
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+            >
+              Vind
+            </p>
+          </div>
           <div
             class="m_3eebeb36 mantine-Divider-root"
             data-orientation="horizontal"
             role="separator"
           />
-          <p
-            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
           >
-            74
-            %
-          </p>
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+            >
+              2.6
+               m/s
+            </p>
+          </div>
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+            >
+              S
+            </p>
+          </div>
         </div>
         <div
           class="m_6d731127 mantine-Stack-root"
           style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: stretch; --stack-justify: flex-start;"
         >
-          <p
-            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
           >
-            Vind
-          </p>
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+            >
+              Vindbyar
+            </p>
+          </div>
           <div
             class="m_3eebeb36 mantine-Divider-root"
             data-orientation="horizontal"
             role="separator"
           />
-          <p
-            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          <div
+            class="m_4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
           >
-            2.6
-             m/s
-          </p>
-          <p
-            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
-          >
-            S
-          </p>
+            <p
+              class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+            >
+              2.8
+               m/s
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -193,48 +218,73 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
         class="m_6d731127 mantine-Stack-root"
         style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: stretch; --stack-justify: flex-start;"
       >
-        <p
-          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          Luftfuktighet
-        </p>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Vind
+          </p>
+        </div>
         <div
           class="m_3eebeb36 mantine-Divider-root"
           data-orientation="horizontal"
           role="separator"
         />
-        <p
-          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          74
-          %
-        </p>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            2.6
+             m/s
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            S
+          </p>
+        </div>
       </div>
       <div
         class="m_6d731127 mantine-Stack-root"
         style="--stack-gap: calc(0.25rem * var(--mantine-scale)); --stack-align: stretch; --stack-justify: flex-start;"
       >
-        <p
-          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          Vind
-        </p>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            Vindbyar
+          </p>
+        </div>
         <div
           class="m_3eebeb36 mantine-Divider-root"
           data-orientation="horizontal"
           role="separator"
         />
-        <p
-          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          2.6
-           m/s
-        </p>
-        <p
-          class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
-        >
-          S
-        </p>
+          <p
+            class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
+          >
+            2.8
+             m/s
+          </p>
+        </div>
       </div>
     </div>
   </div>,

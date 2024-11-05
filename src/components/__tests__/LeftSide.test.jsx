@@ -38,8 +38,9 @@ describe('test LeftSide', () => {
     expect(sunUpDown.length).toBe(2);
     expect(sunUpDown[0]).toHaveTextContent('21:41');
     expect(sunUpDown[1]).toHaveTextContent('04:38');
-    expect(screen.getByText(/luftfuktighet/i)).toBeInTheDocument();
-    expect(screen.getByText(/vind/i)).toBeInTheDocument();
+    expect(screen.getByText(/vind$/i)).toBeInTheDocument();
+    expect(screen.getByText(/vindbyar/i)).toBeInTheDocument();
+    expect(screen.getByText(/2.8 m\/s/i)).toBeInTheDocument();
     expect(snapshot).toMatchSnapshot();
 
     // Click the suntimes button to open modal
