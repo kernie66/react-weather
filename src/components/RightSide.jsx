@@ -1,4 +1,4 @@
-import { Divider, Group, Stack, Text } from '@mantine/core';
+import { Divider, Group, Loader, Stack, Text } from '@mantine/core';
 import { useWeatherData } from '../hooks/weatherQueries.js';
 import classes from '../css/Text.module.css';
 import { useAtomValue } from 'jotai';
@@ -10,13 +10,15 @@ export default function RightSide({ minHeight = '100%' }) {
 
   let windGust = 0;
 
-  if (weatherData) {
-    windGust = weatherData.current.wind_speed;
-    if (weatherData.current.wind_gust) {
-      windGust = weatherData.current.wind_gust;
-    } else if (weatherData.hourly[0].wind_gust) {
-      windGust = weatherData.hourly[0].wind_gust;
-    }
+  if (!weatherData) {
+    return <Loader size={32} color="indigo" />;
+  }
+
+  windGust = weatherData.current.wind_speed;
+  if (weatherData.current.wind_gust) {
+    windGust = weatherData.current.wind_gust;
+  } else if (weatherData.hourly[0].wind_gust) {
+    windGust = weatherData.hourly[0].wind_gust;
   }
 
   return (
