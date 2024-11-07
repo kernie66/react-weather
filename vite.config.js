@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 // import eslint from 'vite-plugin-eslint';
 import eslintPlugin from '@nabla/vite-plugin-eslint';
 import vConsolePlugin from 'vite-plugin-simple-vconsole';
+import topLevelAwait from 'vite-plugin-top-level-await';
 import jotaiDebugLabel from 'jotai/babel/plugin-debug-label';
 import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh';
 
@@ -32,6 +33,12 @@ export default defineConfig(({ mode }) => {
       eslintPlugin(),
       vConsolePlugin({
         enable: true,
+      }),
+      topLevelAwait({
+        // The export name of top-level await promise for each chunk module
+        promiseExportName: '__tla',
+        // The function to generate import names of top-level await promise in each chunk module
+        promiseImportName: (i) => `__tla_${i}`,
       }),
     ],
     server: {

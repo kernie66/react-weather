@@ -162,6 +162,9 @@ importers:
       vite-plugin-simple-vconsole:
         specifier: ^0.1.13
         version: 0.1.13
+      vite-plugin-top-level-await:
+        specifier: ^1.4.4
+        version: 1.4.4(rollup@4.21.1)(vite@5.4.8(@types/node@22.7.5)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
       vitest:
         specifier: ^2.1.2
         version: 2.1.2(@types/node@22.7.5)(@vitest/ui@2.1.2)(jsdom@25.0.1)(msw@2.4.9(typescript@5.4.5))(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1)
@@ -1435,6 +1438,15 @@ packages:
 
   '@react-google-maps/marker-clusterer@2.19.2':
     resolution: {integrity: sha512-x9ibmsP0ZVqzyCo1Pitbw+4b6iEXRw/r1TCy3vOUR3eKrzWLnHYZMR325BkZW2r8fnuWE/V3Fp4QZOP9qYORCw==}
+
+  '@rollup/plugin-virtual@3.0.2':
+    resolution: {integrity: sha512-10monEYsBp3scM4/ND4LNH5Rxvh3e/cVeL3jWTgZ2SrQ+BmUoQcopVQvnaMcOnykb1VkxUFuDAN+0FnpTFRy2A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
 
   '@rollup/rollup-android-arm-eabi@4.21.1':
     resolution: {integrity: sha512-2thheikVEuU7ZxFXubPDOtspKn1x0yqaYQwvALVtEcvFhMifPADBrgRPyHV0TF3b+9BgvgjgagVyvA/UqPZHmg==}
@@ -3878,6 +3890,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+
   vite-node@2.1.2:
     resolution: {integrity: sha512-HPcGNN5g/7I2OtPjLqgOtCRu/qhVvBxTUD3qzitmL0SrG1cWFzxzhMDWussxSbrRYWqnKf8P2jiNhPMSN+ymsQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -3885,6 +3901,11 @@ packages:
 
   vite-plugin-simple-vconsole@0.1.13:
     resolution: {integrity: sha512-Mrm3CSyBDqrZw4FB0to7rcWTC+0qzGjKPCB/wDq3uyvVHcqos7Bw+X/MSiPKP4f+o6Re3Z9hvDdTmRN2xNOVJw==}
+
+  vite-plugin-top-level-await@1.4.4:
+    resolution: {integrity: sha512-QyxQbvcMkgt+kDb12m2P8Ed35Sp6nXP+l8ptGrnHV9zgYDUpraO0CPdlqLSeBqvY2DToR52nutDG7mIHuysdiw==}
+    peerDependencies:
+      vite: '>=2.8'
 
   vite@5.4.8:
     resolution: {integrity: sha512-FqrItQ4DT1NC4zCUqMB4c4AZORMKIa0m8/URVCZ77OZ/QSNeJ54bU1vrFADbDsuwfIPcgknRkmqakQcgnL4GiQ==}
@@ -6130,6 +6151,10 @@ snapshots:
   '@react-google-maps/infobox@2.19.2': {}
 
   '@react-google-maps/marker-clusterer@2.19.2': {}
+
+  '@rollup/plugin-virtual@3.0.2(rollup@4.21.1)':
+    optionalDependencies:
+      rollup: 4.21.1
 
   '@rollup/rollup-android-arm-eabi@4.21.1':
     optional: true
@@ -8831,6 +8856,8 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
+  uuid@10.0.0: {}
+
   vite-node@2.1.2(@types/node@22.7.5)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1):
     dependencies:
       cac: 6.7.14
@@ -8849,6 +8876,16 @@ snapshots:
       - terser
 
   vite-plugin-simple-vconsole@0.1.13: {}
+
+  vite-plugin-top-level-await@1.4.4(rollup@4.21.1)(vite@5.4.8(@types/node@22.7.5)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1)):
+    dependencies:
+      '@rollup/plugin-virtual': 3.0.2(rollup@4.21.1)
+      '@swc/core': 1.7.26
+      uuid: 10.0.0
+      vite: 5.4.8(@types/node@22.7.5)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1)
+    transitivePeerDependencies:
+      - '@swc/helpers'
+      - rollup
 
   vite@5.4.8(@types/node@22.7.5)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1):
     dependencies:

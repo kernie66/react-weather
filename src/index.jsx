@@ -13,6 +13,7 @@ import { Notifications } from '@mantine/notifications';
 
 const theme = createTheme({});
 
+/*
 async function enableMocking() {
   if (!Boolean(import.meta.env.VITE_ENABLE_MSW)) {
     return;
@@ -26,6 +27,7 @@ async function enableMocking() {
 }
 
 await enableMocking();
+*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
