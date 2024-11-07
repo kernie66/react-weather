@@ -2,7 +2,10 @@ import { atom } from 'jotai';
 
 export function atomWithToggle(initialValue) {
   const anAtom = atom(initialValue, (get, set, nextValue) => {
-    const update = nextValue ?? !get(anAtom);
+    let update = !get(anAtom);
+    if ((nextValue === false) | (nextValue === true)) {
+      update = nextValue;
+    }
     set(anAtom, update);
   });
   return anAtom;

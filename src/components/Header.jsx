@@ -1,9 +1,7 @@
 import { TbCheck } from 'react-icons/tb';
 import SelectMapLocation from './SelectMapLocation';
-import { Box, Center, Group, rem, Text } from '@mantine/core';
-import { useDisclosure, useViewportSize } from '@mantine/hooks';
-import SelectHistoryLocation from './SelectHistoryLocation.jsx';
-import classes from '../css/Text.module.css';
+import { Group, rem } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { showNotification } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
@@ -15,25 +13,18 @@ import {
 import { historyToggleState } from '../atoms/toggleStates.js';
 import MenuButton from './MenuButton.jsx';
 import OpenMapButton from './OpenMapButton.jsx';
-
-const titleWidth = 220;
-const paddingWidth = 16 * 2;
-const controlsWidth = 38 * 2;
+import StationLocation from './StationLocation.jsx';
 
 export default function Header() {
   const [currentLocation, setCurrentLocation] = useAtom(
     currentLocationState
   );
   const mapLocation = useAtomValue(mapLocationState);
-  const { width: viewportWidth } = useViewportSize();
   const queryClient = useQueryClient();
   const [mapOpened, { open: openMap, close: closeMap }] =
     useDisclosure(false);
-  const [historyOpened, toggleHistory] = useAtom(historyToggleState);
+  const historyOpened = useAtomValue(historyToggleState);
   const [allowHistoryChange, setAllowHistoryChange] = useState(false);
-
-  const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
-  const buttonWidth = boxWidth - titleWidth - 16;
 
   console.log('Address old:', currentLocation.address);
   console.log('Address new:', mapLocation.address);
@@ -93,32 +84,7 @@ export default function Header() {
         mb={8}
       >
         <MenuButton />
-        <Box w={boxWidth} px={4}>
-          <Center>
-            <Text xs="10" className={classes.outlineHeader}>
-              <Text
-                span
-                px={4}
-                maw={titleWidth}
-                className={classes.outlineHeader}
-              >
-                Väderstation:
-              </Text>
-              <SelectHistoryLocation
-                popover={historyOpened}
-                toggle={toggleHistory}
-                buttonProps={{
-                  size: 'lg',
-                  width: buttonWidth,
-                  variant: 'subtle',
-                  px: 4,
-                }}
-                textClass={classes.outlineHeader}
-                closeOnSelect
-              />
-            </Text>
-          </Center>
-        </Box>
+        <StationLocation />
         <OpenMapButton openMap={openMap} />
       </Group>
     </>

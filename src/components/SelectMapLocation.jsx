@@ -80,6 +80,11 @@ export default function SelectMapLocation({ modal, closeModal }) {
     closeModal();
   };
 
+  // Remove parameter from click callback
+  const togglePopover = () => {
+    toggleMapHistory();
+  };
+
   return (
     <Modal.Root
       fullScreen
@@ -95,7 +100,7 @@ export default function SelectMapLocation({ modal, closeModal }) {
                 Ange adress för väder :&nbsp;&nbsp;
                 <SelectHistoryLocation
                   popover={mapHistoryOpened}
-                  toggle={toggleMapHistory}
+                  toggle={togglePopover}
                 />
               </Text>
               <Button
