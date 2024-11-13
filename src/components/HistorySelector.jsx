@@ -8,20 +8,16 @@ import {
   historyLocationState,
   mapLocationState,
 } from '../atoms/locationStates.js';
-import { useQueryClient } from '@tanstack/react-query';
 import { useSelectHistory } from '../hooks/useSelectHistory.jsx';
 
 export default function HistorySelector({
   toggle,
   closeOnSelect = false,
 }) {
-  const [currentLocation, setCurrentLocation] = useAtom(
-    currentLocationState
-  );
+  const currentLocation = useAtom(currentLocationState);
   const historyLocations = useAtomValue(historyLocationState);
   const setMapLocation = useSetAtom(mapLocationState);
   const [historyValue, setHistoryValue] = useState('');
-  const queryClient = useQueryClient();
   const { selectHistory } = useSelectHistory();
   const onChangeHandler = (value) => {
     setHistoryValue(value);
