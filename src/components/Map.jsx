@@ -5,7 +5,6 @@ import decodeAddress from '../helpers/decodeAddress';
 import SearchAddress from './SearchAddress';
 import SelectOnMap from './SelectOnMap';
 import mapStyles from '../helpers/mapStyles';
-import CurrentPosition from './CurrentPosition';
 import { Center, Loader, Text } from '@mantine/core';
 import { title } from 'radash';
 import { useSetAtom, useAtomValue } from 'jotai';
@@ -90,7 +89,6 @@ export default memo(function Map() {
       mapContainerClassName="map-container"
       onClick={clickOnMap}
     >
-      <CurrentPosition />
       <SearchAddress />
       <SelectOnMap />
     </GoogleMap>

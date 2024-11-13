@@ -1,4 +1,5 @@
 import {
+  act,
   render,
   renderWithNotifications,
   screen,
@@ -11,6 +12,7 @@ import Header from '../Header.jsx';
 import { locationHistoryData } from './data/locationHistoryData.js';
 import { defaultAddress } from '../../atoms/locationStates.js';
 import { fork } from 'radash';
+import { cleanNotifications } from '@mantine/notifications';
 
 const fakeLocationHistory = locationHistoryData;
 const fakeLocationOption =
@@ -20,6 +22,12 @@ describe('test Header and history selection', () => {
   beforeEach(() => {
     testQueryClient.removeQueries();
     localStorage.clear();
+  });
+
+  afterEach(() => {
+    act(() => {
+      cleanNotifications();
+    });
   });
 
   it('renders the header with buttons and empty history selector', async () => {
@@ -53,6 +61,7 @@ describe('test Header and history selection', () => {
       screen.queryByRole('dialog')
     );
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
+    console.log('End of first test');
   });
 
   it('renders the header and selects history location with mouse', async () => {
@@ -68,6 +77,7 @@ describe('test Header and history selection', () => {
       name: /historik/i,
     });
     expect(historyButton).toBeInTheDocument();
+    screen.debug(undefined, Infinity);
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
     expect(screen.queryByRole('listbox')).toBeNull();
 

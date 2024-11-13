@@ -1,13 +1,13 @@
 import { Button, Popover, Text, VisuallyHidden } from '@mantine/core';
-import { useClickOutside, useId } from '@mantine/hooks';
+import { useClickOutside } from '@mantine/hooks';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { currentLocationState } from '../atoms/locationStates.js';
 import classes from '../css/Text.module.css';
 import HistorySelector from './HistorySelector.jsx';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
-const refID = nanoid(10);
+// const refID = nanoid(10);
 
 export default function SelectHistoryLocation({
   popover,
@@ -20,8 +20,7 @@ export default function SelectHistoryLocation({
   const [target, setTarget] = useState(null);
   const [dropdown, setDropdown] = useState(null);
 
-  const keyID = useId(refID);
-  console.log('keyID', keyID);
+  // const keyID = useId(refID);
 
   const handleClickOutside = () => {
     console.debug('Clicked outside');

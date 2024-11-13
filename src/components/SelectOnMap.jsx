@@ -13,7 +13,7 @@ export default function SelectOnMap() {
     <>
       <MarkerF
         position={mapLocation.position}
-        icon="http://maps.google.com/mapfiles/ms/icons/blue.png"
+        icon="https://maps.google.com/mapfiles/ms/icons/blue.png"
         onClick={clickOnMarker}
         className="marked-position"
       />

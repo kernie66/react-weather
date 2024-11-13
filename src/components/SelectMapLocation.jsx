@@ -18,6 +18,7 @@ import {
 } from '../atoms/locationStates.js';
 import { mapHistoryToggleState } from '../atoms/toggleStates.js';
 import { replaceOrAppend } from 'radash';
+import CurrentPosition from './CurrentPosition.jsx';
 
 const Map = lazy(() => import('./Map.jsx'));
 
@@ -125,6 +126,7 @@ export default function SelectMapLocation({ modal, closeModal }) {
               >
                 Hem
               </Button>
+              <CurrentPosition selectPosition={selectPosition} />
             </Group>
           </Modal.Title>
           <Modal.CloseButton

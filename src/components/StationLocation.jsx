@@ -16,8 +16,10 @@ export default function StationLocation() {
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
 
+  console.log('historyOpened', historyOpened);
   // Remove any click-introduced parameter from togglePopover
   const togglePopover = () => {
+    console.log('historyOpened, to be toggled', historyOpened);
     toggleHistory();
   };
 
