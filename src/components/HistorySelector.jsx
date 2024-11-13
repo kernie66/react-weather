@@ -1,6 +1,6 @@
-import { Autocomplete, CloseButton, rem } from '@mantine/core';
+import { Autocomplete, CloseButton } from '@mantine/core';
 import { useState } from 'react';
-import { isEmpty, select } from 'radash';
+import { isEmpty } from 'radash';
 import { FiDelete } from 'react-icons/fi';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import {
@@ -9,8 +9,7 @@ import {
   mapLocationState,
 } from '../atoms/locationStates.js';
 import { useQueryClient } from '@tanstack/react-query';
-import { showNotification } from '@mantine/notifications';
-import { TbCheck } from 'react-icons/tb';
+import { useSelectHistory } from '../hooks/useSelectHistory.jsx';
 
 export default function HistorySelector({
   toggle,
@@ -23,43 +22,13 @@ export default function HistorySelector({
   const setMapLocation = useSetAtom(mapLocationState);
   const [historyValue, setHistoryValue] = useState('');
   const queryClient = useQueryClient();
-
+  const { selectHistory } = useSelectHistory();
   const onChangeHandler = (value) => {
     setHistoryValue(value);
   };
 
-  const setLocation = (newLocation) => {
-    console.log('setLocation called with:', newLocation.address);
-    setCurrentLocation(newLocation);
-    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
-    showNotification({
-      id: 'weatherUpdate',
-      title: 'Väderposition uppdaterad',
-      message: newLocation.address,
-      color: 'green',
-      icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
-      autoClose: 5000,
-      closeButtonProps: { 'aria-label': 'Stäng notis' },
-    });
-  };
-
-  const selectHistory = (selection) => {
-    console.log('selectHistory called with selection:', selection);
-    let historyLocation = currentLocation;
-    if (selection !== 'Ingen historik') {
-      const newHistoryLocation = select(
-        historyLocations,
-        (h) => h,
-        (h) => h.address === selection
-      );
-      historyLocation = newHistoryLocation[0];
-    }
-    console.log('historyLocation', historyLocation);
-    setMapLocation(historyLocation);
-    if (closeOnSelect) {
-      setLocation(historyLocation);
-      toggle();
-    }
+  const submitHistory = (selection) => {
+    selectHistory(selection, toggle);
   };
 
   const clearHistoryInput = () => {
@@ -83,7 +52,7 @@ export default function HistorySelector({
       data-autofocus
       selectFirstOptionOnChange
       onChange={onChangeHandler}
-      onOptionSubmit={selectHistory}
+      onOptionSubmit={submitHistory}
       comboboxProps={{ withinPortal: false, shadow: 'md' }}
       rightSection={
         historyValue !== '' && (
