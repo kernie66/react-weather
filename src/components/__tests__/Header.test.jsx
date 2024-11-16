@@ -61,7 +61,6 @@ describe('test Header and history selection', () => {
       screen.queryByRole('dialog')
     );
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
-    console.log('End of first test');
   });
 
   it('renders the header and selects history location with mouse', async () => {
@@ -77,7 +76,6 @@ describe('test Header and history selection', () => {
       name: /historik/i,
     });
     expect(historyButton).toBeInTheDocument();
-    screen.debug(undefined, Infinity);
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
     expect(screen.queryByRole('listbox')).toBeNull();
 
@@ -144,6 +142,7 @@ describe('test Header and history selection', () => {
       name: /historik/i,
     });
     expect(historyButton).toBeInTheDocument();
+    screen.debug(undefined, Infinity);
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
     expect(screen.queryByRole('listbox')).toBeNull();
 

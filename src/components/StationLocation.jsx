@@ -2,8 +2,14 @@ import { Box, Center, Text } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import classes from '../css/Text.module.css';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { historyToggleState } from '../atoms/toggleStates.js';
+import {
+  currentLocationState,
+  mapLocationState,
+} from '../atoms/locationStates';
+import { useAtomValue } from 'jotai';
+import { useEffect } from 'react';
 
 const titleWidth = 220;
 const paddingWidth = 16 * 2;
@@ -12,14 +18,19 @@ const controlsWidth = 38 * 2;
 export default function StationLocation() {
   const { width: viewportWidth } = useViewportSize();
   const [historyOpened, toggleHistory] = useAtom(historyToggleState);
+  const currentLocation = useAtomValue(currentLocationState);
+  const setMapLocation = useSetAtom(mapLocationState);
 
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
 
-  console.log('historyOpened', historyOpened);
+  useEffect(() => {
+    setMapLocation(currentLocation);
+    console.log('Update map location');
+  });
+
   // Remove any click-introduced parameter from togglePopover
   const togglePopover = () => {
-    console.log('historyOpened, to be toggled', historyOpened);
     toggleHistory();
   };
 

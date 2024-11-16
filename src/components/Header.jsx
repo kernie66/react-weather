@@ -9,14 +9,9 @@ export default function Header() {
   const [mapOpened, { open: openMap, close: closeMap }] =
     useDisclosure(false);
 
-  const closeMap2 = () => {
-    closeMap();
-    console.log('Close map');
-  };
-
   return (
     <>
-      <SelectMapLocation modal={mapOpened} closeModal={closeMap2} />
+      <SelectMapLocation modal={mapOpened} closeModal={closeMap} />
       <Group
         className="weather-header"
         justify="space-between"

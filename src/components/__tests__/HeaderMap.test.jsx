@@ -1,7 +1,13 @@
 import { vi } from 'vitest';
-import { render, screen, userEvent } from '../../../testing-utils';
+import {
+  act,
+  render,
+  screen,
+  userEvent,
+} from '../../../testing-utils';
 import Header from '../Header.jsx';
 import { useJsApiLoader } from '@react-google-maps/api';
+import { cleanNotifications } from '@mantine/notifications';
 // Mock the Google modules
 vi.mock('@react-google-maps/api', () => ({
   GoogleMap: vi.fn(),
@@ -20,6 +26,9 @@ vi.mock('@mantine/hooks', async (importOriginal) => {
 describe('test Map modal of Header', () => {
   afterEach(() => {
     vi.clearAllMocks();
+    act(() => {
+      cleanNotifications();
+    });
   });
 
   afterAll(() => {

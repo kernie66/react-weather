@@ -21,7 +21,7 @@ export default function SelectHistoryLocation({
   const [dropdown, setDropdown] = useState(null);
 
   // const keyID = useId(refID);
-
+  console.log('Select History mapLocation', mapLocation);
   const handleClickOutside = () => {
     console.debug('Clicked outside');
     toggle();
