@@ -70,12 +70,11 @@ export default function CurrentPosition({ selectPosition }) {
     console.log('position', position);
     const results = await getGeocode({ location: position });
     console.debug('Address:', results[0].formatted_address);
-    if (position) {
-      setMapLocation({
-        address: title(decodeAddress(results[0])),
-        position: position,
-      });
-    }
+    const userLocation = {
+      address: title(decodeAddress(results[0])),
+      position: position,
+    };
+    setMapLocation(userLocation);
     setConfirmModalText({
       title: (
         <Text fz={22} fw={500}>
@@ -101,7 +100,8 @@ export default function CurrentPosition({ selectPosition }) {
     const confirm = await getConfirmation();
     if (confirm) {
       console.log('Byt plats');
-      selectPosition();
+      selectPosition(userLocation);
+      //setLocation(userLocation);
     } else {
       console.log('Behåll plats');
       setMapLocation(oldLocation);

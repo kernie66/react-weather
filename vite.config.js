@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
       }),
       eslintPlugin(),
       vConsolePlugin({
-        enable: true,
+        enable: false,
       }),
       topLevelAwait({
         // The export name of top-level await promise for each chunk module

@@ -1,14 +1,10 @@
-import { TbHomeCheck } from 'react-icons/tb';
-import { GiPositionMarker } from 'react-icons/gi';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { Button, Group, Modal, Text, rem } from '@mantine/core';
-// import Map from './Map';
-import { useQueryClient } from '@tanstack/react-query';
-import { TbCheck } from 'react-icons/tb';
-import { showNotification } from '@mantine/notifications';
-import SelectHistoryLocation from './SelectHistoryLocation.jsx';
+import { Button, Group, Modal, Text } from '@mantine/core';
+import { useAtom, useAtomValue } from 'jotai';
+import { replaceOrAppend } from 'radash';
 import { lazy, Suspense } from 'react';
-import { useAtom } from 'jotai';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { GiPositionMarker } from 'react-icons/gi';
+import { TbHomeCheck } from 'react-icons/tb';
 import {
   currentLocationState,
   defaultAddress,
@@ -17,39 +13,36 @@ import {
   mapLocationState,
 } from '../atoms/locationStates.js';
 import { mapHistoryToggleState } from '../atoms/toggleStates.js';
-import { replaceOrAppend } from 'radash';
+import { useSetLocation } from '../hooks/useSetLocation.jsx';
 import CurrentPosition from './CurrentPosition.jsx';
+import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 
 const Map = lazy(() => import('./Map.jsx'));
 
 export default function SelectMapLocation({ modal, closeModal }) {
-  const [currentLocation, setCurrentLocation] = useAtom(
-    currentLocationState
-  );
+  const currentLocation = useAtomValue(currentLocationState);
   const [mapLocation, setMapLocation] = useAtom(mapLocationState);
   const [historyLocations, setHistoryLocations] = useAtom(
     historyLocationState
   );
-  const queryClient = useQueryClient();
   const [mapHistoryOpened, toggleMapHistory] = useAtom(
     mapHistoryToggleState
   );
+  const { setLocation } = useSetLocation();
 
-  const selectPosition = () => {
-    setCurrentLocation(mapLocation);
-    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
-    showNotification({
-      title: 'Väderposition uppdaterad',
-      message: mapLocation.address,
-      color: 'green',
-      icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
-      autoClose: 5000,
-    });
-    if (mapLocation.address !== defaultAddress) {
+  const selectPosition = (newLocation) => {
+    let selectedLocation = mapLocation;
+
+    // Check if a new location is sent as parameter, and not a click object
+    if ('address' in newLocation && 'position' in newLocation) {
+      selectedLocation = newLocation;
+    }
+    setLocation(selectedLocation);
+    if (selectedLocation.address !== defaultAddress) {
       const newHistory = replaceOrAppend(
         historyLocations,
-        mapLocation,
-        (loc) => loc.address === mapLocation.address
+        selectedLocation,
+        (loc) => loc.address === selectedLocation.address
       );
       setHistoryLocations(newHistory);
     }
@@ -66,17 +59,9 @@ export default function SelectMapLocation({ modal, closeModal }) {
       address: defaultAddress,
       position: defaultPosition,
     });
-    setCurrentLocation({
+    setLocation({
       address: defaultAddress,
       position: defaultPosition,
-    });
-    queryClient.invalidateQueries({ queryKey: ['weatherData'] });
-    showNotification({
-      title: 'Väderposition satt till hemadressen',
-      message: defaultAddress, // 'Välkommen hem',
-      color: 'green',
-      icon: <TbCheck style={{ width: rem(18), height: rem(18) }} />,
-      autoClose: 5000,
     });
     closeModal();
   };

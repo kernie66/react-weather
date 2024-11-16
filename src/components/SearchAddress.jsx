@@ -43,8 +43,6 @@ export default function SearchAddress() {
   });
 
   useEffect(() => {
-    // map.panTo(getPosition);
-    console.log('MapPosition:', mapLocation.position);
     const newLocation = new window.google.maps.LatLng(
       mapLocation.position
     );
@@ -53,13 +51,12 @@ export default function SearchAddress() {
   }, [map, mapLocation]);
 
   async function selectionHandler(selection) {
-    console.log('selection', selection);
     if (selection) {
       const address = title(selection);
       // setAddress(address);
       setValue(address, false);
       clearSuggestions();
-      console.log('Select:', address);
+      console.debug('Select:', address);
       const results = await getGeocode({ address: address });
       const coords = getLatLng(results[0]);
       setMapLocation({
