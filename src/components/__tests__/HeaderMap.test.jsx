@@ -24,7 +24,18 @@ vi.mock('@mantine/hooks', async (importOriginal) => {
 
 // const spy = vi.spyOn(Header.prototype, 'closeMap');
 describe('test Map modal of Header', () => {
+  const originalWindow = window.location;
+  const originalNavigator = navigator.geolocation;
+
   afterEach(() => {
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: originalWindow,
+    });
+    Object.defineProperty(navigator, 'geolocation', {
+      configurable: true,
+      value: originalNavigator,
+    });
     vi.clearAllMocks();
     act(() => {
       cleanNotifications();
@@ -35,8 +46,17 @@ describe('test Map modal of Header', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders header and opens map', async () => {
+  it('renders header and opens map with position, https:', async () => {
     const user = userEvent.setup();
+
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: { protocol: 'https:' },
+    });
+    Object.defineProperty(navigator, 'geolocation', {
+      configurable: true,
+      value: { getCurrentPosition: vi.fn() },
+    });
 
     useJsApiLoader.mockReturnValue({
       loadError: false,
@@ -45,15 +65,22 @@ describe('test Map modal of Header', () => {
 
     render(<Header />);
 
-    // Click on the Map button
+    // Find the Map button
     const mapButton = await screen.findByRole('button', {
       name: /öppna karta/i,
     });
     expect(mapButton).toBeVisible();
+
+    // Click on the Map button
     await user.click(mapButton);
     expect(
       await screen.findByText(/ange adress för väder/i)
     ).toBeInTheDocument();
+
+    // Check that geoposition is available and called
+    expect(
+      navigator.geolocation.getCurrentPosition
+    ).toHaveBeenCalledTimes(1);
 
     // Wait for Map to load
     expect(
@@ -76,6 +103,53 @@ describe('test Map modal of Header', () => {
       name: /hem/i,
     });
     expect(homeButton).toBeInTheDocument();
+
+    // Check that the current Position button is available
+    const positionButton = await screen.findByRole('button', {
+      name: /position/i,
+    });
+    expect(positionButton).toBeInTheDocument();
+
+    // Check that the Close button is available and click on it
+    const closeButton = screen.getByRole('button', {
+      name: /stäng karta/i,
+    });
+    expect(closeButton).toBeInTheDocument();
+    await user.click(closeButton);
+  });
+
+  it('renders header and opens map, no position, http:', async () => {
+    const user = userEvent.setup();
+
+    useJsApiLoader.mockReturnValue({
+      loadError: false,
+      isLoading: true,
+    });
+
+    render(<Header />);
+
+    // Find the Map button
+    const mapButton = await screen.findByRole('button', {
+      name: /öppna karta/i,
+    });
+    expect(mapButton).toBeVisible();
+
+    // Click on the Map button
+    await user.click(mapButton);
+    expect(
+      await screen.findByText(/ange adress för väder/i)
+    ).toBeInTheDocument();
+
+    // Check mocked loading of Google Maps
+    expect(
+      await screen.findByText(/väntar på google maps/i)
+    ).toBeInTheDocument();
+
+    // Check that the current Position button is available
+    const positionButton = await screen.queryByRole('button', {
+      name: /position/i,
+    });
+    expect(positionButton).not.toBeInTheDocument();
 
     // Check that the Close button is available and click on it
     const closeButton = screen.getByRole('button', {

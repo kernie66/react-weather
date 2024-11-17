@@ -26,7 +26,7 @@ export default function StationLocation() {
 
   useEffect(() => {
     setMapLocation(currentLocation);
-    console.log('Update map location');
+    console.log('Update map location to current location');
   });
 
   // Remove any click-introduced parameter from togglePopover
