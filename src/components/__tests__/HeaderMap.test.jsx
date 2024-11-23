@@ -96,7 +96,7 @@ describe('test Map modal buttons of Header', () => {
 
     // Check that the History button is available
     const historyButton = await screen.findByRole('button', {
-      name: /historik/i,
+      name: /historik för karta/i,
     });
     expect(historyButton).toBeInTheDocument();
 

@@ -8,6 +8,7 @@ import vConsolePlugin from 'vite-plugin-simple-vconsole';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import jotaiDebugLabel from 'jotai/babel/plugin-debug-label';
 import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh';
+// import MillionLint from '@million/lint';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -25,6 +26,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      // MillionLint.vite(),
       react({
         babel: {
           plugins: [jotaiDebugLabel, jotaiReactRefresh],
