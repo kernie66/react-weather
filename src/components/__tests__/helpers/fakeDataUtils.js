@@ -18,8 +18,6 @@ export const getSelectedOptions = (searchTerm) => {
   return selected;
 };
 
-export const setPersistedLocation = (option = 1) => {};
-
 export const setPersistedHistory = () => {
   localStorage.setItem(
     'locationHistory',

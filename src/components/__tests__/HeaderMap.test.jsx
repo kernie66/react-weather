@@ -28,6 +28,13 @@ describe('test Map modal buttons of Header', () => {
   const originalWindow = window.location;
   const originalNavigator = navigator.geolocation;
 
+  beforeAll(() => {
+    useJsApiLoader.mockReturnValue({
+      loadError: false,
+      isLoading: true,
+    });
+  });
+
   afterEach(() => {
     Object.defineProperty(window, 'location', {
       configurable: true,
@@ -60,11 +67,6 @@ describe('test Map modal buttons of Header', () => {
       value: { getCurrentPosition: vi.fn() },
     });
 
-    useJsApiLoader.mockReturnValue({
-      loadError: false,
-      isLoading: true,
-    });
-
     render(<Header />);
 
     // Find the Map button
@@ -94,7 +96,7 @@ describe('test Map modal buttons of Header', () => {
       await screen.findByText(/väntar på google maps/i)
     ).toBeInTheDocument();
 
-    // Check that the History button is available
+    // Check that the History button in the map header is available
     const historyButton = await screen.findByRole('button', {
       name: /historik för karta/i,
     });
@@ -124,11 +126,6 @@ describe('test Map modal buttons of Header', () => {
 
   it('renders header and opens map, no position, http:', async () => {
     const user = userEvent.setup();
-
-    useJsApiLoader.mockReturnValue({
-      loadError: false,
-      isLoading: true,
-    });
 
     render(<Header />);
 

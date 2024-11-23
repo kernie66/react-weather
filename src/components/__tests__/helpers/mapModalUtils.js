@@ -56,11 +56,21 @@ export const deleteInput = async (user, screen) => {
   await user.click(deleteButton);
 };
 
+export const selectHome = async (user, screen) => {
+  // Check that the Close button is available and click on it
+  const homeButton = screen.getByRole('button', {
+    name: /hem/i,
+    hidden: true,
+  });
+  expect(homeButton).toBeVisible();
+  await user.click(homeButton);
+};
+
 export const closeMap = async (user, screen) => {
   // Check that the Close button is available and click on it
   const closeButton = screen.getByRole('button', {
     name: /stäng karta/i,
   });
-  expect(closeButton).toBeInTheDocument();
+  expect(closeButton).toBeVisible();
   await user.click(closeButton);
 };
