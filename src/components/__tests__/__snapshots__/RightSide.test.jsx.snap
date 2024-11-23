@@ -12,7 +12,7 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
       </style>
       <div
         class="right-side--stack m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: space-between; min-height: 100%;"
+        style="--stack-gap: var(--mantine-spacing-md); --stack-align: flex-end; --stack-justify: space-between; min-height: 100%;"
       >
         <div
           class="m_6d731127 mantine-Stack-root"
@@ -118,7 +118,7 @@ exports[`test RightSide > renders right side info with current wind gust 1`] = `
     </style>
     <div
       class="right-side--stack m_6d731127 mantine-Stack-root"
-      style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: space-between; min-height: 100%;"
+      style="--stack-gap: var(--mantine-spacing-md); --stack-align: flex-end; --stack-justify: space-between; min-height: 100%;"
     >
       <div
         class="m_6d731127 mantine-Stack-root"

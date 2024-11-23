@@ -15,6 +15,7 @@ export default function RightSide({ minHeight = '100%' }) {
     <Stack
       className="right-side--stack"
       mih={minHeight}
+      align="flex-end"
       justify="space-between"
       gap="md"
     >
