@@ -77,14 +77,14 @@ exports[`test Header and history selection > renders the header with buttons and
                 Väderstation:
               </span>
               <button
-                aria-controls=""
+                aria-controls="Station-dropdown"
                 aria-expanded="false"
                 aria-haspopup="dialog"
                 class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
                 data-size="lg"
                 data-variant="subtle"
                 data-with-right-section="true"
-                id=""
+                id="Station-target"
                 justify="space-between"
                 style="--button-justify: space-between; --button-height: var(--button-height-lg); --button-padding-x: var(--button-padding-x-lg); --button-fz: var(--mantine-font-size-lg); --button-bg: transparent; --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; vertical-align: baseline; padding-inline: calc(0.25rem * var(--mantine-scale)); max-width: calc(41.5rem * var(--mantine-scale));"
                 type="button"
@@ -105,7 +105,8 @@ exports[`test Header and history selection > renders the header with buttons and
                     <span
                       class="m_515a97f8 mantine-VisuallyHidden-root"
                     >
-                      Historik
+                      Historik för 
+                      Station
                     </span>
                   </span>
                   <span
@@ -259,14 +260,14 @@ exports[`test Header and history selection > renders the header with buttons and
               Väderstation:
             </span>
             <button
-              aria-controls=""
+              aria-controls="Station-dropdown"
               aria-expanded="false"
               aria-haspopup="dialog"
               class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
               data-size="lg"
               data-variant="subtle"
               data-with-right-section="true"
-              id=""
+              id="Station-target"
               justify="space-between"
               style="--button-justify: space-between; --button-height: var(--button-height-lg); --button-padding-x: var(--button-padding-x-lg); --button-fz: var(--mantine-font-size-lg); --button-bg: transparent; --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; vertical-align: baseline; padding-inline: calc(0.25rem * var(--mantine-scale)); max-width: calc(41.5rem * var(--mantine-scale));"
               type="button"
@@ -287,7 +288,8 @@ exports[`test Header and history selection > renders the header with buttons and
                   <span
                     class="m_515a97f8 mantine-VisuallyHidden-root"
                   >
-                    Historik
+                    Historik för 
+                    Station
                   </span>
                 </span>
                 <span

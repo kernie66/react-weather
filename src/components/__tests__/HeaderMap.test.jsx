@@ -8,6 +8,7 @@ import {
 import Header from '../Header.jsx';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { cleanNotifications } from '@mantine/notifications';
+import { closeMap } from './helpers/mapModalUtils.js';
 // Mock the Google modules
 vi.mock('@react-google-maps/api', () => ({
   GoogleMap: vi.fn(),
@@ -23,7 +24,7 @@ vi.mock('@mantine/hooks', async (importOriginal) => {
 });
 
 // const spy = vi.spyOn(Header.prototype, 'closeMap');
-describe('test Map modal of Header', () => {
+describe('test Map modal buttons of Header', () => {
   const originalWindow = window.location;
   const originalNavigator = navigator.geolocation;
 
@@ -49,6 +50,7 @@ describe('test Map modal of Header', () => {
   it('renders header and opens map with position, https:', async () => {
     const user = userEvent.setup();
 
+    // Ensure geolocation is active for current position
     Object.defineProperty(window, 'location', {
       configurable: true,
       value: { protocol: 'https:' },
@@ -92,6 +94,12 @@ describe('test Map modal of Header', () => {
       await screen.findByText(/väntar på google maps/i)
     ).toBeInTheDocument();
 
+    // Check that the History button is available
+    const historyButton = await screen.findByRole('button', {
+      name: /historik/i,
+    });
+    expect(historyButton).toBeInTheDocument();
+
     // Check that the Select button is available
     const selectButton = await screen.findByRole('button', {
       name: /välj/i,
@@ -110,12 +118,8 @@ describe('test Map modal of Header', () => {
     });
     expect(positionButton).toBeInTheDocument();
 
-    // Check that the Close button is available and click on it
-    const closeButton = screen.getByRole('button', {
-      name: /stäng karta/i,
-    });
-    expect(closeButton).toBeInTheDocument();
-    await user.click(closeButton);
+    // Click the Close button
+    await closeMap(user, screen);
   });
 
   it('renders header and opens map, no position, http:', async () => {
@@ -151,12 +155,7 @@ describe('test Map modal of Header', () => {
     });
     expect(positionButton).not.toBeInTheDocument();
 
-    // Check that the Close button is available and click on it
-    const closeButton = screen.getByRole('button', {
-      name: /stäng karta/i,
-    });
-    expect(closeButton).toBeInTheDocument();
-    await user.click(closeButton);
-    screen.debug(undefined, Infinity);
+    // Click the Close button
+    await closeMap(user, screen);
   });
 });

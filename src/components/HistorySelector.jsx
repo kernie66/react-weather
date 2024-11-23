@@ -46,6 +46,7 @@ export default function HistorySelector({
       data={historyData}
       dropdownOpened
       data-autofocus
+      data-testid="history"
       selectFirstOptionOnChange
       onChange={onChangeHandler}
       onOptionSubmit={submitHistory}
@@ -55,7 +56,7 @@ export default function HistorySelector({
           <CloseButton
             icon={<FiDelete size={20} />}
             onClick={clearHistoryInput}
-            aria-label="Clear value"
+            aria-label="Radera inmatning"
           />
         )
       }

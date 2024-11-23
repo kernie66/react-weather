@@ -113,7 +113,7 @@ export default function SearchAddress() {
             <CloseButton
               icon={<FiDelete size={20} />}
               onClick={() => setValue('', false)}
-              aria-label="Clear value"
+              aria-label="Radera inmatning"
             />
           )
         }

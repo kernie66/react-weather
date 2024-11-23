@@ -15,6 +15,7 @@ export default function SelectHistoryLocation({
   buttonProps = { size: 'sm', variant: 'light', px: 'sm' },
   textClass = classes.historyButton,
   closeOnSelect = false,
+  historyID = '',
 }) {
   const mapLocation = useAtomValue(mapLocationState);
   const [target, setTarget] = useState(null);
@@ -30,6 +31,7 @@ export default function SelectHistoryLocation({
 
   return (
     <Popover
+      id={historyID}
       width={300}
       opened={popover}
       trapFocus
@@ -57,7 +59,7 @@ export default function SelectHistoryLocation({
           >
             {mapLocation.address}
           </Text>
-          <VisuallyHidden>Historik</VisuallyHidden>
+          <VisuallyHidden>Historik för {historyID}</VisuallyHidden>
         </Button>
       </Popover.Target>
       <Popover.Dropdown ref={setDropdown}>

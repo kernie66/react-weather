@@ -1,5 +1,5 @@
 import { Box, Center, Text } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
+import { useId, useViewportSize } from '@mantine/hooks';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
 import classes from '../css/Text.module.css';
 import { useAtom, useSetAtom } from 'jotai';
@@ -20,6 +20,7 @@ export default function StationLocation() {
   const [historyOpened, toggleHistory] = useAtom(historyToggleState);
   const currentLocation = useAtomValue(currentLocationState);
   const setMapLocation = useSetAtom(mapLocationState);
+  const keyId = useId('Station');
 
   const boxWidth = viewportWidth - paddingWidth - controlsWidth - 16;
   const buttonWidth = boxWidth - titleWidth - 16;
@@ -47,6 +48,7 @@ export default function StationLocation() {
             Väderstation:
           </Text>
           <SelectHistoryLocation
+            historyID={keyId}
             popover={historyOpened}
             toggle={togglePopover}
             buttonProps={{

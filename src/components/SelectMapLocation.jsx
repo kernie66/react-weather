@@ -1,4 +1,10 @@
-import { Button, Group, Modal, Text } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  Text,
+  VisuallyHidden,
+} from '@mantine/core';
 import { useAtom, useAtomValue } from 'jotai';
 import { replaceOrAppend } from 'radash';
 import { lazy, Suspense } from 'react';
@@ -16,6 +22,7 @@ import { mapHistoryToggleState } from '../atoms/toggleStates.js';
 import { useSetLocation } from '../hooks/useSetLocation.jsx';
 import CurrentPosition from './CurrentPosition.jsx';
 import SelectHistoryLocation from './SelectHistoryLocation.jsx';
+import { useId } from '@mantine/hooks';
 
 const Map = lazy(() => import('./Map.jsx'));
 
@@ -29,7 +36,9 @@ export default function SelectMapLocation({ modal, closeModal }) {
     mapHistoryToggleState
   );
   const { setLocation } = useSetLocation();
+  const keyId = useId('Karta');
 
+  console.log('modal', modal);
   const selectPosition = (newLocation) => {
     let selectedLocation = mapLocation;
 
@@ -46,11 +55,13 @@ export default function SelectMapLocation({ modal, closeModal }) {
       );
       setHistoryLocations(newHistory);
     }
+    toggleMapHistory(false);
     closeModal();
   };
 
   const restorePosition = () => {
     setMapLocation(currentLocation);
+    toggleMapHistory(false);
     closeModal();
   };
 
@@ -63,6 +74,7 @@ export default function SelectMapLocation({ modal, closeModal }) {
       address: defaultAddress,
       position: defaultPosition,
     });
+    toggleMapHistory(false);
     closeModal();
   };
 
@@ -85,6 +97,7 @@ export default function SelectMapLocation({ modal, closeModal }) {
               <Text fw={500} fz="h3">
                 Ange adress för väder :&nbsp;&nbsp;
                 <SelectHistoryLocation
+                  historyID={keyId}
                   popover={mapHistoryOpened}
                   toggle={togglePopover}
                 />
@@ -113,6 +126,7 @@ export default function SelectMapLocation({ modal, closeModal }) {
               </Button>
               <CurrentPosition selectPosition={selectPosition} />
             </Group>
+            <VisuallyHidden>Karthuvud</VisuallyHidden>
           </Modal.Title>
           <Modal.CloseButton
             icon={<AiOutlineCloseCircle size={40} />}
