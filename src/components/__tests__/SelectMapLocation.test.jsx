@@ -1,6 +1,6 @@
 import { cleanNotifications } from '@mantine/notifications';
 import { useJsApiLoader } from '@react-google-maps/api';
-import { vi } from 'vitest';
+import { vi, expect } from 'vitest';
 import {
   act,
   renderWithNotifications,
@@ -16,14 +16,17 @@ import {
   selectHome,
   selectLocation,
   selectOption,
+  selectPosition,
 } from './helpers/mapModalUtils.js';
 import {
+  FakeGeocodeResult,
   FakeLocationHistory,
   getFakeLocationOption,
   setPersistedHistory,
 } from './helpers/fakeDataUtils.js';
 import SetFakeLocations from './helpers/SetFakeLocations.jsx';
 import { defaultAddress } from '../../atoms/locationStates.js';
+import { getGeocode } from 'use-places-autocomplete';
 
 // Mock the Google modules
 vi.mock('@react-google-maps/api', () => ({
@@ -31,7 +34,9 @@ vi.mock('@react-google-maps/api', () => ({
   useJsApiLoader: vi.fn(),
 }));
 vi.mock('use-places-autocomplete', () => ({
-  getGeocode: vi.fn(),
+  getGeocode: vi
+    .fn()
+    .mockImplementation(async () => FakeGeocodeResult),
 }));
 
 vi.mock('@mantine/hooks', async (importOriginal) => {
@@ -64,7 +69,17 @@ describe('test SelectMapLocation modal', () => {
     });
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
-      value: { getCurrentPosition: vi.fn() },
+      value: {
+        getCurrentPosition: vi
+          .fn()
+          .mockImplementationOnce((success) =>
+            Promise.resolve(
+              success({
+                coords: { latitude: 66.66, longitude: -66.66 },
+              })
+            )
+          ),
+      },
     });
   });
 
@@ -214,7 +229,6 @@ describe('test SelectMapLocation modal', () => {
     // Click the Home button
     await selectHome(user, screen);
 
-    screen.debug(undefined, Infinity);
     // Wait for the modal to close
     expect(
       await screen.findAllByRole('dialog', { hidden: true })
@@ -236,5 +250,89 @@ describe('test SelectMapLocation modal', () => {
 
   it('selects current browser location', async () => {
     const user = userEvent.setup();
+    const initialOption = 5;
+
+    // setPersistedHistory();
+
+    renderWithNotifications(
+      <>
+        <SetFakeLocations option={initialOption} />
+        <SelectMapLocation modal={true} closeModal={closeModal} />
+      </>
+    );
+
+    // Check the rendered modal
+    expect(
+      await screen.findByText(/ange adress för väder/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(getFakeLocationOption(initialOption))
+    ).toBeInTheDocument();
+    expect(await screen.queryByRole('listbox')).toBeNull();
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(1);
+
+    // Click the Position button
+    await selectPosition(user, screen);
+
+    // Wait for the confirm modal to appear
+    const cancelButton = await screen.findByRole('button', {
+      name: /avbryt/i,
+      hidden: true,
+    });
+    expect(cancelButton).toBeVisible();
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(2);
+    expect(getGeocode).toHaveBeenCalledTimes(1);
+
+    // Click the cancel button to close confirm modal only
+    await user.click(cancelButton);
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(1);
+
+    // Click the Position button
+    await selectPosition(user, screen);
+
+    // Wait for the confirm modal to appear
+    const confirmButton = await screen.findByRole('button', {
+      name: /bekräfta/i,
+      hidden: true,
+    });
+    expect(confirmButton).toBeVisible();
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(2);
+    expect(getGeocode).toHaveBeenCalledTimes(2);
+    expect(
+      screen.getByText(getFakeLocationOption(initialOption))
+    ).toBeInTheDocument();
+    const regexCurrentLocation = new RegExp(
+      FakeGeocodeResult[0].address_components[1].long_name
+    );
+    expect(screen.getAllByText(regexCurrentLocation)).toHaveLength(2);
+
+    // Click to Confirm new address
+    await user.click(confirmButton);
+
+    // Wait for the modal to close
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(1);
+    expect(closeModal).toHaveBeenCalledTimes(1);
+
+    // Check that the notification is shown
+    const notification = await screen.findByRole('alert');
+    expect(notification).toBeInTheDocument();
+    expect(
+      screen.getByText(/väderposition uppdaterad/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByText(regexCurrentLocation, {
+        hidden: true,
+      })
+    ).toHaveLength(2);
   });
 });

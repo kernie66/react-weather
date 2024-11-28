@@ -137,7 +137,6 @@ describe('test Header and history selection', () => {
       name: /historik/i,
     });
     expect(historyButton).toBeInTheDocument();
-    screen.debug(undefined, Infinity);
     expect(screen.getByText(defaultAddress)).toBeInTheDocument();
     expect(screen.queryByRole('listbox')).toBeNull();
 

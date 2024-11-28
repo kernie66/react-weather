@@ -24,3 +24,40 @@ export const setPersistedHistory = () => {
     JSON.stringify(FakeLocationHistory)
   );
 };
+
+export const FakeGeocodeResult = [
+  {
+    address_components: [
+      {
+        long_name: '1A',
+        types: ['street_number'],
+      },
+      {
+        long_name: 'Testvägen',
+        types: ['route'],
+      },
+      {
+        long_name: 'Testort',
+        types: ['sublocality', 'political', 'sublocality_level_1'],
+      },
+      {
+        long_name: 'Testkommun',
+        types: ['postal_town'],
+      },
+      {
+        long_name: 'Testlän',
+        types: ['administrative_level_1', 'political'],
+      },
+      {
+        long_name: 'Testland',
+        short_name: 'TL',
+        types: ['country', 'political'],
+      },
+      {
+        long_name: '175 00',
+        types: ['postal_code'],
+      },
+    ],
+    formatted_address: 'Testvägen 1A, 175 00 Testkommun, Testland',
+  },
+];

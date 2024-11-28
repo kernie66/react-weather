@@ -147,7 +147,7 @@ describe('test Map modal buttons of Header', () => {
     ).toBeInTheDocument();
 
     // Check that the current Position button is available
-    const positionButton = await screen.queryByRole('button', {
+    const positionButton = screen.queryByRole('button', {
       name: /position/i,
     });
     expect(positionButton).not.toBeInTheDocument();
