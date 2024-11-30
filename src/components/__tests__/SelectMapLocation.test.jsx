@@ -11,6 +11,7 @@ import {
 import { testQueryClient } from '../../../testing-utils/render.jsx';
 import SelectMapLocation from '../SelectMapLocation.jsx';
 import {
+  closeMap,
   deleteInput,
   openHistory,
   selectHome,
@@ -34,9 +35,7 @@ vi.mock('@react-google-maps/api', () => ({
   useJsApiLoader: vi.fn(),
 }));
 vi.mock('use-places-autocomplete', () => ({
-  getGeocode: vi
-    .fn()
-    .mockImplementation(async () => FakeGeocodeResult),
+  getGeocode: vi.fn().mockImplementation(() => FakeGeocodeResult),
 }));
 
 vi.mock('@mantine/hooks', async (importOriginal) => {
@@ -73,11 +72,18 @@ describe('test SelectMapLocation modal', () => {
         getCurrentPosition: vi
           .fn()
           .mockImplementationOnce((success) =>
-            Promise.resolve(
-              success({
-                coords: { latitude: 66.66, longitude: -66.66 },
-              })
-            )
+            success({
+              coords: { latitude: 66.66, longitude: -66.66 },
+            })
+          )
+          .mockImplementationOnce((success, reject) =>
+            reject({
+              code: '',
+              message: '',
+              PERMISSION_DENIED: '',
+              POSITION_UNAVAILABLE: '',
+              TIMEOUT: '',
+            })
           ),
       },
     });
@@ -334,5 +340,58 @@ describe('test SelectMapLocation modal', () => {
         hidden: true,
       })
     ).toHaveLength(2);
+  });
+
+  it('fails to get current browser location', async () => {
+    const user = userEvent.setup();
+    const initialOption = 5;
+
+    Object.defineProperty(navigator, 'geolocation', {
+      configurable: true,
+      value: {
+        getCurrentPosition: vi
+          .fn()
+          .mockImplementation((success, reject) => {
+            reject({
+              code: '100',
+              message: 'Rejecting current position',
+              PERMISSION_DENIED: '',
+              POSITION_UNAVAILABLE: '',
+              TIMEOUT: '',
+            });
+          }),
+      },
+    });
+
+    // setPersistedHistory();
+
+    renderWithNotifications(
+      <>
+        <SetFakeLocations option={initialOption} />
+        <SelectMapLocation modal={true} closeModal={closeModal} />
+      </>
+    );
+
+    // Check the rendered modal
+    expect(
+      await screen.findByText(/ange adress för väder/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(getFakeLocationOption(initialOption))
+    ).toBeInTheDocument();
+    expect(await screen.queryByRole('listbox')).toBeNull();
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(1);
+
+    expect(
+      await screen.queryByRole('button', {
+        name: /position/i,
+        hidden: true,
+      })
+    ).not.toBeInTheDocument();
+
+    // Close the map modal
+    await closeMap(user, screen);
   });
 });

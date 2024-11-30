@@ -21,7 +21,8 @@ export const currentLocationState = atomWithStorage(
 );
 
 export const currentPositionState = atom(
-  (get) => get(currentLocationState).position,
+  (get) => get(currentLocationState).position
+  /* Not used
   (get, set, update) => {
     console.log('update', update);
     set(currentLocationState, {
@@ -29,6 +30,7 @@ export const currentPositionState = atom(
       position: update,
     });
   }
+  */
 );
 
 export const historyLocationState = atomWithStorage(

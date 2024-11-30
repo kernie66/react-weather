@@ -48,6 +48,7 @@ export default function CurrentPosition({ selectPosition }) {
     console.error(
       'Error code: ' + error.code + ' - ' + error.message
     );
+    setLocationServiceEnabled(false);
   };
 
   useEffect(() => {
