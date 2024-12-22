@@ -28,6 +28,7 @@ import {
 import SetFakeLocations from './helpers/SetFakeLocations.jsx';
 import { defaultAddress } from '../../atoms/locationStates.js';
 import { getGeocode } from 'use-places-autocomplete';
+import { faker } from '@faker-js/faker';
 
 // Mock the Google modules
 vi.mock('@react-google-maps/api', () => ({
@@ -73,7 +74,10 @@ describe('test SelectMapLocation modal', () => {
           .fn()
           .mockImplementationOnce((success) =>
             success({
-              coords: { latitude: 66.66, longitude: -66.66 },
+              coords: {
+                latitude: faker.location.latitude(),
+                longitude: faker.location.longitude(),
+              },
             })
           )
           .mockImplementationOnce((success, reject) =>

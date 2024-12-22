@@ -51,6 +51,8 @@
     ]
   },
   "devDependencies": {
+    "@anshulsanghi/googlemaps-vitest-mocks": "^1.0.1",
+    "@faker-js/faker": "^9.3.0",
     "@nabla/vite-plugin-eslint": "^2.0.4",
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/react-query-devtools": "^5.61.0",
