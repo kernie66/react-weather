@@ -9,13 +9,17 @@ import decodeAddress from '../helpers/decodeAddress';
 import { Autocomplete, CloseButton } from '@mantine/core';
 import { title, unique } from 'radash';
 import { useAtom } from 'jotai';
-import { mapLocationState } from '../atoms/locationStates.js';
+import {
+  defaultPosition,
+  mapLocationState,
+} from '../atoms/locationStates.js';
 import { mapAddressToggleState } from '../atoms/toggleStates.js';
 
 export default function SearchAddress() {
   const map = useGoogleMap();
   const [location, setLocation] = useState(
-    new window.google.maps.LatLng(59.476, 17.905)
+    defaultPosition
+    //new window.google.maps.LatLng(59.476, 17.905)
   );
   const [options, setOptions] = useState([]);
   const [mapLocation, setMapLocation] = useAtom(mapLocationState);
@@ -43,9 +47,13 @@ export default function SearchAddress() {
   });
 
   useEffect(() => {
-    const newLocation = new window.google.maps.LatLng(
-      mapLocation.position
-    );
+    const newLocation = {
+      lat: mapLocation.position.lat,
+      lng: mapLocation.position.lng,
+    };
+    // new window.google.maps.LatLng(
+    //  mapLocation.position
+    //);
     map.panTo(newLocation);
     setLocation(newLocation);
   }, [map, mapLocation]);
@@ -68,7 +76,6 @@ export default function SearchAddress() {
   }
 
   const onChangeHandler = (value) => {
-    console.log('value', value);
     if (value.length >= 2) {
       setValue(value);
       toggleAddress(true);
@@ -82,15 +89,15 @@ export default function SearchAddress() {
   useEffect(() => {
     if (data) {
       const newOptions = data.map((option) => option.description);
-      console.log('newOptions', newOptions);
+      // console.log('newOptions', newOptions);
       const uniqueOptions = unique(newOptions);
-      console.log('uniqueOptions', uniqueOptions);
+      // console.log('uniqueOptions', uniqueOptions);
       setOptions(uniqueOptions);
     }
   }, [data]);
 
   const optionsFilter = ({ options }) => {
-    console.log('Options:', options);
+    // console.log('Options:', options);
     return options;
   };
 
