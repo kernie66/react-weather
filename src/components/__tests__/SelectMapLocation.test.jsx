@@ -20,9 +20,9 @@ import {
   selectPosition,
 } from './helpers/mapModalUtils.js';
 import {
-  FakeGeocodeResult,
   FakeLocationHistory,
   getFakeLocationOption,
+  getFakerGeocodeResult,
   setPersistedHistory,
 } from './helpers/fakeDataUtils.js';
 import SetFakeLocations from './helpers/SetFakeLocations.jsx';
@@ -30,13 +30,15 @@ import { defaultAddress } from '../../atoms/locationStates.js';
 import { getGeocode } from 'use-places-autocomplete';
 import { faker } from '@faker-js/faker';
 
+const FakerGeocodeResult = getFakerGeocodeResult();
+
 // Mock the Google modules
 vi.mock('@react-google-maps/api', () => ({
   GoogleMap: vi.fn(),
   useJsApiLoader: vi.fn(),
 }));
 vi.mock('use-places-autocomplete', () => ({
-  getGeocode: vi.fn().mockImplementation(() => FakeGeocodeResult),
+  getGeocode: vi.fn().mockImplementation(() => FakerGeocodeResult),
 }));
 
 vi.mock('@mantine/hooks', async (importOriginal) => {
@@ -320,7 +322,7 @@ describe('test SelectMapLocation modal', () => {
       screen.getByText(getFakeLocationOption(initialOption))
     ).toBeInTheDocument();
     const regexCurrentLocation = new RegExp(
-      FakeGeocodeResult[0].address_components[1].long_name
+      FakerGeocodeResult[0].address_components[1].long_name
     );
     expect(screen.getAllByText(regexCurrentLocation)).toHaveLength(2);
 
