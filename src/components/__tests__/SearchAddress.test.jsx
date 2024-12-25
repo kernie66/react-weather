@@ -87,9 +87,10 @@ describe('test SearchAddress within Map', () => {
   });
   beforeEach(() => {
     initialize();
+    vi.clearAllMocks();
   });
 
-  it('renders address search field and selects an address', async () => {
+  it('selects an address from the map address search field', async () => {
     const user = userEvent.setup();
     console.log('Starting');
     render(
@@ -104,11 +105,6 @@ describe('test SearchAddress within Map', () => {
       /ange adress, ort eller plats/i
     );
     expect(addressInput).toBeInTheDocument();
-    expect(
-      await screen.queryByRole('button', {
-        name: /radera inmatning/i,
-      })
-    ).not.toBeInTheDocument();
 
     // Focus and input text
     await user.click(addressInput);
@@ -118,12 +114,6 @@ describe('test SearchAddress within Map', () => {
     await user.keyboard(inputText);
     expect(addressInput).toHaveValue(inputText);
     expect(clearSuggestionsSpy).toHaveBeenCalledOnce();
-
-    // Check that the delete button is shown
-    const deleteButton = await screen.findByRole('button', {
-      name: /radera inmatning/i,
-    });
-    expect(deleteButton).toBeInTheDocument();
 
     // Check and select one of the address options
     expect(screen.getAllByRole('option')).toHaveLength(5);
@@ -164,6 +154,53 @@ describe('test SearchAddress within Map', () => {
         name: FakerPosition.lng,
       })
     ).toBeInTheDocument();
-    screen.debug();
+  });
+
+  it('deletes the input from the map address search field', async () => {
+    const user = userEvent.setup();
+    console.log('Starting');
+    render(
+      <>
+        <Map />
+      </>
+    );
+
+    // Check that the address input field exist, without delete button
+    const addressInput = await screen.findByPlaceholderText(
+      /ange adress, ort eller plats/i
+    );
+    expect(addressInput).toBeInTheDocument();
+    expect(
+      await screen.queryByRole('button', {
+        name: /radera inmatning/i,
+      })
+    ).not.toBeInTheDocument();
+
+    // Focus and input text
+    await user.click(addressInput);
+    expect(addressInput).toHaveFocus();
+
+    const inputText = faker.word.sample(3);
+    await user.keyboard(inputText);
+    expect(addressInput).toHaveValue(inputText);
+    expect(clearSuggestionsSpy).toHaveBeenCalledOnce();
+
+    // Check that the delete button is shown
+    const deleteButton = await screen.findByRole('button', {
+      name: /radera inmatning/i,
+    });
+    expect(deleteButton).toBeInTheDocument();
+
+    // Click the delete button
+    await user.click(deleteButton);
+    expect(addressInput).toHaveValue('');
+
+    // Check that the address input field exist, without delete button
+    expect(addressInput).toBeInTheDocument();
+    expect(
+      await screen.queryByRole('button', {
+        name: /radera inmatning/i,
+      })
+    ).not.toBeInTheDocument();
   });
 });
