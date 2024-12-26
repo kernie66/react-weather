@@ -2,7 +2,6 @@ import { expect, vi } from 'vitest';
 import { render, screen, userEvent } from '../../../testing-utils';
 import { initialize } from '@anshulsanghi/googlemaps-vitest-mocks';
 import Map from '../Map.jsx';
-import { useJsApiLoader } from '@react-google-maps/api';
 import { useState } from 'react';
 import {
   getFakerGeocodeResult,
@@ -28,7 +27,10 @@ vi.mock('@react-google-maps/api', async (importOriginal) => {
   return {
     ...realApi,
     //GoogleMap: vi.fn(),
-    useJsApiLoader: vi.fn(),
+    useJsApiLoader: vi.fn().mockReturnValue({
+      // loadError: false,
+      isLoaded: true,
+    }),
   };
 });
 
@@ -70,21 +72,7 @@ vi.mock('use-places-autocomplete', async (importOriginal) => {
   };
 });
 
-/*
-vi.mock('@mantine/hooks', async (importOriginal) => {
-  const realHooks = await importOriginal();
-  return { ...realHooks };import { expect } from "@storybook/test";
-
-});
-// */
 describe('test SearchAddress within Map', () => {
-  beforeAll(() => {
-    useJsApiLoader.mockReturnValue({
-      loadError: false,
-      isLoading: false,
-      isLoaded: true,
-    });
-  });
   beforeEach(() => {
     initialize();
     vi.clearAllMocks();
@@ -92,7 +80,7 @@ describe('test SearchAddress within Map', () => {
 
   it('selects an address from the map address search field', async () => {
     const user = userEvent.setup();
-    console.log('Starting');
+
     render(
       <>
         <Map />

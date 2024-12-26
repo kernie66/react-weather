@@ -70,10 +70,10 @@ export const getFakerGeocodeResult = () => {
 };
 
 export const getFakerSearchAddressOptions = ({
-  numberOfOptions,
+  numberOfOptions = 5,
   duplicate,
 }) => {
-  const options = Array.from(Array(numberOfOptions | 5), () => ({
+  const options = Array.from(Array(numberOfOptions), () => ({
     description: `${faker.location.street()}, ${faker.location.city()}, ${faker.location.country()}`,
   }));
 

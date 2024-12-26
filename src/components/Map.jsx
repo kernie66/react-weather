@@ -62,10 +62,11 @@ export default memo(function Map() {
     }
   }
 
+  console.log(loadError, isLoaded);
   if (loadError) {
     return (
       <Center h="75vh">
-        <Text color="red" fz="xl">
+        <Text c="red" fz="xl">
           Kan inte ladda Google Maps...
         </Text>
       </Center>
