@@ -309,6 +309,27 @@ describe('test SelectMapLocation modal', () => {
     await selectPosition(user, screen);
 
     // Wait for the confirm modal to appear
+    const closeButton = await screen.findByRole('button', {
+      name: /stäng bekräftelse/i,
+      hidden: true,
+    });
+    expect(closeButton).toBeVisible();
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(2);
+    screen.debug(undefined, Infinity);
+    expect(getGeocode).toHaveBeenCalledTimes(2);
+
+    // Click the close button to close confirm modal only
+    await user.click(closeButton);
+    expect(
+      await screen.findAllByRole('dialog', { hidden: true })
+    ).toHaveLength(1);
+
+    // Click the Position button
+    await selectPosition(user, screen);
+
+    // Wait for the confirm modal to appear
     const confirmButton = await screen.findByRole('button', {
       name: /bekräfta/i,
       hidden: true,
@@ -317,7 +338,7 @@ describe('test SelectMapLocation modal', () => {
     expect(
       await screen.findAllByRole('dialog', { hidden: true })
     ).toHaveLength(2);
-    expect(getGeocode).toHaveBeenCalledTimes(2);
+    expect(getGeocode).toHaveBeenCalledTimes(3);
     expect(
       screen.getByText(getFakeLocationOption(initialOption))
     ).toBeInTheDocument();

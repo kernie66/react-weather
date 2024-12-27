@@ -32,6 +32,7 @@ export const useConfirm = () => {
     return (
       <Modal
         opened={opened}
+        closeButtonProps={{ 'aria-label': 'Stäng bekräftelse' }}
         onClose={() => onClose(false)}
         size={size}
         centered
