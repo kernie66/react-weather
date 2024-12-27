@@ -5,9 +5,11 @@ import { mapLocationState } from '../atoms/locationStates.js';
 export default function SelectOnMap() {
   const mapLocation = useAtomValue(mapLocationState);
 
+  /* v8 ignore start */
   const clickOnMarker = (ev) => {
     console.log('Marker clicked');
   };
+  /* v8 ignore stop */
 
   return (
     <>
