@@ -26,6 +26,7 @@ dayjs.extend(calendar);
 
 console.debug('Runs in App.jsx');
 
+/* v8 ignore start */
 const storedLocation = localStorage.getItem('location');
 console.log('Stored location:', storedLocation);
 if (
@@ -38,12 +39,16 @@ if (
 
 const storedHistory = localStorage.getItem('locationHistory');
 console.log('Stored history locations:', storedHistory);
-if (isEmpty(storedHistory) || storedHistory === '[{}]') {
+if (
+  storedHistory &&
+  (isEmpty(storedHistory) || storedHistory === '[{}]')
+) {
   console.log(
     'History location key is empty, removed from localStorage'
   );
   localStorage.removeItem('locationHistory');
 }
+/* v8 ignore stop */
 
 export default function App() {
   return (

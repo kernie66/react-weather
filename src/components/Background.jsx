@@ -12,6 +12,7 @@ export default function Background({ children }) {
       className="weather-background"
       fluid
       style={backgroundStyle}
+      aria-label={'Bakgrundsbild'}
     >
       {children}
     </Container>

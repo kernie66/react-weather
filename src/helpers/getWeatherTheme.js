@@ -14,7 +14,7 @@ const nightTempColor = 'steelblue';
 export const getWeatherTheme = (weather) => {
   const now = dayjs();
   const sunTimes = SunCalc.getTimes(
-    dayjs().toDate(),
+    now.toDate(),
     weather.lat,
     weather.lon
   );
