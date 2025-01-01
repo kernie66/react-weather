@@ -1,15 +1,16 @@
 import { Group, Modal, Table } from '@mantine/core';
 import { getSunTimeTable } from '../helpers/getSunTimeTable.js';
 import dayjs from 'dayjs';
-import { useWeatherPosition } from '../hooks/weatherQueries.js';
+import { useAtomValue } from 'jotai';
+import { currentPositionState } from '../atoms/locationStates.js';
 
 export default function SunInfoModal({
   sunInfoOpened,
   closeSunInfo,
 }) {
-  const { data: position } = useWeatherPosition();
+  const currentPosition = useAtomValue(currentPositionState);
 
-  const sunTableData = getSunTimeTable(dayjs(), position);
+  const sunTableData = getSunTimeTable(dayjs(), currentPosition);
 
   return (
     <Modal

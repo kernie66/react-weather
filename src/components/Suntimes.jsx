@@ -5,20 +5,21 @@ import {
   VisuallyHidden,
 } from '@mantine/core';
 import dayjs from 'dayjs';
-import { useWeatherPosition } from '../hooks/weatherQueries.js';
 import { getSunTimes } from '../helpers/getSunInfo.js';
 import SunIcon from './SunIcon.jsx';
 import { useDisclosure } from '@mantine/hooks';
 import SunInfoModal from './SunInfoModal.jsx';
+import { useAtomValue } from 'jotai';
+import { currentPositionState } from '../atoms/locationStates.js';
 
 export default function SunTimes() {
-  const { data: position } = useWeatherPosition();
+  const currentPosition = useAtomValue(currentPositionState);
   const [sunInfoOpened, { open: openSunInfo, close: closeSunInfo }] =
     useDisclosure(false);
 
   const { sunriseTime, sunsetTime, afterSunrise } = getSunTimes(
     dayjs(),
-    position
+    currentPosition
   );
 
   return (

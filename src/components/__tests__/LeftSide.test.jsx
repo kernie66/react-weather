@@ -36,8 +36,8 @@ describe('test LeftSide', () => {
     );
     // Test the correct order: sunset -> sunrise
     expect(sunUpDown.length).toBe(2);
-    expect(sunUpDown[0]).toHaveTextContent('21:41');
-    expect(sunUpDown[1]).toHaveTextContent('04:38');
+    expect(sunUpDown[0]).toHaveTextContent('21:57');
+    expect(sunUpDown[1]).toHaveTextContent('03:54');
     expect(screen.getByText(/vind$/i)).toBeInTheDocument();
     expect(screen.getByText(/vindbyar/i)).toBeInTheDocument();
     expect(screen.getByText(/2.8 m\/s/i)).toBeInTheDocument();
@@ -70,8 +70,8 @@ describe('test LeftSide', () => {
     );
     // Test the correct order: sunrise -> sunset
     expect(sunUpDown.length).toBe(2);
-    expect(sunUpDown[0]).toHaveTextContent('04:37');
-    expect(sunUpDown[1]).toHaveTextContent('21:41');
+    expect(sunUpDown[0]).toHaveTextContent('03:52');
+    expect(sunUpDown[1]).toHaveTextContent('21:57');
   });
 
   it('renders left side info after sunset', async () => {
@@ -88,7 +88,7 @@ describe('test LeftSide', () => {
     );
     // Test the correct order: sunrise -> sunset
     expect(sunUpDown.length).toBe(2);
-    expect(sunUpDown[0]).toHaveTextContent('04:38');
-    expect(sunUpDown[1]).toHaveTextContent('21:40');
+    expect(sunUpDown[0]).toHaveTextContent('03:54');
+    expect(sunUpDown[1]).toHaveTextContent('21:55');
   });
 });

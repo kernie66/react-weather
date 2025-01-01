@@ -35,7 +35,7 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
                 class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
                 style="font-weight: 500; text-align: right;"
               >
-                21:41
+                21:57
               </p>
             </div>
             <div
@@ -56,7 +56,7 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
                 class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
                 style="font-weight: 500; text-align: right;"
               >
-                04:38
+                03:54
               </p>
             </div>
           </div>
@@ -183,7 +183,7 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
               class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
               style="font-weight: 500; text-align: right;"
             >
-              21:41
+              21:57
             </p>
           </div>
           <div
@@ -204,7 +204,7 @@ exports[`test LeftSide > renders left side info at daytime 1`] = `
               class="mantine-focus-auto _outlineSingle_597f95 m_b6d8b162 mantine-Text-root"
               style="font-weight: 500; text-align: right;"
             >
-              04:38
+              03:54
             </p>
           </div>
         </div>

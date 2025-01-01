@@ -6,15 +6,16 @@ const calculateSunTimes = (date, position) => {
   const nextDay = currentTime.add(1, 'day');
 
   const currentSunTimes = SunCalc.getTimes(
-    dayjs(currentTime).toDate(),
+    // dayjs(currentTime).toDate(),
+    new Date(),
     position.lat,
-    position.lon
+    position.lng
   );
 
   const nextSunTimes = SunCalc.getTimes(
     dayjs(nextDay).toDate(),
     position.lat,
-    position.lon
+    position.lng
   );
 
   return {
