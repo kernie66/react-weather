@@ -131,14 +131,14 @@ exports[`test TemperatureDisplay > renders the main temperature display area wit
         <div />
       </div>
       <div
-        class="m_b37d9ac7 mantine-Notifications-root"
+        class="m_b37d9ac7 mantine-Notifications-root width-before-scroll-bar"
         data-position="top-right"
         style="--notifications-z-index: 400; --notifications-container-width: calc(27.5rem * var(--mantine-scale));"
       >
         <div />
       </div>
       <div
-        class="m_b37d9ac7 mantine-Notifications-root"
+        class="m_b37d9ac7 mantine-Notifications-root width-before-scroll-bar"
         data-position="bottom-right"
         style="--notifications-z-index: 400; --notifications-container-width: calc(27.5rem * var(--mantine-scale));"
       >
