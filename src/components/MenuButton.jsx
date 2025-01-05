@@ -1,6 +1,6 @@
 import { TbRefresh } from 'react-icons/tb';
 import { TbMenu2 } from 'react-icons/tb';
-import { FaCompress } from 'react-icons/fa';
+import { FaCompress, FaExpand } from 'react-icons/fa';
 import {
   Button,
   Menu,
@@ -46,7 +46,7 @@ export default function MenuButton() {
                 style={{ width: rem(20), height: rem(20) }}
               />
             ) : (
-              <FaCompress
+              <FaExpand
                 color="teal"
                 style={{ width: rem(20), height: rem(20) }}
               />
