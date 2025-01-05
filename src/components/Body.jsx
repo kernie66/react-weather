@@ -1,8 +1,4 @@
-import {
-  useMediaQuery,
-  useOs,
-  useViewportSize,
-} from '@mantine/hooks';
+import { useMediaQuery, useViewportSize } from '@mantine/hooks';
 import CurrentWeather from './CurrentWeather';
 import ErrorBoundary from './ErrorBoundary';
 // import FlipDisplay from './FlipDisplay';
@@ -17,6 +13,7 @@ import {
   Loader,
   SimpleGrid,
   Stack,
+  VisuallyHidden,
   em,
 } from '@mantine/core';
 import UpdatedAt from './UpdatedAt.jsx';
@@ -30,11 +27,10 @@ const mainDisplayMinHeight = 340;
 
 export default function Body() {
   const { isLoading } = useWeatherData();
-  const thisOs = useOs();
-  let limitWidth = 1024; // My iPad 6
   const { width: viewportWidth } = useViewportSize();
 
-  console.log('thisOs', thisOs);
+  let limitWidth = 1024; // My iPad 6
+
   console.log('ViewportWidth', viewportWidth);
   if (viewportWidth >= 1024) {
     limitWidth = viewportWidth;
@@ -51,6 +47,7 @@ export default function Body() {
     return (
       <Center h="75vh">
         <Loader color="blue" size="xl" type="bars" />
+        <VisuallyHidden>Laddar sidan</VisuallyHidden>
       </Center>
     );
   }
